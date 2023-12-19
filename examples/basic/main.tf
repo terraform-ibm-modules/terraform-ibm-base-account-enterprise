@@ -1,24 +1,24 @@
 ########################################################################################################################
-# Resource group
+# Base Account
 ########################################################################################################################
 
-module "resource_group" {
-  source  = "terraform-ibm-modules/resource-group/ibm"
-  version = "1.1.4"
-  # if an existing resource group is not set (null) create a new one using prefix
-  resource_group_name          = var.resource_group == null ? "${var.prefix}-resource-group" : null
-  existing_resource_group_name = var.resource_group
+module "basic_account" {
+  source = "../.."
+  providers = {
+    logdna.at = logdna.at
+    logdna.ld = logdna.ld
+  }
+  region                         = var.region
+  resource_group_name            = "${var.prefix}-resource-group"
+  activity_tracker_instance_name = "${var.prefix}-atracker"
+  activity_tracker_plan          = "lite"
+  cos_instance_name              = "${var.prefix}-cos-instance"
+  cos_bucket_name                = "${var.prefix}-cos-bucket"
+  trusted_profile_name           = "${var.prefix}-trusted-profile"
+  resource_tags                  = var.resource_tags
 }
 
-########################################################################################################################
-# COS instance
-########################################################################################################################
-
-resource "ibm_resource_instance" "cos_instance" {
-  name              = "${var.prefix}-cos"
-  resource_group_id = module.resource_group.resource_group_id
-  service           = "cloud-object-storage"
-  plan              = "standard"
-  location          = "global"
-  tags              = var.resource_tags
+data "ibm_resource_key" "at_resource_key" {
+  name                 = module.basic_account.atracker.activity_tracker_manager_key_name
+  resource_instance_id = module.basic_account.atracker.crn
 }

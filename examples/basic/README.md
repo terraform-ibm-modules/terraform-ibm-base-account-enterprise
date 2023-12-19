@@ -9,3 +9,7 @@ The text below should describe exactly what resources are provisioned / configur
 An end-to-end basic example that will provision the following:
 - A new resource group if one is not passed in.
 - A new Cloud Object Storage instance.
+- A new Cloud Object Storage bucket.
+- A new Activity Tracker instance.
+- A new Trusted Profile for Projects access.
+- A default set of Account Settings.
