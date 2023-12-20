@@ -56,11 +56,12 @@
                   "profile_name": "IBM Cloud for Financial Services",
                   "profile_version": "1.5.0"
                 }
-              ]},
+              ]
+            },
             "iam_permissions": [
               {
                 "role_crns": [
-                    "crn:v1:bluemix:public:iam::::serviceRole:Manager"
+                  "crn:v1:bluemix:public:iam::::serviceRole:Manager"
                 ],
                 "service_name": "cloud-object-storage"
               },
@@ -72,8 +73,8 @@
               },
               {
                 "role_crns": [
-                    "crn:v1:bluemix:public:iam::::serviceRole:Writer",
-                    "crn:v1:bluemix:public:iam::::role:Administrator"
+                  "crn:v1:bluemix:public:iam::::serviceRole:Writer",
+                  "crn:v1:bluemix:public:iam::::role:Administrator"
                 ],
                 "service_name": "atracker"
               }
