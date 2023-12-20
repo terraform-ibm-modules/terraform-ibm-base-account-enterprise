@@ -1,0 +1,98 @@
+{
+    "products": [
+      {
+        "name": "deploy-arch-ibm-base-layer",
+        "label": "Base layer Account Settings",
+        "product_kind": "solution",
+        "tags": [
+          "ibm_created",
+          "target_terraform",
+          "terraform",
+          "reference_architecture",
+          "solution"
+        ],
+        "keywords": [
+          "base layer",
+          "IaC",
+          "infrastructure as code",
+          "terraform",
+          "solution",
+          "account",
+          "iam"
+        ],
+        "short_description": "Creates and configures the base layer components of an IBM Cloud account",
+        "long_description": "This architecture supports creating and configuring the base layer components of an IBM Cloud account, including IAM account settings, Activity Tracker routing, Cloud Objects Storage, Trusted profile and associated access groups and the resource group in which all resources will be provisioned in.",
+        "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-base-account-enterprise/blob/main/README.md",
+        "offering_icon_url": "https://raw.githubusercontent.com/terraform-ibm-modules/documentation/main/icons/security_icon.svg",
+        "provider_name": "IBM",
+        "features": [
+          {
+            "title": "Configure IAM account settings",
+            "description": "Configure IAM account settings so they meet FSCloud compliance requirements."
+          },
+          {
+            "title": "Creates Activity Tracker route and target",
+            "description": "Creates Activity Tracker route and target so events are sent to a COS bucket."
+          },
+          {
+            "title": "Creates Trusted profile",
+            "description": "Creates Trusted profile and associated access group for Projects."
+          },
+          {
+            "title": "Creates resource group",
+            "description": "Creates resource group where all resources created by this solution are provisioned."
+          }
+        ],
+        "flavors": [
+          {
+            "label": "Standard",
+            "name": "standard",
+            "install_type": "fullstack",
+            "working_directory": "solutions/standard",
+            "compliance": {
+              "authority": "scc-v3",
+              "profiles": [
+                {
+                  "profile_name": "IBM Cloud for Financial Services",
+                  "profile_version": "1.5.0"
+                }
+              ]},
+            "iam_permissions": [
+              {
+                "role_crns": [
+                    "crn:v1:bluemix:public:iam::::serviceRole:Manager"
+                ],
+                "service_name": "cloud-object-storage"
+              },
+              {
+                "role_crns": [
+                  "crn:v1:bluemix:public:iam::::role:Administrator"
+                ],
+                "service_name": "iam-identity"
+              },
+              {
+                "role_crns": [
+                    "crn:v1:bluemix:public:iam::::serviceRole:Writer",
+                    "crn:v1:bluemix:public:iam::::role:Administrator"
+                ],
+                "service_name": "atracker"
+              }
+            ],
+            "architecture": {
+              "descriptions": "This architecture supports creating and configuring the base layer components of an IBM Cloud account.",
+              "diagrams": [
+                {
+                  "diagram": {
+                    "caption": "Base layer Account Settings",
+                    "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-base-account-enterprise/main/reference-architecture/diagram.svg",
+                    "type": "image/svg+xml"
+                  },
+                  "description": "This architecture supports creating and configuring the base layer components of an IBM Cloud account."
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }

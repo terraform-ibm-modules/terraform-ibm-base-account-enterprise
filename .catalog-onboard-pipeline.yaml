@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+offerings:
+  - name: deploy-arch-ibm-base-layer
+    kind: solution
+    catalog_id: 7df1e4ca-d54c-4fd0-82ce-3d13247308cd
+    offering_id: 63641cec-6093-4b4f-b7b0-98d2f4185cd6
+    variations:
+      - name: standard
+        mark_ready: false
+        install_type: fullstack
+        scc:
+          # Instance ID in account "GoldenEye FSCloud Testing (ae14871c179f49869e19657b37ec7c4e) <-> 2626044
+          instance_id: d5eaa656-140f-450f-b912-51f50951ed0e
+          region: us-south
