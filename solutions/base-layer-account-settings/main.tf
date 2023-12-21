@@ -17,5 +17,7 @@ module "basic_account" {
   cos_target_name             = "${var.prefix}-target"
   activity_tracker_locations  = [var.region, "global"]
   activity_tracker_route_name = "${var.prefix}-route"
+  kms_encryption_enabled      = true
+  kms_key_crn                 = var.kms_key_crn
   resource_tags               = var.resource_tags
 }

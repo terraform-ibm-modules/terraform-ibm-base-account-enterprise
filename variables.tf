@@ -11,6 +11,7 @@ variable "resource_group_name" {
   type        = string
   description = "Name of the resource group where resources are created."
 }
+
 variable "access_token_expiration" {
   type        = string
   description = "Defines the access token expiration in seconds"
@@ -108,37 +109,83 @@ variable "cos_bucket_name" {
   description = "The name to give the newly provisioned COS bucket."
 }
 
-variable "activity_tracker_instance_name" {
-  type        = string
-  description = "The name to give the Activity Tracker instance created by the module."
+variable "kms_encryption_enabled" {
+  type        = bool
+  description = "Set as true to use KMS key encryption to encrypt data in COS bucket"
+  default     = false
 }
 
-variable "activity_tracker_plan" {
+variable "kms_key_crn" {
   type        = string
-  description = "The plan of the Activity Tracker instance created by the module."
+  description = "CRN of the KMS key to use to encrypt the data in the COS bucket."
+  default     = null
+}
 
+variable "retention_enabled" {
+  type        = bool
+  description = "Retention enabled for COS bucket."
+  default     = false
+}
+
+variable "retention_default" {
+  description = "Specifies default duration of time an object that can be kept unmodified for COS bucket."
+  type        = number
+  default     = 90
+}
+
+variable "retention_maximum" {
+  description = "Specifies maximum duration of time an object that can be kept unmodified for COS bucket."
+  type        = number
+  default     = 350
+}
+
+variable "retention_minimum" {
+  description = "Specifies minimum duration of time an object must be kept unmodified for COS bucket."
+  type        = number
+  default     = 90
+}
+
+variable "retention_permanent" {
+  description = "Specifies a permanent retention status either enable or disable for COS bucket."
+  type        = bool
+  default     = false
+}
+
+variable "cos_resource_key_name" {
+  type        = string
+  description = "Name of the resource key for COS instance."
+}
+
+variable "cos_target_name" {
+  type        = string
+  description = "Name of the COS Target for Activity Tracker."
+}
+
+variable "activity_tracker_route_name" {
+  type        = string
+  description = "Name of the route for the Activity Tracker."
+}
+
+variable "activity_tracker_locations" {
+  type        = list(string)
+  description = "Location of the route for the Activity Tracker."
 }
 
 variable "trusted_profile_name" {
   type        = string
-  description = "Name of the trusted profile"
+  description = "Name of the trusted profile."
 }
 
 variable "trusted_profile_description" {
   type        = string
-  description = "Description of the trusted profile"
+  description = "Description of the trusted profile."
   default     = "Trusted Profile for Projects access"
 }
 
 variable "trusted_profile_roles" {
   type        = list(string)
-  description = "List of roles given to the trusted profile"
+  description = "List of roles given to the trusted profile."
   default     = ["Administrator"]
-
-  validation {
-    condition     = alltrue(contains(["Viewer", "Operator", "Editor", "Administrator", "RC KeyManager"], var.trusted_profile_roles[*]))
-    error_message = "Trusted Profile role must be one of: \"Viewer\", \"Operator\", \"Editor\", \"Administrator\", \"RC KeyManager\""
-  }
 }
 
 variable "resource_tags" {
