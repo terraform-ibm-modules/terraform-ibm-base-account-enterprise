@@ -1,8 +1,8 @@
 {
     "products": [
       {
-        "name": "deploy-arch-ibm-base-layer",
-        "label": "Base layer Account Settings",
+        "name": "deploy-arch-ibm-account-infra-base",
+        "label": "Account Infrastructure Base",
         "product_kind": "solution",
         "tags": [
           "ibm_created",
