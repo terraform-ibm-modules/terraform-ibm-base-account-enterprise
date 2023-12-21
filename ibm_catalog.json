@@ -48,7 +48,7 @@
             "label": "Standard",
             "name": "standard",
             "install_type": "fullstack",
-            "working_directory": "solutions/standard",
+            "working_directory": "solutions/base-layer-account-settings",
             "compliance": {
               "authority": "scc-v3",
               "profiles": [
