@@ -64,6 +64,7 @@ module "cos" {
   cos_tags           = var.resource_tags
   instance_cbr_rules = var.cos_instance_cbr_rules
   access_tags        = var.cos_instance_access_tags
+  create_hmac_key    = false
 }
 
 resource "ibm_iam_authorization_policy" "atracker_cos" {

@@ -14,6 +14,9 @@ This module is a general base layer module for setting up a newly provisioned ac
 - Activity Tracker routing + COS instance and bucket
 - Trusted Profile + Access Group for Projects
 
+![account-infrastructure-base](https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-account-infrastructure-base/main/reference-architectures/base-account-enterprise.svg)
+
+
 <!-- Below content is automatically populated via pre-commit hook -->
 <!-- BEGIN OVERVIEW HOOK -->
 ## Overview
@@ -43,6 +46,9 @@ Add an example of the use of the module in the following code block.
 Use real values instead of "var.<var_name>" or other placeholder values
 unless real values don't help users know what to change.
 -->
+
+#### Before You Begin
+An IAM authorization policy must exist in the account where the KMS key resides which grants the Cloud Object Storage service in account to which this solution is being deployed, reader access to the KMS instance that the KMS key belongs to.
 
 ```hcl
 locals {

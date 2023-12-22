@@ -9,5 +9,7 @@ An end-to-end deployable architecture solution that will provision the following
 - An Activity Tracker route to route events to the COS bucket.
 - A new Trusted Profile for Projects access.
 
+![account-infrastructure-base](https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-account-infrastructure-base/main/reference-architectures/base-account-enterprise.svg)
+
 ## Before You Begin
 An IAM authorization policy must exist in the account where the KMS key resides which grants the Cloud Object Storage service in account to which this solution is being deployed, reader access to the KMS instance that the KMS key belongs to.
