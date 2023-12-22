@@ -2,8 +2,8 @@
 package test
 
 import (
-	"errors"
 	"log"
+	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -11,7 +11,10 @@ import (
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testhelper"
 )
 
-const completeExampleDir = "solutions/account-infrastructure-base"
+const solutionDir = "solutions/account-infrastructure-base"
+
+// Define a struct with fields that match the structure of the YAML data
+const yamlLocation = "../common-dev-assets/common-go-assets/common-permanent-resources.yaml"
 
 var permanentResources map[string]interface{}
 
@@ -45,7 +48,7 @@ func setupOptions(t *testing.T, prefix string, dir string) *testhelper.TestOptio
 func TestRunDA(t *testing.T) {
 	t.Parallel()
 
-	options := setupOptions(t, "base-acct", completeExampleDir)
+	options := setupOptions(t, "base-acct", solutionDir)
 
 	output, err := options.RunTestConsistency()
 	assert.Nil(t, err, "This should not have errored")
@@ -55,7 +58,7 @@ func TestRunDA(t *testing.T) {
 func TestRunUpgradeDA(t *testing.T) {
 	t.Parallel()
 
-	options := setupOptions(t, "base-acct-upg", completeExampleDir)
+	options := setupOptions(t, "base-acct-upg", solutionDir)
 
 	output, err := options.RunTestUpgrade()
 	if !options.UpgradeTestSkipped {
