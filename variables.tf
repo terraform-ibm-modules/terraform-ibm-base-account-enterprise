@@ -214,12 +214,6 @@ variable "cos_bucket_retention_permanent" {
   default     = false
 }
 
-variable "cos_create_hmac_key" {
-  type        = bool
-  description = "Enable to create the HMAC key for the COS instance."
-  default     = true
-}
-
 variable "cos_hmac_key_name" {
   type        = string
   description = "Name of the resource key for COS instance."

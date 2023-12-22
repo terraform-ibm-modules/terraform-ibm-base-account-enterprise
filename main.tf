@@ -63,16 +63,14 @@ module "cos" {
   cos_instance_name  = var.cos_instance_name
   cos_plan           = var.cos_plan
   cos_tags           = var.resource_tags
-  create_hmac_key    = var.cos_create_hmac_key
-  hmac_key_name      = var.cos_hmac_key_name
-  hmac_key_role      = var.cos_hmac_key_role
+  create_hmac_key    = false
   instance_cbr_rules = var.cos_instance_cbr_rules
 }
 
-data "ibm_resource_key" "cos_resource_key" {
-  depends_on           = [module.cos]
+resource "ibm_resource_key" "cos_resource_key" {
   name                 = var.cos_hmac_key_name
   resource_instance_id = module.cos.cos_instance_id
+  role                 = var.cos_hmac_key_role
 }
 
 module "activity_tracker" {
@@ -91,7 +89,7 @@ module "activity_tracker" {
   ]
   cos_targets = [
     {
-      api_key       = data.ibm_resource_key.cos_resource_key.credentials.apikey
+      api_key       = ibm_resource_key.cos_resource_key.credentials.apikey
       bucket_name   = module.cos.buckets[var.cos_bucket_name].bucket_name
       endpoint      = module.cos.buckets[var.cos_bucket_name].s3_endpoint_private
       instance_id   = module.cos.cos_instance_id

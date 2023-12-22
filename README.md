@@ -128,7 +128,7 @@ You need the following permissions to run this module.
 
 | Name | Type |
 |------|------|
-| [ibm_resource_key.cos_resource_key](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/resource_key) | data source |
+| [ibm_resource_key.cos_resource_key](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/resource_key) | resource |
 
 ### Inputs
 
@@ -156,7 +156,6 @@ You need the following permissions to run this module.
 | <a name="input_cos_bucket_retention_minimum"></a> [cos\_bucket\_retention\_minimum](#input\_cos\_bucket\_retention\_minimum) | Specifies minimum duration of time an object must be kept unmodified for COS bucket. | `number` | `90` | no |
 | <a name="input_cos_bucket_retention_permanent"></a> [cos\_bucket\_retention\_permanent](#input\_cos\_bucket\_retention\_permanent) | Specifies a permanent retention status either enable or disable for COS bucket. | `bool` | `false` | no |
 | <a name="input_cos_bucket_storage_class"></a> [cos\_bucket\_storage\_class](#input\_cos\_bucket\_storage\_class) | COS Bucket storage class type | `string` | `null` | no |
-| <a name="input_cos_create_hmac_key"></a> [cos\_create\_hmac\_key](#input\_cos\_create\_hmac\_key) | Enable to create the HMAC key for the COS instance. | `bool` | `true` | no |
 | <a name="input_cos_hmac_key_name"></a> [cos\_hmac\_key\_name](#input\_cos\_hmac\_key\_name) | Name of the resource key for COS instance. | `string` | `"hmac-cos-key"` | no |
 | <a name="input_cos_hmac_key_role"></a> [cos\_hmac\_key\_role](#input\_cos\_hmac\_key\_role) | The role you want to be associated with your new hmac key. Valid roles are 'Writer', 'Reader', 'Manager', 'Content Reader', 'Object Reader', 'Object Writer'. | `string` | `"Manager"` | no |
 | <a name="input_cos_instance_cbr_rules"></a> [cos\_instance\_cbr\_rules](#input\_cos\_instance\_cbr\_rules) | CBR Rules for the COS instance. | <pre>list(object({<br>    description = string<br>    account_id  = string<br>    rule_contexts = list(object({<br>      attributes = optional(list(object({<br>        name  = string<br>        value = string<br>      })))<br>    }))<br>    enforcement_mode = string<br>    tags = optional(list(object({<br>      name  = string<br>      value = string<br>    })), [])<br>    operations = optional(list(object({<br>      api_types = list(object({<br>        api_type_id = string<br>      }))<br>    })))<br>  }))</pre> | `[]` | no |
