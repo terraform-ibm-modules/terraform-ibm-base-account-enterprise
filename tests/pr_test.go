@@ -34,12 +34,10 @@ func setupOptions(t *testing.T, prefix string, dir string) *testhelper.TestOptio
 		Testing:      t,
 		TerraformDir: dir,
 		Prefix:       prefix,
-		TerraformVars: map[string]interface{}{
-			"kms_key_crn": permanentResources["hpcs_south_root_key_crn"],
-		},
 	})
 	options.TerraformVars = map[string]interface{}{
-		"prefix": options.Prefix,
+		"prefix":      options.Prefix,
+		"kms_key_crn": permanentResources["hpcs_south_root_key_crn"],
 	}
 
 	return options
