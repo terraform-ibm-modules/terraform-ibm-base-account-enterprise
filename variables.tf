@@ -4,12 +4,12 @@
 
 variable "region" {
   type        = string
-  description = "Region of the resources created by the module."
+  description = "Region of the COS resources created by the module."
 }
 
 variable "resource_group_name" {
   type        = string
-  description = "Name of the resource group where resources are created."
+  description = "The name of the resource group to create. All resources provisioned by this module will be provisioned to this group."
 }
 
 variable "access_token_expiration" {
@@ -99,6 +99,12 @@ variable "user_mfa_reset" {
   default     = false
 }
 
+variable "cos_plan" {
+  type        = string
+  description = "Plan of the COS instance created by the module"
+  default     = "standard"
+}
+
 variable "cos_instance_name" {
   type        = string
   description = "The name to give the cloud object storage instance that will be provisioned by this module."
@@ -106,7 +112,31 @@ variable "cos_instance_name" {
 
 variable "cos_bucket_name" {
   type        = string
-  description = "The name to give the newly provisioned COS bucket."
+  description = "The name to give the newly provisioned COS bucket which will be used for Activity Tracker logs."
+}
+
+variable "cos_bucket_access_tags" {
+  type        = list(string)
+  description = "A list of Access Tags applied to the created bucket."
+  default     = []
+}
+
+variable "cos_bucket_expire_enabled" {
+  type        = bool
+  description = "A flag to control expiry rule on the bucket."
+  default     = false
+}
+
+variable "cos_bucket_expire_days" {
+  type        = number
+  description = "Number of days before expiry."
+  default     = 365
+}
+
+variable "cos_bucket_object_versioning_enabled" {
+  type        = bool
+  description = "A flag to control object versioning on the bucket."
+  default     = false
 }
 
 variable "kms_encryption_enabled" {
@@ -118,42 +148,138 @@ variable "kms_encryption_enabled" {
 variable "kms_key_crn" {
   type        = string
   description = "CRN of the KMS key to use to encrypt the data in the COS bucket."
+}
+
+variable "kms_guid" {
+  type        = string
+  description = "GUID of the KMS instance where the provided key is taken from."
+}
+
+variable "cos_bucket_management_endpoint_type" {
+  type        = string
+  description = "Management endpoint of the COS bucket."
+}
+
+variable "cos_bucket_storage_class" {
+  type        = string
+  description = "COS Bucket storage class type"
   default     = null
 }
 
-variable "retention_enabled" {
+variable "cos_bucket_archive_enabled" {
+  type        = bool
+  description = "Set as true to enable archiving on the COS bucket."
+  default     = false
+}
+
+variable "cos_bucket_archive_days" {
+  type        = number
+  description = "Number of days to archive objects in the bucket."
+  default     = 20
+}
+
+variable "cos_bucket_archive_type" {
+  type        = string
+  description = "Type of archiving to use on bucket."
+  default     = "Glacier"
+}
+
+variable "cos_bucket_retention_enabled" {
   type        = bool
   description = "Retention enabled for COS bucket."
   default     = false
 }
 
-variable "retention_default" {
+variable "cos_bucket_retention_default" {
   description = "Specifies default duration of time an object that can be kept unmodified for COS bucket."
   type        = number
   default     = 90
 }
 
-variable "retention_maximum" {
+variable "cos_bucket_retention_maximum" {
   description = "Specifies maximum duration of time an object that can be kept unmodified for COS bucket."
   type        = number
   default     = 350
 }
 
-variable "retention_minimum" {
+variable "cos_bucket_retention_minimum" {
   description = "Specifies minimum duration of time an object must be kept unmodified for COS bucket."
   type        = number
   default     = 90
 }
 
-variable "retention_permanent" {
+variable "cos_bucket_retention_permanent" {
   description = "Specifies a permanent retention status either enable or disable for COS bucket."
   type        = bool
   default     = false
 }
 
-variable "cos_resource_key_name" {
+variable "cos_create_hmac_key" {
+  type        = bool
+  description = "Enable to create the HMAC key for the COS instance."
+  default     = true
+}
+
+variable "cos_hmac_key_name" {
   type        = string
   description = "Name of the resource key for COS instance."
+  default     = "hmac-cos-key"
+}
+
+variable "cos_hmac_key_role" {
+  type        = string
+  description = "The role you want to be associated with your new hmac key. Valid roles are 'Writer', 'Reader', 'Manager', 'Content Reader', 'Object Reader', 'Object Writer'."
+  default     = "Manager"
+}
+
+variable "cos_bucket_cbr_rules" {
+  type = list(object({
+    description = string
+    account_id  = string
+    rule_contexts = list(object({
+      attributes = optional(list(object({
+        name  = string
+        value = string
+      })))
+    }))
+    enforcement_mode = string
+    tags = optional(list(object({
+      name  = string
+      value = string
+    })), [])
+    operations = optional(list(object({
+      api_types = list(object({
+        api_type_id = string
+      }))
+    })))
+  }))
+  description = "COS Bucket CBR Rules"
+  default     = []
+}
+
+variable "cos_instance_cbr_rules" {
+  type = list(object({
+    description = string
+    account_id  = string
+    rule_contexts = list(object({
+      attributes = optional(list(object({
+        name  = string
+        value = string
+      })))
+    }))
+    enforcement_mode = string
+    tags = optional(list(object({
+      name  = string
+      value = string
+    })), [])
+    operations = optional(list(object({
+      api_types = list(object({
+        api_type_id = string
+      }))
+    })))
+  }))
+  description = "CBR Rules for the COS instance."
+  default     = []
 }
 
 variable "cos_target_name" {
@@ -168,7 +294,8 @@ variable "activity_tracker_route_name" {
 
 variable "activity_tracker_locations" {
   type        = list(string)
-  description = "Location of the route for the Activity Tracker."
+  description = "Location of the route for the Activity Tracker, logs from these locations will be sent to the specified target. Supports passing individual regions, as well as `global` and `*`."
+  default     = ["*", "global"]
 }
 
 variable "trusted_profile_name" {
@@ -190,6 +317,6 @@ variable "trusted_profile_roles" {
 
 variable "resource_tags" {
   type        = list(string)
-  description = "A list of tags applied to resources created by the module."
-  default     = null
+  description = "A list of tags applied to the COS resources created by the module."
+  default     = []
 }

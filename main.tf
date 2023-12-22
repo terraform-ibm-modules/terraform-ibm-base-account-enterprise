@@ -28,26 +28,51 @@ module "account_settings" {
 }
 
 module "cos" {
-  source                 = "terraform-ibm-modules/cos/ibm"
-  version                = "7.0.7"
-  resource_group_id      = module.resource_group.resource_group_id
-  region                 = var.region
-  cos_instance_name      = var.cos_instance_name
-  cos_tags               = var.resource_tags
-  bucket_name            = var.cos_bucket_name
-  kms_encryption_enabled = var.kms_encryption_enabled
-  kms_key_crn            = var.kms_key_crn
-  retention_enabled      = var.retention_enabled
-  retention_default      = var.retention_default
-  retention_maximum      = var.retention_maximum
-  retention_permanent    = var.retention_permanent
-  retention_minimum      = var.retention_minimum
+  source            = "terraform-ibm-modules/cos/ibm//modules/fscloud"
+  version           = "7.0.7"
+  resource_group_id = module.resource_group.resource_group_id
+  bucket_configs = [{
+    access_tags                   = var.cos_bucket_access_tags
+    bucket_name                   = var.cos_bucket_name
+    kms_encryption_enabled        = var.kms_encryption_enabled
+    kms_guid                      = var.kms_guid
+    kms_key_crn                   = var.kms_key_crn
+    skip_iam_authorization_policy = true
+    management_endpoint_type      = var.cos_bucket_management_endpoint_type
+    storage_class                 = var.cos_bucket_storage_class
+    object_versioning_enabled     = var.cos_bucket_object_versioning_enabled
+    region_location               = var.region
+    resource_group_id             = module.resource_group.resource_group_id
+    archive_rule = {
+      enable = var.cos_bucket_archive_enabled
+      days   = var.cos_bucket_archive_days
+      type   = var.cos_bucket_archive_type
+    }
+    expire_rule = {
+      enable = var.cos_bucket_expire_enabled
+      days   = var.cos_bucket_expire_days
+    }
+    retention_rule = var.cos_bucket_retention_enabled ? {
+      default   = var.cos_bucket_retention_default
+      maximum   = var.cos_bucket_retention_maximum
+      minimum   = var.cos_bucket_retention_minimum
+      permanent = var.cos_bucket_retention_permanent
+    } : null
+    cbr_rules = var.cos_bucket_cbr_rules
+  }]
+  cos_instance_name  = var.cos_instance_name
+  cos_plan           = var.cos_plan
+  cos_tags           = var.resource_tags
+  create_hmac_key    = var.cos_create_hmac_key
+  hmac_key_name      = var.cos_hmac_key_name
+  hmac_key_role      = var.cos_hmac_key_role
+  instance_cbr_rules = var.cos_instance_cbr_rules
 }
 
-resource "ibm_resource_key" "cos_resource_key" {
-  name                 = var.cos_resource_key_name
+data "ibm_resource_key" "cos_resource_key" {
+  depends_on           = [module.cos]
+  name                 = var.cos_hmac_key_name
   resource_instance_id = module.cos.cos_instance_id
-  role                 = "Writer"
 }
 
 module "activity_tracker" {
@@ -56,6 +81,7 @@ module "activity_tracker" {
   providers = {
     logdna.at = logdna.at
   }
+  activity_tracker_provision = false
   activity_tracker_routes = [
     {
       route_name = var.activity_tracker_route_name
@@ -65,9 +91,9 @@ module "activity_tracker" {
   ]
   cos_targets = [
     {
-      api_key       = ibm_resource_key.cos_resource_key.credentials.apikey
-      bucket_name   = module.cos.bucket_name
-      endpoint      = module.cos.s3_endpoint_private
+      api_key       = data.ibm_resource_key.cos_resource_key.credentials.apikey
+      bucket_name   = module.cos.buckets[var.cos_bucket_name].bucket_name
+      endpoint      = module.cos.buckets[var.cos_bucket_name].s3_endpoint_private
       instance_id   = module.cos.cos_instance_id
       target_region = var.region
       target_name   = var.cos_target_name
