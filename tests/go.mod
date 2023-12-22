@@ -1,4 +1,4 @@
-module github.com/terraform-ibm-modules/terraform-ibm-base-account-enterprise
+module github.com/terraform-ibm-modules/terraform-ibm-account-infrastructure-base
 
 go 1.21
 
