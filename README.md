@@ -38,6 +38,15 @@ https://terraform-ibm-modules.github.io/documentation/#/implementation-guideline
 <!-- This heading should always match the name of the root level module (aka the repo name) -->
 ## terraform-ibm-account-infrastructure-base
 
+### Current limitations:
+The module currently does not support setting the following FSCloud requirements:
+- Check whether user list visibility restrictions are configured in IAM settings for the account owner
+  - Follow these [steps](https://cloud.ibm.com/docs/account?topic=account-iam-user-setting) as a workaround to set this manually in the UI
+- Check whether the Financial Services Validated setting is enabled in account settings
+  - Follow these [steps](https://cloud.ibm.com/docs/account?topic=account-enabling-fs-validated) as a workaround to set this manually in the UI
+
+Tracking issue with IBM provider -> https://github.com/IBM-Cloud/terraform-provider-ibm/issues/4204
+
 ### Usage
 
 <!--
@@ -122,8 +131,8 @@ You need the following permissions to run this module.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_account_settings"></a> [account\_settings](#module\_account\_settings) | terraform-ibm-modules/iam-account-settings/ibm | 2.5.0 |
-| <a name="module_activity_tracker"></a> [activity\_tracker](#module\_activity\_tracker) | terraform-ibm-modules/observability-instances/ibm//modules/activity_tracker | 2.10.2 |
-| <a name="module_cos"></a> [cos](#module\_cos) | terraform-ibm-modules/cos/ibm//modules/fscloud | 7.1.1 |
+| <a name="module_activity_tracker"></a> [activity\_tracker](#module\_activity\_tracker) | terraform-ibm-modules/observability-instances/ibm//modules/activity_tracker | 2.10.3 |
+| <a name="module_cos"></a> [cos](#module\_cos) | terraform-ibm-modules/cos/ibm//modules/fscloud | 7.1.2 |
 | <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | terraform-ibm-modules/resource-group/ibm | 1.1.4 |
 | <a name="module_trusted_profile_projects"></a> [trusted\_profile\_projects](#module\_trusted\_profile\_projects) | terraform-ibm-modules/trusted-profile/ibm | 1.0.1 |
 
