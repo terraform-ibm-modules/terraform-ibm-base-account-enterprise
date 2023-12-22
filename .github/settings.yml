@@ -15,7 +15,7 @@ repository:
   # By changing this field, you rename the repository.
 
   # Uncomment this name property and set the name to the current repo name.
-  # name: ""
+  name: "terraform-ibm-account-infrastructure-base"
 
   # The description is displayed under the repository name on the
   # organization page and in the 'About' section of the repository.
