@@ -37,11 +37,6 @@ output "cos_instance_id" {
   description = "COS Instance ID"
 }
 
-output "cos_s3_endpoint_private" {
-  value       = module.cos.s3_endpoint_private
-  description = "COS S3 Endpoint Private"
-}
-
 output "account_allowed_ip_addresses" {
   value       = module.account_settings.account_allowed_ip_addresses
   description = "Account Settings Allowed IP Addresses"

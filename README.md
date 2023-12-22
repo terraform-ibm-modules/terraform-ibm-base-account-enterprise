@@ -1,4 +1,4 @@
-# Terraform IBM Base Account Enterprise
+# IBM Cloud Account infrastructure base module
 
 [![Stable (With quality checks)](https://img.shields.io/badge/Status-Stable%20(With%20quality%20checks)-green)](https://terraform-ibm-modules.github.io/documentation/#/badge-status)
 [![latest release](https://img.shields.io/github/v/release/terraform-ibm-modules/terraform-ibm-base-account-enterprise?logo=GitHub&sort=semver)](https://github.com/terraform-ibm-modules/terraform-ibm-base-account-enterprise/releases/latest)
@@ -7,11 +7,11 @@
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 <!-- Add a description of module(s) in this repo -->
-This module is a general base layer module for setting up a newly provisioned enterprise account with a default provision of:
+This module is a general base layer module for setting up a newly provisioned account with a default provision of:
 
 - Base Resource Group
 - IAM Account Settings
-- Activity Tracker routing + COS Bucket
+- Activity Tracker routing + COS instance and bucket
 - Trusted Profile + Access Group for Projects
 
 <!-- Below content is automatically populated via pre-commit hook -->
@@ -33,7 +33,7 @@ https://terraform-ibm-modules.github.io/documentation/#/implementation-guideline
 
 
 <!-- This heading should always match the name of the root level module (aka the repo name) -->
-## terraform-ibm-base-account-enterprise
+## terraform-ibm-account-infrastructure-base
 
 ### Usage
 
@@ -62,22 +62,19 @@ provider "logdna" {
 }
 
 module "enterprise_account" {
-    source  = "terraform-ibm-modules/base-account-enterprise/ibm"
+    source  = "terraform-ibm-modules/account-infrastructure-base/ibm"
     version = "X.X.X" # Replace "X.X.X" with a release version to lock into a specific release
     providers = { # providers block necessary for logdna provider aliases
         logdna.at = logdna.at
         logdna.ld = logdna.ld
     }
     region                      = "us-south"
-    resource_group_name         = "base-enterprise-resource-group"
-    cos_instance_name           = "base-enterprise-cos-instance"
-    cos_bucket_name             = "base-enterprise-cos-bucket"
-    cos_resource_key_name       = "base-enterprise-cos-key"
-    cos_target_name             = "base-enterprise-cos-target"
-    trusted_profile_name        = "base-enterprise-trusted-profile"
-    activity_tracker_locations  = ["us-south", "global"]
-    activity_tracker_route_name = "base-enterprise-route"
-    resource_tags               = ["base-enterprise"]
+    resource_group_name         = "account-base-resource-group"
+    cos_instance_name           = "account-base-cos-instance"
+    cos_bucket_name             = "atracker-cos-bucket"
+    cos_target_name             = "atracker-cos-target"
+    trusted_profile_name        = "account-base-trusted-profile"
+    activity_tracker_route_name = "atracker-cos-route"
 }
 ```
 
@@ -119,8 +116,8 @@ You need the following permissions to run this module.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_account_settings"></a> [account\_settings](#module\_account\_settings) | terraform-ibm-modules/iam-account-settings/ibm | 2.5.0 |
-| <a name="module_activity_tracker"></a> [activity\_tracker](#module\_activity\_tracker) | terraform-ibm-modules/observability-instances/ibm//modules/activity_tracker | 2.10.1 |
-| <a name="module_cos"></a> [cos](#module\_cos) | terraform-ibm-modules/cos/ibm//modules/fscloud | 7.0.7 |
+| <a name="module_activity_tracker"></a> [activity\_tracker](#module\_activity\_tracker) | terraform-ibm-modules/observability-instances/ibm//modules/activity_tracker | 2.10.2 |
+| <a name="module_cos"></a> [cos](#module\_cos) | terraform-ibm-modules/cos/ibm//modules/fscloud | 7.1.1 |
 | <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | terraform-ibm-modules/resource-group/ibm | 1.1.4 |
 | <a name="module_trusted_profile_projects"></a> [trusted\_profile\_projects](#module\_trusted\_profile\_projects) | terraform-ibm-modules/trusted-profile/ibm | 1.0.1 |
 
@@ -128,7 +125,7 @@ You need the following permissions to run this module.
 
 | Name | Type |
 |------|------|
-| [ibm_resource_key.cos_resource_key](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/resource_key) | resource |
+| [ibm_iam_authorization_policy.atracker_cos](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/iam_authorization_policy) | resource |
 
 ### Inputs
 
@@ -147,7 +144,7 @@ You need the following permissions to run this module.
 | <a name="input_cos_bucket_cbr_rules"></a> [cos\_bucket\_cbr\_rules](#input\_cos\_bucket\_cbr\_rules) | COS Bucket CBR Rules | <pre>list(object({<br>    description = string<br>    account_id  = string<br>    rule_contexts = list(object({<br>      attributes = optional(list(object({<br>        name  = string<br>        value = string<br>      })))<br>    }))<br>    enforcement_mode = string<br>    tags = optional(list(object({<br>      name  = string<br>      value = string<br>    })), [])<br>    operations = optional(list(object({<br>      api_types = list(object({<br>        api_type_id = string<br>      }))<br>    })))<br>  }))</pre> | `[]` | no |
 | <a name="input_cos_bucket_expire_days"></a> [cos\_bucket\_expire\_days](#input\_cos\_bucket\_expire\_days) | Number of days before expiry. | `number` | `365` | no |
 | <a name="input_cos_bucket_expire_enabled"></a> [cos\_bucket\_expire\_enabled](#input\_cos\_bucket\_expire\_enabled) | A flag to control expiry rule on the bucket. | `bool` | `false` | no |
-| <a name="input_cos_bucket_management_endpoint_type"></a> [cos\_bucket\_management\_endpoint\_type](#input\_cos\_bucket\_management\_endpoint\_type) | Management endpoint of the COS bucket. | `string` | n/a | yes |
+| <a name="input_cos_bucket_management_endpoint_type"></a> [cos\_bucket\_management\_endpoint\_type](#input\_cos\_bucket\_management\_endpoint\_type) | The type of endpoint for the IBM terraform provider to use to manage the bucket. (public, private or direct) | `string` | `"public"` | no |
 | <a name="input_cos_bucket_name"></a> [cos\_bucket\_name](#input\_cos\_bucket\_name) | The name to give the newly provisioned COS bucket which will be used for Activity Tracker logs. | `string` | n/a | yes |
 | <a name="input_cos_bucket_object_versioning_enabled"></a> [cos\_bucket\_object\_versioning\_enabled](#input\_cos\_bucket\_object\_versioning\_enabled) | A flag to control object versioning on the bucket. | `bool` | `false` | no |
 | <a name="input_cos_bucket_retention_default"></a> [cos\_bucket\_retention\_default](#input\_cos\_bucket\_retention\_default) | Specifies default duration of time an object that can be kept unmodified for COS bucket. | `number` | `90` | no |
@@ -156,26 +153,24 @@ You need the following permissions to run this module.
 | <a name="input_cos_bucket_retention_minimum"></a> [cos\_bucket\_retention\_minimum](#input\_cos\_bucket\_retention\_minimum) | Specifies minimum duration of time an object must be kept unmodified for COS bucket. | `number` | `90` | no |
 | <a name="input_cos_bucket_retention_permanent"></a> [cos\_bucket\_retention\_permanent](#input\_cos\_bucket\_retention\_permanent) | Specifies a permanent retention status either enable or disable for COS bucket. | `bool` | `false` | no |
 | <a name="input_cos_bucket_storage_class"></a> [cos\_bucket\_storage\_class](#input\_cos\_bucket\_storage\_class) | COS Bucket storage class type | `string` | `null` | no |
-| <a name="input_cos_hmac_key_name"></a> [cos\_hmac\_key\_name](#input\_cos\_hmac\_key\_name) | Name of the resource key for COS instance. | `string` | `"hmac-cos-key"` | no |
-| <a name="input_cos_hmac_key_role"></a> [cos\_hmac\_key\_role](#input\_cos\_hmac\_key\_role) | The role you want to be associated with your new hmac key. Valid roles are 'Writer', 'Reader', 'Manager', 'Content Reader', 'Object Reader', 'Object Writer'. | `string` | `"Manager"` | no |
+| <a name="input_cos_instance_access_tags"></a> [cos\_instance\_access\_tags](#input\_cos\_instance\_access\_tags) | A list of Access Tags applied to the created COS instance. | `list(string)` | `[]` | no |
 | <a name="input_cos_instance_cbr_rules"></a> [cos\_instance\_cbr\_rules](#input\_cos\_instance\_cbr\_rules) | CBR Rules for the COS instance. | <pre>list(object({<br>    description = string<br>    account_id  = string<br>    rule_contexts = list(object({<br>      attributes = optional(list(object({<br>        name  = string<br>        value = string<br>      })))<br>    }))<br>    enforcement_mode = string<br>    tags = optional(list(object({<br>      name  = string<br>      value = string<br>    })), [])<br>    operations = optional(list(object({<br>      api_types = list(object({<br>        api_type_id = string<br>      }))<br>    })))<br>  }))</pre> | `[]` | no |
 | <a name="input_cos_instance_name"></a> [cos\_instance\_name](#input\_cos\_instance\_name) | The name to give the cloud object storage instance that will be provisioned by this module. | `string` | n/a | yes |
 | <a name="input_cos_plan"></a> [cos\_plan](#input\_cos\_plan) | Plan of the COS instance created by the module | `string` | `"standard"` | no |
 | <a name="input_cos_target_name"></a> [cos\_target\_name](#input\_cos\_target\_name) | Name of the COS Target for Activity Tracker. | `string` | n/a | yes |
 | <a name="input_enforce_allowed_ip_addresses"></a> [enforce\_allowed\_ip\_addresses](#input\_enforce\_allowed\_ip\_addresses) | If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to SIEM and Activity Tracker. After running in monitored mode to test this variable, it should then explicitly be set to true to enforce IP allow listing. | `bool` | `true` | no |
 | <a name="input_inactive_session_timeout"></a> [inactive\_session\_timeout](#input\_inactive\_session\_timeout) | Specify how long (seconds) a user is allowed to stay logged in the account while being inactive/idle | `string` | `"900"` | no |
-| <a name="input_kms_encryption_enabled"></a> [kms\_encryption\_enabled](#input\_kms\_encryption\_enabled) | Set as true to use KMS key encryption to encrypt data in COS bucket | `bool` | `false` | no |
-| <a name="input_kms_guid"></a> [kms\_guid](#input\_kms\_guid) | GUID of the KMS instance where the provided key is taken from. | `string` | n/a | yes |
 | <a name="input_kms_key_crn"></a> [kms\_key\_crn](#input\_kms\_key\_crn) | CRN of the KMS key to use to encrypt the data in the COS bucket. | `string` | n/a | yes |
 | <a name="input_max_sessions_per_identity"></a> [max\_sessions\_per\_identity](#input\_max\_sessions\_per\_identity) | Defines the maximum allowed sessions per identity required by the account. Supports any whole number greater than '0', or 'NOT\_SET' to unset account setting and use service default. | `string` | `"NOT_SET"` | no |
 | <a name="input_mfa"></a> [mfa](#input\_mfa) | Specify Multi-Factor Authentication method in the account. Supported valid values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users). | `string` | `"TOTP4ALL"` | no |
 | <a name="input_public_access_enabled"></a> [public\_access\_enabled](#input\_public\_access\_enabled) | Enable/Disable public access group in which resources are open anyone regardless if they are member of your account or not | `bool` | `false` | no |
 | <a name="input_refresh_token_expiration"></a> [refresh\_token\_expiration](#input\_refresh\_token\_expiration) | Defines the refresh token expiration in seconds | `string` | `"259200"` | no |
-| <a name="input_region"></a> [region](#input\_region) | Region of the COS resources created by the module. | `string` | n/a | yes |
-| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group to create. All resources provisioned by this module will be provisioned to this group. | `string` | n/a | yes |
+| <a name="input_region"></a> [region](#input\_region) | Region to provision the COS resources created by this solution. | `string` | `"us-south"` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group to create. All resources created by this module will be provisioned to this group. | `string` | n/a | yes |
 | <a name="input_resource_tags"></a> [resource\_tags](#input\_resource\_tags) | A list of tags applied to the COS resources created by the module. | `list(string)` | `[]` | no |
 | <a name="input_serviceid_creation"></a> [serviceid\_creation](#input\_serviceid\_creation) | When restriction is enabled, only users, including the account owner, assigned the Service ID creator role on the IAM Identity Service can create service IDs. Allowed values are 'RESTRICTED', 'NOT\_RESTRICTED', or 'NOT\_SET' (to 'unset' a previous set value). | `string` | `"RESTRICTED"` | no |
 | <a name="input_shell_settings_enabled"></a> [shell\_settings\_enabled](#input\_shell\_settings\_enabled) | Enable global shell settings to all users in the account | `bool` | `false` | no |
+| <a name="input_skip_atracker_cos_iam_auth_policy"></a> [skip\_atracker\_cos\_iam\_auth\_policy](#input\_skip\_atracker\_cos\_iam\_auth\_policy) | Set to true to skip the creation of an IAM authorization policy that permits the Activity Tracker service Object Writer access to the Cloud Object Storage instance provisioned by this module. NOTE: If skipping, you must ensure the auth policy exists on the account before running the module. | `bool` | `false` | no |
 | <a name="input_trusted_profile_description"></a> [trusted\_profile\_description](#input\_trusted\_profile\_description) | Description of the trusted profile. | `string` | `"Trusted Profile for Projects access"` | no |
 | <a name="input_trusted_profile_name"></a> [trusted\_profile\_name](#input\_trusted\_profile\_name) | Name of the trusted profile. | `string` | n/a | yes |
 | <a name="input_trusted_profile_roles"></a> [trusted\_profile\_roles](#input\_trusted\_profile\_roles) | List of roles given to the trusted profile. | `list(string)` | <pre>[<br>  "Administrator"<br>]</pre> | no |
@@ -204,7 +199,6 @@ You need the following permissions to run this module.
 | <a name="output_cos_bucket"></a> [cos\_bucket](#output\_cos\_bucket) | COS Bucket |
 | <a name="output_cos_instance_guid"></a> [cos\_instance\_guid](#output\_cos\_instance\_guid) | COS Instance GUID |
 | <a name="output_cos_instance_id"></a> [cos\_instance\_id](#output\_cos\_instance\_id) | COS Instance ID |
-| <a name="output_cos_s3_endpoint_private"></a> [cos\_s3\_endpoint\_private](#output\_cos\_s3\_endpoint\_private) | COS S3 Endpoint Private |
 | <a name="output_resource_group_id"></a> [resource\_group\_id](#output\_resource\_group\_id) | ID of the Resource Group created by the module. |
 | <a name="output_resource_group_name"></a> [resource\_group\_name](#output\_resource\_group\_name) | Name of the Resource Group created by the module. |
 | <a name="output_trusted_profile_projects"></a> [trusted\_profile\_projects](#output\_trusted\_profile\_projects) | Trusted Profile Projects Profile |

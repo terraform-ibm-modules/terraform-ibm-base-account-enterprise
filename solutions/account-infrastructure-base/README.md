@@ -1,12 +1,13 @@
-# IBM Cloud Enterprise Account Base Layer
+# IBM Cloud Account Infrastructure Base solution
 
-An end-to-end deployable architecture that will provision the following:
-- A new resource group.
-- A new Cloud Object Storage instance.
-- A new Cloud Object Storage bucket.
-- A new Activity Tracker instance.
+An end-to-end deployable architecture solution that will provision the following:
+- A resource group.
+- A default set of FSCloud compliant Account Settings.
+- A Cloud Object Storage instance.
+- A Cloud Object Storage bucket encrypted with the KMS key.
+- An Activity Tracker target for the COS bucket
+- An Activity Tracker route to route events to the COS bucket.
 - A new Trusted Profile for Projects access.
-- A default set of Account Settings.
 
-NOTE:
-If the KMS instance you are using for encryption exists in a separate account from the account where the DA is being run you will need to create an Authorization Policy in the account that contains the KMS instance with the `source` of the policy being for COS services in the account where the DA is run and the `target` of the policy being the KMS service and providing `Reader` access to the KMS instance.
+## Before You Begin
+An IAM authorization policy must exist in the account where the KMS key resides which grants the Cloud Object Storage service in account to which this solution is being deployed, reader access to the KMS instance that the KMS key belongs to.

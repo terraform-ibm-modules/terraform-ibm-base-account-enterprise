@@ -1,1 +1,0 @@
-solutions/account-infrastructure-base/main.tf

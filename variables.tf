@@ -1,15 +1,10 @@
 ########################################################################################################################
-# Input Variables
+# Account Variables
 ########################################################################################################################
-
-variable "region" {
-  type        = string
-  description = "Region of the COS resources created by the module."
-}
 
 variable "resource_group_name" {
   type        = string
-  description = "The name of the resource group to create. All resources provisioned by this module will be provisioned to this group."
+  description = "The name of the resource group to create. All resources created by this module will be provisioned to this group."
 }
 
 variable "access_token_expiration" {
@@ -99,6 +94,16 @@ variable "user_mfa_reset" {
   default     = false
 }
 
+########################################################################################################################
+# COS Variables
+########################################################################################################################
+
+variable "region" {
+  type        = string
+  description = "Region to provision the COS resources created by this solution."
+  default     = "us-south"
+}
+
 variable "cos_plan" {
   type        = string
   description = "Plan of the COS instance created by the module"
@@ -108,6 +113,18 @@ variable "cos_plan" {
 variable "cos_instance_name" {
   type        = string
   description = "The name to give the cloud object storage instance that will be provisioned by this module."
+}
+
+variable "resource_tags" {
+  type        = list(string)
+  description = "A list of tags applied to the COS resources created by the module."
+  default     = []
+}
+
+variable "cos_instance_access_tags" {
+  type        = list(string)
+  description = "A list of Access Tags applied to the created COS instance."
+  default     = []
 }
 
 variable "cos_bucket_name" {
@@ -139,25 +156,19 @@ variable "cos_bucket_object_versioning_enabled" {
   default     = false
 }
 
-variable "kms_encryption_enabled" {
-  type        = bool
-  description = "Set as true to use KMS key encryption to encrypt data in COS bucket"
-  default     = false
-}
-
 variable "kms_key_crn" {
   type        = string
   description = "CRN of the KMS key to use to encrypt the data in the COS bucket."
 }
 
-variable "kms_guid" {
-  type        = string
-  description = "GUID of the KMS instance where the provided key is taken from."
-}
-
 variable "cos_bucket_management_endpoint_type" {
+  description = "The type of endpoint for the IBM terraform provider to use to manage the bucket. (public, private or direct)"
   type        = string
-  description = "Management endpoint of the COS bucket."
+  default     = "public"
+  validation {
+    condition     = contains(["public", "private", "direct"], var.cos_bucket_management_endpoint_type)
+    error_message = "The specified management_endpoint_type_for_bucket is not a valid selection!"
+  }
 }
 
 variable "cos_bucket_storage_class" {
@@ -214,18 +225,6 @@ variable "cos_bucket_retention_permanent" {
   default     = false
 }
 
-variable "cos_hmac_key_name" {
-  type        = string
-  description = "Name of the resource key for COS instance."
-  default     = "hmac-cos-key"
-}
-
-variable "cos_hmac_key_role" {
-  type        = string
-  description = "The role you want to be associated with your new hmac key. Valid roles are 'Writer', 'Reader', 'Manager', 'Content Reader', 'Object Reader', 'Object Writer'."
-  default     = "Manager"
-}
-
 variable "cos_bucket_cbr_rules" {
   type = list(object({
     description = string
@@ -276,6 +275,16 @@ variable "cos_instance_cbr_rules" {
   default     = []
 }
 
+########################################################################################################################
+# ATracker Variables
+########################################################################################################################
+
+variable "skip_atracker_cos_iam_auth_policy" {
+  type        = bool
+  description = "Set to true to skip the creation of an IAM authorization policy that permits the Activity Tracker service Object Writer access to the Cloud Object Storage instance provisioned by this module. NOTE: If skipping, you must ensure the auth policy exists on the account before running the module."
+  default     = false
+}
+
 variable "cos_target_name" {
   type        = string
   description = "Name of the COS Target for Activity Tracker."
@@ -292,6 +301,10 @@ variable "activity_tracker_locations" {
   default     = ["*", "global"]
 }
 
+########################################################################################################################
+# Trusted Profile Variables
+########################################################################################################################
+
 variable "trusted_profile_name" {
   type        = string
   description = "Name of the trusted profile."
@@ -307,10 +320,4 @@ variable "trusted_profile_roles" {
   type        = list(string)
   description = "List of roles given to the trusted profile."
   default     = ["Administrator"]
-}
-
-variable "resource_tags" {
-  type        = list(string)
-  description = "A list of tags applied to the COS resources created by the module."
-  default     = []
 }

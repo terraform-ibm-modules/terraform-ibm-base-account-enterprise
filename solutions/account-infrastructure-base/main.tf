@@ -2,7 +2,7 @@
 # Base Account
 ########################################################################################################################
 
-module "base_layer" {
+module "account_infrastructure_base" {
   source = "../.."
   providers = {
     logdna.at = logdna.at
@@ -13,11 +13,9 @@ module "base_layer" {
   cos_instance_name                   = "${var.prefix}-cos-instance"
   cos_bucket_name                     = "${var.prefix}-cos-bucket"
   trusted_profile_name                = "${var.prefix}-trusted-profile"
-  cos_target_name                     = "${var.prefix}-target"
-  cos_bucket_management_endpoint_type = "public"
-  activity_tracker_route_name         = "${var.prefix}-route"
-  kms_encryption_enabled              = true
-  kms_guid                            = var.kms_guid
+  cos_target_name                     = "${var.prefix}-cos-target"
+  cos_bucket_management_endpoint_type = var.cos_bucket_management_endpoint_type
+  activity_tracker_route_name         = "${var.prefix}-cos-route"
   kms_key_crn                         = var.kms_key_crn
   resource_tags                       = var.resource_tags
 }

@@ -1,5 +1,5 @@
 ##############################################################################
-# Base Account Module
+# Account infrastructure base module
 ##############################################################################
 
 module "resource_group" {
@@ -29,13 +29,12 @@ module "account_settings" {
 
 module "cos" {
   source            = "terraform-ibm-modules/cos/ibm//modules/fscloud"
-  version           = "7.0.7"
+  version           = "7.1.1"
   resource_group_id = module.resource_group.resource_group_id
   bucket_configs = [{
     access_tags                   = var.cos_bucket_access_tags
     bucket_name                   = var.cos_bucket_name
-    kms_encryption_enabled        = var.kms_encryption_enabled
-    kms_guid                      = var.kms_guid
+    kms_encryption_enabled        = true
     kms_key_crn                   = var.kms_key_crn
     skip_iam_authorization_policy = true
     management_endpoint_type      = var.cos_bucket_management_endpoint_type
@@ -63,19 +62,22 @@ module "cos" {
   cos_instance_name  = var.cos_instance_name
   cos_plan           = var.cos_plan
   cos_tags           = var.resource_tags
-  create_hmac_key    = false
   instance_cbr_rules = var.cos_instance_cbr_rules
+  access_tags        = var.cos_instance_access_tags
 }
 
-resource "ibm_resource_key" "cos_resource_key" {
-  name                 = var.cos_hmac_key_name
-  resource_instance_id = module.cos.cos_instance_id
-  role                 = var.cos_hmac_key_role
+resource "ibm_iam_authorization_policy" "atracker_cos" {
+  count                       = var.skip_atracker_cos_iam_auth_policy ? 0 : 1
+  source_service_name         = "atracker"
+  target_service_name         = "cloud-object-storage"
+  target_resource_instance_id = module.cos.cos_instance_id
+  roles                       = ["Object Writer"]
+  description                 = "Permit AT service Object Writer access to COS instance ${module.cos.cos_instance_id}"
 }
 
 module "activity_tracker" {
   source  = "terraform-ibm-modules/observability-instances/ibm//modules/activity_tracker"
-  version = "2.10.1"
+  version = "2.10.2"
   providers = {
     logdna.at = logdna.at
   }
@@ -89,12 +91,12 @@ module "activity_tracker" {
   ]
   cos_targets = [
     {
-      api_key       = ibm_resource_key.cos_resource_key.credentials.apikey
-      bucket_name   = module.cos.buckets[var.cos_bucket_name].bucket_name
-      endpoint      = module.cos.buckets[var.cos_bucket_name].s3_endpoint_private
-      instance_id   = module.cos.cos_instance_id
-      target_region = var.region
-      target_name   = var.cos_target_name
+      bucket_name                = module.cos.buckets[var.cos_bucket_name].bucket_name
+      endpoint                   = module.cos.buckets[var.cos_bucket_name].s3_endpoint_private
+      instance_id                = module.cos.cos_instance_id
+      target_region              = var.region
+      target_name                = var.cos_target_name
+      service_to_service_enabled = true
     }
   ]
 }
