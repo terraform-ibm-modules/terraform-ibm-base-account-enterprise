@@ -1,0 +1,7 @@
+{
+  "ibmcloud_api_key": $VALIDATION_APIKEY,
+  "region": "us-south",
+  "resource_tags": $TAGS,
+  "prefix": $PREFIX,
+  "kms_key_crn": $HPCS_US_SOUTH_ROOT_KEY_CRN
+}
