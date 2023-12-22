@@ -19,7 +19,7 @@ TODO: Replace me with description of the module(s) in this repo
 <!-- Below content is automatically populated via pre-commit hook -->
 <!-- BEGIN OVERVIEW HOOK -->
 ## Overview
-* [terraform-ibm-base-account-enterprise](#terraform-ibm-base-account-enterprise)
+* [terraform-ibm-account-infrastructure-base](#terraform-ibm-account-infrastructure-base)
 * [Examples](./examples)
     * [Basic example](./examples/basic)
     * [Complete example](./examples/complete)
