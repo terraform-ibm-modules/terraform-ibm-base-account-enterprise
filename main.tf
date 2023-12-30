@@ -29,7 +29,7 @@ module "account_settings" {
 
 module "cos" {
   source            = "terraform-ibm-modules/cos/ibm//modules/fscloud"
-  version           = "7.1.2"
+  version           = "7.1.3"
   resource_group_id = module.resource_group.resource_group_id
   bucket_configs = [{
     access_tags                   = var.cos_bucket_access_tags
