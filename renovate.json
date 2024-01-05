@@ -4,13 +4,13 @@
   "packageRules": [
     {
       "description": "Use fix as Semantic Commit prefix for all dependency updates in these folders to generate release",
-      "matchPaths": ["solutions/account-infrastructure-base"],
+      "matchFileNames": ["solutions/account-infrastructure-base"],
       "semanticCommitType": "fix"
     },
     {
       "description": "Allow the locked in provider version to be updated to the latest for DAs",
       "enabled": true,
-      "matchPaths": ["solutions/account-infrastructure-base"],
+      "matchFileNames": ["solutions/account-infrastructure-base"],
       "matchManagers": ["terraform"],
       "matchDepTypes": ["required_provider"],
       "rangeStrategy": "bump",
