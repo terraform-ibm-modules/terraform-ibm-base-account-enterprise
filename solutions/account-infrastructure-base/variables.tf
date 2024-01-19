@@ -39,3 +39,8 @@ variable "cos_bucket_management_endpoint_type" {
     error_message = "The specified management_endpoint_type_for_bucket is not a valid selection!"
   }
 }
+
+variable "allowed_ip_addresses" {
+  description = "List of the IP addresses and subnets from which IAM tokens can be created for the account."
+  type        = list(string)
+}
