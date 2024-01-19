@@ -18,4 +18,5 @@ module "account_infrastructure_base" {
   activity_tracker_route_name         = "${var.prefix}-cos-route"
   kms_key_crn                         = var.kms_key_crn
   resource_tags                       = var.resource_tags
+  allowed_ip_addresses                = var.allowed_ip_addresses
 }
