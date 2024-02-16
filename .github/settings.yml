@@ -25,4 +25,4 @@ repository:
   description: "A general base layer module for setting up a newly provisioned account."
 
   # Use a comma-separated list of topics to set on the repo (ensure not to use any caps in the topic string).
-  topics: terraform, ibm-cloud, terraform-module, stable, account, account-infrastructure-base, core-team, supported
+  topics: terraform, ibm-cloud, terraform-module, stable, account, account-infrastructure-base, core-team, supported, deployable-architecture
