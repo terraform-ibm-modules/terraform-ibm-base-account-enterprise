@@ -114,3 +114,35 @@ module "trusted_profile_projects" {
     }]
   }]
 }
+
+###################################################################################
+# Custom Roles
+###################################################################################
+
+resource "ibm_iam_custom_role" "custom_iam_roles" {
+  for_each     = { for role in var.custom_roles : role.name => role }
+  name         = each.value.name
+  display_name = each.value.display_name
+  description  = coalesce(each.value.description, "Custom role: ${coalesce(each.value.display_name, each.value.role_name, each.value.name)}")
+  service      = each.value.service
+  actions      = each.value.actions
+}
+
+###################################################################################
+# Access Groups
+###################################################################################
+
+module "access_groups" {
+  for_each          = { for obj in var.access_groups : obj.access_group_name => obj }
+  source            = "terraform-ibm-modules/iam-access-group/ibm"
+  version           = "1.1.1"
+  access_group_name = each.value.access_group_name
+  provision         = each.value.provision
+  add_members       = each.value.add_members
+  description       = each.value.description
+  tags              = each.value.tags
+  ibm_ids           = each.value.ibm_ids
+  service_ids       = each.value.service_ids
+  policies          = each.value.policies
+  dynamic_rules     = each.value.dynamic_rules
+}

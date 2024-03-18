@@ -19,4 +19,32 @@ module "account_infrastructure_base" {
   kms_key_crn                         = var.kms_key_crn
   resource_tags                       = var.resource_tags
   allowed_ip_addresses                = var.allowed_ip_addresses
+
+  access_groups = [{
+    access_group_name = "${var.prefix}-access-group"
+    dynamic_rules = {
+      "dynamic-rule-example" = {
+        condition = [{
+          claim    = "test_claim"
+          operator = "CONTAINS"
+          value    = "test_value"
+        }]
+        expiration        = 3
+        identity_provider = "https://idp-test.example.org/SAML2"
+      }
+    }
+    policies = {
+      "test-policy" = {
+        roles = ["Viewer"]
+        tags  = ["account-infrastructure-base-example"]
+      }
+    }
+  }]
+
+  custom_roles = [{
+    actions      = ["cloud-object-storage.bucket.get"]
+    display_name = "account-base-test-custom-role"
+    name         = "account-base-test-custom-role"
+    service      = "cloud-object-storage"
+  }]
 }

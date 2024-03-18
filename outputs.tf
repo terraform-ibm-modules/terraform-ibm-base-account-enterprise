@@ -121,3 +121,13 @@ output "trusted_profile_projects_policies" {
   value       = module.trusted_profile_projects.trusted_profile_policies
   description = "Trusted Profile Projects Profile Policies"
 }
+
+output "custom_iam_roles" {
+  value       = ibm_iam_custom_role.custom_iam_roles
+  description = "Custom IAM Roles"
+}
+
+output "access_groups" {
+  value       = module.access_groups
+  description = "Access Groups"
+}

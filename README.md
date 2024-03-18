@@ -130,6 +130,7 @@ You need the following permissions to run this module.
 
 | Name | Source | Version |
 |------|--------|---------|
+| <a name="module_access_groups"></a> [access\_groups](#module\_access\_groups) | terraform-ibm-modules/iam-access-group/ibm | 1.1.1 |
 | <a name="module_account_settings"></a> [account\_settings](#module\_account\_settings) | terraform-ibm-modules/iam-account-settings/ibm | 2.5.0 |
 | <a name="module_activity_tracker"></a> [activity\_tracker](#module\_activity\_tracker) | terraform-ibm-modules/observability-instances/ibm//modules/activity_tracker | 2.10.3 |
 | <a name="module_cos"></a> [cos](#module\_cos) | terraform-ibm-modules/cos/ibm//modules/fscloud | 7.1.3 |
@@ -141,11 +142,13 @@ You need the following permissions to run this module.
 | Name | Type |
 |------|------|
 | [ibm_iam_authorization_policy.atracker_cos](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/iam_authorization_policy) | resource |
+| [ibm_iam_custom_role.custom_iam_roles](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/iam_custom_role) | resource |
 
 ### Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_access_groups"></a> [access\_groups](#input\_access\_groups) | IAM Access Groups and policies | <pre>list(object({<br>    access_group_name = string<br>    provision         = optional(bool, true)<br>    add_members       = optional(bool, true)<br>    description       = optional(string, null)<br>    tags              = optional(list(string), null)<br>    ibm_ids           = optional(list(string), null)<br>    service_ids       = optional(list(string), null)<br><br>    policies = map(object({<br>      roles              = list(string)<br>      account_management = optional(bool)<br>      tags               = set(string)<br>      resources = optional(list(object({<br>        region               = optional(string)<br>        attributes           = optional(map(string))<br>        service              = optional(string)<br>        resource_instance_id = optional(string)<br>        resource_type        = optional(string)<br>        resource             = optional(string)<br>        resource_group_id    = optional(string)<br>      })))<br>      resource_attributes = optional(list(object({<br>        name     = string<br>        value    = string<br>        operator = optional(string)<br>      })))<br>    }))<br><br>    dynamic_rules = map(object({<br>      expiration        = number<br>      identity_provider = string<br>      condition = list(object({<br>        claim    = string<br>        operator = string<br>        value    = string<br>      }))<br>    }))<br>  }))</pre> | `[]` | no |
 | <a name="input_access_token_expiration"></a> [access\_token\_expiration](#input\_access\_token\_expiration) | Defines the access token expiration in seconds | `string` | `"3600"` | no |
 | <a name="input_active_session_timeout"></a> [active\_session\_timeout](#input\_active\_session\_timeout) | Specify how long (seconds) a user is allowed to work continuously in the account | `number` | `3600` | no |
 | <a name="input_activity_tracker_locations"></a> [activity\_tracker\_locations](#input\_activity\_tracker\_locations) | Location of the route for the Activity Tracker, logs from these locations will be sent to the specified target. Supports passing individual regions, as well as `global` and `*`. | `list(string)` | <pre>[<br>  "*",<br>  "global"<br>]</pre> | no |
@@ -173,6 +176,7 @@ You need the following permissions to run this module.
 | <a name="input_cos_instance_name"></a> [cos\_instance\_name](#input\_cos\_instance\_name) | The name to give the cloud object storage instance that will be provisioned by this module. | `string` | n/a | yes |
 | <a name="input_cos_plan"></a> [cos\_plan](#input\_cos\_plan) | Plan of the COS instance created by the module | `string` | `"standard"` | no |
 | <a name="input_cos_target_name"></a> [cos\_target\_name](#input\_cos\_target\_name) | Name of the COS Target for Activity Tracker. | `string` | n/a | yes |
+| <a name="input_custom_roles"></a> [custom\_roles](#input\_custom\_roles) | IAM custom roles for Access Groups | <pre>list(object({<br>    name         = string<br>    service      = string<br>    display_name = string<br>    actions      = list(string)<br>    description  = optional(string, "")<br>  }))</pre> | `[]` | no |
 | <a name="input_enforce_allowed_ip_addresses"></a> [enforce\_allowed\_ip\_addresses](#input\_enforce\_allowed\_ip\_addresses) | If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to SIEM and Activity Tracker. After running in monitored mode to test this variable, it should then explicitly be set to true to enforce IP allow listing. | `bool` | `true` | no |
 | <a name="input_inactive_session_timeout"></a> [inactive\_session\_timeout](#input\_inactive\_session\_timeout) | Specify how long (seconds) a user is allowed to stay logged in the account while being inactive/idle | `string` | `"900"` | no |
 | <a name="input_kms_key_crn"></a> [kms\_key\_crn](#input\_kms\_key\_crn) | CRN of the KMS key to use to encrypt the data in the COS bucket. | `string` | n/a | yes |
@@ -196,6 +200,7 @@ You need the following permissions to run this module.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_access_groups"></a> [access\_groups](#output\_access\_groups) | Access Groups |
 | <a name="output_account_allowed_ip_addresses"></a> [account\_allowed\_ip\_addresses](#output\_account\_allowed\_ip\_addresses) | Account Settings Allowed IP Addresses |
 | <a name="output_account_allowed_ip_addresses_control_mode"></a> [account\_allowed\_ip\_addresses\_control\_mode](#output\_account\_allowed\_ip\_addresses\_control\_mode) | Account Settings Allowed IP Addresses Control Mode |
 | <a name="output_account_allowed_ip_addresses_enforced"></a> [account\_allowed\_ip\_addresses\_enforced](#output\_account\_allowed\_ip\_addresses\_enforced) | Account Settings Allowed IP Addresses Enforced |
@@ -214,6 +219,7 @@ You need the following permissions to run this module.
 | <a name="output_cos_bucket"></a> [cos\_bucket](#output\_cos\_bucket) | COS Bucket |
 | <a name="output_cos_instance_guid"></a> [cos\_instance\_guid](#output\_cos\_instance\_guid) | COS Instance GUID |
 | <a name="output_cos_instance_id"></a> [cos\_instance\_id](#output\_cos\_instance\_id) | COS Instance ID |
+| <a name="output_custom_iam_roles"></a> [custom\_iam\_roles](#output\_custom\_iam\_roles) | Custom IAM Roles |
 | <a name="output_resource_group_id"></a> [resource\_group\_id](#output\_resource\_group\_id) | ID of the Resource Group created by the module. |
 | <a name="output_resource_group_name"></a> [resource\_group\_name](#output\_resource\_group\_name) | Name of the Resource Group created by the module. |
 | <a name="output_trusted_profile_projects"></a> [trusted\_profile\_projects](#output\_trusted\_profile\_projects) | Trusted Profile Projects Profile |

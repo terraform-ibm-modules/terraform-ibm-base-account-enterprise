@@ -321,3 +321,64 @@ variable "trusted_profile_roles" {
   description = "List of roles given to the trusted profile."
   default     = ["Administrator"]
 }
+
+########################################################################################################################
+# Access Group Variables
+########################################################################################################################
+
+variable "access_groups" {
+  description = "IAM Access Groups and policies"
+  type = list(object({
+    access_group_name = string
+    provision         = optional(bool, true)
+    add_members       = optional(bool, true)
+    description       = optional(string, null)
+    tags              = optional(list(string), null)
+    ibm_ids           = optional(list(string), null)
+    service_ids       = optional(list(string), null)
+
+    policies = map(object({
+      roles              = list(string)
+      account_management = optional(bool)
+      tags               = set(string)
+      resources = optional(list(object({
+        region               = optional(string)
+        attributes           = optional(map(string))
+        service              = optional(string)
+        resource_instance_id = optional(string)
+        resource_type        = optional(string)
+        resource             = optional(string)
+        resource_group_id    = optional(string)
+      })))
+      resource_attributes = optional(list(object({
+        name     = string
+        value    = string
+        operator = optional(string)
+      })))
+    }))
+
+    dynamic_rules = map(object({
+      expiration        = number
+      identity_provider = string
+      condition = list(object({
+        claim    = string
+        operator = string
+        value    = string
+      }))
+    }))
+  }))
+
+  default = []
+}
+
+variable "custom_roles" {
+  description = "IAM custom roles for Access Groups"
+  type = list(object({
+    name         = string
+    service      = string
+    display_name = string
+    actions      = list(string)
+    description  = optional(string, "")
+  }))
+  default = []
+}
