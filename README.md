@@ -26,14 +26,8 @@ This module is a general base layer module for setting up a newly provisioned ac
 <!-- END OVERVIEW HOOK -->
 
 
-<!--
-If this repo contains any reference architectures, uncomment the heading below and links to them.
-(Usually in the `/reference-architectures` directory.)
-See "Reference architecture" in Authoring Guidelines in the public documentation at
-https://terraform-ibm-modules.github.io/documentation/#/implementation-guidelines?id=reference-architecture
--->
-<!-- ## Reference architectures -->
-
+## Reference architectures
+- [IBM Cloud Account Infrastructure Base solution](./solutions/account-infrastructure-base/)
 
 <!-- This heading should always match the name of the root level module (aka the repo name) -->
 ## terraform-ibm-account-infrastructure-base
