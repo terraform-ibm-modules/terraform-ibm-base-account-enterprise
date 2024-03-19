@@ -21,7 +21,6 @@ This module is a general base layer module for setting up a newly provisioned ac
 <!-- BEGIN OVERVIEW HOOK -->
 ## Overview
 * [terraform-ibm-account-infrastructure-base](#terraform-ibm-account-infrastructure-base)
-* [Examples](./examples)
 * [Contributing](#contributing)
 <!-- END OVERVIEW HOOK -->
 
