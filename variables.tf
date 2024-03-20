@@ -331,7 +331,7 @@ variable "access_groups" {
   type = list(object({
     access_group_name = string
     provision         = optional(bool, true)
-    add_members       = optional(bool, true)
+    add_members       = optional(bool, false)
     description       = optional(string, null)
     tags              = optional(list(string), null)
     ibm_ids           = optional(list(string), null)

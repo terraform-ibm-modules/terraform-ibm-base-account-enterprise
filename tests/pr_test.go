@@ -46,13 +46,15 @@ func setupOptions(t *testing.T, prefix string, dir string) *testhelper.TestOptio
 			{
 				"access_group_name": fmt.Sprintf("%s-access-group", options.Prefix),
 				"dynamic_rules": map[string]interface{}{
-					"conditions": []map[string]interface{}{{
-						"claim":    "test_claim",
-						"operator": "CONTAINS",
-						"value":    "test_value",
-					}},
-					"expiration":        3,
-					"identity_provider": "https://idp-test.example.org/SAML2",
+					"test_map": map[string]interface{}{
+						"conditions": []map[string]interface{}{{
+							"claim":    "test_claim",
+							"operator": "CONTAINS",
+							"value":    "test_value",
+						}},
+						"expiration":        3,
+						"identity_provider": "https://idp-test.example.org/SAML2",
+					},
 				},
 				"policies": map[string]interface{}{
 					"test-policy": map[string]interface{}{
@@ -72,7 +74,7 @@ func setupOptions(t *testing.T, prefix string, dir string) *testhelper.TestOptio
 					"cloud-object-storage.bucket.get",
 				},
 				"display_name": "account-base-test-custom-role",
-				"name":         "account-base-test-custom-role",
+				"name":         "AccountBaseTestCustomRole",
 				"service":      "cloud-object-storage",
 			},
 		},
