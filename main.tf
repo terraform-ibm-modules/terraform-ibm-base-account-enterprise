@@ -123,7 +123,7 @@ resource "ibm_iam_custom_role" "custom_iam_roles" {
   for_each     = { for role in var.custom_roles : role.name => role }
   name         = each.value.name
   display_name = each.value.display_name
-  description  = coalesce(each.value.description, "Custom role: ${coalesce(each.value.display_name, each.value.role_name, each.value.name)}")
+  description  = coalesce(each.value.description, "Custom role: ${coalesce(each.value.display_name, each.value.name)}")
   service      = each.value.service
   actions      = each.value.actions
 }
