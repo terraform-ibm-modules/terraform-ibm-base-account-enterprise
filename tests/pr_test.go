@@ -2,6 +2,7 @@
 package test
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"testing"
@@ -40,6 +41,40 @@ func setupOptions(t *testing.T, prefix string, dir string) *testhelper.TestOptio
 		"kms_key_crn": permanentResources["hpcs_south_root_key_crn"],
 		"allowed_ip_addresses": []string{
 			"0.0.0.0/0",
+		},
+		"access_groups": []map[string]interface{}{
+			{
+				"access_group_name": fmt.Sprintf("%s-access-group", options.Prefix),
+				"dynamic_rules": map[string]interface{}{
+					"conditions": []map[string]interface{}{{
+						"claim":    "test_claim",
+						"operator": "CONTAINS",
+						"value":    "test_value",
+					}},
+					"expiration":        3,
+					"identity_provider": "https://idp-test.example.org/SAML2",
+				},
+				"policies": map[string]interface{}{
+					"test-policy": map[string]interface{}{
+						"roles": []string{
+							"Viewer",
+						},
+						"tags": []string{
+							"account-infrastructure-base-example",
+						},
+					},
+				},
+			},
+		},
+		"custom_roles": []map[string]interface{}{
+			{
+				"actions": []string{
+					"cloud-object-storage.bucket.get",
+				},
+				"display_name": "account-base-test-custom-role",
+				"name":         "account-base-test-custom-role",
+				"service":      "cloud-object-storage",
+			},
 		},
 	}
 

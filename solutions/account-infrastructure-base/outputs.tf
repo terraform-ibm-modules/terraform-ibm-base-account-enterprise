@@ -121,3 +121,13 @@ output "trusted_profile_projects_policies" {
   value       = module.account_infrastructure_base.trusted_profile_projects_policies
   description = "Trusted Profile Projects Profile Policies"
 }
+
+output "custom_iam_roles" {
+  value       = module.account_infrastructure_base.custom_iam_roles
+  description = "Custom IAM Roles"
+}
+
+output "access_groups" {
+  value       = module.account_infrastructure_base.access_groups
+  description = "Access Groups"
+}

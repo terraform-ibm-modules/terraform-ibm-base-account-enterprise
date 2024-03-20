@@ -360,7 +360,7 @@ variable "access_groups" {
     dynamic_rules = map(object({
       expiration        = number
       identity_provider = string
-      condition = list(object({
+      conditions = list(object({
         claim    = string
         operator = string
         value    = string
