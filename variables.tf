@@ -340,7 +340,7 @@ variable "access_groups" {
     policies = map(object({
       roles              = list(string)
       account_management = optional(bool)
-      tags               = set(string)
+      tags               = optional(set(string), [])
       resources = optional(list(object({
         region               = optional(string)
         attributes           = optional(map(string))
@@ -357,7 +357,7 @@ variable "access_groups" {
       })))
     }))
 
-    dynamic_rules = map(object({
+    dynamic_rules = optional(map(object({
       expiration        = number
       identity_provider = string
       conditions = list(object({
@@ -365,7 +365,7 @@ variable "access_groups" {
         operator = string
         value    = string
       }))
-    }))
+    })), {})
   }))
 
   default = []

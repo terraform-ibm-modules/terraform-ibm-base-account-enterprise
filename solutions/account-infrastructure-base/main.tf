@@ -19,6 +19,28 @@ module "account_infrastructure_base" {
   kms_key_crn                         = var.kms_key_crn
   resource_tags                       = var.resource_tags
   allowed_ip_addresses                = var.allowed_ip_addresses
-  access_groups                       = var.access_groups
   custom_roles                        = var.custom_roles
+  access_groups = [{
+    access_group_name = "${var.prefix}-admin"
+    description       = "Access Group with full Administrator privileges"
+    policies = {
+      "acct-admin" = {
+        account_management = true
+        roles              = ["Administrator"]
+      },
+      "res-group" = {
+        roles = ["Administrator"]
+        resource_attributes = [{
+          name  = "resourceGroupId"
+          value = "*"
+        }]
+      },
+      "all-iam" = {
+        roles = ["Administrator", "Manager"]
+        resources = [{
+          service = "iam-access-management"
+        }]
+      }
+    }
+  }]
 }
