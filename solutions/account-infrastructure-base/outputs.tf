@@ -2,41 +2,6 @@
 # Outputs
 ########################################################################################################################
 
-output "resource_group_id" {
-  value       = module.account_infrastructure_base.resource_group_id
-  description = "ID of the Resource Group created by the module."
-}
-
-output "resource_group_name" {
-  value       = module.account_infrastructure_base.resource_group_name
-  description = "Name of the Resource Group created by the module."
-}
-
-output "activity_tracker_routes" {
-  value       = module.account_infrastructure_base.activity_tracker_routes
-  description = "Activity Tracker Routes"
-}
-
-output "activity_tracker_targets" {
-  value       = module.account_infrastructure_base.activity_tracker_targets
-  description = "Activity Tracker Targets"
-}
-
-output "cos_bucket" {
-  value       = module.account_infrastructure_base.cos_bucket
-  description = "COS Bucket"
-}
-
-output "cos_instance_guid" {
-  value       = module.account_infrastructure_base.cos_instance_guid
-  description = "COS Instance GUID"
-}
-
-output "cos_instance_id" {
-  value       = module.account_infrastructure_base.cos_instance_id
-  description = "COS Instance ID"
-}
-
 output "account_allowed_ip_addresses" {
   value       = module.account_infrastructure_base.account_allowed_ip_addresses
   description = "Account Settings Allowed IP Addresses"

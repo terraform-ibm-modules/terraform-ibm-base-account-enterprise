@@ -32,16 +32,8 @@
           "description": "Configure IAM account settings so they meet FSCloud compliance requirements."
         },
         {
-          "title": "Creates Activity Tracker route and target",
-          "description": "Creates Activity Tracker route and target so events are sent to a COS bucket."
-        },
-        {
           "title": "Creates Trusted profile",
           "description": "Creates Trusted profile and associated access group for Projects."
-        },
-        {
-          "title": "Creates resource group",
-          "description": "Creates resource group where all resources created by this solution are provisioned."
         }
       ],
       "flavors": [
@@ -62,22 +54,9 @@
           "iam_permissions": [
             {
               "role_crns": [
-                "crn:v1:bluemix:public:iam::::serviceRole:Manager"
-              ],
-              "service_name": "cloud-object-storage"
-            },
-            {
-              "role_crns": [
                 "crn:v1:bluemix:public:iam::::role:Administrator"
               ],
               "service_name": "iam-identity"
-            },
-            {
-              "role_crns": [
-                "crn:v1:bluemix:public:iam::::serviceRole:Writer",
-                "crn:v1:bluemix:public:iam::::role:Administrator"
-              ],
-              "service_name": "atracker"
             }
           ],
           "architecture": {
