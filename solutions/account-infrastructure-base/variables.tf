@@ -8,9 +8,10 @@ variable "ibmcloud_api_key" {
   sensitive   = true
 }
 
-variable "prefix" {
+variable "trusted_profile_name" {
   type        = string
-  description = "Prefix to append to all resources created by this solution."
+  description = "Name of the Trusted Profile used by Projects"
+  default     = "account-infra-base-trusted-profile-projects"
 }
 
 variable "allowed_ip_addresses" {

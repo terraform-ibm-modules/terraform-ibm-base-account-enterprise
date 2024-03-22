@@ -29,14 +29,12 @@ func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
 
-func setupOptions(t *testing.T, prefix string, dir string) *testhelper.TestOptions {
+func setupOptions(t *testing.T, dir string) *testhelper.TestOptions {
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
 		Testing:      t,
 		TerraformDir: dir,
-		Prefix:       prefix,
 	})
 	options.TerraformVars = map[string]interface{}{
-		"prefix": options.Prefix,
 		"allowed_ip_addresses": []string{
 			"0.0.0.0/0",
 		},
@@ -53,7 +51,7 @@ func TestRunDA(t *testing.T) {
 
 	// t.Parallel()
 
-	options := setupOptions(t, "base-acct", solutionDir)
+	options := setupOptions(t, solutionDir)
 
 	output, err := options.RunTestConsistency()
 	assert.Nil(t, err, "This should not have errored")
@@ -68,7 +66,7 @@ func TestRunUpgradeDA(t *testing.T) {
 
 	// t.Parallel()
 
-	options := setupOptions(t, "base-acct-upg", solutionDir)
+	options := setupOptions(t, solutionDir)
 
 	output, err := options.RunTestUpgrade()
 	if !options.UpgradeTestSkipped {
