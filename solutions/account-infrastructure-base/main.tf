@@ -36,7 +36,7 @@ module "account_infrastructure_base" {
         }]
       },
       "all-iam" = {
-        roles = ["Administrator", "Manager"]
+        roles = ["Administrator"]
         resources = [{
           service = "iam-access-management"
         }]
