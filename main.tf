@@ -114,3 +114,10 @@ module "trusted_profile_projects" {
     }]
   }]
 }
+
+module "cbr_fscloud" {
+  source            = "terraform-ibm-modules/cbr/ibm//modules/fscloud"
+  version           = "1.20.0"
+  prefix            = var.cbr_prefix
+  zone_vpc_crn_list = []
+}

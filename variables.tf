@@ -321,3 +321,13 @@ variable "trusted_profile_roles" {
   description = "List of roles given to the trusted profile."
   default     = ["Administrator"]
 }
+
+########################################################################################################################
+# CBR Variables
+########################################################################################################################
+
+variable "cbr_prefix" {
+  type        = string
+  description = "String to use as the prefix for all CBR resources"
+  default     = "acct-infra-base"
+}

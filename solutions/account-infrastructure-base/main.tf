@@ -19,4 +19,5 @@ module "account_infrastructure_base" {
   kms_key_crn                         = var.kms_key_crn
   resource_tags                       = var.resource_tags
   allowed_ip_addresses                = var.allowed_ip_addresses
+  cbr_prefix                          = var.prefix
 }
