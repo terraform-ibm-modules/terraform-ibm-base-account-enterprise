@@ -36,8 +36,9 @@ func setupOptions(t *testing.T, prefix string, dir string) *testhelper.TestOptio
 		Prefix:       prefix,
 	})
 	options.TerraformVars = map[string]interface{}{
-		"prefix":      options.Prefix,
-		"kms_key_crn": permanentResources["hpcs_south_root_key_crn"],
+		"prefix":                 options.Prefix,
+		"kms_key_crn":            permanentResources["hpcs_south_root_key_crn"],
+		"provision_atracker_cos": true,
 		"allowed_ip_addresses": []string{
 			"0.0.0.0/0",
 		},
@@ -76,21 +77,4 @@ func TestRunUpgradeDA(t *testing.T) {
 		assert.Nil(t, err, "This should not have errored")
 		assert.NotNil(t, output, "Expected some output")
 	}
-}
-
-func TestRunDAWithObs(t *testing.T) {
-	/* Unable to run tests in parallel as both are trying to update account settings at
-	   the same time, and the following error is observed:
-	   "Error: UpdateAccountSettingsWithContext failed Couldn't save cloudshell settings for account"
-	*/
-
-	// t.Parallel()
-
-	options := setupOptions(t, "base-acct", solutionDir)
-
-	options.TerraformVars["provision_atracker_cos"] = true
-
-	output, err := options.RunTestConsistency()
-	assert.Nil(t, err, "This should not have errored")
-	assert.NotNil(t, output, "Expected some output")
 }
