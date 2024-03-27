@@ -44,3 +44,9 @@ variable "allowed_ip_addresses" {
   description = "List of the IP addresses and subnets from which IAM tokens can be created for the account."
   type        = list(string)
 }
+
+variable "provision_atracker_cos" {
+  type        = bool
+  description = "Enable to create an Atracker route and COS instance + bucket."
+  default     = false
+}

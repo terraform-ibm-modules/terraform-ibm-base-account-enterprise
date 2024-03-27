@@ -2,6 +2,27 @@
 # Account infrastructure base module
 ##############################################################################
 
+locals {
+  # input validation
+  # tflint-ignore: terraform_unused_declarations
+  validate_atracker_provision_cos_instance_name = var.provision_atracker_cos && var.cos_instance_name == null ? tobool("'var.cos_instance_name' cannot be null if 'var.provision_atracker_cos' is true") : true
+  # tflint-ignore: terraform_unused_declarations
+  validate_atracker_provision_cos_bucket_name = var.provision_atracker_cos && var.cos_bucket_name == null ? tobool("'var.cos_bucket_name' cannot be null if 'var.provision_atracker_cos' is true") : true
+  # tflint-ignore: terraform_unused_declarations
+  validate_atracker_provision_kms_key_crn = var.provision_atracker_cos && var.kms_key_crn == null ? tobool("'var.kms_key_crn' cannot be null if 'var.provision_atracker_cos' is true") : true
+  # tflint-ignore: terraform_unused_declarations
+  validate_atracker_provision_cos_target_name = var.provision_atracker_cos && var.cos_target_name == null ? tobool("'var.cos_target_name' cannot be null if 'var.provision_atracker_cos' is true") : true
+  # tflint-ignore: terraform_unused_declarations
+  validate_atracker_provision_activity_tracker_route_name = var.provision_atracker_cos && var.activity_tracker_route_name == null ? tobool("'var.activity_tracker_route_name' cannot be null if 'var.provision_atracker_cos' is true") : true
+
+  # outputs
+  cos_bucket               = var.provision_atracker_cos ? module.cos[0].buckets[var.cos_bucket_name] : null
+  cos_instance_guid        = var.provision_atracker_cos ? module.cos[0].cos_instance_guid : null
+  cos_instance_id          = var.provision_atracker_cos ? module.cos[0].cos_instance_id : null
+  activity_tracker_targets = var.provision_atracker_cos ? module.activity_tracker[0].activity_tracker_targets[var.cos_target_name] : null
+  activity_tracker_routes  = var.provision_atracker_cos ? module.activity_tracker[0].activity_tracker_routes : null
+}
+
 module "resource_group" {
   source              = "terraform-ibm-modules/resource-group/ibm"
   version             = "1.1.4"
@@ -28,6 +49,7 @@ module "account_settings" {
 }
 
 module "cos" {
+  count             = var.provision_atracker_cos ? 1 : 0
   source            = "terraform-ibm-modules/cos/ibm//modules/fscloud"
   version           = "7.1.3"
   resource_group_id = module.resource_group.resource_group_id
@@ -68,15 +90,16 @@ module "cos" {
 }
 
 resource "ibm_iam_authorization_policy" "atracker_cos" {
-  count                       = var.skip_atracker_cos_iam_auth_policy ? 0 : 1
+  count                       = var.provision_atracker_cos ? (var.skip_atracker_cos_iam_auth_policy ? 0 : 1) : 0
   source_service_name         = "atracker"
   target_service_name         = "cloud-object-storage"
-  target_resource_instance_id = module.cos.cos_instance_guid
+  target_resource_instance_id = local.cos_instance_guid
   roles                       = ["Object Writer"]
-  description                 = "Permit AT service Object Writer access to COS instance ${module.cos.cos_instance_id}"
+  description                 = "Permit AT service Object Writer access to COS instance ${local.cos_instance_id}"
 }
 
 module "activity_tracker" {
+  count   = var.provision_atracker_cos ? 1 : 0
   source  = "terraform-ibm-modules/observability-instances/ibm//modules/activity_tracker"
   version = "2.10.3"
   providers = {
@@ -87,14 +110,14 @@ module "activity_tracker" {
     {
       route_name = var.activity_tracker_route_name
       locations  = var.activity_tracker_locations
-      target_ids = [module.activity_tracker.activity_tracker_targets[var.cos_target_name].id]
+      target_ids = [local.activity_tracker_targets.id]
     }
   ]
   cos_targets = [
     {
-      bucket_name                = module.cos.buckets[var.cos_bucket_name].bucket_name
-      endpoint                   = module.cos.buckets[var.cos_bucket_name].s3_endpoint_private
-      instance_id                = module.cos.cos_instance_id
+      bucket_name                = local.cos_bucket.bucket_name
+      endpoint                   = local.cos_bucket.s3_endpoint_private
+      instance_id                = local.cos_bucket.cos_instance_id
       target_region              = var.region
       target_name                = var.cos_target_name
       service_to_service_enabled = true

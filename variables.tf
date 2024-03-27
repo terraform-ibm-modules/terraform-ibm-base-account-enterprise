@@ -98,6 +98,12 @@ variable "user_mfa_reset" {
 # COS Variables
 ########################################################################################################################
 
+variable "provision_atracker_cos" {
+  type        = bool
+  description = "Enable to create an Atracker route and COS instance + bucket."
+  default     = false
+}
+
 variable "region" {
   type        = string
   description = "Region to provision the COS resources created by this solution."
@@ -113,6 +119,7 @@ variable "cos_plan" {
 variable "cos_instance_name" {
   type        = string
   description = "The name to give the cloud object storage instance that will be provisioned by this module."
+  default     = null
 }
 
 variable "resource_tags" {
@@ -130,6 +137,7 @@ variable "cos_instance_access_tags" {
 variable "cos_bucket_name" {
   type        = string
   description = "The name to give the newly provisioned COS bucket which will be used for Activity Tracker logs."
+  default     = null
 }
 
 variable "cos_bucket_access_tags" {
@@ -159,6 +167,7 @@ variable "cos_bucket_object_versioning_enabled" {
 variable "kms_key_crn" {
   type        = string
   description = "CRN of the KMS key to use to encrypt the data in the COS bucket."
+  default     = null
 }
 
 variable "cos_bucket_management_endpoint_type" {
@@ -288,11 +297,13 @@ variable "skip_atracker_cos_iam_auth_policy" {
 variable "cos_target_name" {
   type        = string
   description = "Name of the COS Target for Activity Tracker."
+  default     = null
 }
 
 variable "activity_tracker_route_name" {
   type        = string
   description = "Name of the route for the Activity Tracker."
+  default     = null
 }
 
 variable "activity_tracker_locations" {
