@@ -331,3 +331,63 @@ variable "cbr_prefix" {
   description = "String to use as the prefix for all CBR resources"
   default     = "acct-infra-base"
 }
+
+variable "cbr_allow_cos_to_kms" {
+  type        = bool
+  description = "Set rule for COS to KMS, default is true"
+  default     = true
+}
+
+variable "cbr_allow_block_storage_to_kms" {
+  type        = bool
+  description = "Set rule for block storage to KMS, default is true"
+  default     = true
+}
+
+variable "cbr_allow_roks_to_kms" {
+  type        = bool
+  description = "Set rule for ROKS to KMS, default is true"
+  default     = true
+}
+
+variable "cbr_allow_icd_to_kms" {
+  type        = bool
+  description = "Set rule for ICD to KMS, default is true"
+  default     = true
+}
+
+variable "cbr_allow_event_streams_to_kms" {
+  type        = bool
+  description = "Set rule for Event Streams (Messagehub) to KMS, default is true"
+  default     = true
+}
+
+variable "cbr_allow_vpcs_to_container_registry" {
+  type        = bool
+  description = "Set rule for VPCs to container registry, default is true"
+  default     = true
+}
+
+variable "cbr_allow_vpcs_to_cos" {
+  type        = bool
+  description = "Set rule for VPCs to COS, default is true"
+  default     = true
+}
+
+variable "cbr_allow_at_to_cos" {
+  type        = bool
+  description = "Set rule for Activity Tracker to COS, default is true"
+  default     = true
+}
+
+variable "cbr_allow_iks_to_is" {
+  type        = bool
+  description = "Set rule for IKS to IS (VPC Infrastructure Services), default is true"
+  default     = true
+}
+
+variable "cbr_allow_is_to_cos" {
+  type        = bool
+  description = "Set rule for IS (VPC Infrastructure Services) to COS, default is true"
+  default     = true
+}

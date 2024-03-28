@@ -147,6 +147,16 @@ You need the following permissions to run this module.
 | <a name="input_activity_tracker_route_name"></a> [activity\_tracker\_route\_name](#input\_activity\_tracker\_route\_name) | Name of the route for the Activity Tracker. | `string` | n/a | yes |
 | <a name="input_allowed_ip_addresses"></a> [allowed\_ip\_addresses](#input\_allowed\_ip\_addresses) | List of the IP addresses and subnets from which IAM tokens can be created for the account. | `list(any)` | `[]` | no |
 | <a name="input_api_creation"></a> [api\_creation](#input\_api\_creation) | When restriction is enabled, only users, including the account owner, assigned the User API key creator role on the IAM Identity Service can create API keys. Allowed values are 'RESTRICTED', 'NOT\_RESTRICTED', or 'NOT\_SET' (to 'unset' a previous set value). | `string` | `"RESTRICTED"` | no |
+| <a name="input_cbr_allow_at_to_cos"></a> [cbr\_allow\_at\_to\_cos](#input\_cbr\_allow\_at\_to\_cos) | Set rule for Activity Tracker to COS, default is true | `bool` | `true` | no |
+| <a name="input_cbr_allow_block_storage_to_kms"></a> [cbr\_allow\_block\_storage\_to\_kms](#input\_cbr\_allow\_block\_storage\_to\_kms) | Set rule for block storage to KMS, default is true | `bool` | `true` | no |
+| <a name="input_cbr_allow_cos_to_kms"></a> [cbr\_allow\_cos\_to\_kms](#input\_cbr\_allow\_cos\_to\_kms) | Set rule for COS to KMS, default is true | `bool` | `true` | no |
+| <a name="input_cbr_allow_event_streams_to_kms"></a> [cbr\_allow\_event\_streams\_to\_kms](#input\_cbr\_allow\_event\_streams\_to\_kms) | Set rule for Event Streams (Messagehub) to KMS, default is true | `bool` | `true` | no |
+| <a name="input_cbr_allow_icd_to_kms"></a> [cbr\_allow\_icd\_to\_kms](#input\_cbr\_allow\_icd\_to\_kms) | Set rule for ICD to KMS, default is true | `bool` | `true` | no |
+| <a name="input_cbr_allow_iks_to_is"></a> [cbr\_allow\_iks\_to\_is](#input\_cbr\_allow\_iks\_to\_is) | Set rule for IKS to IS (VPC Infrastructure Services), default is true | `bool` | `true` | no |
+| <a name="input_cbr_allow_is_to_cos"></a> [cbr\_allow\_is\_to\_cos](#input\_cbr\_allow\_is\_to\_cos) | Set rule for IS (VPC Infrastructure Services) to COS, default is true | `bool` | `true` | no |
+| <a name="input_cbr_allow_roks_to_kms"></a> [cbr\_allow\_roks\_to\_kms](#input\_cbr\_allow\_roks\_to\_kms) | Set rule for ROKS to KMS, default is true | `bool` | `true` | no |
+| <a name="input_cbr_allow_vpcs_to_container_registry"></a> [cbr\_allow\_vpcs\_to\_container\_registry](#input\_cbr\_allow\_vpcs\_to\_container\_registry) | Set rule for VPCs to container registry, default is true | `bool` | `true` | no |
+| <a name="input_cbr_allow_vpcs_to_cos"></a> [cbr\_allow\_vpcs\_to\_cos](#input\_cbr\_allow\_vpcs\_to\_cos) | Set rule for VPCs to COS, default is true | `bool` | `true` | no |
 | <a name="input_cbr_prefix"></a> [cbr\_prefix](#input\_cbr\_prefix) | String to use as the prefix for all CBR resources | `string` | `"acct-infra-base"` | no |
 | <a name="input_cos_bucket_access_tags"></a> [cos\_bucket\_access\_tags](#input\_cos\_bucket\_access\_tags) | A list of Access Tags applied to the created bucket. | `list(string)` | `[]` | no |
 | <a name="input_cos_bucket_archive_days"></a> [cos\_bucket\_archive\_days](#input\_cos\_bucket\_archive\_days) | Number of days to archive objects in the bucket. | `number` | `20` | no |
