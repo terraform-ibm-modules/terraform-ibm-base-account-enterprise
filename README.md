@@ -11,9 +11,12 @@ This module is a general base layer module for setting up a newly provisioned ac
 
 - Base Resource Group
 - IAM Account Settings
-- Activity Tracker routing + COS instance and bucket
 - Trusted Profile + Access Group for Projects
 - CBR Rules + Zones
+
+This module also optionally supports provisioning the following resources:
+
+- Activity Tracker routing + COS instance and bucket
 
 ![account-infrastructure-base](https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-account-infrastructure-base/main/reference-architectures/base-account-enterprise.svg)
 
@@ -51,7 +54,7 @@ unless real values don't help users know what to change.
 -->
 
 #### Before You Begin
-An IAM authorization policy must exist in the account where the KMS key resides which grants the Cloud Object Storage service in account to which this solution is being deployed, reader access to the KMS instance that the KMS key belongs to.
+If you are using this module to create an ATracker route and COS instance & bucket you will need an IAM authorization policy in the account where the KMS key resides which grants the Cloud Object Storage service in the account to which this solution is being deployed, reader access to the KMS instance that the KMS key belongs to.
 
 ```hcl
 locals {
@@ -79,6 +82,7 @@ module "enterprise_account" {
     }
     region                      = "us-south"
     resource_group_name         = "account-base-resource-group"
+    provision_atracker_cos      = true # setting this enables provisioning of the ATracker + COS resources
     cos_instance_name           = "account-base-cos-instance"
     cos_bucket_name             = "atracker-cos-bucket"
     cos_target_name             = "atracker-cos-target"
@@ -144,7 +148,7 @@ You need the following permissions to run this module.
 | <a name="input_access_token_expiration"></a> [access\_token\_expiration](#input\_access\_token\_expiration) | Defines the access token expiration in seconds | `string` | `"3600"` | no |
 | <a name="input_active_session_timeout"></a> [active\_session\_timeout](#input\_active\_session\_timeout) | Specify how long (seconds) a user is allowed to work continuously in the account | `number` | `3600` | no |
 | <a name="input_activity_tracker_locations"></a> [activity\_tracker\_locations](#input\_activity\_tracker\_locations) | Location of the route for the Activity Tracker, logs from these locations will be sent to the specified target. Supports passing individual regions, as well as `global` and `*`. | `list(string)` | <pre>[<br>  "*",<br>  "global"<br>]</pre> | no |
-| <a name="input_activity_tracker_route_name"></a> [activity\_tracker\_route\_name](#input\_activity\_tracker\_route\_name) | Name of the route for the Activity Tracker. | `string` | n/a | yes |
+| <a name="input_activity_tracker_route_name"></a> [activity\_tracker\_route\_name](#input\_activity\_tracker\_route\_name) | Name of the route for the Activity Tracker, required if 'var.provision\_atracker\_cos' is true. | `string` | `null` | no |
 | <a name="input_allowed_ip_addresses"></a> [allowed\_ip\_addresses](#input\_allowed\_ip\_addresses) | List of the IP addresses and subnets from which IAM tokens can be created for the account. | `list(any)` | `[]` | no |
 | <a name="input_api_creation"></a> [api\_creation](#input\_api\_creation) | When restriction is enabled, only users, including the account owner, assigned the User API key creator role on the IAM Identity Service can create API keys. Allowed values are 'RESTRICTED', 'NOT\_RESTRICTED', or 'NOT\_SET' (to 'unset' a previous set value). | `string` | `"RESTRICTED"` | no |
 | <a name="input_cbr_allow_at_to_cos"></a> [cbr\_allow\_at\_to\_cos](#input\_cbr\_allow\_at\_to\_cos) | Set rule for Activity Tracker to COS, default is true | `bool` | `true` | no |
@@ -166,7 +170,7 @@ You need the following permissions to run this module.
 | <a name="input_cos_bucket_expire_days"></a> [cos\_bucket\_expire\_days](#input\_cos\_bucket\_expire\_days) | Number of days before expiry. | `number` | `365` | no |
 | <a name="input_cos_bucket_expire_enabled"></a> [cos\_bucket\_expire\_enabled](#input\_cos\_bucket\_expire\_enabled) | A flag to control expiry rule on the bucket. | `bool` | `false` | no |
 | <a name="input_cos_bucket_management_endpoint_type"></a> [cos\_bucket\_management\_endpoint\_type](#input\_cos\_bucket\_management\_endpoint\_type) | The type of endpoint for the IBM terraform provider to use to manage the bucket. (public, private or direct) | `string` | `"public"` | no |
-| <a name="input_cos_bucket_name"></a> [cos\_bucket\_name](#input\_cos\_bucket\_name) | The name to give the newly provisioned COS bucket which will be used for Activity Tracker logs. | `string` | n/a | yes |
+| <a name="input_cos_bucket_name"></a> [cos\_bucket\_name](#input\_cos\_bucket\_name) | The name to give the newly provisioned COS bucket which will be used for Activity Tracker logs, required if 'var.provision\_atracker\_cos' is true. | `string` | `null` | no |
 | <a name="input_cos_bucket_object_versioning_enabled"></a> [cos\_bucket\_object\_versioning\_enabled](#input\_cos\_bucket\_object\_versioning\_enabled) | A flag to control object versioning on the bucket. | `bool` | `false` | no |
 | <a name="input_cos_bucket_retention_default"></a> [cos\_bucket\_retention\_default](#input\_cos\_bucket\_retention\_default) | Specifies default duration of time an object that can be kept unmodified for COS bucket. | `number` | `90` | no |
 | <a name="input_cos_bucket_retention_enabled"></a> [cos\_bucket\_retention\_enabled](#input\_cos\_bucket\_retention\_enabled) | Retention enabled for COS bucket. | `bool` | `false` | no |
@@ -176,14 +180,15 @@ You need the following permissions to run this module.
 | <a name="input_cos_bucket_storage_class"></a> [cos\_bucket\_storage\_class](#input\_cos\_bucket\_storage\_class) | COS Bucket storage class type | `string` | `null` | no |
 | <a name="input_cos_instance_access_tags"></a> [cos\_instance\_access\_tags](#input\_cos\_instance\_access\_tags) | A list of Access Tags applied to the created COS instance. | `list(string)` | `[]` | no |
 | <a name="input_cos_instance_cbr_rules"></a> [cos\_instance\_cbr\_rules](#input\_cos\_instance\_cbr\_rules) | CBR Rules for the COS instance. | <pre>list(object({<br>    description = string<br>    account_id  = string<br>    rule_contexts = list(object({<br>      attributes = optional(list(object({<br>        name  = string<br>        value = string<br>      })))<br>    }))<br>    enforcement_mode = string<br>    tags = optional(list(object({<br>      name  = string<br>      value = string<br>    })), [])<br>    operations = optional(list(object({<br>      api_types = list(object({<br>        api_type_id = string<br>      }))<br>    })))<br>  }))</pre> | `[]` | no |
-| <a name="input_cos_instance_name"></a> [cos\_instance\_name](#input\_cos\_instance\_name) | The name to give the cloud object storage instance that will be provisioned by this module. | `string` | n/a | yes |
+| <a name="input_cos_instance_name"></a> [cos\_instance\_name](#input\_cos\_instance\_name) | The name to give the cloud object storage instance that will be provisioned by this module, required if 'var.provision\_atracker\_cos' is true. | `string` | `null` | no |
 | <a name="input_cos_plan"></a> [cos\_plan](#input\_cos\_plan) | Plan of the COS instance created by the module | `string` | `"standard"` | no |
-| <a name="input_cos_target_name"></a> [cos\_target\_name](#input\_cos\_target\_name) | Name of the COS Target for Activity Tracker. | `string` | n/a | yes |
+| <a name="input_cos_target_name"></a> [cos\_target\_name](#input\_cos\_target\_name) | Name of the COS Target for Activity Tracker, required if 'var.provision\_atracker\_cos' is true. | `string` | `null` | no |
 | <a name="input_enforce_allowed_ip_addresses"></a> [enforce\_allowed\_ip\_addresses](#input\_enforce\_allowed\_ip\_addresses) | If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to SIEM and Activity Tracker. After running in monitored mode to test this variable, it should then explicitly be set to true to enforce IP allow listing. | `bool` | `true` | no |
 | <a name="input_inactive_session_timeout"></a> [inactive\_session\_timeout](#input\_inactive\_session\_timeout) | Specify how long (seconds) a user is allowed to stay logged in the account while being inactive/idle | `string` | `"900"` | no |
-| <a name="input_kms_key_crn"></a> [kms\_key\_crn](#input\_kms\_key\_crn) | CRN of the KMS key to use to encrypt the data in the COS bucket. | `string` | n/a | yes |
+| <a name="input_kms_key_crn"></a> [kms\_key\_crn](#input\_kms\_key\_crn) | CRN of the KMS key to use to encrypt the data in the COS bucket, required if 'var.provision\_atracker\_cos' is true. | `string` | `null` | no |
 | <a name="input_max_sessions_per_identity"></a> [max\_sessions\_per\_identity](#input\_max\_sessions\_per\_identity) | Defines the maximum allowed sessions per identity required by the account. Supports any whole number greater than '0', or 'NOT\_SET' to unset account setting and use service default. | `string` | `"NOT_SET"` | no |
 | <a name="input_mfa"></a> [mfa](#input\_mfa) | Specify Multi-Factor Authentication method in the account. Supported valid values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users). | `string` | `"TOTP4ALL"` | no |
+| <a name="input_provision_atracker_cos"></a> [provision\_atracker\_cos](#input\_provision\_atracker\_cos) | Enable to create an Atracker route and COS instance + bucket. | `bool` | `false` | no |
 | <a name="input_public_access_enabled"></a> [public\_access\_enabled](#input\_public\_access\_enabled) | Enable/Disable public access group in which resources are open anyone regardless if they are member of your account or not | `bool` | `false` | no |
 | <a name="input_refresh_token_expiration"></a> [refresh\_token\_expiration](#input\_refresh\_token\_expiration) | Defines the refresh token expiration in seconds | `string` | `"259200"` | no |
 | <a name="input_region"></a> [region](#input\_region) | Region to provision the COS resources created by this solution. | `string` | `"us-south"` | no |

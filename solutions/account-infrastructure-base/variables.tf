@@ -45,6 +45,12 @@ variable "allowed_ip_addresses" {
   type        = list(string)
 }
 
+variable "provision_atracker_cos" {
+  type        = bool
+  description = "Enable to create an Atracker route and COS instance + bucket."
+  default     = false
+}
+
 variable "cbr_allow_cos_to_kms" {
   type        = bool
   description = "Set rule for COS to KMS, default is true"
