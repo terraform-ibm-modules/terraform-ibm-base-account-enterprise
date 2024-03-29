@@ -173,3 +173,9 @@ variable "cbr_allow_is_to_cos" {
   description = "Set rule for IS (VPC Infrastructure Services) to COS, default is true"
   default     = true
 }
+
+variable "provision_atracker_cos" {
+  type        = bool
+  description = "Enable to create an Atracker route and COS instance + bucket."
+  default     = false
+}
