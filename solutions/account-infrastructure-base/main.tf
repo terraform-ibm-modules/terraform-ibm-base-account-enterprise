@@ -9,6 +9,7 @@ module "account_infrastructure_base" {
     logdna.ld = logdna.ld
   }
   region                              = var.region
+  provision_atracker_cos              = var.provision_atracker_cos
   resource_group_name                 = "${var.prefix}-resource-group"
   cos_instance_name                   = "${var.prefix}-cos-instance"
   cos_bucket_name                     = "${var.prefix}-cos-bucket"
