@@ -28,6 +28,7 @@ variable "resource_tags" {
 variable "kms_key_crn" {
   type        = string
   description = "CRN of the KMS key to encrypt the COS bucket."
+  default     = null
 }
 
 variable "cos_bucket_management_endpoint_type" {
