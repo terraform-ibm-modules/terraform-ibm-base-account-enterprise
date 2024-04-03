@@ -44,6 +44,7 @@ variable "cos_bucket_management_endpoint_type" {
 variable "allowed_ip_addresses" {
   description = "List of the IP addresses and subnets from which IAM tokens can be created for the account."
   type        = list(string)
+  default     = null
 }
 
 variable "provision_atracker_cos" {
