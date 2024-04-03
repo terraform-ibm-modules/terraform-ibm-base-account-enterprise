@@ -27,7 +27,7 @@ variable "resource_tags" {
 
 variable "kms_key_crn" {
   type        = string
-  description = "CRN of the KMS key to encrypt the COS bucket."
+  description = "CRN of the KMS key to encrypt the COS bucket, required if 'var.provision_atracker_cos' is true."
   default     = null
 }
 
