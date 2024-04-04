@@ -27,7 +27,8 @@ variable "resource_tags" {
 
 variable "kms_key_crn" {
   type        = string
-  description = "CRN of the KMS key to encrypt the COS bucket."
+  description = "CRN of the KMS key to encrypt the COS bucket, required if 'var.provision_atracker_cos' is true."
+  default     = null
 }
 
 variable "cos_bucket_management_endpoint_type" {
@@ -43,6 +44,7 @@ variable "cos_bucket_management_endpoint_type" {
 variable "allowed_ip_addresses" {
   description = "List of the IP addresses and subnets from which IAM tokens can be created for the account."
   type        = list(string)
+  default     = null
 }
 
 variable "provision_atracker_cos" {
