@@ -12,7 +12,7 @@ variable "region" {
   type        = string
   description = "Region to provision the COS resources created by this solution. Only used if required if 'var.provision_atracker_cos' is true."
   default     = "us-south"
-  nullable = false
+  nullable    = false
 }
 
 variable "prefix" {
