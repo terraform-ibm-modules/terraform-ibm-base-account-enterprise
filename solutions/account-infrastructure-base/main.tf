@@ -10,7 +10,14 @@ module "account_infrastructure_base" {
   }
   region                              = var.region
   provision_atracker_cos              = var.provision_atracker_cos
-  resource_group_name                 = "${var.prefix}-resource-group"
+  security_resource_group_name        = var.security_resource_group_name
+  audit_resource_group_name           = var.audit_resource_group_name
+  observability_resource_group_name   = var.observability_resource_group_name
+  management_resource_group_name      = var.management_resource_group_name
+  workload_resource_group_name        = var.workload_resource_group_name
+  edge_resource_group_name            = var.edge_resource_group_name
+  devops_resource_group_name          = var.devops_resource_group_name
+  existing_cos_resource_group_name    = var.existing_cos_resource_group_name
   cos_instance_name                   = "${var.prefix}-cos-instance"
   cos_bucket_name                     = "${var.prefix}-cos-bucket"
   trusted_profile_name                = "${var.prefix}-trusted-profile"
