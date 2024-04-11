@@ -7,7 +7,7 @@ offerings:
     offering_id: 63641cec-6093-4b4f-b7b0-98d2f4185cd6
     variations:
       - name: standard
-        mark_ready: false
+        mark_ready: true
         install_type: fullstack
         scc:
           # Instance ID in account "GoldenEye FSCloud Testing (ae14871c179f49869e19657b37ec7c4e) <-> 2626044
