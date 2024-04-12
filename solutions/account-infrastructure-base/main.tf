@@ -12,7 +12,7 @@ module "account_infrastructure_base" {
   provision_atracker_cos              = var.provision_atracker_cos
   security_resource_group_name        = var.security_resource_group_name
   audit_resource_group_name           = var.audit_resource_group_name
-  observability_resource_group_name   = coalesce("${var.prefix}-resource-group", var.observability_resource_group_name)
+  observability_resource_group_name   = var.observability_resource_group_name
   management_resource_group_name      = var.management_resource_group_name
   workload_resource_group_name        = var.workload_resource_group_name
   edge_resource_group_name            = var.edge_resource_group_name
