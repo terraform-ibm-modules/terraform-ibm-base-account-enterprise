@@ -18,6 +18,10 @@ This module also optionally supports provisioning the following resources:
 
 - Activity Tracker routing + COS instance and bucket
 
+This module also optionally supports provisioning the following resources:
+
+- Activity Tracker routing + COS instance and bucket
+
 ![account-infrastructure-base](https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-account-infrastructure-base/main/reference-architectures/base-account-enterprise.svg)
 
 
