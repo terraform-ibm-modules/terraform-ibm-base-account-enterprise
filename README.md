@@ -44,6 +44,28 @@ The module currently does not support setting the following FSCloud requirements
 
 Tracking issue with IBM provider -> https://github.com/IBM-Cloud/terraform-provider-ibm/issues/4204
 
+### Pre-wired CBR configuration for FS Cloud
+
+This module creates default coarse-grained CBR rules in a given account following a "secure by default" approach - that is: deny all flows by default, except known documented communication in the [Financial Services Cloud Reference Architecture](https://cloud.ibm.com/docs/framework-financial-services?topic=framework-financial-services-vpc-architecture-about):
+
+- Cloud Object Storage (COS) -> Hyper Protect Crypto Services (HPCS)
+- Block Storage -> Hyper Protect Crypto Services (HPCS)
+- IBM Cloud Kubernetes Service (IKS) -> Hyper Protect Crypto Services (HPCS)
+- All IBM Cloud Databases (ICD) services -> Hyper Protect Crypto Services (HPCS)
+- Activity Tracker route -> Cloud Object Storage (COS)
+- Virtual Private Clouds (VPCs) where clusters are deployed -> Cloud Object Storage (COS)
+- IBM Cloud VPC Infrastructure Services (IS) -> Cloud Object Storage (COS)
+- Virtual Private Cloud workload (eg: Kubernetes worker nodes) -> IBM Cloud Container Registry
+- IBM Cloud Databases (ICD) -> Hyper Protect Crypto Services (HPCS)
+- IBM Cloud Kubernetes Service (IKS) -> VPC Infrastructure Services (IS)
+- Event Streams (Messagehub) -> Hyper Protect Crypto Services (HPCS)
+
+**Note on KMS**: the module supports setting up rules for Key Protect, and Hyper Protect Crypto Services. By default the modules set rules for Hyper Protect Crypto Services, but this can be modified to use Key Protect, Hyper Protect, or both Key Protect and Hyper Protect Crypto Services using the input variable `kms_service_targeted_by_prewired_rules`.
+
+#### Note
+
+The services 'compliance', 'directlink', 'iam-groups', 'containers-kubernetes', 'user-management' does not support restriction per location.
+
 ### Usage
 
 <!--
@@ -161,6 +183,7 @@ You need the following permissions to run this module.
 | <a name="input_cbr_allow_roks_to_kms"></a> [cbr\_allow\_roks\_to\_kms](#input\_cbr\_allow\_roks\_to\_kms) | Set rule for ROKS to KMS, default is true | `bool` | `true` | no |
 | <a name="input_cbr_allow_vpcs_to_container_registry"></a> [cbr\_allow\_vpcs\_to\_container\_registry](#input\_cbr\_allow\_vpcs\_to\_container\_registry) | Set rule for VPCs to container registry, default is true | `bool` | `true` | no |
 | <a name="input_cbr_allow_vpcs_to_cos"></a> [cbr\_allow\_vpcs\_to\_cos](#input\_cbr\_allow\_vpcs\_to\_cos) | Set rule for VPCs to COS, default is true | `bool` | `true` | no |
+| <a name="input_cbr_kms_service_targeted_by_prewired_rules"></a> [cbr\_kms\_service\_targeted\_by\_prewired\_rules](#input\_cbr\_kms\_service\_targeted\_by\_prewired\_rules) | IBM Cloud offers two distinct Key Management Services (KMS): Key Protect and Hyper Protect Crypto Services (HPCS). This variable determines the specific KMS service to which the pre-configured rules will be applied. Use the value 'key-protect' to specify the Key Protect service, and 'hs-crypto' for the Hyper Protect Crypto Services (HPCS). | `string` | `"hs-crypto"` | no |
 | <a name="input_cbr_prefix"></a> [cbr\_prefix](#input\_cbr\_prefix) | String to use as the prefix for all CBR resources | `string` | `"acct-infra-base"` | no |
 | <a name="input_cos_bucket_access_tags"></a> [cos\_bucket\_access\_tags](#input\_cos\_bucket\_access\_tags) | A list of Access Tags applied to the created bucket. | `list(string)` | `[]` | no |
 | <a name="input_cos_bucket_archive_days"></a> [cos\_bucket\_archive\_days](#input\_cos\_bucket\_archive\_days) | Number of days to archive objects in the bucket. | `number` | `20` | no |
