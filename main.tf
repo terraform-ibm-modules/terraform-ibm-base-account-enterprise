@@ -78,20 +78,20 @@ locals {
 module "resource_group" {
   for_each            = local.rg_map
   source              = "terraform-ibm-modules/resource-group/ibm"
-  version             = "1.1.4"
+  version             = "1.1.5"
   resource_group_name = each.key
 }
 
 module "existing_resource_group" {
   count                        = var.existing_cos_resource_group_name != null ? 1 : 0
   source                       = "terraform-ibm-modules/resource-group/ibm"
-  version                      = "1.1.4"
+  version                      = "1.1.5"
   existing_resource_group_name = var.existing_cos_resource_group_name
 }
 
 module "account_settings" {
   source                       = "terraform-ibm-modules/iam-account-settings/ibm"
-  version                      = "2.5.0"
+  version                      = "2.8.1"
   access_token_expiration      = var.access_token_expiration
   active_session_timeout       = var.active_session_timeout
   allowed_ip_addresses         = var.allowed_ip_addresses
@@ -111,8 +111,8 @@ module "account_settings" {
 module "cos" {
   count             = var.provision_atracker_cos ? 1 : 0
   source            = "terraform-ibm-modules/cos/ibm//modules/fscloud"
-  version           = "7.1.3"
-  resource_group_id = local.cos_rg
+  version           = "8.1.6"
+  resource_group_id = module.resource_group.resource_group_id
   bucket_configs = [{
     access_tags                   = var.cos_bucket_access_tags
     bucket_name                   = var.cos_bucket_name
@@ -146,22 +146,12 @@ module "cos" {
   cos_tags           = var.resource_tags
   instance_cbr_rules = var.cos_instance_cbr_rules
   access_tags        = var.cos_instance_access_tags
-  create_hmac_key    = false
-}
-
-resource "ibm_iam_authorization_policy" "atracker_cos" {
-  count                       = var.provision_atracker_cos ? (var.skip_atracker_cos_iam_auth_policy ? 0 : 1) : 0
-  source_service_name         = "atracker"
-  target_service_name         = "cloud-object-storage"
-  target_resource_instance_id = local.cos_instance_guid
-  roles                       = ["Object Writer"]
-  description                 = "Permit AT service Object Writer access to COS instance ${local.cos_instance_id}"
 }
 
 module "activity_tracker" {
   count   = var.provision_atracker_cos ? 1 : 0
   source  = "terraform-ibm-modules/observability-instances/ibm//modules/activity_tracker"
-  version = "2.10.3"
+  version = "2.12.2"
   providers = {
     logdna.at = logdna.at
   }
@@ -175,19 +165,20 @@ module "activity_tracker" {
   ]
   cos_targets = [
     {
-      bucket_name                = local.cos_bucket.bucket_name
-      endpoint                   = local.cos_bucket.s3_endpoint_private
-      instance_id                = local.cos_bucket.cos_instance_id
-      target_region              = var.region
-      target_name                = var.cos_target_name
-      service_to_service_enabled = true
+      bucket_name                       = local.cos_bucket.bucket_name
+      endpoint                          = local.cos_bucket.s3_endpoint_private
+      instance_id                       = local.cos_bucket.cos_instance_id
+      target_region                     = var.region
+      target_name                       = var.cos_target_name
+      service_to_service_enabled        = true
+      skip_atracker_cos_iam_auth_policy = var.skip_atracker_cos_iam_auth_policy
     }
   ]
 }
 
 module "trusted_profile_projects" {
   source                      = "terraform-ibm-modules/trusted-profile/ibm"
-  version                     = "1.0.1"
+  version                     = "1.0.3"
   trusted_profile_name        = var.trusted_profile_name
   trusted_profile_description = var.trusted_profile_description
   trusted_profile_policies = [{
