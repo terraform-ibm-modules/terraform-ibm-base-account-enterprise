@@ -112,7 +112,7 @@ module "cos" {
   count             = var.provision_atracker_cos ? 1 : 0
   source            = "terraform-ibm-modules/cos/ibm//modules/fscloud"
   version           = "8.1.6"
-  resource_group_id = module.resource_group.resource_group_id
+  resource_group_id = local.cos_rg
   bucket_configs = [{
     access_tags                   = var.cos_bucket_access_tags
     bucket_name                   = var.cos_bucket_name
