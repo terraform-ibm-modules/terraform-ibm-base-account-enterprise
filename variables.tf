@@ -8,7 +8,7 @@ variable "security_resource_group_name" {
   default     = null
 
   validation {
-    condition = length(var.security_resource_group_name) <= 40
+    condition     = length(var.security_resource_group_name) <= 40
     error_message = "`var.security_resource_group_name` must be 40 characters or less."
   }
 }
@@ -19,7 +19,7 @@ variable "audit_resource_group_name" {
   default     = null
 
   validation {
-    condition = length(var.audit_resource_group_name) <= 40
+    condition     = length(var.audit_resource_group_name) <= 40
     error_message = "`var.audit_resource_group_name` must be 40 characters or less."
   }
 }
@@ -30,7 +30,7 @@ variable "observability_resource_group_name" {
   default     = null
 
   validation {
-    condition = length(var.observability_resource_group_name) <= 40
+    condition     = length(var.observability_resource_group_name) <= 40
     error_message = "`var.observability_resource_group_name` must be 40 characters or less."
   }
 }
@@ -41,7 +41,7 @@ variable "management_resource_group_name" {
   default     = null
 
   validation {
-    condition = length(var.management_resource_group_name) <= 40
+    condition     = length(var.management_resource_group_name) <= 40
     error_message = "`var.management_resource_group_name` must be 40 characters or less."
   }
 }
@@ -52,7 +52,7 @@ variable "workload_resource_group_name" {
   default     = null
 
   validation {
-    condition = length(var.workload_resource_group_name) <= 40
+    condition     = length(var.workload_resource_group_name) <= 40
     error_message = "`var.workload_resource_group_name` must be 40 characters or less."
   }
 }
@@ -63,7 +63,7 @@ variable "edge_resource_group_name" {
   default     = null
 
   validation {
-    condition = length(var.edge_resource_group_name) <= 40
+    condition     = length(var.edge_resource_group_name) <= 40
     error_message = "`var.edge_resource_group_name` must be 40 characters or less."
   }
 }
@@ -74,7 +74,7 @@ variable "devops_resource_group_name" {
   default     = null
 
   validation {
-    condition = length(var.devops_resource_group_name) <= 40
+    condition     = length(var.devops_resource_group_name) <= 40
     error_message = "`var.devops_resource_group_name` must be 40 characters or less."
   }
 }
