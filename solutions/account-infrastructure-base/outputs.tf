@@ -2,13 +2,73 @@
 # Outputs
 ########################################################################################################################
 
-output "resource_group_id" {
-  value       = module.account_infrastructure_base.resource_group_id
+output "security_resource_group_id" {
+  value       = module.account_infrastructure_base.security_resource_group_id
   description = "ID of the Resource Group created by the module."
 }
 
-output "resource_group_name" {
-  value       = module.account_infrastructure_base.resource_group_name
+output "security_resource_group_name" {
+  value       = module.account_infrastructure_base.security_resource_group_name
+  description = "Name of the Resource Group created by the module."
+}
+
+output "audit_resource_group_id" {
+  value       = module.account_infrastructure_base.audit_resource_group_id
+  description = "ID of the Resource Group created by the module."
+}
+
+output "audit_resource_group_name" {
+  value       = module.account_infrastructure_base.audit_resource_group_name
+  description = "Name of the Resource Group created by the module."
+}
+
+output "observability_resource_group_id" {
+  value       = module.account_infrastructure_base.observability_resource_group_id
+  description = "ID of the Resource Group created by the module."
+}
+
+output "observability_resource_group_name" {
+  value       = module.account_infrastructure_base.observability_resource_group_name
+  description = "Name of the Resource Group created by the module."
+}
+
+output "management_resource_group_id" {
+  value       = module.account_infrastructure_base.management_resource_group_id
+  description = "ID of the Resource Group created by the module."
+}
+
+output "management_resource_group_name" {
+  value       = module.account_infrastructure_base.management_resource_group_name
+  description = "Name of the Resource Group created by the module."
+}
+
+output "workload_resource_group_id" {
+  value       = module.account_infrastructure_base.workload_resource_group_id
+  description = "ID of the Resource Group created by the module."
+}
+
+output "workload_resource_group_name" {
+  value       = module.account_infrastructure_base.workload_resource_group_name
+  description = "Name of the Resource Group created by the module."
+}
+
+output "edge_resource_group_id" {
+  value       = module.account_infrastructure_base.edge_resource_group_id
+  description = "ID of the Resource Group created by the module."
+}
+
+output "edge_resource_group_name" {
+  value       = module.account_infrastructure_base.edge_resource_group_name
+  description = "Name of the Resource Group created by the module."
+}
+
+output "devops_resource_group_id" {
+  value       = module.account_infrastructure_base.devops_resource_group_id
+  description = "ID of the Resource Group created by the module."
+}
+
+output "devops_resource_group_name" {
+  value       = module.account_infrastructure_base.devops_resource_group_name
   description = "Name of the Resource Group created by the module."
 }
 

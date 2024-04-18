@@ -2,13 +2,73 @@
 # Outputs
 ########################################################################################################################
 
-output "resource_group_id" {
-  value       = module.resource_group.resource_group_id
+output "security_resource_group_id" {
+  value       = local.security_resource_group.id
   description = "ID of the Resource Group created by the module."
 }
 
-output "resource_group_name" {
-  value       = module.resource_group.resource_group_name
+output "security_resource_group_name" {
+  value       = local.security_resource_group.name
+  description = "Name of the Resource Group created by the module."
+}
+
+output "audit_resource_group_id" {
+  value       = local.audit_resource_group.id
+  description = "ID of the Resource Group created by the module."
+}
+
+output "audit_resource_group_name" {
+  value       = local.audit_resource_group.name
+  description = "Name of the Resource Group created by the module."
+}
+
+output "observability_resource_group_id" {
+  value       = local.observability_resource_group.id
+  description = "ID of the Resource Group created by the module."
+}
+
+output "observability_resource_group_name" {
+  value       = local.observability_resource_group.name
+  description = "Name of the Resource Group created by the module."
+}
+
+output "management_resource_group_id" {
+  value       = local.management_resource_group.id
+  description = "ID of the Resource Group created by the module."
+}
+
+output "management_resource_group_name" {
+  value       = local.management_resource_group.name
+  description = "Name of the Resource Group created by the module."
+}
+
+output "workload_resource_group_id" {
+  value       = local.workload_resource_group.id
+  description = "ID of the Resource Group created by the module."
+}
+
+output "workload_resource_group_name" {
+  value       = local.workload_resource_group.name
+  description = "Name of the Resource Group created by the module."
+}
+
+output "edge_resource_group_id" {
+  value       = local.edge_resource_group.id
+  description = "ID of the Resource Group created by the module."
+}
+
+output "edge_resource_group_name" {
+  value       = local.edge_resource_group.name
+  description = "Name of the Resource Group created by the module."
+}
+
+output "devops_resource_group_id" {
+  value       = local.devops_resource_group.id
+  description = "ID of the Resource Group created by the module."
+}
+
+output "devops_resource_group_name" {
+  value       = local.devops_resource_group.name
   description = "Name of the Resource Group created by the module."
 }
 

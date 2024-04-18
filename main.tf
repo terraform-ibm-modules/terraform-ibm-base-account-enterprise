@@ -15,18 +15,78 @@ locals {
   # tflint-ignore: terraform_unused_declarations
   validate_atracker_provision_activity_tracker_route_name = var.provision_atracker_cos && var.activity_tracker_route_name == null ? tobool("'var.activity_tracker_route_name' cannot be null if 'var.provision_atracker_cos' is true") : true
 
-  # outputs
+  # cos/atracker outputs
   cos_bucket               = var.provision_atracker_cos ? module.cos[0].buckets[var.cos_bucket_name] : null
   cos_instance_guid        = var.provision_atracker_cos ? module.cos[0].cos_instance_guid : null
   cos_instance_id          = var.provision_atracker_cos ? module.cos[0].cos_instance_id : null
   activity_tracker_targets = var.provision_atracker_cos ? module.activity_tracker[0].activity_tracker_targets[var.cos_target_name] : null
   activity_tracker_routes  = var.provision_atracker_cos ? module.activity_tracker[0].activity_tracker_routes : null
+
+  # resource group logic
+  rg_vars = {
+    security_resource_group      = var.security_resource_group_name,
+    audit_resource_group         = var.audit_resource_group_name,
+    observability_resource_group = var.observability_resource_group_name,
+    management_resource_group    = var.management_resource_group_name,
+    workload_resource_group      = var.workload_resource_group_name,
+    edge_resource_group          = var.edge_resource_group_name,
+    devops_resource_group        = var.devops_resource_group_name
+  }
+  rg_list = distinct(compact(values(local.rg_vars)))
+
+  rg_map = { for name in local.rg_list :
+    name => [for k, v in local.rg_vars : k if name == v]
+  }
+
+  # resource group validations
+  # tflint-ignore: terraform_unused_declarations
+  validate_observability_resource_group = var.existing_cos_resource_group_name == null && var.observability_resource_group_name == null && var.provision_atracker_cos ? tobool("'var.existing_cos_resource_group_name' must be provided if 'var.provision_atracker_cos' is true and 'var.observability_resource_group_name' is not provided") : true
+
+  # resource group outputs
+  security_resource_group = local.rg_vars["security_resource_group"] == null ? { id = null, name = null } : {
+    id   = module.resource_group[local.rg_vars["security_resource_group"]].resource_group_id
+    name = module.resource_group[local.rg_vars["security_resource_group"]].resource_group_name
+  }
+  audit_resource_group = local.rg_vars["audit_resource_group"] == null ? { id = null, name = null } : {
+    id   = module.resource_group[local.rg_vars["audit_resource_group"]].resource_group_id
+    name = module.resource_group[local.rg_vars["audit_resource_group"]].resource_group_name
+  }
+  observability_resource_group = local.rg_vars["observability_resource_group"] == null ? { id = null, name = null } : {
+    id   = module.resource_group[local.rg_vars["observability_resource_group"]].resource_group_id
+    name = module.resource_group[local.rg_vars["observability_resource_group"]].resource_group_name
+  }
+  management_resource_group = local.rg_vars["management_resource_group"] == null ? { id = null, name = null } : {
+    id   = module.resource_group[local.rg_vars["management_resource_group"]].resource_group_id
+    name = module.resource_group[local.rg_vars["management_resource_group"]].resource_group_name
+  }
+  workload_resource_group = local.rg_vars["workload_resource_group"] == null ? { id = null, name = null } : {
+    id   = module.resource_group[local.rg_vars["workload_resource_group"]].resource_group_id
+    name = module.resource_group[local.rg_vars["workload_resource_group"]].resource_group_name
+  }
+  edge_resource_group = local.rg_vars["edge_resource_group"] == null ? { id = null, name = null } : {
+    id   = module.resource_group[local.rg_vars["edge_resource_group"]].resource_group_id
+    name = module.resource_group[local.rg_vars["edge_resource_group"]].resource_group_name
+  }
+  devops_resource_group = local.rg_vars["devops_resource_group"] == null ? { id = null, name = null } : {
+    id   = module.resource_group[local.rg_vars["devops_resource_group"]].resource_group_id
+    name = module.resource_group[local.rg_vars["devops_resource_group"]].resource_group_name
+  }
+
+  cos_rg = !var.provision_atracker_cos ? "" : var.existing_cos_resource_group_name != null ? module.existing_resource_group[0].resource_group_id : local.observability_resource_group.id
 }
 
 module "resource_group" {
+  for_each            = local.rg_map
   source              = "terraform-ibm-modules/resource-group/ibm"
   version             = "1.1.5"
-  resource_group_name = var.resource_group_name
+  resource_group_name = each.key
+}
+
+module "existing_resource_group" {
+  count                        = var.existing_cos_resource_group_name != null ? 1 : 0
+  source                       = "terraform-ibm-modules/resource-group/ibm"
+  version                      = "1.1.5"
+  existing_resource_group_name = var.existing_cos_resource_group_name
 }
 
 module "account_settings" {
@@ -52,7 +112,7 @@ module "cos" {
   count             = var.provision_atracker_cos ? 1 : 0
   source            = "terraform-ibm-modules/cos/ibm//modules/fscloud"
   version           = "8.1.6"
-  resource_group_id = module.resource_group.resource_group_id
+  resource_group_id = local.cos_rg
   bucket_configs = [{
     access_tags                   = var.cos_bucket_access_tags
     bucket_name                   = var.cos_bucket_name
@@ -63,7 +123,7 @@ module "cos" {
     storage_class                 = var.cos_bucket_storage_class
     object_versioning_enabled     = var.cos_bucket_object_versioning_enabled
     region_location               = var.region
-    resource_group_id             = module.resource_group.resource_group_id
+    resource_group_id             = local.cos_rg
     archive_rule = {
       enable = var.cos_bucket_archive_enabled
       days   = var.cos_bucket_archive_days
