@@ -17,7 +17,7 @@ variable "region" {
 
 variable "prefix" {
   type        = string
-  description = "Prefix to append to all resources created by this solution."
+  description = "(Optional) Prefix to append to all resources created by this solution."
   default     = null
 }
 
@@ -57,43 +57,43 @@ variable "provision_atracker_cos" {
 
 variable "security_resource_group_name" {
   type        = string
-  description = "The name of the security resource group to create."
+  description = "The name of the security resource group to create. If `var.prefix` is provided then it will be prefixed on the name in the format of `<var.prefix>-<var.security_resource_group_name>`."
   default     = null
 }
 
 variable "audit_resource_group_name" {
   type        = string
-  description = "The name of the audit resource group to create."
+  description = "The name of the audit resource group to create. If `var.prefix` is provided then it will be prefixed on the name in the format of `<var.prefix>-<var.audit_resource_group_name>`."
   default     = null
 }
 
 variable "observability_resource_group_name" {
   type        = string
-  description = "The name of the observability resource group to create. Required if `var.provision_atracker_cos` is true and `var.existing_cos_resource_group_name` is not provided."
+  description = "The name of the observability resource group to create. Required if `var.provision_atracker_cos` is true and `var.existing_cos_resource_group_name` is not provided. If `var.prefix` is provided then it will be prefixed on the name in the format of `<var.prefix>-<var.observability_resource_group_name>`."
   default     = null
 }
 
 variable "management_resource_group_name" {
   type        = string
-  description = "The name of the management resource group to create."
+  description = "The name of the management resource group to create. If `var.prefix` is provided then it will be prefixed on the name in the format of `<var.prefix>-<var.management_resource_group_name>`."
   default     = null
 }
 
 variable "workload_resource_group_name" {
   type        = string
-  description = "The name of the workload resource group to create."
+  description = "The name of the workload resource group to create. If `var.prefix` is provided then it will be prefixed on the name in the format of `<var.prefix>-<var.workload_resource_group_name>`."
   default     = null
 }
 
 variable "edge_resource_group_name" {
   type        = string
-  description = "The name of the edge resource group to create."
+  description = "The name of the edge resource group to create. If `var.prefix` is provided then it will be prefixed on the name in the format of `<var.prefix>-<var.edge_resource_group_name>`."
   default     = null
 }
 
 variable "devops_resource_group_name" {
   type        = string
-  description = "The name of the devops resource group to create."
+  description = "The name of the devops resource group to create. If `var.prefix` is provided then it will be prefixed on the name in the format of `<var.prefix>-<var.devops_resource_group_name>`."
   default     = null
 }
 
