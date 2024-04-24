@@ -54,6 +54,54 @@ variable "provision_atracker_cos" {
   default     = false
 }
 
+variable "security_resource_group_name" {
+  type        = string
+  description = "The name of the security resource group to create."
+  default     = null
+}
+
+variable "audit_resource_group_name" {
+  type        = string
+  description = "The name of the audit resource group to create."
+  default     = null
+}
+
+variable "observability_resource_group_name" {
+  type        = string
+  description = "The name of the observability resource group to create. Required if `var.provision_atracker_cos` is true and `var.existing_cos_resource_group_name` is not provided."
+  default     = null
+}
+
+variable "management_resource_group_name" {
+  type        = string
+  description = "The name of the management resource group to create."
+  default     = null
+}
+
+variable "workload_resource_group_name" {
+  type        = string
+  description = "The name of the workload resource group to create."
+  default     = null
+}
+
+variable "edge_resource_group_name" {
+  type        = string
+  description = "The name of the edge resource group to create."
+  default     = null
+}
+
+variable "devops_resource_group_name" {
+  type        = string
+  description = "The name of the devops resource group to create."
+  default     = null
+}
+
+variable "existing_cos_resource_group_name" {
+  type        = string
+  description = "The name of an existing resource group to use for the COS instance/bucket, required if `var.provision_artacker_cos` is true and `var.observability_resource_group_name` is not provided."
+  default     = null
+}
+
 variable "cbr_allow_cos_to_kms" {
   type        = bool
   description = "Set rule for COS to KMS, default is true"

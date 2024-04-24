@@ -42,6 +42,7 @@ func setupOptions(t *testing.T, prefix string, dir string) *testhelper.TestOptio
 		"allowed_ip_addresses": []string{
 			"0.0.0.0/0",
 		},
+		"observability_resource_group_name": "obs-resource-group",
 	}
 
 	return options
