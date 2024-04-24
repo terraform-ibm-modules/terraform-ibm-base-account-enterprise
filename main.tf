@@ -204,5 +204,5 @@ module "cbr_fscloud" {
   allow_at_to_cos                        = var.cbr_allow_at_to_cos
   allow_iks_to_is                        = var.cbr_allow_iks_to_is
   allow_is_to_cos                        = var.cbr_allow_is_to_cos
-  kms_service_targeted_by_prewired_rules = [var.cbr_kms_service_targeted_by_prewired_rules]
+  kms_service_targeted_by_prewired_rules = var.cbr_kms_service_targeted_by_prewired_rules
 }
