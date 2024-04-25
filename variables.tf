@@ -94,7 +94,7 @@ variable "access_token_expiration" {
 variable "active_session_timeout" {
   type        = number
   description = "Specify how long (seconds) a user is allowed to work continuously in the account"
-  default     = 3600
+  default     = 86400
 }
 
 variable "allowed_ip_addresses" {
@@ -118,7 +118,7 @@ variable "enforce_allowed_ip_addresses" {
 variable "inactive_session_timeout" {
   type        = string
   description = "Specify how long (seconds) a user is allowed to stay logged in the account while being inactive/idle"
-  default     = "900"
+  default     = "7200"
 }
 
 variable "max_sessions_per_identity" {
