@@ -91,7 +91,7 @@ module "existing_resource_group" {
 
 module "account_settings" {
   source                       = "terraform-ibm-modules/iam-account-settings/ibm"
-  version                      = "2.8.1"
+  version                      = "2.9.0"
   access_token_expiration      = var.access_token_expiration
   active_session_timeout       = var.active_session_timeout
   allowed_ip_addresses         = var.allowed_ip_addresses
