@@ -39,6 +39,7 @@ func setupOptions(t *testing.T, prefix string, dir string) *testhelper.TestOptio
 		"prefix":                 options.Prefix,
 		"kms_key_crn":            permanentResources["hpcs_south_root_key_crn"],
 		"provision_atracker_cos": true,
+		"provision_cbr":          true,
 		"allowed_ip_addresses": []string{
 			"0.0.0.0/0",
 		},

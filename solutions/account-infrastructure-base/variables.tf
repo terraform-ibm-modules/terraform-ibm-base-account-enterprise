@@ -102,6 +102,12 @@ variable "existing_cos_resource_group_name" {
   default     = null
 }
 
+variable "provision_cbr" {
+  type        = bool
+  description = "Set to true to enable creation of CBR Rules and Zones in the module."
+  default     = false
+}
+
 variable "cbr_allow_cos_to_kms" {
   type        = bool
   description = "Set rule for COS to KMS, default is true"

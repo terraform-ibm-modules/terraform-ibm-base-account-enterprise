@@ -415,6 +415,12 @@ variable "trusted_profile_roles" {
 # CBR Variables
 ########################################################################################################################
 
+variable "provision_cbr" {
+  type        = bool
+  description = "Set to true to enable creation of CBR Rules and Zones in the module."
+  default     = false
+}
+
 variable "cbr_prefix" {
   type        = string
   description = "String to use as the prefix for all CBR resources"

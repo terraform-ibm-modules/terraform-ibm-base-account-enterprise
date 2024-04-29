@@ -190,6 +190,7 @@ module "trusted_profile_projects" {
 }
 
 module "cbr_fscloud" {
+  count                                  = var.provision_cbr ? 1 : 0
   source                                 = "terraform-ibm-modules/cbr/ibm//modules/fscloud"
   version                                = "1.20.0"
   prefix                                 = var.cbr_prefix
