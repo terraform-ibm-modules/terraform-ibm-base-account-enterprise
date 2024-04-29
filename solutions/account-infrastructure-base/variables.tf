@@ -29,7 +29,7 @@ variable "resource_tags" {
 
 variable "kms_key_crn" {
   type        = string
-  description = "CRN of the KMS key to encrypt the COS bucket, required if 'var.provision_atracker_cos' is true."
+  description = "CRN of the KMS key to encrypt the COS bucket, required if 'provision_atracker_cos' is true."
   default     = null
 }
 
@@ -57,48 +57,48 @@ variable "provision_atracker_cos" {
 
 variable "security_resource_group_name" {
   type        = string
-  description = "The name of the security resource group to create. If `var.prefix` is provided then it will be prefixed on the name in the format of `<var.prefix>-<var.security_resource_group_name>`."
+  description = "The name of the security resource group to create. If `var.prefix` is provided then it will be prefixed on the name in the format of `<prefix>-<security_resource_group_name>`."
   default     = null
 }
 
 variable "audit_resource_group_name" {
   type        = string
-  description = "The name of the audit resource group to create. If `var.prefix` is provided then it will be prefixed on the name in the format of `<var.prefix>-<var.audit_resource_group_name>`."
+  description = "The name of the audit resource group to create. If `prefix` is provided then it will be prefixed on the name in the format of `<prefix>-<audit_resource_group_name>`."
   default     = null
 }
 
 variable "observability_resource_group_name" {
   type        = string
-  description = "The name of the observability resource group to create. Required if `var.provision_atracker_cos` is true and `var.existing_cos_resource_group_name` is not provided. If `var.prefix` is provided then it will be prefixed on the name in the format of `<var.prefix>-<var.observability_resource_group_name>`."
+  description = "The name of the observability resource group to create. Required if `provision_atracker_cos` is true and `existing_cos_resource_group_name` is not provided. If `prefix` is provided then it will be prefixed on the name in the format of `<prefix>-<observability_resource_group_name>`."
   default     = null
 }
 
 variable "management_resource_group_name" {
   type        = string
-  description = "The name of the management resource group to create. If `var.prefix` is provided then it will be prefixed on the name in the format of `<var.prefix>-<var.management_resource_group_name>`."
+  description = "The name of the management resource group to create. If `prefix` is provided then it will be prefixed on the name in the format of `<prefix>-<management_resource_group_name>`."
   default     = null
 }
 
 variable "workload_resource_group_name" {
   type        = string
-  description = "The name of the workload resource group to create. If `var.prefix` is provided then it will be prefixed on the name in the format of `<var.prefix>-<var.workload_resource_group_name>`."
+  description = "The name of the workload resource group to create. If `prefix` is provided then it will be prefixed on the name in the format of `<prefix>-<workload_resource_group_name>`."
   default     = null
 }
 
 variable "edge_resource_group_name" {
   type        = string
-  description = "The name of the edge resource group to create. If `var.prefix` is provided then it will be prefixed on the name in the format of `<var.prefix>-<var.edge_resource_group_name>`."
+  description = "The name of the edge resource group to create. If `prefix` is provided then it will be prefixed on the name in the format of `<prefix>-<edge_resource_group_name>`."
   default     = null
 }
 
 variable "devops_resource_group_name" {
   type        = string
-  description = "The name of the devops resource group to create. If `var.prefix` is provided then it will be prefixed on the name in the format of `<var.prefix>-<var.devops_resource_group_name>`."
+  description = "The name of the devops resource group to create. If `prefix` is provided then it will be prefixed on the name in the format of `<prefix>-<devops_resource_group_name>`."
   default     = null
 }
 
 variable "existing_cos_resource_group_name" {
   type        = string
-  description = "The name of an existing resource group to use for the COS instance/bucket, required if `var.provision_artacker_cos` is true and `var.observability_resource_group_name` is not provided."
+  description = "The name of an existing resource group to use for the COS instance/bucket, required if `provision_artacker_cos` is true and `observability_resource_group_name` is not provided."
   default     = null
 }
