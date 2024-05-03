@@ -14,6 +14,8 @@ locals {
   validate_atracker_provision_cos_target_name = var.provision_atracker_cos && var.cos_target_name == null ? tobool("'var.cos_target_name' cannot be null if 'var.provision_atracker_cos' is true") : true
   # tflint-ignore: terraform_unused_declarations
   validate_atracker_provision_activity_tracker_route_name = var.provision_atracker_cos && var.activity_tracker_route_name == null ? tobool("'var.activity_tracker_route_name' cannot be null if 'var.provision_atracker_cos' is true") : true
+  # tflint-ignore: terraform_unused_declarations
+  validate_trusted_profile_name_provision = var.provision_trusted_profile_projects && var.trusted_profile_name == null ? tobool("'var.trusted_profile_name' cannot be null if 'var.provision_trusted_profile_projects' is true") : true
 
   # cos/atracker outputs
   cos_bucket               = var.provision_atracker_cos ? module.cos[0].buckets[var.cos_bucket_name] : null
@@ -177,6 +179,7 @@ module "activity_tracker" {
 }
 
 module "trusted_profile_projects" {
+  count                       = var.provision_trusted_profile_projects ? 1 : 0
   source                      = "terraform-ibm-modules/trusted-profile/ibm"
   version                     = "1.0.3"
   trusted_profile_name        = var.trusted_profile_name
