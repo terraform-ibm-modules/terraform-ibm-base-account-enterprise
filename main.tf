@@ -178,6 +178,11 @@ module "activity_tracker" {
   ]
 }
 
+moved {
+  from = module.trusted_profile_projects
+  to   = module.trusted_profile_projects[0]
+}
+
 module "trusted_profile_projects" {
   count                       = var.provision_trusted_profile_projects ? 1 : 0
   source                      = "terraform-ibm-modules/trusted-profile/ibm"
