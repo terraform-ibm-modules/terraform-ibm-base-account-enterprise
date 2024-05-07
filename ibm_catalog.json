@@ -21,27 +21,27 @@
         "account",
         "iam"
       ],
-      "short_description": "Creates and configures the base layer components of an IBM Cloud account",
-      "long_description": "This architecture supports creating and configuring the base layer components of an IBM Cloud account, including IAM account settings, Activity Tracker routing, Cloud Objects Storage, Trusted profile and associated access groups and the resource group in which all resources will be provisioned in.",
+      "short_description": "Creates and configures the base layer components of an IBM Cloud account according to best practices",
+      "long_description": "The Account Infrastructure Base architecture supports creating and configuring the foundational components of an IBM Cloud account. This includes IAM account settings, Activity Tracker routing, Cloud Objects Storage, a trusted profile and associated access groups, and the resource group in which all resources are provisioned.",
       "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-base-account-enterprise/blob/main/README.md",
       "offering_icon_url": "https://raw.githubusercontent.com/terraform-ibm-modules/documentation/main/icons/security_icon.svg",
       "provider_name": "IBM",
       "features": [
         {
-          "title": "Configure IAM account settings",
-          "description": "Configure IAM account settings so they meet FSCloud compliance requirements."
+          "title": "Configures IAM account settings",
+          "description": "Configures IAM account settings to meet FSCloud compliance requirements."
         },
         {
           "title": "Creates Activity Tracker route and target",
-          "description": "Creates Activity Tracker route and target so events are sent to a COS bucket."
+          "description": "Creates Activity Tracker route and target to send events to a COS bucket."
         },
         {
-          "title": "Creates Trusted profile",
-          "description": "Creates Trusted profile and associated access group for Projects."
+          "title": "Creates access controls",
+          "description": "Creates a trusted profile and the associated access group to provide secure authenticaiton for applications."
         },
         {
-          "title": "Creates resource group",
-          "description": "Creates resource group where all resources created by this solution are provisioned."
+          "title": "Creates a resource group",
+          "description": "Creates the resource group where all resources that are created by this solution are provisioned."
         }
       ],
       "flavors": [
