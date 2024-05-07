@@ -394,9 +394,16 @@ variable "activity_tracker_locations" {
 # Trusted Profile Variables
 ########################################################################################################################
 
+variable "provision_trusted_profile_projects" {
+  type        = bool
+  description = "Controls whether the Trusted Profile for Projects is provisioned."
+  default     = true
+}
+
 variable "trusted_profile_name" {
   type        = string
-  description = "Name of the trusted profile."
+  description = "Name of the trusted profile, required if `provision_trusted_profile_projects` is true."
+  default     = null
 }
 
 variable "trusted_profile_description" {
