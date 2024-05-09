@@ -105,25 +105,25 @@ variable "allowed_ip_addresses" {
 
 variable "api_creation" {
   type        = string
-  description = "When restriction is enabled, only users, including the account owner, assigned the User API key creator role on the IAM Identity Service can create API keys. Allowed values are 'RESTRICTED', 'NOT_RESTRICTED', or 'NOT_SET' (to 'unset' a previous set value)."
+  description = "When restriction is enabled, only users that are assigned the User API key creator role on the IAM Identity Service can create API keys, including the account owner. Allowed values are 'RESTRICTED', 'NOT_RESTRICTED', or 'NOT_SET' (to 'unset' a previous set value)."
   default     = "RESTRICTED"
 }
 
 variable "enforce_allowed_ip_addresses" {
   type        = bool
-  description = "If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to SIEM and Activity Tracker. After running in monitored mode to test this variable, it should then explicitly be set to true to enforce IP allow listing."
+  description = "If true, IP address restriction is enforced. If false, traffic originating outside of the specified allowed IP addresss is monitored with audit events sent to SIEM and Activity Tracker. After running in monitoring mode to test the impact of the restriction, you must set to true to enforce the IP allowlist."
   default     = true
 }
 
 variable "inactive_session_timeout" {
   type        = string
-  description = "Specify how long (seconds) a user is allowed to stay logged in the account while being inactive/idle"
+  description = "Define the maximum time it takes before an inactive user is signed out and their credentials are required again. The maximum duration a user can be inactive is 24 hours."
   default     = "7200"
 }
 
 variable "max_sessions_per_identity" {
   type        = string
-  description = "Defines the maximum allowed sessions per identity required by the account. Supports any whole number greater than '0', or 'NOT_SET' to unset account setting and use service default."
+  description = "Define the number of login sessions that an account user can have active. Supports any whole number greater than '0', or 'NOT_SET' to unset account setting and use service default."
   default     = "NOT_SET"
 }
 
@@ -135,25 +135,25 @@ variable "mfa" {
 
 variable "public_access_enabled" {
   type        = bool
-  description = "Enable/Disable public access group in which resources are open anyone regardless if they are member of your account or not"
+  description = "Enable or disable the public access group. Assigning an access policy to the access group opens access to that resource to anyone whether they're a member of your account or not because authentication is no longer required. When set to false, the public access group is disabled."
   default     = false
 }
 
 variable "refresh_token_expiration" {
   type        = string
-  description = "Defines the refresh token expiration in seconds"
+  description = "Define the duration for how long refresh tokens are valid. The maximum duration you can set for a refresh token is 72 hours."
   default     = "259200"
 }
 
 variable "serviceid_creation" {
   type        = string
-  description = "When restriction is enabled, only users, including the account owner, assigned the Service ID creator role on the IAM Identity Service can create service IDs. Allowed values are 'RESTRICTED', 'NOT_RESTRICTED', or 'NOT_SET' (to 'unset' a previous set value)."
+  description = "When restriction is enabled, only users that are assigned the Service ID creator role on the IAM Identity Service can create service IDs, including the account owner. Allowed values are 'RESTRICTED', 'NOT_RESTRICTED', or 'NOT_SET' (to 'unset' a previous set value)."
   default     = "RESTRICTED"
 }
 
 variable "shell_settings_enabled" {
   type        = bool
-  description = "Enable global shell settings to all users in the account"
+  description = "Allow CLI logins with only a password. Set to false for a higher level of security."
   default     = false
 }
 
