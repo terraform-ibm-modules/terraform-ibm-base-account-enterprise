@@ -81,7 +81,7 @@
             }
           ],
           "architecture": {
-            "descriptions": "The Account Infrastructure Base architecture provides a standardized approach to setting up cloud account settings and related audit logging controls as outlined in the IBM Cloud Framework for Financial Services. The architecture includes configurations for IAM settings and access controls, enforcing security best practices. Storing Activity Tracker logs in a Cloud Object Storage bucket ensures that the log data is securely retained and easily accessible for analysis, auditing, and compliance purposes. You can use this architecture as a base for deploying additional services and resources in multiple types of accounts, such as administrative or workload accounts.",
+            "descriptions": "The Account Infrastructure Base architecture provides a standardized approach to setting up cloud account settings and related audit logging controls as outlined in the IBM Cloud Framework for Financial Services. The architecture includes configurations for IAM settings and access controls that enforce security best practices. Storing Activity Tracker logs in a Cloud Object Storage bucket ensures that the log data is securely retained and easily accessible for analysis, auditing, and compliance purposes. You can use this architecture as a base for deploying additional services and resources in multiple types of accounts, such as administrative or workload accounts.",
             "diagrams": [
               {
                 "diagram": {
@@ -89,7 +89,7 @@
                   "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-account-infrastructure-base/main/reference-architectures/base-account-enterprise.svg",
                   "type": "image/svg+xml"
                 },
-                "description": "The Account Infrastructure Base architecture provides a standardized approach to setting up cloud account settings and related audit logging controls as outlined in the IBM Cloud Framework for Financial Services. The architecture includes configurations for IAM settings and access controls, enforcing security best practices. Storing Activity Tracker logs in a Cloud Object Storage bucket ensures that the log data is securely retained and easily accessible for analysis, auditing, and compliance purposes. You can use this architecture as a base for deploying additional services and resources in multiple types of accounts, such as administrative or workload accounts."
+                "description": "The Account Infrastructure Base architecture provides a standardized approach to setting up cloud account settings and related audit logging controls as outlined in the IBM Cloud Framework for Financial Services. The architecture includes configurations for IAM settings and access controls that enforce security best practices. Storing Activity Tracker logs in a Cloud Object Storage bucket ensures that the log data is securely retained and easily accessible for analysis, auditing, and compliance purposes. You can use this architecture as a base for deploying additional services and resources in multiple types of accounts, such as administrative or workload accounts."
               }
             ]
           }
