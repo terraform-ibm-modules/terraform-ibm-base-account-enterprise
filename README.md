@@ -1,4 +1,4 @@
-# IBM Cloud Account infrastructure base module
+# IBM Cloud Account Infrastructure Base module
 
 [![Stable (With quality checks)](https://img.shields.io/badge/Status-Stable%20(With%20quality%20checks)-green)](https://terraform-ibm-modules.github.io/documentation/#/badge-status)
 [![latest release](https://img.shields.io/github/v/release/terraform-ibm-modules/terraform-ibm-base-account-enterprise?logo=GitHub&sort=semver)](https://github.com/terraform-ibm-modules/terraform-ibm-base-account-enterprise/releases/latest)
@@ -7,15 +7,16 @@
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 <!-- Add a description of module(s) in this repo -->
-This module is a general base layer module for setting up a newly provisioned account with a default provision of:
+This is a foundational module that sets up a newly provisioned account with the following default provisions:
 
-- Base Resource Group
-- IAM Account Settings
-- Trusted Profile + Access Group for Projects
+- A resource group
+- IAM account settings
+- Trusted profile and access group to work with Projects
 
 This module also optionally supports provisioning the following resources:
 
-- Activity Tracker routing + COS instance and bucket
+- Activity Tracker routing
+- Cloud Object Storage instance and bucket
 
 ![account-infrastructure-base](https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-account-infrastructure-base/main/reference-architectures/base-account-enterprise.svg)
 
@@ -34,7 +35,7 @@ This module also optionally supports provisioning the following resources:
 <!-- This heading should always match the name of the root level module (aka the repo name) -->
 ## terraform-ibm-account-infrastructure-base
 
-### Current limitations:
+### Current limitations
 The module currently does not support setting the following FSCloud requirements:
 - Check whether user list visibility restrictions are configured in IAM settings for the account owner
   - Follow these [steps](https://cloud.ibm.com/docs/account?topic=account-iam-user-setting) as a workaround to set this manually in the UI
@@ -52,8 +53,8 @@ Use real values instead of "var.<var_name>" or other placeholder values
 unless real values don't help users know what to change.
 -->
 
-#### Before You Begin
-If you are using this module to create an ATracker route and COS instance & bucket you will need an IAM authorization policy in the account where the KMS key resides which grants the Cloud Object Storage service in the account to which this solution is being deployed, reader access to the KMS instance that the KMS key belongs to.
+#### Before you begin
+If you are using this module to create an Activity Tracker route and Cloud Object Storage instance and bucket, you need an IAM authorization policy in the account where the key management service key resides. This grants the Cloud Object Storage service in the account to which this solution is being deployed, reader access to the KMS instance that the KMS key belongs to.
 
 ```hcl
 locals {
