@@ -93,7 +93,7 @@ variable "access_token_expiration" {
 
 variable "active_session_timeout" {
   type        = number
-  description = "Specify how long (seconds) a user is allowed to work continuously in the account"
+  description = "Specify how long in seconds a user is allowed to work continuously in the account"
   default     = 86400
 }
 
@@ -111,7 +111,7 @@ variable "api_creation" {
 
 variable "enforce_allowed_ip_addresses" {
   type        = bool
-  description = "If true, IP address restriction is enforced. If false, traffic originating outside of the specified allowed IP addresss is monitored with audit events sent to SIEM and Activity Tracker. After running in monitoring mode to test the impact of the restriction, you must set to true to enforce the IP allowlist."
+  description = "Whether the IP address restriction is enforced. If false, traffic originating outside of the specified allowed IP addresss is monitored with audit events sent to QRadar SIEM and Activity Tracker. After running in monitoring mode to test the impact of the restriction, you must set to true to enforce the IP allowlist."
   default     = true
 }
 
@@ -135,7 +135,7 @@ variable "mfa" {
 
 variable "public_access_enabled" {
   type        = bool
-  description = "Enable or disable the public access group. Assigning an access policy to the access group opens access to that resource to anyone whether they're a member of your account or not because authentication is no longer required. When set to false, the public access group is disabled."
+  description = "Whether to enable or disable the public access group. Assigning an access policy to the access group opens access to that resource to anyone whether they're a member of your account or not because authentication is no longer required. When set to false, the public access group is disabled."
   default     = false
 }
 
@@ -153,7 +153,7 @@ variable "serviceid_creation" {
 
 variable "shell_settings_enabled" {
   type        = bool
-  description = "Allow CLI logins with only a password. Set to false for a higher level of security."
+  description = "Whether to allow CLI logins with only a password. Set to false for a higher level of security."
   default     = false
 }
 
@@ -162,13 +162,13 @@ variable "user_mfa" {
     iam_id = string
     mfa    = string
   }))
-  description = "Specify Multi-Factor Authentication method for specific users the account. Supported valid values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users). Example of format is available here > https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings#usage"
+  description = "Specify Multi-Factor Authentication method for specific users the account. Supported values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users). Example of format is available here > https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings#usage"
   default     = []
 }
 
 variable "user_mfa_reset" {
   type        = bool
-  description = "Set to true to delete all user MFA settings configured in the targeted account, and ignoring entries declared in var user_mfa"
+  description = "Whether to delete all user MFA settings configured in the targeted account. Set to true to ignore entries declared in variable `user_mfa`."
   default     = false
 }
 
@@ -178,113 +178,113 @@ variable "user_mfa_reset" {
 
 variable "provision_atracker_cos" {
   type        = bool
-  description = "Enable to create an Atracker route and COS instance + bucket."
+  description = "Whether to create an Activity Tracker route and Cloud Object Storage instance and bucket."
   default     = false
 }
 
 variable "region" {
   type        = string
-  description = "Region to provision the COS resources created by this solution."
+  description = "Region to provision the Cloud Object Storage resources created by this solution."
   default     = "us-south"
 }
 
 variable "cos_plan" {
   type        = string
-  description = "Plan of the COS instance created by the module"
+  description = "Pricing plan of the Cloud Object Storage instance created by the module."
   default     = "standard"
 }
 
 variable "cos_instance_name" {
   type        = string
-  description = "The name to give the cloud object storage instance that will be provisioned by this module, required if 'var.provision_atracker_cos' is true."
+  description = "The name for the Cloud Object Storage instance that this module provisions. Required if the variable `provision_atracker_cos` is true."
   default     = null
 }
 
 variable "resource_tags" {
   type        = list(string)
-  description = "A list of tags applied to the COS resources created by the module."
+  description = "A list of tags applied to the Cloud Object Storage resources that are created by the module."
   default     = []
 }
 
 variable "cos_instance_access_tags" {
   type        = list(string)
-  description = "A list of Access Tags applied to the created COS instance."
+  description = "A list of access tags applied to the created Cloud Object Storage instance."
   default     = []
 }
 
 variable "cos_bucket_name" {
   type        = string
-  description = "The name to give the newly provisioned COS bucket which will be used for Activity Tracker logs, required if 'var.provision_atracker_cos' is true."
+  description = "The name for the newly provisioned Cloud Object Storage bucket that is used store Activity Tracker logs. Required if variable `provision_atracker_cos` is true."
   default     = null
 }
 
 variable "cos_bucket_access_tags" {
   type        = list(string)
-  description = "A list of Access Tags applied to the created bucket."
+  description = "A list of access tags applied to the created Cloud Object Storage bucket."
   default     = []
 }
 
 variable "cos_bucket_expire_enabled" {
   type        = bool
-  description = "A flag to control expiry rule on the bucket."
+  description = "Whether to enable the expiration rule on the Cloud Object Storage bucket. Specify the number of days in the variable `cos_bucket_expire_days`."
   default     = false
 }
 
 variable "cos_bucket_expire_days" {
   type        = number
-  description = "Number of days before expiry."
+  description = "Number of days before objects in a Cloud Object Storage bucket are automatically deleted."
   default     = 365
 }
 
 variable "cos_bucket_object_versioning_enabled" {
   type        = bool
-  description = "A flag to control object versioning on the bucket."
+  description = "Whether to enable versioning on the bucket."
   default     = false
 }
 
 variable "kms_key_crn" {
   type        = string
-  description = "CRN of the KMS key to use to encrypt the data in the COS bucket, required if 'var.provision_atracker_cos' is true."
+  description = "Cloud Resource Name (CRN) of the key management service key used to encrypt the data in the Cloud Object Storage bucket. Required if variable `provision_atracker_cos` is true."
   default     = null
 }
 
 variable "cos_bucket_management_endpoint_type" {
-  description = "The type of endpoint for the IBM terraform provider to use to manage the bucket. (public, private or direct)"
+  description = "The type of endpoint that the IBM terraform provider uses to manage the bucket. Suppodted values are `public`, `private` or `direct`."
   type        = string
   default     = "public"
   validation {
     condition     = contains(["public", "private", "direct"], var.cos_bucket_management_endpoint_type)
-    error_message = "The specified management_endpoint_type_for_bucket is not a valid selection!"
+    error_message = "The specified management_endpoint_type_for_bucket is not a valid selection."
   }
 }
 
 variable "cos_bucket_storage_class" {
   type        = string
-  description = "COS Bucket storage class type"
+  description = "Cloud Object Storage bucket storage class type."
   default     = null
 }
 
 variable "cos_bucket_archive_enabled" {
   type        = bool
-  description = "Set as true to enable archiving on the COS bucket."
+  description = "Whether to enable archiving on the Cloud Object Storage bucket."
   default     = false
 }
 
 variable "cos_bucket_archive_days" {
   type        = number
-  description = "Number of days to archive objects in the bucket."
+  description = "Number of days before objects in the bucket are archived."
   default     = 20
 }
 
 variable "cos_bucket_archive_type" {
   type        = string
-  description = "Type of archiving to use on bucket."
+  description = "Type of archiving to use on the bucket."
   default     = "Glacier"
 }
 
 variable "cos_bucket_retention_enabled" {
   type        = bool
-  description = "Retention enabled for COS bucket."
+  description = "Whether to enable retention for the Cloud Object Storage bucket."
   default     = false
 }
 
@@ -295,19 +295,19 @@ variable "cos_bucket_retention_default" {
 }
 
 variable "cos_bucket_retention_maximum" {
-  description = "Specifies maximum duration of time an object that can be kept unmodified for COS bucket."
+  description = "Specifies maximum duration of time in days that an object that can be kept unmodified for a Cloud Object Storage bucket."
   type        = number
   default     = 350
 }
 
 variable "cos_bucket_retention_minimum" {
-  description = "Specifies minimum duration of time an object must be kept unmodified for COS bucket."
+  description = "Specifies minimum duration of time in days that an object must be kept unmodified for COS bucket."
   type        = number
   default     = 90
 }
 
 variable "cos_bucket_retention_permanent" {
-  description = "Specifies a permanent retention status either enable or disable for COS bucket."
+  description = "Whether to enable a permanent retention status for the COS bucket."
   type        = bool
   default     = false
 }
@@ -358,7 +358,7 @@ variable "cos_instance_cbr_rules" {
       }))
     })))
   }))
-  description = "CBR Rules for the COS instance."
+  description = "Context-based restriction rules for the Cloud Object Storage instance."
   default     = []
 }
 
@@ -368,25 +368,25 @@ variable "cos_instance_cbr_rules" {
 
 variable "skip_atracker_cos_iam_auth_policy" {
   type        = bool
-  description = "Set to true to skip the creation of an IAM authorization policy that permits the Activity Tracker service Object Writer access to the Cloud Object Storage instance provisioned by this module. NOTE: If skipping, you must ensure the auth policy exists on the account before running the module."
+  description = "Whether to skip creating an IAM authorization policy that grants the Activity Tracker service Object Writer access to the Cloud Object Storage instance that is provisioned by this module. If set to true, you must ensure the authorization policy exists on the account before running the module."
   default     = false
 }
 
 variable "cos_target_name" {
   type        = string
-  description = "Name of the COS Target for Activity Tracker, required if 'var.provision_atracker_cos' is true."
+  description = "Name of the Cloud Object Storage target for Activity Tracker. Required if variable `provision_atracker_cos` is true."
   default     = null
 }
 
 variable "activity_tracker_route_name" {
   type        = string
-  description = "Name of the route for the Activity Tracker, required if 'var.provision_atracker_cos' is true."
+  description = "Name of the route for the Activity Tracker. Required if variable `provision_atracker_cos` is true."
   default     = null
 }
 
 variable "activity_tracker_locations" {
   type        = list(string)
-  description = "Location of the route for the Activity Tracker, logs from these locations will be sent to the specified target. Supports passing individual regions, as well as `global` and `*`."
+  description = "Location of the route for the Activity Tracker. Logs from these locations are sent to the specified target. Supports passing individual regions, as well as `global` and `*`."
   default     = ["*", "global"]
 }
 
