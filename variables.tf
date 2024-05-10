@@ -81,7 +81,7 @@ variable "devops_resource_group_name" {
 
 variable "existing_cos_resource_group_name" {
   type        = string
-  description = "The name of an existing resource group to use for the COS instance/bucket, required if `var.provision_artacker_cos` is true and `var.observability_resource_group_name` is not provided."
+  description = "The name of an existing resource group to use for the Object Storage instance and bucket. Required if `var.provision_artacker_cos` is true and `var.observability_resource_group_name` is not provided."
   default     = null
 }
 
@@ -173,66 +173,66 @@ variable "user_mfa_reset" {
 }
 
 ########################################################################################################################
-# COS Variables
+# IBM Cloud Object Storage Variables
 ########################################################################################################################
 
 variable "provision_atracker_cos" {
   type        = bool
-  description = "Whether to create an Activity Tracker route and Cloud Object Storage instance and bucket."
+  description = "Whether to create an Activity Tracker route and Object Storage instance and bucket."
   default     = false
 }
 
 variable "region" {
   type        = string
-  description = "Region to provision the Cloud Object Storage resources created by this solution."
+  description = "Region to provision the Object Storage resources created by this solution."
   default     = "us-south"
 }
 
 variable "cos_plan" {
   type        = string
-  description = "Pricing plan of the Cloud Object Storage instance created by the module."
+  description = "Pricing plan of the Object Storage instance created by the module."
   default     = "standard"
 }
 
 variable "cos_instance_name" {
   type        = string
-  description = "The name for the Cloud Object Storage instance that this module provisions. Required if the variable `provision_atracker_cos` is true."
+  description = "The name for the Object Storage instance that this module provisions. Required if the variable `provision_atracker_cos` is true."
   default     = null
 }
 
 variable "resource_tags" {
   type        = list(string)
-  description = "A list of tags applied to the Cloud Object Storage resources that are created by the module."
+  description = "A list of tags applied to the Object Storage resources that are created by the module."
   default     = []
 }
 
 variable "cos_instance_access_tags" {
   type        = list(string)
-  description = "A list of access tags applied to the created Cloud Object Storage instance."
+  description = "A list of access tags applied to the created Object Storage instance."
   default     = []
 }
 
 variable "cos_bucket_name" {
   type        = string
-  description = "The name for the newly provisioned Cloud Object Storage bucket that is used store Activity Tracker logs. Required if variable `provision_atracker_cos` is true."
+  description = "The name for the newly provisioned Object Storage bucket that is used store Activity Tracker logs. Required if variable `provision_atracker_cos` is true."
   default     = null
 }
 
 variable "cos_bucket_access_tags" {
   type        = list(string)
-  description = "A list of access tags applied to the created Cloud Object Storage bucket."
+  description = "A list of access tags applied to the created Object Storage bucket."
   default     = []
 }
 
 variable "cos_bucket_expire_enabled" {
   type        = bool
-  description = "Whether to enable the expiration rule on the Cloud Object Storage bucket. Specify the number of days in the variable `cos_bucket_expire_days`."
+  description = "Whether to enable the expiration rule on the Object Storage bucket. Specify the number of days in the variable `cos_bucket_expire_days`."
   default     = false
 }
 
 variable "cos_bucket_expire_days" {
   type        = number
-  description = "Number of days before objects in a Cloud Object Storage bucket are automatically deleted."
+  description = "Number of days before objects in a Object Storage bucket are automatically deleted."
   default     = 365
 }
 
@@ -244,7 +244,7 @@ variable "cos_bucket_object_versioning_enabled" {
 
 variable "kms_key_crn" {
   type        = string
-  description = "Cloud Resource Name (CRN) of the key management service key used to encrypt the data in the Cloud Object Storage bucket. Required if variable `provision_atracker_cos` is true."
+  description = "Cloud Resource Name (CRN) of the key management service key used to encrypt the data in the Object Storage bucket. Required if variable `provision_atracker_cos` is true."
   default     = null
 }
 
@@ -260,13 +260,13 @@ variable "cos_bucket_management_endpoint_type" {
 
 variable "cos_bucket_storage_class" {
   type        = string
-  description = "Cloud Object Storage bucket storage class type."
+  description = "Object Storage bucket storage class type."
   default     = null
 }
 
 variable "cos_bucket_archive_enabled" {
   type        = bool
-  description = "Whether to enable archiving on the Cloud Object Storage bucket."
+  description = "Whether to enable archiving on the Object Storage bucket."
   default     = false
 }
 
@@ -284,30 +284,30 @@ variable "cos_bucket_archive_type" {
 
 variable "cos_bucket_retention_enabled" {
   type        = bool
-  description = "Whether to enable retention for the Cloud Object Storage bucket."
+  description = "Whether to enable retention for the Object Storage bucket."
   default     = false
 }
 
 variable "cos_bucket_retention_default" {
-  description = "Specifies default duration of time an object that can be kept unmodified for COS bucket."
+  description = "Specifies default duration of time an object that can be kept unmodified for Object Storagebucket."
   type        = number
   default     = 90
 }
 
 variable "cos_bucket_retention_maximum" {
-  description = "Specifies maximum duration of time in days that an object that can be kept unmodified for a Cloud Object Storage bucket."
+  description = "Specifies maximum duration of time in days that an object that can be kept unmodified for a Object Storage bucket."
   type        = number
   default     = 350
 }
 
 variable "cos_bucket_retention_minimum" {
-  description = "Specifies minimum duration of time in days that an object must be kept unmodified for COS bucket."
+  description = "Specifies minimum duration of time in days that an object must be kept unmodified for Object Storage bucket."
   type        = number
   default     = 90
 }
 
 variable "cos_bucket_retention_permanent" {
-  description = "Whether to enable a permanent retention status for the COS bucket."
+  description = "Whether to enable a permanent retention status for the Object Storage bucket."
   type        = bool
   default     = false
 }
@@ -333,7 +333,7 @@ variable "cos_bucket_cbr_rules" {
       }))
     })))
   }))
-  description = "COS Bucket CBR Rules"
+  description = "Context-based restriciton rules for the Object Storage bucket"
   default     = []
 }
 
@@ -358,23 +358,23 @@ variable "cos_instance_cbr_rules" {
       }))
     })))
   }))
-  description = "Context-based restriction rules for the Cloud Object Storage instance."
+  description = "Context-based restriction rules for the Object Storage instance."
   default     = []
 }
 
 ########################################################################################################################
-# ATracker Variables
+# Activity Tracker Variables
 ########################################################################################################################
 
 variable "skip_atracker_cos_iam_auth_policy" {
   type        = bool
-  description = "Whether to skip creating an IAM authorization policy that grants the Activity Tracker service Object Writer access to the Cloud Object Storage instance that is provisioned by this module. If set to true, you must ensure the authorization policy exists on the account before running the module."
+  description = "Whether to skip creating an IAM authorization policy that grants the Activity Tracker service Object Writer access to the Object Storage instance that is provisioned by this module. If set to true, you must ensure the authorization policy exists on the account before running the module."
   default     = false
 }
 
 variable "cos_target_name" {
   type        = string
-  description = "Name of the Cloud Object Storage target for Activity Tracker. Required if variable `provision_atracker_cos` is true."
+  description = "Name of the Object Storage target for Activity Tracker. Required if variable `provision_atracker_cos` is true."
   default     = null
 }
 
