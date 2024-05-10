@@ -11,7 +11,7 @@ This is a foundational module that sets up a newly provisioned account with the 
 
 - A resource group
 - IAM account settings
-- Trusted profile and access group to work with Projects
+- A trusted profile and access group to securely deploy this architecture
 
 This module also optionally supports provisioning the following resources:
 
