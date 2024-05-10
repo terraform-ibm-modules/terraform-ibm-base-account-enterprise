@@ -163,21 +163,21 @@ output "account_shell_settings_status" {
 }
 
 output "trusted_profile_projects" {
-  value       = module.trusted_profile_projects.trusted_profile
+  value       = one(module.trusted_profile_projects[*].trusted_profile)
   description = "Trusted Profile Projects Profile"
 }
 
 output "trusted_profile_projects_claim_rules" {
-  value       = module.trusted_profile_projects.trusted_profile_claim_rules
+  value       = one(module.trusted_profile_projects[*].trusted_profile_claim_rules)
   description = "Trusted Profile Projects Profile Claim Rules"
 }
 
 output "trusted_profile_projects_links" {
-  value       = module.trusted_profile_projects.trusted_profile_links
+  value       = one(module.trusted_profile_projects[*].trusted_profile_links)
   description = "Trusted Profile Projects Profile Links"
 }
 
 output "trusted_profile_projects_policies" {
-  value       = module.trusted_profile_projects.trusted_profile_policies
+  value       = one(module.trusted_profile_projects[*].trusted_profile_policies)
   description = "Trusted Profile Projects Profile Policies"
 }
