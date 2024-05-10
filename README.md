@@ -10,13 +10,15 @@
 This is a foundational module that sets up a newly provisioned account with the following default provisions:
 
 - A resource group
-- IAM account settings
-- A trusted profile and access group to securely deploy this architecture
+- Financial Services Cloud compliant account settings
+- A trusted profile to securely deploy this solution
 
 This module also optionally supports provisioning the following resources:
 
-- Activity Tracker routing
-- Cloud Object Storage instance and bucket
+- An IBM Cloud Object Storage instance
+- An Object Storage bucket encrypted with the Key Managemement Service key
+- An Activity Tracker target for the Object Storage  bucket
+- An Activity Tracker route to route events to the Object Storage bucket
 
 ![account-infrastructure-base](https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-account-infrastructure-base/main/reference-architectures/base-account-enterprise.svg)
 
@@ -54,7 +56,7 @@ unless real values don't help users know what to change.
 -->
 
 #### Before you begin
-If you are using this module to create an Activity Tracker route and Cloud Object Storage instance and bucket, you need an IAM authorization policy in the account where the key management service key resides. This grants the Cloud Object Storage service in the account to which this solution is being deployed, reader access to the KMS instance that the KMS key belongs to.
+If you are using this module to create an Activity Tracker route and Cloud Object Storage instance and bucket, you need an IAM authorization policy in the account where the Key Managemement Service key resides. This grants the Cloud Object Storage service in the account to which this solution is being deployed, reader access to the Key Managemement Service instance that the KMS key belongs to.
 
 ```hcl
 locals {
@@ -82,7 +84,7 @@ module "enterprise_account" {
     }
     region                      = "us-south"
     resource_group_name         = "account-base-resource-group"
-    provision_atracker_cos      = true # setting this enables provisioning of the ATracker + COS resources
+    provision_atracker_cos      = true # setting this enables provisioning of the Activity Tracker and Object Storage resources
     cos_instance_name           = "account-base-cos-instance"
     cos_bucket_name             = "atracker-cos-bucket"
     cos_target_name             = "atracker-cos-target"
@@ -176,22 +178,22 @@ No resources.
 | <a name="input_enforce_allowed_ip_addresses"></a> [enforce\_allowed\_ip\_addresses](#input\_enforce\_allowed\_ip\_addresses) | If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to SIEM and Activity Tracker. After running in monitored mode to test this variable, it should then explicitly be set to true to enforce IP allow listing. | `bool` | `true` | no |
 | <a name="input_existing_cos_resource_group_name"></a> [existing\_cos\_resource\_group\_name](#input\_existing\_cos\_resource\_group\_name) | The name of an existing resource group to use for the COS instance/bucket, required if `var.provision_artacker_cos` is true and `var.observability_resource_group_name` is not provided. | `string` | `null` | no |
 | <a name="input_inactive_session_timeout"></a> [inactive\_session\_timeout](#input\_inactive\_session\_timeout) | Specify how long (seconds) a user is allowed to stay logged in the account while being inactive/idle | `string` | `"7200"` | no |
-| <a name="input_kms_key_crn"></a> [kms\_key\_crn](#input\_kms\_key\_crn) | CRN of the KMS key to use to encrypt the data in the COS bucket, required if 'var.provision\_atracker\_cos' is true. | `string` | `null` | no |
+| <a name="input_kms_key_crn"></a> [kms\_key\_crn](#input\_kms\_key\_crn) | CRN of the Key Managemement Service key to use to encrypt the data in the Object Storage bucket, required if 'var.provision\_atracker\_cos' is true. | `string` | `null` | no |
 | <a name="input_management_resource_group_name"></a> [management\_resource\_group\_name](#input\_management\_resource\_group\_name) | The name of the management resource group to create. | `string` | `null` | no |
 | <a name="input_max_sessions_per_identity"></a> [max\_sessions\_per\_identity](#input\_max\_sessions\_per\_identity) | Defines the maximum allowed sessions per identity required by the account. Supports any whole number greater than '0', or 'NOT\_SET' to unset account setting and use service default. | `string` | `"NOT_SET"` | no |
 | <a name="input_mfa"></a> [mfa](#input\_mfa) | Specify Multi-Factor Authentication method in the account. Supported valid values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users). | `string` | `"TOTP4ALL"` | no |
 | <a name="input_observability_resource_group_name"></a> [observability\_resource\_group\_name](#input\_observability\_resource\_group\_name) | The name of the observability resource group to create. Required if `var.provision_atracker_cos` is true and `var.existing_cos_resource_group_name` is not provided. | `string` | `null` | no |
-| <a name="input_provision_atracker_cos"></a> [provision\_atracker\_cos](#input\_provision\_atracker\_cos) | Enable to create an Atracker route and COS instance + bucket. | `bool` | `false` | no |
-| <a name="input_provision_trusted_profile_projects"></a> [provision\_trusted\_profile\_projects](#input\_provision\_trusted\_profile\_projects) | Controls whether the Trusted Profile for Projects is provisioned. | `bool` | `true` | no |
+| <a name="input_provision_atracker_cos"></a> [provision\_atracker\_cos](#input\_provision\_atracker\_cos) | Enable to create an Atracker route and Object Storage instance and bucket. | `bool` | `false` | no |
+| <a name="input_provision_trusted_profile_projects"></a> [provision\_trusted\_profile\_projects](#input\_provision\_trusted\_profile\_projects) | Controls whether the trusted profile for projects is provisioned. | `bool` | `true` | no |
 | <a name="input_public_access_enabled"></a> [public\_access\_enabled](#input\_public\_access\_enabled) | Enable/Disable public access group in which resources are open anyone regardless if they are member of your account or not | `bool` | `false` | no |
 | <a name="input_refresh_token_expiration"></a> [refresh\_token\_expiration](#input\_refresh\_token\_expiration) | Defines the refresh token expiration in seconds | `string` | `"259200"` | no |
-| <a name="input_region"></a> [region](#input\_region) | Region to provision the COS resources created by this solution. | `string` | `"us-south"` | no |
-| <a name="input_resource_tags"></a> [resource\_tags](#input\_resource\_tags) | A list of tags applied to the COS resources created by the module. | `list(string)` | `[]` | no |
+| <a name="input_region"></a> [region](#input\_region) | Region to provision the Object Storage resources created by this solution. | `string` | `"us-south"` | no |
+| <a name="input_resource_tags"></a> [resource\_tags](#input\_resource\_tags) | A list of tags applied to the Object Storage resources created by the module. | `list(string)` | `[]` | no |
 | <a name="input_security_resource_group_name"></a> [security\_resource\_group\_name](#input\_security\_resource\_group\_name) | The name of the security resource group to create. | `string` | `null` | no |
 | <a name="input_serviceid_creation"></a> [serviceid\_creation](#input\_serviceid\_creation) | When restriction is enabled, only users, including the account owner, assigned the Service ID creator role on the IAM Identity Service can create service IDs. Allowed values are 'RESTRICTED', 'NOT\_RESTRICTED', or 'NOT\_SET' (to 'unset' a previous set value). | `string` | `"RESTRICTED"` | no |
 | <a name="input_shell_settings_enabled"></a> [shell\_settings\_enabled](#input\_shell\_settings\_enabled) | Enable global shell settings to all users in the account | `bool` | `false` | no |
 | <a name="input_skip_atracker_cos_iam_auth_policy"></a> [skip\_atracker\_cos\_iam\_auth\_policy](#input\_skip\_atracker\_cos\_iam\_auth\_policy) | Set to true to skip the creation of an IAM authorization policy that permits the Activity Tracker service Object Writer access to the Cloud Object Storage instance provisioned by this module. NOTE: If skipping, you must ensure the auth policy exists on the account before running the module. | `bool` | `false` | no |
-| <a name="input_trusted_profile_description"></a> [trusted\_profile\_description](#input\_trusted\_profile\_description) | Description of the trusted profile. | `string` | `"Trusted Profile for Projects access"` | no |
+| <a name="input_trusted_profile_description"></a> [trusted\_profile\_description](#input\_trusted\_profile\_description) | Description of the trusted profile. | `string` | `"A project can assume this trusted profile, which grants the project access to deploy an architecture in the account where the trusted profile exists."` | no |
 | <a name="input_trusted_profile_name"></a> [trusted\_profile\_name](#input\_trusted\_profile\_name) | Name of the trusted profile, required if `provision_trusted_profile_projects` is true. | `string` | `null` | no |
 | <a name="input_trusted_profile_roles"></a> [trusted\_profile\_roles](#input\_trusted\_profile\_roles) | List of roles given to the trusted profile. | `list(string)` | <pre>[<br>  "Administrator"<br>]</pre> | no |
 | <a name="input_user_mfa"></a> [user\_mfa](#input\_user\_mfa) | Specify Multi-Factor Authentication method for specific users the account. Supported valid values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users). Example of format is available here > https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings#usage | <pre>set(object({<br>    iam_id = string<br>    mfa    = string<br>  }))</pre> | `[]` | no |
