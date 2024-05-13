@@ -15,8 +15,8 @@ This is an end-to-end deployable architecture solution that provisions the follo
 Create an IAM authorization policy in the account where the Key Management Service (KMS) key resides. Grant the Object Storage service in the account where this solution is deployed the Reader role on the KMS instance that the key belongs to.
 
 
-## Current limitations
-The module currently does not support configuring the following settings that are required for FSCloud compliance:
+## Limitations
+The solution currently does not support configuring the following settings that are required for FSCloud compliance:
 - The user list visibility IAM setting. An account owener can enable this restriction manually in the IBM Cloud console by following these [steps](https://cloud.ibm.com/docs/account?topic=account-iam-user-setting).
 - The Financial Services Validated setting. An account owner can enable the account to be Financial Services Validated designated, which means your account stores and manages regulated financial services information. Follow these [steps](https://cloud.ibm.com/docs/account?topic=account-enabling-fs-validated) to set this manually in the IBM Cloud console.
 
