@@ -286,56 +286,6 @@ variable "cos_bucket_retention_permanent" {
   default     = false
 }
 
-variable "cos_bucket_cbr_rules" {
-  type = list(object({
-    description = string
-    account_id  = string
-    rule_contexts = list(object({
-      attributes = optional(list(object({
-        name  = string
-        value = string
-      })))
-    }))
-    enforcement_mode = string
-    tags = optional(list(object({
-      name  = string
-      value = string
-    })), [])
-    operations = optional(list(object({
-      api_types = list(object({
-        api_type_id = string
-      }))
-    })))
-  }))
-  description = "COS Bucket CBR Rules"
-  default     = []
-}
-
-variable "cos_instance_cbr_rules" {
-  type = list(object({
-    description = string
-    account_id  = string
-    rule_contexts = list(object({
-      attributes = optional(list(object({
-        name  = string
-        value = string
-      })))
-    }))
-    enforcement_mode = string
-    tags = optional(list(object({
-      name  = string
-      value = string
-    })), [])
-    operations = optional(list(object({
-      api_types = list(object({
-        api_type_id = string
-      }))
-    })))
-  }))
-  description = "CBR Rules for the COS instance."
-  default     = []
-}
-
 variable "skip_atracker_cos_iam_auth_policy" {
   type        = bool
   description = "Set to true to skip the creation of an IAM authorization policy that permits the Activity Tracker service Object Writer access to the Cloud Object Storage instance provisioned by this module. NOTE: If skipping, you must ensure the auth policy exists on the account before running the module."

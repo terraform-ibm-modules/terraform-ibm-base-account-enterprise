@@ -44,8 +44,6 @@ module "account_infrastructure_base" {
   cos_bucket_retention_maximum         = var.cos_bucket_retention_maximum
   cos_bucket_retention_minimum         = var.cos_bucket_retention_minimum
   cos_bucket_retention_permanent       = var.cos_bucket_retention_permanent
-  cos_bucket_cbr_rules                 = var.cos_bucket_cbr_rules
-  cos_instance_cbr_rules               = var.cos_instance_cbr_rules
   skip_atracker_cos_iam_auth_policy    = var.skip_atracker_cos_iam_auth_policy
   activity_tracker_locations           = var.activity_tracker_locations
 
