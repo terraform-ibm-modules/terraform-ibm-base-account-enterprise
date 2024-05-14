@@ -8,7 +8,7 @@ An end-to-end deployable architecture solution that will provision the following
 - An Activity Tracker target for the COS bucket
 - An Activity Tracker route to route events to the COS bucket.
 - A new Trusted Profile for Projects access.
-- A set of FSCloud compliant Context Based Restrictions (CBRs) Rules and Zones.
+- A set of context-based restriction rules and zones that are compliant with IBM Cloud Framework for Financial Services.
 
 ![account-infrastructure-base](https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-account-infrastructure-base/main/reference-architectures/base-account-enterprise.svg)
 
