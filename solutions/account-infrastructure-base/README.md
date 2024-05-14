@@ -7,7 +7,7 @@ This is an end-to-end deployable architecture solution that provisions the follo
 - An IBM Cloud Object Storage bucket encrypted with the key management service key
 - An Activity Tracker target for the Object Storage bucket
 - An Activity Tracker route to route events to the Object Storage bucket
-- A trusted profile to give Projects access to securely deploy this solution
+- A trusted profile to give Projects access to securely deploy solutions in this account
 
 ![account-infrastructure-base](https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-account-infrastructure-base/main/reference-architectures/base-account-enterprise.svg)
 
