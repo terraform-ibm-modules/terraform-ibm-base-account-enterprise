@@ -348,7 +348,7 @@ variable "cbr_allow_cos_to_kms" {
 
 variable "cbr_allow_block_storage_to_kms" {
   type        = bool
-  description = "Whether to enable the rule that allows block storage to access the key management service. Default is true."
+  description = "Whether to enable the rule that allows Block Storage for VPC to access the key management service. Default is true."
   default     = true
 }
 
