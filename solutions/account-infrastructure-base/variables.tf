@@ -192,133 +192,133 @@ variable "cos_plan" {
 
 variable "cos_instance_name" {
   type        = string
-  description = "The name to give the cloud object storage instance that will be provisioned by this module, required if 'var.provision_atracker_cos' is true."
+  description = "The name for the Object Storage instance that this module provisions. Required if the variable `provision_atracker_cos` is true."
   default     = null
 }
 
 variable "cos_instance_access_tags" {
   type        = list(string)
-  description = "A list of Access Tags applied to the created COS instance."
+  description = "A list of access tags applied to the Object Storage instance that this module provisions."
   default     = []
 }
 
 variable "cos_bucket_name" {
   type        = string
-  description = "The name to give the newly provisioned COS bucket which will be used for Activity Tracker logs, required if 'var.provision_atracker_cos' is true."
+  description = "The name for the Object Storage bucket that stores Activity Tracker logs. Required if variable `provision_atracker_cos` is true."
   default     = null
 }
 
 variable "cos_bucket_access_tags" {
   type        = list(string)
-  description = "A list of Access Tags applied to the created bucket."
+  description = "A list of access tags applied to the Object Storage bucket that this module provisions."
   default     = []
 }
 
 variable "cos_bucket_expire_enabled" {
   type        = bool
-  description = "A flag to control expiry rule on the bucket."
+  description = "Whether to enable the expiration rule on the Object Storage bucket. Specify the number of days in the variable `cos_bucket_expire_days`."
   default     = false
 }
 
 variable "cos_bucket_expire_days" {
   type        = number
-  description = "Number of days before expiry."
+  description = "Number of days before objects in a Object Storage bucket are automatically deleted."
   default     = 365
 }
 
 variable "cos_bucket_object_versioning_enabled" {
   type        = bool
-  description = "A flag to control object versioning on the bucket."
+  description = "Whether to enable versioning on the bucket."
   default     = false
 }
 
 variable "cos_bucket_storage_class" {
   type        = string
-  description = "COS Bucket storage class type"
+  description = "Object Storage bucket storage class type."
   default     = null
 }
 
 variable "cos_bucket_archive_enabled" {
   type        = bool
-  description = "Set as true to enable archiving on the COS bucket."
+  description = "Whether to enable archiving on the Object Storage bucket."
   default     = false
 }
 
 variable "cos_bucket_archive_days" {
   type        = number
-  description = "Number of days to archive objects in the bucket."
+  description = "Number of days before objects in the bucket are archived."
   default     = 20
 }
 
 variable "cos_bucket_archive_type" {
   type        = string
-  description = "Type of archiving to use on bucket."
+  description = "Type of archiving to use on the bucket."
   default     = "Glacier"
 }
 
 variable "cos_bucket_retention_enabled" {
   type        = bool
-  description = "Retention enabled for COS bucket."
+  description = "Whether to enable retention for the Object Storage bucket."
   default     = false
 }
 
 variable "cos_bucket_retention_default" {
-  description = "Specifies default duration of time an object that can be kept unmodified for COS bucket."
+  description = "Specifies default duration of time that an object can be kept unmodified in an Object Storage bucket."
   type        = number
   default     = 90
 }
 
 variable "cos_bucket_retention_maximum" {
-  description = "Specifies maximum duration of time an object that can be kept unmodified for COS bucket."
+  description = "Specifies the maximum duration of time that an object can be kept unmodified in an Object Storage bucket."
   type        = number
   default     = 350
 }
 
 variable "cos_bucket_retention_minimum" {
-  description = "Specifies minimum duration of time an object must be kept unmodified for COS bucket."
+  description = "Specifies minimum duration of time in days that an object must be kept unmodified for Object Storage bucket."
   type        = number
   default     = 90
 }
 
 variable "cos_bucket_retention_permanent" {
-  description = "Specifies a permanent retention status either enable or disable for COS bucket."
+  description = "Whether to enable a permanent retention status for the Object Storage bucket."
   type        = bool
   default     = false
 }
 
 variable "skip_atracker_cos_iam_auth_policy" {
   type        = bool
-  description = "Set to true to skip the creation of an IAM authorization policy that permits the Activity Tracker service Object Writer access to the Cloud Object Storage instance provisioned by this module. NOTE: If skipping, you must ensure the auth policy exists on the account before running the module."
+  description = "Whether to skip creating an IAM authorization policy that grants the Activity Tracker service Object Writer access to the Object Storage instance that is provisioned by this module. If set to true, you must ensure the authorization policy exists on the account before running the module."
   default     = false
 }
 
 variable "cos_target_name" {
   type        = string
-  description = "Name of the COS Target for Activity Tracker, required if 'var.provision_atracker_cos' is true."
+  description = "Name of the Object Storage target for Activity Tracker. Required if variable `provision_atracker_cos` is true."
   default     = null
 }
 
 variable "activity_tracker_route_name" {
   type        = string
-  description = "Name of the route for the Activity Tracker, required if 'var.provision_atracker_cos' is true."
+  description = "Name of the route for Activity Tracker. Required if variable `provision_atracker_cos` is true."
   default     = null
 }
 
 variable "activity_tracker_locations" {
   type        = list(string)
-  description = "Location of the route for the Activity Tracker, logs from these locations will be sent to the specified target. Supports passing individual regions, as well as `global` and `*`."
+  description = "Location of the route for Activity Tracker. Logs from these locations are sent to the specified target. Supports passing individual regions, `global`, and `*`."
   default     = ["*", "global"]
 }
 
 variable "provision_trusted_profile_projects" {
   type        = bool
-  description = "Controls whether the Trusted Profile for Projects is provisioned."
+  description = "Whether the trusted profile for Projects is provisioned."
   default     = true
 }
 
 variable "trusted_profile_name" {
   type        = string
-  description = "Name of the trusted profile, required if `provision_trusted_profile_projects` is true."
+  description = "Name of the trusted profile. Required if `provision_trusted_profile_projects` is true."
   default     = null
 }
 
