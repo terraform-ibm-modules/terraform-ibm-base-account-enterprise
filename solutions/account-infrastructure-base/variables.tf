@@ -169,6 +169,12 @@ variable "shell_settings_enabled" {
   default     = false
 }
 
+variable "skip_cloud_shell_calls" {
+  type        = bool
+  description = "Skip Cloud Shell calls in the account."
+  default     = false
+}
+
 variable "user_mfa" {
   type = set(object({
     iam_id = string
