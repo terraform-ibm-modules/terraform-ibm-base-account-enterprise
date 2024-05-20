@@ -194,6 +194,12 @@ variable "region" {
   default     = "us-south"
 }
 
+variable "skip_cos_kms_auth_policy" {
+  type        = bool
+  description = "Enable to skip the IAM Authoriation policy creation between the IBM Cloud Object Storage instance and the key management service."
+  default     = false
+}
+
 variable "cos_plan" {
   type        = string
   description = "Plan of the COS instance created by the module"

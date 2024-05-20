@@ -111,6 +111,21 @@ module "account_settings" {
   skip_cloud_shell_calls       = var.skip_cloud_shell_calls
 }
 
+locals {
+  kms_service_name  = split(":", var.kms_key_crn)[4]
+  kms_instance_guid = split(":", var.kms_key_crn)[7]
+}
+
+resource "ibm_iam_authorization_policy" "s2s_auth" {
+  count                       = !var.skip_cos_kms_auth_policy && var.provision_atracker_cos ? 1 : 0
+  source_service_name         = "cloud-object-storage"
+  source_resource_instance_id = module.cos[0].cos_instance_guid
+  target_service_name         = local.kms_service_name
+  target_resource_instance_id = local.kms_instance_guid
+  roles                       = ["Reader"]
+  description                 = "Authorization policy for IBM Cloud Object Storage instance to read keys in key management service instance created by terraform-ibm-account-infrastructure-base."
+}
+
 module "cos" {
   count             = var.provision_atracker_cos ? 1 : 0
   source            = "terraform-ibm-modules/cos/ibm//modules/fscloud"
