@@ -4,7 +4,7 @@
 
 variable "ibmcloud_api_key" {
   type        = string
-   description = "The IBM Cloud API key that is used by the provider to authenticate with IBM Cloud to create the resources."
+  description = "The IBM Cloud API key that is used by the provider to authenticate with IBM Cloud to create the resources."
   sensitive   = true
 }
 
