@@ -1,6 +1,6 @@
 # IBM Cloud Account Infrastructure Base solution
 
-This is an end-to-end deployable architecture solution that provisions the following:
+An end-to-end deployable architecture solution that provisions the following infrastructure:
 - A resource group
 - A default set of Financial Services Cloud compliant account settings
 - An IBM Cloud Object Storage instance
