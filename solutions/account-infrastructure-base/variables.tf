@@ -159,7 +159,7 @@ variable "refresh_token_expiration" {
 
 variable "serviceid_creation" {
   type        = string
-  description = "When restriction is enabled, only users that are assigned the Service ID creator role on the IAM Identity Service can create service IDs, including the account owner. Allowed values are 'RESTRICTED', 'NOT_RESTRICTED', or 'NOT_SET' (to 'unset' a previous set value)."
+  description = "When restriction is enabled, only users that are assigned the Service ID creator role on the IAM Identity Service can create service IDs, including the account owner. Allowed values are `restricted`, `not_restricted`, or `not_set` (to clear a previous value)."
   default     = "RESTRICTED"
 }
 
