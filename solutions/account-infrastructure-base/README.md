@@ -16,8 +16,12 @@ Create an IAM authorization policy in the account where the key management servi
 
 
 ## Limitations
-The solution currently does not support configuring the following settings that are required for FSCloud compliance:
-- The user list visibility IAM setting. An account owener can enable this restriction manually in the IBM Cloud console by following these [steps](https://cloud.ibm.com/docs/account?topic=account-iam-user-setting).
-- The Financial Services Validated setting. An account owner can enable the account to be Financial Services Validated designated, which means your account stores and manages regulated financial services information. Follow these [steps](https://cloud.ibm.com/docs/account?topic=account-enabling-fs-validated) to set this manually in the IBM Cloud console.
+
+The solution does not support configuring the following settings that are required for compliance with IBM Cloud for Financial Services:
+
+- The user list visibility IAM setting. An account owner can enable this restriction in the IBM Cloud console by following these [steps](https://cloud.ibm.com/docs/account?topic=account-iam-user-setting).
+- The Financial Services Validated setting. An account owner can enable the account to be designated as Financial Services Validated. IBM Cloud for Financial Services Validated designates that an IBM Cloud service or ecosystem partner service has evidenced compliance to the controls of the IBM Cloud Framework for Financial Services and can be used to build solutions that might themselves be validated. 
+
+    For more information, see [Enabling your account to use Financial Services Validated products](https://cloud.ibm.com/docs/account?topic=account-enabling-fs-validated).
 
 Tracking issue with IBM provider -> https://github.com/IBM-Cloud/terraform-provider-ibm/issues/4204
