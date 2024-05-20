@@ -17,19 +17,19 @@ variable "region" {
 
 variable "prefix" {
   type        = string
-  description = "Optional prefix to append to all resources created by this solution."
+  description = "An optional prefix to append to all resources created by this solution."
   default     = null
 }
 
 variable "resource_tags" {
   type        = list(string)
-  description = "Optional list of tags to be added to the Object Storage resources created by this solution. Required only if `provision_atracker_cos` is true."
+  description = "An optional list of tags to be added to the Object Storage resources created by this solution. Required only if `provision_atracker_cos` is true."
   default     = []
 }
 
 variable "kms_key_crn" {
   type        = string
-  description = "CRN of the key management service key to encrypt the Object Storage bucket. Required if `provision_atracker_cos` is true."
+  description = "The CRN of the key management service key to encrypt the Object Storage bucket. Required if `provision_atracker_cos` is true."
   default     = null
 }
 
@@ -44,7 +44,7 @@ variable "cos_bucket_management_endpoint_type" {
 }
 
 variable "allowed_ip_addresses" {
-  description = "List of the IP addresses and subnets from which IAM tokens can be created for the account."
+  description = " A list of the IP addresses and subnets from which IAM tokens can be created for the account."
   type        = list(string)
   default     = []
 }
@@ -105,7 +105,7 @@ variable "existing_cos_resource_group_name" {
 
 variable "access_token_expiration" {
   type        = string
-  description = "Specify the access token expiration in seconds."
+  description = "The access token expiration in seconds."
   default     = "3600"
 }
 
@@ -117,7 +117,7 @@ variable "active_session_timeout" {
 
 variable "api_creation" {
   type        = string
-  description = "When restriction is enabled, only users that are assigned the User API key creator role on the IAM Identity Service can create API keys, including the account owner. Allowed values are 'RESTRICTED', 'NOT_RESTRICTED', or 'NOT_SET' to 'unset' a previously set value."
+  description = "When restriction is enabled, only users that are assigned the User API key creator role on the IAM Identity Service can create API keys, including the account owner. Allowed values are `restricted`, `not_restricted`, or `not_set` (to clear a previous value)."
   default     = "RESTRICTED"
 }
 
@@ -129,19 +129,19 @@ variable "enforce_allowed_ip_addresses" {
 
 variable "inactive_session_timeout" {
   type        = string
-  description = "Specify the maximum time in seconds before an inactive user is signed out and their credentials are required again. The maximum duration a user can be inactive is 24 hours."
+  description = "The maximum time in seconds before an inactive user is signed out and their credentials are required again. The maximum duration a user can be inactive is 24 hours."
   default     = "7200"
 }
 
 variable "max_sessions_per_identity" {
   type        = string
-  description = "Specify the number of login sessions that an account user can have active. Supports any whole number greater than '0', or 'NOT_SET' to unset account setting and use service default."
+  description = "The number of login sessions that an account user can have active. Supports any whole number greater than `0`, or `NOT_SET` to unset account setting and use service default."
   default     = "NOT_SET"
 }
 
 variable "mfa" {
   type        = string
-  description = "Specify Multi-Factor Authentication method in the account. Supported valid values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users)."
+  description = "The Multi-Factor Authentication method in the account. Supported valid values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users)."
   default     = "TOTP4ALL"
 }
 
@@ -153,7 +153,7 @@ variable "public_access_enabled" {
 
 variable "refresh_token_expiration" {
   type        = string
-  description = "Specify the duration for how long refresh tokens are valid. The maximum duration you can set for a refresh token is 72 hours."
+  description = "The duration for how long refresh tokens are valid. The maximum duration you can set for a refresh token is 72 hours."
   default     = "259200"
 }
 
@@ -174,7 +174,7 @@ variable "user_mfa" {
     iam_id = string
     mfa    = string
   }))
-  description = "Specify Multi-Factor Authentication method for specific users the account. Supported valid values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users). Example of format is available here > https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings#usage"
+  description = "Multi-Factor Authentication method for specific users the account. Supported valid values are `NONE` (No MFA trait set), `TOTP` (For all non-federated IBMId users), `TOTP4ALL` (For all users), `LEVEL1` (Email based MFA for all users), `LEVEL2` (TOTP based MFA for all users), `LEVEL3` (U2F MFA for all users). Example of format is available here > https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings#usage"
   default     = []
 }
 
@@ -186,7 +186,7 @@ variable "user_mfa_reset" {
 
 variable "cos_plan" {
   type        = string
-  description = "Pricing plan of the Object Storage instance created by the module."
+  description = "The pricing plan of the Object Storage instance created by the module."
   default     = "standard"
 }
 
@@ -222,7 +222,7 @@ variable "cos_bucket_expire_enabled" {
 
 variable "cos_bucket_expire_days" {
   type        = number
-  description = "Number of days before objects in a Object Storage bucket are automatically deleted."
+  description = "The number of days before objects in a Object Storage bucket are automatically deleted."
   default     = 365
 }
 
@@ -234,7 +234,7 @@ variable "cos_bucket_object_versioning_enabled" {
 
 variable "cos_bucket_storage_class" {
   type        = string
-  description = "Object Storage bucket storage class type."
+  description = "The Object Storage bucket storage class type."
   default     = null
 }
 
@@ -246,13 +246,13 @@ variable "cos_bucket_archive_enabled" {
 
 variable "cos_bucket_archive_days" {
   type        = number
-  description = "Number of days before objects in the bucket are archived."
+  description = "The number of days before objects in the bucket are archived."
   default     = 20
 }
 
 variable "cos_bucket_archive_type" {
   type        = string
-  description = "Type of archiving to use on the bucket."
+  description = "The type of archiving to use on the bucket."
   default     = "Glacier"
 }
 
@@ -263,19 +263,19 @@ variable "cos_bucket_retention_enabled" {
 }
 
 variable "cos_bucket_retention_default" {
-  description = "Specifies default duration of time that an object can be kept unmodified in an Object Storage bucket."
+  description = "The default duration of time that an object can be kept unmodified in an Object Storage bucket."
   type        = number
   default     = 90
 }
 
 variable "cos_bucket_retention_maximum" {
-  description = "Specifies the maximum duration of time that an object can be kept unmodified in an Object Storage bucket."
+  description = "The maximum duration of time that an object can be kept unmodified in an Object Storage bucket."
   type        = number
   default     = 350
 }
 
 variable "cos_bucket_retention_minimum" {
-  description = "Specifies minimum duration of time in days that an object must be kept unmodified for Object Storage bucket."
+  description = "The minimum duration of time in days that an object must be kept unmodified for Object Storage bucket."
   type        = number
   default     = 90
 }
@@ -294,19 +294,19 @@ variable "skip_atracker_cos_iam_auth_policy" {
 
 variable "cos_target_name" {
   type        = string
-  description = "Name of the Object Storage target for Activity Tracker. Required if variable `provision_atracker_cos` is true."
+  description = "The name of the Object Storage target for Activity Tracker. Required if variable `provision_atracker_cos` is true."
   default     = null
 }
 
 variable "activity_tracker_route_name" {
   type        = string
-  description = "Name of the route for Activity Tracker. Required if variable `provision_atracker_cos` is true."
+  description = "The name of the route for Activity Tracker. Required if variable `provision_atracker_cos` is true."
   default     = null
 }
 
 variable "activity_tracker_locations" {
   type        = list(string)
-  description = "Location of the route for Activity Tracker. Logs from these locations are sent to the specified target. Supports passing individual regions, `global`, and `*`."
+  description = "The location of the route for Activity Tracker. Logs from these locations are sent to the specified target. Supports passing individual regions, `global`, and `*`."
   default     = ["*", "global"]
 }
 
@@ -318,18 +318,18 @@ variable "provision_trusted_profile_projects" {
 
 variable "trusted_profile_name" {
   type        = string
-  description = "Name of the trusted profile. Required if `provision_trusted_profile_projects` is true."
+  description = "The name of the trusted profile. Required if `provision_trusted_profile_projects` is true."
   default     = null
 }
 
 variable "trusted_profile_description" {
   type        = string
-  description = "Description of the trusted profile."
+  description = "The description of the trusted profile."
   default     = "Trusted Profile for Projects access"
 }
 
 variable "trusted_profile_roles" {
   type        = list(string)
-  description = "List of roles given to the trusted profile."
+  description = "A list of roles given to the trusted profile."
   default     = ["Administrator"]
 }
