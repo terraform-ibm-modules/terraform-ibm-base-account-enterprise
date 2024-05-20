@@ -2,12 +2,12 @@
 
 An end-to-end deployable architecture solution that provisions the following infrastructure:
 - A resource group
-- A default set of Financial Services Cloud compliant account settings
+- A default set of account settings that are compliant with the IBM Cloud for Financial Services framework 
 - An IBM Cloud Object Storage instance
 - An IBM Cloud Object Storage bucket encrypted with the key management service key
 - An Activity Tracker target for the Object Storage bucket
-- An Activity Tracker route to route events to the Object Storage bucket
-- A trusted profile to give Projects access to securely deploy solutions in this account
+- An Activity Tracker route that routes events to the Object Storage bucket
+- A trusted profile to give access for IBM Cloud Projects to deploy solutions securely in this account
 
 ![account-infrastructure-base](https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-account-infrastructure-base/main/reference-architectures/base-account-enterprise.svg)
 
