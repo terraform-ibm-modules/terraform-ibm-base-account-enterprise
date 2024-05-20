@@ -93,7 +93,7 @@ module "existing_resource_group" {
 
 module "account_settings" {
   source                       = "terraform-ibm-modules/iam-account-settings/ibm"
-  version                      = "2.9.0"
+  version                      = "2.10.0"
   access_token_expiration      = var.access_token_expiration
   active_session_timeout       = var.active_session_timeout
   allowed_ip_addresses         = var.allowed_ip_addresses
@@ -108,12 +108,13 @@ module "account_settings" {
   shell_settings_enabled       = var.shell_settings_enabled
   user_mfa                     = var.user_mfa
   user_mfa_reset               = var.user_mfa_reset
+  skip_cloud_shell_calls       = var.skip_cloud_shell_calls
 }
 
 module "cos" {
   count             = var.provision_atracker_cos ? 1 : 0
   source            = "terraform-ibm-modules/cos/ibm//modules/fscloud"
-  version           = "8.1.10"
+  version           = "8.2.8"
   resource_group_id = local.cos_rg
   bucket_configs = [{
     access_tags                   = var.cos_bucket_access_tags
