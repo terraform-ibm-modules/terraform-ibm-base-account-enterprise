@@ -4,9 +4,6 @@ CRA_TARGETS:
   - CRA_TARGET: "solutions/account-infrastructure-base" # Target directory for CRA scan. If not provided, the CRA Scan will not be run.
     CRA_IGNORE_RULES_FILE: "cra-tf-validate-ignore-rules.json" # CRA Ignore file to use. If not provided, it checks the repo root directory for `cra-tf-validate-ignore-rules.json`
     PROFILE_ID: "bfacb71d-4b84-41ac-9825-e8a3a3eb7405" # SCC profile ID (currently set to IBM Cloud Framework for Financial Services 1.6.0 profile).
-    SCC_INSTANCE_ID: "d5eaa656-140f-450f-b912-51f50951ed0e" # Instance ID in account "GoldenEye FSCloud Testing (ae14871c179f49869e19657b37ec7c4e) <-> 2626044"
-    SCC_REGION: "us-south" # The IBM Cloud region that the SCC instance is in. If not provided, a default global value will be used.
-    TOOLCHAIN_ID: "abd3ebbf-b194-4816-8143-e1932c1fc021" # The ID of the toolchain to get the profile from. Must be from an account in which the apikey has access to.
     CRA_ENVIRONMENT_VARIABLES:  # An optional map of environment variables for CRA, where the key is the variable name and value is the value. Useful for providing TF_VARs.
       TF_VAR_kms_key_crn: "crn:v1:bluemix:public:hs-crypto:us-south:a/abac0df06b644a9cabc6e44f55b3880e:e6dce284-e80f-46e1-a3c1-830f7adff7a9:key:1368d2eb-3ed0-4a8b-b09c-2155895f01ea"
       TF_VAR_prefix: "test"
