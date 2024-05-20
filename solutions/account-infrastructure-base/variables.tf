@@ -10,7 +10,7 @@ variable "ibmcloud_api_key" {
 
 variable "region" {
   type        = string
-  description = "Region to provision the Object Storage resources created by this solution. Only required if `provision_atracker_cos` is true."
+  description = "The region to provision the Object Storage resources created by this solution. Only required if `provision_atracker_cos` is true."
   default     = "us-south"
   nullable    = false
 }
