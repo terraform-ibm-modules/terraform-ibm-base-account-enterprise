@@ -4,32 +4,32 @@
 
 variable "ibmcloud_api_key" {
   type        = string
-  description = "The IBM Cloud API Key"
+  description = "The IBM Cloud API key that is used by the provider to authenticate with IBM Cloud to create the resources."
   sensitive   = true
 }
 
 variable "region" {
   type        = string
-  description = "Region to provision the COS resources created by this solution. Only required if 'provision_atracker_cos' is true."
+  description = "The region to provision the Object Storage resources created by this solution. Only required if `provision_atracker_cos` is true."
   default     = "us-south"
   nullable    = false
 }
 
 variable "prefix" {
   type        = string
-  description = "(Optional) Prefix to append to all resources created by this solution."
+  description = "An optional prefix to append to all resources created by this solution."
   default     = null
 }
 
 variable "resource_tags" {
   type        = list(string)
-  description = "Optional list of tags to be added to the COS resources created by this solution. Only required if 'provision_atracker_cos' is true."
+  description = "An optional list of tags to be added to the Object Storage resources created by this solution. Required only if `provision_atracker_cos` is true."
   default     = []
 }
 
 variable "kms_key_crn" {
   type        = string
-  description = "CRN of the KMS key to encrypt the COS bucket, required if 'provision_atracker_cos' is true."
+  description = "The CRN of the key management service key to encrypt the Object Storage bucket. Required if `provision_atracker_cos` is true."
   default     = null
 }
 
@@ -39,133 +39,133 @@ variable "cos_bucket_management_endpoint_type" {
   default     = "public"
   validation {
     condition     = contains(["public", "private", "direct"], var.cos_bucket_management_endpoint_type)
-    error_message = "The specified management_endpoint_type_for_bucket is not a valid selection!"
+    error_message = "The specified management_endpoint_type_for_bucket is not a valid selection."
   }
 }
 
 variable "allowed_ip_addresses" {
-  description = "List of the IP addresses and subnets from which IAM tokens can be created for the account."
+  description = " A list of the IP addresses and subnets from which IAM tokens can be created for the account."
   type        = list(string)
   default     = []
 }
 
 variable "provision_atracker_cos" {
   type        = bool
-  description = "Enable to create an Atracker route and COS instance + bucket."
+  description = "Whether to enable creating an Activity Tracker route, Object Storage instance, and bucket."
   default     = false
 }
 
 variable "security_resource_group_name" {
   type        = string
-  description = "The name of the security resource group to create. If `var.prefix` is provided then it will be prefixed on the name in the format of `<prefix>-<security_resource_group_name>`."
+  description = "The name of the security resource group to create. If `var.prefix` is provided, it is prefixed on the name in the following format: `<prefix>-<security_resource_group_name>`."
   default     = null
 }
 
 variable "audit_resource_group_name" {
   type        = string
-  description = "The name of the audit resource group to create. If `prefix` is provided then it will be prefixed on the name in the format of `<prefix>-<audit_resource_group_name>`."
+  description = "The name of the audit resource group to create. If `prefix` is provided, it is prefixed on the name in the following format: `<prefix>-<audit_resource_group_name>`."
   default     = null
 }
 
 variable "observability_resource_group_name" {
   type        = string
-  description = "The name of the observability resource group to create. Required if `provision_atracker_cos` is true and `existing_cos_resource_group_name` is not provided. If `prefix` is provided then it will be prefixed on the name in the format of `<prefix>-<observability_resource_group_name>`."
+  description = "The name of the observability resource group to create. Required if `provision_atracker_cos` is true and `existing_cos_resource_group_name` is not provided. If `prefix` is provided, it is prefixed on the name in the following format: `<prefix>-<observability_resource_group_name>`."
   default     = null
 }
 
 variable "management_resource_group_name" {
   type        = string
-  description = "The name of the management resource group to create. If `prefix` is provided then it will be prefixed on the name in the format of `<prefix>-<management_resource_group_name>`."
+  description = "The name of the management resource group to create. If `prefix` is provided, it is prefixed on the name in the following format: `<prefix>-<management_resource_group_name>`."
   default     = null
 }
 
 variable "workload_resource_group_name" {
   type        = string
-  description = "The name of the workload resource group to create. If `prefix` is provided then it will be prefixed on the name in the format of `<prefix>-<workload_resource_group_name>`."
+  description = "The name of the workload resource group to create. If `prefix` is provided, it is prefixed on the name in the following format: `<prefix>-<workload_resource_group_name>`."
   default     = null
 }
 
 variable "edge_resource_group_name" {
   type        = string
-  description = "The name of the edge resource group to create. If `prefix` is provided then it will be prefixed on the name in the format of `<prefix>-<edge_resource_group_name>`."
+  description = "The name of the edge resource group to create. If `prefix` is provided, it is prefixed on the name in the following format: `<prefix>-<edge_resource_group_name>`."
   default     = null
 }
 
 variable "devops_resource_group_name" {
   type        = string
-  description = "The name of the devops resource group to create. If `prefix` is provided then it will be prefixed on the name in the format of `<prefix>-<devops_resource_group_name>`."
+  description = "The name of the devops resource group to create. If `prefix` is provided, it is prefixed on the name in the following format: `<prefix>-<devops_resource_group_name>`."
   default     = null
 }
 
 variable "existing_cos_resource_group_name" {
   type        = string
-  description = "The name of an existing resource group to use for the COS instance/bucket, required if `provision_artacker_cos` is true and `observability_resource_group_name` is not provided."
+  description = "The name of an existing resource group to use for the Object Storage instance and bucket. Required if `provision_artacker_cos` is true and `observability_resource_group_name` is not provided."
   default     = null
 }
 
 variable "access_token_expiration" {
   type        = string
-  description = "Defines the access token expiration in seconds"
+  description = "The access token expiration in seconds."
   default     = "3600"
 }
 
 variable "active_session_timeout" {
   type        = number
-  description = "Specify how long (seconds) a user is allowed to work continuously in the account"
+  description = "Specify how long in seconds a user is allowed to work continuously in the account."
   default     = 86400
 }
 
 variable "api_creation" {
   type        = string
-  description = "When restriction is enabled, only users, including the account owner, assigned the User API key creator role on the IAM Identity Service can create API keys. Allowed values are 'RESTRICTED', 'NOT_RESTRICTED', or 'NOT_SET' (to 'unset' a previous set value)."
+  description = "When restriction is enabled, only users that are assigned the User API key creator role on the IAM Identity Service can create API keys, including the account owner. Allowed values are `restricted`, `not_restricted`, or `not_set` (to clear a previous value)."
   default     = "RESTRICTED"
 }
 
 variable "enforce_allowed_ip_addresses" {
   type        = bool
-  description = "If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to SIEM and Activity Tracker. After running in monitored mode to test this variable, it should then explicitly be set to true to enforce IP allow listing."
+  description = "Whether the IP address restriction is enforced. If `false`, traffic originating outside of the specified allowed IP addresss is monitored with audit events sent to QRadar SIEM and Activity Tracker. After running in monitoring mode to test the impact of the restriction, you must set to `true` to enforce the IP allowlist."
   default     = true
 }
 
 variable "inactive_session_timeout" {
   type        = string
-  description = "Specify how long (seconds) a user is allowed to stay logged in the account while being inactive/idle"
+  description = "The maximum time in seconds before an inactive user is signed out and their credentials are required again. The maximum duration a user can be inactive is 24 hours."
   default     = "7200"
 }
 
 variable "max_sessions_per_identity" {
   type        = string
-  description = "Defines the maximum allowed sessions per identity required by the account. Supports any whole number greater than '0', or 'NOT_SET' to unset account setting and use service default."
+  description = "The number of login sessions that an account user can have active. Supports any whole number greater than `0`, or `NOT_SET` to unset account setting and use service default."
   default     = "NOT_SET"
 }
 
 variable "mfa" {
   type        = string
-  description = "Specify Multi-Factor Authentication method in the account. Supported valid values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users)."
+  description = "The Multi-Factor Authentication method in the account. Supported valid values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users)."
   default     = "TOTP4ALL"
 }
 
 variable "public_access_enabled" {
   type        = bool
-  description = "Enable/Disable public access group in which resources are open anyone regardless if they are member of your account or not"
+  description = "Whether to enable or disable the public access group. Assigning an access policy to the access group opens access to that resource to anyone whether they're a member of your account or not because authentication is no longer required. When set to false, the public access group is disabled."
   default     = false
 }
 
 variable "refresh_token_expiration" {
   type        = string
-  description = "Defines the refresh token expiration in seconds"
+  description = "The duration for how long refresh tokens are valid. The maximum duration you can set for a refresh token is 72 hours."
   default     = "259200"
 }
 
 variable "serviceid_creation" {
   type        = string
-  description = "When restriction is enabled, only users, including the account owner, assigned the Service ID creator role on the IAM Identity Service can create service IDs. Allowed values are 'RESTRICTED', 'NOT_RESTRICTED', or 'NOT_SET' (to 'unset' a previous set value)."
+  description = "When restriction is enabled, only users that are assigned the Service ID creator role on the IAM Identity Service can create service IDs, including the account owner. Allowed values are `restricted`, `not_restricted`, or `not_set` (to clear a previous value)."
   default     = "RESTRICTED"
 }
 
 variable "shell_settings_enabled" {
   type        = bool
-  description = "Enable global shell settings to all users in the account"
+  description = "Whether to allow CLI logins with only a password. Set to false for a higher level of security."
   default     = false
 }
 
@@ -174,162 +174,162 @@ variable "user_mfa" {
     iam_id = string
     mfa    = string
   }))
-  description = "Specify Multi-Factor Authentication method for specific users the account. Supported valid values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users). Example of format is available here > https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings#usage"
+  description = "Multi-Factor Authentication method for specific users the account. Supported valid values are `NONE` (No MFA trait set), `TOTP` (For all non-federated IBMId users), `TOTP4ALL` (For all users), `LEVEL1` (Email based MFA for all users), `LEVEL2` (TOTP based MFA for all users), `LEVEL3` (U2F MFA for all users). Example of format is available here > https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings#usage"
   default     = []
 }
 
 variable "user_mfa_reset" {
   type        = bool
-  description = "Set to true to delete all user MFA settings configured in the targeted account, and ignoring entries declared in var user_mfa"
+  description = "Whether to delete all user MFA settings configured in the targeted account. Set to true to ignore entries declared in variable `user_mfa`."
   default     = false
 }
 
 variable "cos_plan" {
   type        = string
-  description = "Plan of the COS instance created by the module"
+  description = "The pricing plan of the Object Storage instance created by the module."
   default     = "standard"
 }
 
 variable "cos_instance_name" {
   type        = string
-  description = "The name to give the cloud object storage instance that will be provisioned by this module, required if 'var.provision_atracker_cos' is true."
+  description = "The name for the Object Storage instance that this module provisions. Required if the variable `provision_atracker_cos` is true."
   default     = null
 }
 
 variable "cos_instance_access_tags" {
   type        = list(string)
-  description = "A list of Access Tags applied to the created COS instance."
+  description = "A list of access tags applied to the Object Storage instance that this module provisions."
   default     = []
 }
 
 variable "cos_bucket_name" {
   type        = string
-  description = "The name to give the newly provisioned COS bucket which will be used for Activity Tracker logs, required if 'var.provision_atracker_cos' is true."
+  description = "The name for the Object Storage bucket that stores Activity Tracker logs. Required if variable `provision_atracker_cos` is true."
   default     = null
 }
 
 variable "cos_bucket_access_tags" {
   type        = list(string)
-  description = "A list of Access Tags applied to the created bucket."
+  description = "A list of access tags applied to the Object Storage bucket that this module provisions."
   default     = []
 }
 
 variable "cos_bucket_expire_enabled" {
   type        = bool
-  description = "A flag to control expiry rule on the bucket."
+  description = "Whether to enable the expiration rule on the Object Storage bucket. Specify the number of days in the variable `cos_bucket_expire_days`."
   default     = false
 }
 
 variable "cos_bucket_expire_days" {
   type        = number
-  description = "Number of days before expiry."
+  description = "The number of days before objects in a Object Storage bucket are automatically deleted."
   default     = 365
 }
 
 variable "cos_bucket_object_versioning_enabled" {
   type        = bool
-  description = "A flag to control object versioning on the bucket."
+  description = "Whether to enable versioning on the bucket."
   default     = false
 }
 
 variable "cos_bucket_storage_class" {
   type        = string
-  description = "COS Bucket storage class type"
+  description = "The Object Storage bucket storage class type."
   default     = null
 }
 
 variable "cos_bucket_archive_enabled" {
   type        = bool
-  description = "Set as true to enable archiving on the COS bucket."
+  description = "Whether to enable archiving on the Object Storage bucket."
   default     = false
 }
 
 variable "cos_bucket_archive_days" {
   type        = number
-  description = "Number of days to archive objects in the bucket."
+  description = "The number of days before objects in the bucket are archived."
   default     = 20
 }
 
 variable "cos_bucket_archive_type" {
   type        = string
-  description = "Type of archiving to use on bucket."
+  description = "The type of archiving to use on the bucket."
   default     = "Glacier"
 }
 
 variable "cos_bucket_retention_enabled" {
   type        = bool
-  description = "Retention enabled for COS bucket."
+  description = "Whether to enable retention for the Object Storage bucket."
   default     = false
 }
 
 variable "cos_bucket_retention_default" {
-  description = "Specifies default duration of time an object that can be kept unmodified for COS bucket."
+  description = "The default duration of time that an object can be kept unmodified in an Object Storage bucket."
   type        = number
   default     = 90
 }
 
 variable "cos_bucket_retention_maximum" {
-  description = "Specifies maximum duration of time an object that can be kept unmodified for COS bucket."
+  description = "The maximum duration of time that an object can be kept unmodified in an Object Storage bucket."
   type        = number
   default     = 350
 }
 
 variable "cos_bucket_retention_minimum" {
-  description = "Specifies minimum duration of time an object must be kept unmodified for COS bucket."
+  description = "The minimum duration of time in days that an object must be kept unmodified for Object Storage bucket."
   type        = number
   default     = 90
 }
 
 variable "cos_bucket_retention_permanent" {
-  description = "Specifies a permanent retention status either enable or disable for COS bucket."
+  description = "Whether to enable a permanent retention status for the Object Storage bucket."
   type        = bool
   default     = false
 }
 
 variable "skip_atracker_cos_iam_auth_policy" {
   type        = bool
-  description = "Set to true to skip the creation of an IAM authorization policy that permits the Activity Tracker service Object Writer access to the Cloud Object Storage instance provisioned by this module. NOTE: If skipping, you must ensure the auth policy exists on the account before running the module."
+  description = "Whether to skip creating an IAM authorization policy that grants the Activity Tracker service Object Writer access to the Object Storage instance that is provisioned by this module. If set to true, you must ensure the authorization policy exists on the account before running the module."
   default     = false
 }
 
 variable "cos_target_name" {
   type        = string
-  description = "Name of the COS Target for Activity Tracker, required if 'var.provision_atracker_cos' is true."
+  description = "The name of the Object Storage target for Activity Tracker. Required if variable `provision_atracker_cos` is true."
   default     = null
 }
 
 variable "activity_tracker_route_name" {
   type        = string
-  description = "Name of the route for the Activity Tracker, required if 'var.provision_atracker_cos' is true."
+  description = "The name of the route for Activity Tracker. Required if variable `provision_atracker_cos` is true."
   default     = null
 }
 
 variable "activity_tracker_locations" {
   type        = list(string)
-  description = "Location of the route for the Activity Tracker, logs from these locations will be sent to the specified target. Supports passing individual regions, as well as `global` and `*`."
+  description = "The location of the route for Activity Tracker. Logs from these locations are sent to the specified target. Supports passing individual regions, `global`, and `*`."
   default     = ["*", "global"]
 }
 
 variable "provision_trusted_profile_projects" {
   type        = bool
-  description = "Controls whether the Trusted Profile for Projects is provisioned."
+  description = "Whether the trusted profile for Projects is provisioned."
   default     = true
 }
 
 variable "trusted_profile_name" {
   type        = string
-  description = "Name of the trusted profile, required if `provision_trusted_profile_projects` is true."
+  description = "The name of the trusted profile. Required if `provision_trusted_profile_projects` is true."
   default     = null
 }
 
 variable "trusted_profile_description" {
   type        = string
-  description = "Description of the trusted profile."
+  description = "The description of the trusted profile."
   default     = "Trusted Profile for Projects access"
 }
 
 variable "trusted_profile_roles" {
   type        = list(string)
-  description = "List of roles given to the trusted profile."
+  description = "A list of roles given to the trusted profile."
   default     = ["Administrator"]
 }
