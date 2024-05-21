@@ -194,9 +194,9 @@ variable "region" {
   default     = "us-south"
 }
 
-variable "skip_cos_kms_auth_policy" {
+variable "provision_cos_kms_auth_policy" {
   type        = bool
-  description = "Enable to skip the IAM Authoriation policy creation between the IBM Cloud Object Storage instance and the key management service."
+  description = "Whether to enable creating an IAM authoriation policy between the IBM Cloud Object Storage instance and the Key Management service instance of the CRN provided in `var.kms_key_crn`. This variable has no effect if `var.provision_atracker_cos` is false."
   default     = false
 }
 

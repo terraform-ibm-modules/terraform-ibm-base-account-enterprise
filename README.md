@@ -52,9 +52,6 @@ Use real values instead of "var.<var_name>" or other placeholder values
 unless real values don't help users know what to change.
 -->
 
-#### Before You Begin
-If you are using this module to create an ATracker route and COS instance & bucket you will need an IAM authorization policy in the account where the KMS key resides which grants the Cloud Object Storage service in the account to which this solution is being deployed, reader access to the KMS instance that the KMS key belongs to.
-
 ```hcl
 locals {
   at_endpoint = "https://api.us-south.logging.cloud.ibm.com"
@@ -79,14 +76,16 @@ module "enterprise_account" {
         logdna.at = logdna.at
         logdna.ld = logdna.ld
     }
-    region                      = "us-south"
-    resource_group_name         = "account-base-resource-group"
-    provision_atracker_cos      = true # setting this enables provisioning of the ATracker + COS resources
-    cos_instance_name           = "account-base-cos-instance"
-    cos_bucket_name             = "atracker-cos-bucket"
-    cos_target_name             = "atracker-cos-target"
-    trusted_profile_name        = "account-base-trusted-profile"
-    activity_tracker_route_name = "atracker-cos-route"
+    region                        = "us-south"
+    resource_group_name           = "account-base-resource-group"
+    provision_atracker_cos        = true # setting this enables provisioning of the ATracker + COS resources
+    provision_cos_kms_auth_policy = true # setting this enables provisioning an authorization policy between the COS instances and the KMS instance given via the CRN
+    kms_key_crn                   = "crn:v1:bluemix:public:(kms|hs-crypto):(region):a/(Account ID):(KMS instance GUID)::"
+    cos_instance_name             = "account-base-cos-instance"
+    cos_bucket_name               = "atracker-cos-bucket"
+    cos_target_name               = "atracker-cos-target"
+    trusted_profile_name          = "account-base-trusted-profile"
+    activity_tracker_route_name   = "atracker-cos-route"
 }
 ```
 
@@ -122,6 +121,7 @@ You need the following permissions to run this module.
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0, <1.7.0 |
 | <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.62.0, < 2.0.0 |
 | <a name="requirement_logdna"></a> [logdna](#requirement\_logdna) | >= 1.14.2, < 2.0.0 |
+| <a name="requirement_time"></a> [time](#requirement\_time) | > 0.9.1, < 1.0.0 |
 
 ### Modules
 
@@ -138,7 +138,8 @@ You need the following permissions to run this module.
 
 | Name | Type |
 |------|------|
-| [ibm_iam_authorization_policy.s2s_auth](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/iam_authorization_policy) | resource |
+| [ibm_iam_authorization_policy.cos_kms_s2s](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/iam_authorization_policy) | resource |
+| [time_sleep.delay_for_auth_policy](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
 
 ### Inputs
 
@@ -183,6 +184,7 @@ You need the following permissions to run this module.
 | <a name="input_mfa"></a> [mfa](#input\_mfa) | Specify Multi-Factor Authentication method in the account. Supported valid values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users). | `string` | `"TOTP4ALL"` | no |
 | <a name="input_observability_resource_group_name"></a> [observability\_resource\_group\_name](#input\_observability\_resource\_group\_name) | The name of the observability resource group to create. Required if `var.provision_atracker_cos` is true and `var.existing_cos_resource_group_name` is not provided. | `string` | `null` | no |
 | <a name="input_provision_atracker_cos"></a> [provision\_atracker\_cos](#input\_provision\_atracker\_cos) | Enable to create an Atracker route and COS instance + bucket. | `bool` | `false` | no |
+| <a name="input_provision_cos_kms_auth_policy"></a> [provision\_cos\_kms\_auth\_policy](#input\_provision\_cos\_kms\_auth\_policy) | Whether to enable creating an IAM authoriation policy between the IBM Cloud Object Storage instance and the Key Management service instance of the CRN provided in `var.kms_key_crn`. This variable has no effect if `var.provision_atracker_cos` is false. | `bool` | `false` | no |
 | <a name="input_provision_trusted_profile_projects"></a> [provision\_trusted\_profile\_projects](#input\_provision\_trusted\_profile\_projects) | Controls whether the Trusted Profile for Projects is provisioned. | `bool` | `true` | no |
 | <a name="input_public_access_enabled"></a> [public\_access\_enabled](#input\_public\_access\_enabled) | Enable/Disable public access group in which resources are open anyone regardless if they are member of your account or not | `bool` | `false` | no |
 | <a name="input_refresh_token_expiration"></a> [refresh\_token\_expiration](#input\_refresh\_token\_expiration) | Defines the refresh token expiration in seconds | `string` | `"259200"` | no |
@@ -193,7 +195,6 @@ You need the following permissions to run this module.
 | <a name="input_shell_settings_enabled"></a> [shell\_settings\_enabled](#input\_shell\_settings\_enabled) | Enable global shell settings to all users in the account | `bool` | `false` | no |
 | <a name="input_skip_atracker_cos_iam_auth_policy"></a> [skip\_atracker\_cos\_iam\_auth\_policy](#input\_skip\_atracker\_cos\_iam\_auth\_policy) | Set to true to skip the creation of an IAM authorization policy that permits the Activity Tracker service Object Writer access to the Cloud Object Storage instance provisioned by this module. NOTE: If skipping, you must ensure the auth policy exists on the account before running the module. | `bool` | `false` | no |
 | <a name="input_skip_cloud_shell_calls"></a> [skip\_cloud\_shell\_calls](#input\_skip\_cloud\_shell\_calls) | Skip Cloud Shell calls in the account. | `bool` | `true` | no |
-| <a name="input_skip_cos_kms_auth_policy"></a> [skip\_cos\_kms\_auth\_policy](#input\_skip\_cos\_kms\_auth\_policy) | Enable to skip the IAM Authoriation policy creation between the IBM Cloud Object Storage instance and the key management service. | `bool` | `false` | no |
 | <a name="input_trusted_profile_description"></a> [trusted\_profile\_description](#input\_trusted\_profile\_description) | Description of the trusted profile. | `string` | `"Trusted Profile for Projects access"` | no |
 | <a name="input_trusted_profile_name"></a> [trusted\_profile\_name](#input\_trusted\_profile\_name) | Name of the trusted profile, required if `provision_trusted_profile_projects` is true. | `string` | `null` | no |
 | <a name="input_trusted_profile_roles"></a> [trusted\_profile\_roles](#input\_trusted\_profile\_roles) | List of roles given to the trusted profile. | `list(string)` | <pre>[<br>  "Administrator"<br>]</pre> | no |
