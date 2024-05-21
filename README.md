@@ -76,16 +76,16 @@ module "enterprise_account" {
         logdna.at = logdna.at
         logdna.ld = logdna.ld
     }
-    region                        = "us-south"
-    resource_group_name           = "account-base-resource-group"
-    provision_atracker_cos        = true # setting this enables provisioning of the ATracker + COS resources
-    provision_cos_kms_auth_policy = true # setting this enables provisioning an authorization policy between the COS instances and the KMS instance given via the CRN
-    kms_key_crn                   = "crn:v1:bluemix:public:(kms|hs-crypto):(region):a/(Account ID):(KMS instance GUID)::"
-    cos_instance_name             = "account-base-cos-instance"
-    cos_bucket_name               = "atracker-cos-bucket"
-    cos_target_name               = "atracker-cos-target"
-    trusted_profile_name          = "account-base-trusted-profile"
-    activity_tracker_route_name   = "atracker-cos-route"
+    region                            = "us-south"
+    resource_group_name               = "account-base-resource-group"
+    provision_atracker_cos            = true # setting this enables provisioning of the ATracker + COS resources
+    cos_skip_iam_authorization_policy = false # setting this enables provisioning an authorization policy between the COS instances and the KMS instance given via the CRN
+    kms_key_crn                       = "crn:v1:bluemix:public:(kms|hs-crypto):(region):a/(Account ID):(KMS instance GUID)::"
+    cos_instance_name                 = "account-base-cos-instance"
+    cos_bucket_name                   = "atracker-cos-bucket"
+    cos_target_name                   = "atracker-cos-target"
+    trusted_profile_name              = "account-base-trusted-profile"
+    activity_tracker_route_name       = "atracker-cos-route"
 }
 ```
 
@@ -121,7 +121,6 @@ You need the following permissions to run this module.
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0, <1.7.0 |
 | <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.62.0, < 2.0.0 |
 | <a name="requirement_logdna"></a> [logdna](#requirement\_logdna) | >= 1.14.2, < 2.0.0 |
-| <a name="requirement_time"></a> [time](#requirement\_time) | > 0.9.1, < 1.0.0 |
 
 ### Modules
 
@@ -136,10 +135,7 @@ You need the following permissions to run this module.
 
 ### Resources
 
-| Name | Type |
-|------|------|
-| [ibm_iam_authorization_policy.cos_kms_s2s](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/iam_authorization_policy) | resource |
-| [time_sleep.delay_for_auth_policy](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
+No resources.
 
 ### Inputs
 
@@ -172,6 +168,7 @@ You need the following permissions to run this module.
 | <a name="input_cos_instance_cbr_rules"></a> [cos\_instance\_cbr\_rules](#input\_cos\_instance\_cbr\_rules) | CBR Rules for the COS instance. | <pre>list(object({<br>    description = string<br>    account_id  = string<br>    rule_contexts = list(object({<br>      attributes = optional(list(object({<br>        name  = string<br>        value = string<br>      })))<br>    }))<br>    enforcement_mode = string<br>    tags = optional(list(object({<br>      name  = string<br>      value = string<br>    })), [])<br>    operations = optional(list(object({<br>      api_types = list(object({<br>        api_type_id = string<br>      }))<br>    })))<br>  }))</pre> | `[]` | no |
 | <a name="input_cos_instance_name"></a> [cos\_instance\_name](#input\_cos\_instance\_name) | The name to give the cloud object storage instance that will be provisioned by this module, required if 'var.provision\_atracker\_cos' is true. | `string` | `null` | no |
 | <a name="input_cos_plan"></a> [cos\_plan](#input\_cos\_plan) | Plan of the COS instance created by the module | `string` | `"standard"` | no |
+| <a name="input_cos_skip_iam_authorization_policy"></a> [cos\_skip\_iam\_authorization\_policy](#input\_cos\_skip\_iam\_authorization\_policy) | Whether to enable creating an IAM authoriation policy between the IBM Cloud Object Storage instance and the Key Management service instance of the CRN provided in `var.kms_key_crn`. This variable has no effect if `var.provision_atracker_cos` is false. | `bool` | `true` | no |
 | <a name="input_cos_target_name"></a> [cos\_target\_name](#input\_cos\_target\_name) | Name of the COS Target for Activity Tracker, required if 'var.provision\_atracker\_cos' is true. | `string` | `null` | no |
 | <a name="input_devops_resource_group_name"></a> [devops\_resource\_group\_name](#input\_devops\_resource\_group\_name) | The name of the devops resource group to create. | `string` | `null` | no |
 | <a name="input_edge_resource_group_name"></a> [edge\_resource\_group\_name](#input\_edge\_resource\_group\_name) | The name of the edge resource group to create. | `string` | `null` | no |
@@ -184,7 +181,6 @@ You need the following permissions to run this module.
 | <a name="input_mfa"></a> [mfa](#input\_mfa) | Specify Multi-Factor Authentication method in the account. Supported valid values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users). | `string` | `"TOTP4ALL"` | no |
 | <a name="input_observability_resource_group_name"></a> [observability\_resource\_group\_name](#input\_observability\_resource\_group\_name) | The name of the observability resource group to create. Required if `var.provision_atracker_cos` is true and `var.existing_cos_resource_group_name` is not provided. | `string` | `null` | no |
 | <a name="input_provision_atracker_cos"></a> [provision\_atracker\_cos](#input\_provision\_atracker\_cos) | Enable to create an Atracker route and COS instance + bucket. | `bool` | `false` | no |
-| <a name="input_provision_cos_kms_auth_policy"></a> [provision\_cos\_kms\_auth\_policy](#input\_provision\_cos\_kms\_auth\_policy) | Whether to enable creating an IAM authoriation policy between the IBM Cloud Object Storage instance and the Key Management service instance of the CRN provided in `var.kms_key_crn`. This variable has no effect if `var.provision_atracker_cos` is false. | `bool` | `false` | no |
 | <a name="input_provision_trusted_profile_projects"></a> [provision\_trusted\_profile\_projects](#input\_provision\_trusted\_profile\_projects) | Controls whether the Trusted Profile for Projects is provisioned. | `bool` | `true` | no |
 | <a name="input_public_access_enabled"></a> [public\_access\_enabled](#input\_public\_access\_enabled) | Enable/Disable public access group in which resources are open anyone regardless if they are member of your account or not | `bool` | `false` | no |
 | <a name="input_refresh_token_expiration"></a> [refresh\_token\_expiration](#input\_refresh\_token\_expiration) | Defines the refresh token expiration in seconds | `string` | `"259200"` | no |

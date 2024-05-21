@@ -11,10 +11,6 @@ An end-to-end deployable architecture solution that provisions the following inf
 
 ![account-infrastructure-base](https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-account-infrastructure-base/main/reference-architectures/base-account-enterprise.svg)
 
-## Before you begin
-Create an IAM authorization policy in the account where the key management service (KMS) key resides. Grant the Object Storage service the Reader role on the KMS instance that the key belongs to in the account where this solution is deployed.
-
-
 ## Limitations
 
 The solution does not support configuring the following settings that are required for compliance with IBM Cloud for Financial Services:

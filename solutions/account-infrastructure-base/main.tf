@@ -22,7 +22,7 @@ module "account_infrastructure_base" {
 
   # atracker + cos
   provision_atracker_cos               = var.provision_atracker_cos
-  provision_cos_kms_auth_policy        = var.provision_cos_kms_auth_policy
+  cos_skip_iam_authorization_policy    = var.cos_skip_iam_authorization_policy
   cos_instance_name                    = var.cos_instance_name == null ? try("${var.prefix}-cos-instance", "cos-instance") : var.cos_instance_name
   cos_bucket_name                      = var.cos_bucket_name == null ? try("${var.prefix}-cos-bucket", "cos-bucket") : var.cos_bucket_name
   cos_target_name                      = var.cos_target_name == null ? try("${var.prefix}-cos-target", "cos-target") : var.cos_target_name

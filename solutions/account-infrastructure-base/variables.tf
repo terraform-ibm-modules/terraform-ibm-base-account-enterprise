@@ -55,10 +55,10 @@ variable "provision_atracker_cos" {
   default     = false
 }
 
-variable "provision_cos_kms_auth_policy" {
+variable "cos_skip_iam_authorization_policy" {
   type        = bool
   description = "Whether to enable creating an IAM authoriation policy between the IBM Cloud Object Storage instance and the Key Management service instance of the CRN provided in `var.kms_key_crn`. This variable has no effect if `var.provision_atracker_cos` is false."
-  default     = false
+  default     = true
 }
 
 variable "security_resource_group_name" {

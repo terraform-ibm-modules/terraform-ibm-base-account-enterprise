@@ -36,10 +36,10 @@ func setupOptions(t *testing.T, prefix string, dir string) *testhelper.TestOptio
 		Prefix:       prefix,
 	})
 	options.TerraformVars = map[string]interface{}{
-		"prefix":                        options.Prefix,
-		"kms_key_crn":                   permanentResources["hpcs_south_root_key_crn"],
-		"provision_atracker_cos":        true,
-		"provision_cos_kms_auth_policy": true,
+		"prefix":                            options.Prefix,
+		"kms_key_crn":                       permanentResources["hpcs_south_root_key_crn"],
+		"provision_atracker_cos":            true,
+		"cos_skip_iam_authorization_policy": false,
 		"allowed_ip_addresses": []string{
 			"0.0.0.0/0",
 		},
