@@ -121,8 +121,8 @@ module "cos" {
     bucket_name                   = var.cos_bucket_name
     kms_encryption_enabled        = true
     kms_key_crn                   = var.kms_key_crn
-    kms_guid                      = var.provision_atracker_cos && !var.cos_skip_iam_authorization_policy ? split(":", var.kms_key_crn)[7] : null
-    skip_iam_authorization_policy = var.cos_skip_iam_authorization_policy
+    kms_guid                      = var.provision_atracker_cos && !var.skip_cos_kms_auth_policy ? split(":", var.kms_key_crn)[7] : null
+    skip_iam_authorization_policy = var.skip_cos_kms_auth_policy
     management_endpoint_type      = var.cos_bucket_management_endpoint_type
     storage_class                 = var.cos_bucket_storage_class
     object_versioning_enabled     = var.cos_bucket_object_versioning_enabled

@@ -11,6 +11,9 @@ An end-to-end deployable architecture solution that provisions the following inf
 
 ![account-infrastructure-base](https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-account-infrastructure-base/main/reference-architectures/base-account-enterprise.svg)
 
+## Before You Begin
+If you are using this module to create an ATracker route and IBM Cloud Object Storage instance and bucket, and using a key from a key management service in a separate account, you will need an IAM authorization policy in the account where the key management service resides which grants the IBM Cloud Object Storage service in this account Reader access to the key management service.
+
 ## Limitations
 
 The solution does not support configuring the following settings that are required for compliance with IBM Cloud for Financial Services:

@@ -52,6 +52,9 @@ Use real values instead of "var.<var_name>" or other placeholder values
 unless real values don't help users know what to change.
 -->
 
+#### Before You Begin
+If you are using this module to create an ATracker route and IBM Cloud Object Storage instance and bucket, and using a key from a key management service in a separate account, you will need an IAM authorization policy in the account where the key management service resides which grants the IBM Cloud Object Storage service in this account Reader access to the key management service.
+
 ```hcl
 locals {
   at_endpoint = "https://api.us-south.logging.cloud.ibm.com"
@@ -168,7 +171,6 @@ No resources.
 | <a name="input_cos_instance_cbr_rules"></a> [cos\_instance\_cbr\_rules](#input\_cos\_instance\_cbr\_rules) | CBR Rules for the COS instance. | <pre>list(object({<br>    description = string<br>    account_id  = string<br>    rule_contexts = list(object({<br>      attributes = optional(list(object({<br>        name  = string<br>        value = string<br>      })))<br>    }))<br>    enforcement_mode = string<br>    tags = optional(list(object({<br>      name  = string<br>      value = string<br>    })), [])<br>    operations = optional(list(object({<br>      api_types = list(object({<br>        api_type_id = string<br>      }))<br>    })))<br>  }))</pre> | `[]` | no |
 | <a name="input_cos_instance_name"></a> [cos\_instance\_name](#input\_cos\_instance\_name) | The name to give the cloud object storage instance that will be provisioned by this module, required if 'var.provision\_atracker\_cos' is true. | `string` | `null` | no |
 | <a name="input_cos_plan"></a> [cos\_plan](#input\_cos\_plan) | Plan of the COS instance created by the module | `string` | `"standard"` | no |
-| <a name="input_cos_skip_iam_authorization_policy"></a> [cos\_skip\_iam\_authorization\_policy](#input\_cos\_skip\_iam\_authorization\_policy) | Whether to enable creating an IAM authoriation policy between the IBM Cloud Object Storage instance and the Key Management service instance of the CRN provided in `var.kms_key_crn`. This variable has no effect if `var.provision_atracker_cos` is false. | `bool` | `true` | no |
 | <a name="input_cos_target_name"></a> [cos\_target\_name](#input\_cos\_target\_name) | Name of the COS Target for Activity Tracker, required if 'var.provision\_atracker\_cos' is true. | `string` | `null` | no |
 | <a name="input_devops_resource_group_name"></a> [devops\_resource\_group\_name](#input\_devops\_resource\_group\_name) | The name of the devops resource group to create. | `string` | `null` | no |
 | <a name="input_edge_resource_group_name"></a> [edge\_resource\_group\_name](#input\_edge\_resource\_group\_name) | The name of the edge resource group to create. | `string` | `null` | no |
@@ -191,6 +193,7 @@ No resources.
 | <a name="input_shell_settings_enabled"></a> [shell\_settings\_enabled](#input\_shell\_settings\_enabled) | Enable global shell settings to all users in the account | `bool` | `false` | no |
 | <a name="input_skip_atracker_cos_iam_auth_policy"></a> [skip\_atracker\_cos\_iam\_auth\_policy](#input\_skip\_atracker\_cos\_iam\_auth\_policy) | Set to true to skip the creation of an IAM authorization policy that permits the Activity Tracker service Object Writer access to the Cloud Object Storage instance provisioned by this module. NOTE: If skipping, you must ensure the auth policy exists on the account before running the module. | `bool` | `false` | no |
 | <a name="input_skip_cloud_shell_calls"></a> [skip\_cloud\_shell\_calls](#input\_skip\_cloud\_shell\_calls) | Skip Cloud Shell calls in the account. | `bool` | `true` | no |
+| <a name="input_skip_cos_kms_auth_policy"></a> [skip\_cos\_kms\_auth\_policy](#input\_skip\_cos\_kms\_auth\_policy) | Whether to enable creating an IAM authoriation policy between the IBM Cloud Object Storage instance and the Key Management service instance of the CRN provided in `kms_key_crn`. This variable has no effect if `provision_atracker_cos` is false. | `bool` | `false` | no |
 | <a name="input_trusted_profile_description"></a> [trusted\_profile\_description](#input\_trusted\_profile\_description) | Description of the trusted profile. | `string` | `"Trusted Profile for Projects access"` | no |
 | <a name="input_trusted_profile_name"></a> [trusted\_profile\_name](#input\_trusted\_profile\_name) | Name of the trusted profile, required if `provision_trusted_profile_projects` is true. | `string` | `null` | no |
 | <a name="input_trusted_profile_roles"></a> [trusted\_profile\_roles](#input\_trusted\_profile\_roles) | List of roles given to the trusted profile. | `list(string)` | <pre>[<br>  "Administrator"<br>]</pre> | no |
