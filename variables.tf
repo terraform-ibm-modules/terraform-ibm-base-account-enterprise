@@ -204,6 +204,16 @@ variable "cos_instance_name" {
   type        = string
   description = "The name to give the cloud object storage instance that will be provisioned by this module, required if 'var.provision_atracker_cos' is true."
   default     = null
+
+  validation {
+    condition     = var.cos_instance_name == null ? true : length(var.cos_instance_name) <= 180
+    error_message = "'var.cos_instance_name' must be 180 characters or less"
+  }
+
+  validation {
+    condition     = var.cos_instance_name == null ? true : length(regexall("^([^[:ascii:]]|[a-zA-Z0-9-._: ])+$", var.cos_instance_name)) > 0
+    error_message = "'var.cos_instance_name' must match the following regex pattern: \"^([^[:ascii:]]|[a-zA-Z0-9-._: ])+$\""
+  }
 }
 
 variable "resource_tags" {
@@ -222,6 +232,21 @@ variable "cos_bucket_name" {
   type        = string
   description = "The name to give the newly provisioned COS bucket which will be used for Activity Tracker logs, required if 'var.provision_atracker_cos' is true."
   default     = null
+
+  validation {
+    condition     = var.cos_bucket_name == null ? true : (length(var.cos_bucket_name) >= 3)
+    error_message = "'var.cos_bucket_name' must be 3 or more characters long"
+  }
+
+  validation {
+    condition     = var.cos_bucket_name == null ? true : (length(var.cos_bucket_name) <= 63)
+    error_message = "'var.cos_bucket_name' must be 63 or less characters long"
+  }
+
+  validation {
+    condition     = var.cos_bucket_name == null ? true : length(regexall("^[a-z0-9][a-z0-9-]+[a-z0-9]$", var.cos_bucket_name)) > 0
+    error_message = "'var.cos_bucket_name' must match the following regex pattern: \"^[a-z0-9][a-z0-9]+[a-z0-9]$\""
+  }
 }
 
 variable "cos_bucket_access_tags" {
