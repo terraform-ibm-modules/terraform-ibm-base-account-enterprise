@@ -10,6 +10,5 @@ offerings:
         mark_ready: false
         install_type: fullstack
         scc:
-          # Instance ID in account "GoldenEye FSCloud Testing (ae14871c179f49869e19657b37ec7c4e) <-> 2626044
-          instance_id: d5eaa656-140f-450f-b912-51f50951ed0e
+          instance_id: 1c7d5f78-9262-44c3-b779-b28fe4d88c37
           region: us-south
