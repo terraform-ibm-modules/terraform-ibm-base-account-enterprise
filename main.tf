@@ -114,14 +114,15 @@ module "account_settings" {
 module "cos" {
   count             = var.provision_atracker_cos ? 1 : 0
   source            = "terraform-ibm-modules/cos/ibm//modules/fscloud"
-  version           = "8.2.8"
+  version           = "8.2.12"
   resource_group_id = local.cos_rg
   bucket_configs = [{
     access_tags                   = var.cos_bucket_access_tags
     bucket_name                   = var.cos_bucket_name
     kms_encryption_enabled        = true
     kms_key_crn                   = var.kms_key_crn
-    skip_iam_authorization_policy = true
+    kms_guid                      = var.provision_atracker_cos && !var.skip_cos_kms_auth_policy ? split(":", var.kms_key_crn)[7] : null
+    skip_iam_authorization_policy = var.skip_cos_kms_auth_policy
     management_endpoint_type      = var.cos_bucket_management_endpoint_type
     storage_class                 = var.cos_bucket_storage_class
     object_versioning_enabled     = var.cos_bucket_object_versioning_enabled
