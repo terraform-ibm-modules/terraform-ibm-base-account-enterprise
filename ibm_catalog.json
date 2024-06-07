@@ -22,28 +22,29 @@
         "iam"
       ],
       "short_description": "Creates and configures the base layer components of an IBM Cloud account",
-      "long_description": "This architecture supports creating and configuring the base layer components of an IBM Cloud account, including IAM account settings, Activity Tracker routing, Cloud Objects Storage, Trusted profile and associated access groups and the resource group in which all resources will be provisioned in.",
+      "long_description": "This architecture supports creating and configuring the foundational components of an IBM Cloud account. This includes IAM account settings, Activity Tracker routing, Cloud Objects Storage, a trusted profile and associated access groups, and the resource group in which all resources are provisioned.",
       "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-base-account-enterprise/blob/main/README.md",
       "offering_icon_url": "https://raw.githubusercontent.com/terraform-ibm-modules/documentation/main/icons/security_icon.svg",
       "provider_name": "IBM",
       "features": [
         {
-          "title": "Configure IAM account settings",
-          "description": "Configure IAM account settings so they meet FSCloud compliance requirements."
+          "title": "Configures IAM account settings",
+          "description": "Configures IAM account settings to meet compliance requirements fof the IBM Cloud Framework for Financial Services."
         },
         {
           "title": "Creates Activity Tracker route and target",
-          "description": "Creates Activity Tracker route and target so events are sent to a COS bucket."
+          "description": "Creates Activity Tracker route and target, sending logs to a Cloud Object Storage bucket."
         },
         {
-          "title": "Creates Trusted profile",
-          "description": "Creates Trusted profile and associated access group for Projects."
+          "title": "Creates access controls",
+          "description": "Creates a trusted profile and associated access group to give Projects access to securely deploy solutions in this account."
         },
         {
-          "title": "Creates resource group",
+          "title": "Creates a resource group",
           "description": "Creates resource group where all resources created by this solution are provisioned."
         }
       ],
+      "support_details": "This product is in the community registry, as such support is handled through the originated repo. If you experience issues please open an issue in that repository [https://github.com/terraform-ibm-modules/terraform-ibm-account-infrastructure-base/issues](https://github.com/terraform-ibm-modules/terraform-ibm-account-infrastructure-base/issues). Please note this product is not supported via the IBM Cloud Support Center.",
       "flavors": [
         {
           "label": "Standard",
@@ -81,7 +82,7 @@
             }
           ],
           "architecture": {
-            "descriptions": "This architecture supports creating and configuring the base layer components of an IBM Cloud account.",
+            "descriptions": "The Account Infrastructure Base architecture provides a standardized approach to setting up cloud account settings and related audit logging controls as outlined in the IBM Cloud Framework for Financial Services. The architecture includes configurations for IAM settings and access controls that enforce security best practices. Storing Activity Tracker logs in a Cloud Object Storage bucket ensures that the log data is securely retained and easily accessible for analysis, auditing, and compliance purposes. You can use this architecture as a base for deploying additional services and resources in multiple types of accounts, such as administrative or workload accounts.",
             "diagrams": [
               {
                 "diagram": {
@@ -89,7 +90,7 @@
                   "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-account-infrastructure-base/main/reference-architectures/base-account-enterprise.svg",
                   "type": "image/svg+xml"
                 },
-                "description": "This architecture supports creating and configuring the base layer components of an IBM Cloud account."
+                "description": "The Account Infrastructure Base architecture provides a standardized approach to setting up cloud account settings and related audit logging controls as outlined in the IBM Cloud Framework for Financial Services. The architecture includes configurations for IAM settings and access controls that enforce security best practices. Storing Activity Tracker logs in a Cloud Object Storage bucket ensures that the log data is securely retained and easily accessible for analysis, auditing, and compliance purposes. You can use this architecture as a base for deploying additional services and resources in multiple types of accounts, such as administrative or workload accounts."
               }
             ]
           }
