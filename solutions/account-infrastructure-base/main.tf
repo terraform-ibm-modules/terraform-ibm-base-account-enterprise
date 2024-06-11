@@ -61,6 +61,7 @@ module "account_infrastructure_base" {
   refresh_token_expiration     = var.refresh_token_expiration
   serviceid_creation           = var.serviceid_creation
   shell_settings_enabled       = var.shell_settings_enabled
+  skip_cloud_shell_calls       = var.skip_cloud_shell_calls
   user_mfa                     = var.user_mfa
   user_mfa_reset               = var.user_mfa_reset
 
