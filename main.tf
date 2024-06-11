@@ -198,3 +198,129 @@ module "trusted_profile_projects" {
     }]
   }]
 }
+
+module "access_management" {
+  count   = var.provision_access_management ? 1 : 0
+  source  = "terraform-ibm-modules/iam-access-group/ibm//modules/access-management"
+  version = "1.2.0"
+
+  # admin observability
+  admin_observability_ag_name          = var.admin_observability_ag_name
+  admin_observability_ag_policies      = var.admin_observability_ag_policies
+  admin_observability_ag_dynamic_rules = var.admin_observability_ag_dynamic_rules
+  admin_observability_ag_add_members   = var.admin_observability_ag_add_members
+  admin_observability_ag_description   = var.admin_observability_ag_description
+  admin_observability_ag_tags          = var.admin_observability_ag_tags
+  admin_observability_ag_ibm_ids       = var.admin_observability_ag_ibm_ids
+  admin_observability_ag_service_ids   = var.admin_observability_ag_service_ids
+
+  # admin security
+  admin_security_ag_name          = var.admin_security_ag_name
+  admin_security_ag_policies      = var.admin_security_ag_policies
+  admin_security_ag_dynamic_rules = var.admin_security_ag_dynamic_rules
+  admin_security_ag_add_members   = var.admin_security_ag_add_members
+  admin_security_ag_description   = var.admin_security_ag_description
+  admin_security_ag_tags          = var.admin_security_ag_tags
+  admin_security_ag_ibm_ids       = var.admin_security_ag_ibm_ids
+  admin_security_ag_service_ids   = var.admin_security_ag_service_ids
+
+  # admin network
+  admin_network_ag_name          = var.admin_network_ag_name
+  admin_network_ag_policies      = var.admin_network_ag_policies
+  admin_network_ag_dynamic_rules = var.admin_network_ag_dynamic_rules
+  admin_network_ag_add_members   = var.admin_network_ag_add_members
+  admin_network_ag_description   = var.admin_network_ag_description
+  admin_network_ag_tags          = var.admin_network_ag_tags
+  admin_network_ag_ibm_ids       = var.admin_network_ag_ibm_ids
+  admin_network_ag_service_ids   = var.admin_network_ag_service_ids
+
+  # admin compute
+  admin_compute_ag_name          = var.admin_compute_ag_name
+  admin_compute_ag_policies      = var.admin_compute_ag_policies
+  admin_compute_ag_dynamic_rules = var.admin_compute_ag_dynamic_rules
+  admin_compute_ag_add_members   = var.admin_compute_ag_add_members
+  admin_compute_ag_description   = var.admin_compute_ag_description
+  admin_compute_ag_tags          = var.admin_compute_ag_tags
+  admin_compute_ag_ibm_ids       = var.admin_compute_ag_ibm_ids
+  admin_compute_ag_service_ids   = var.admin_compute_ag_service_ids
+
+  # privileged observability
+  privileged_observability_ag_name          = var.privileged_observability_ag_name
+  privileged_observability_ag_policies      = var.privileged_observability_ag_policies
+  privileged_observability_ag_dynamic_rules = var.privileged_observability_ag_dynamic_rules
+  privileged_observability_ag_add_members   = var.privileged_observability_ag_add_members
+  privileged_observability_ag_description   = var.privileged_observability_ag_description
+  privileged_observability_ag_tags          = var.privileged_observability_ag_tags
+  privileged_observability_ag_ibm_ids       = var.privileged_observability_ag_ibm_ids
+  privileged_observability_ag_service_ids   = var.privileged_observability_ag_service_ids
+
+  # privileged security
+  privileged_security_ag_name          = var.privileged_security_ag_name
+  privileged_security_ag_policies      = var.privileged_security_ag_policies
+  privileged_security_ag_dynamic_rules = var.privileged_security_ag_dynamic_rules
+  privileged_security_ag_add_members   = var.privileged_security_ag_add_members
+  privileged_security_ag_description   = var.privileged_security_ag_description
+  privileged_security_ag_tags          = var.privileged_security_ag_tags
+  privileged_security_ag_ibm_ids       = var.privileged_security_ag_ibm_ids
+  privileged_security_ag_service_ids   = var.privileged_security_ag_service_ids
+
+  # privileged network
+  privileged_network_ag_name          = var.privileged_network_ag_name
+  privileged_network_ag_policies      = var.privileged_network_ag_policies
+  privileged_network_ag_dynamic_rules = var.privileged_network_ag_dynamic_rules
+  privileged_network_ag_add_members   = var.privileged_network_ag_add_members
+  privileged_network_ag_description   = var.privileged_network_ag_description
+  privileged_network_ag_tags          = var.privileged_network_ag_tags
+  privileged_network_ag_ibm_ids       = var.privileged_network_ag_ibm_ids
+  privileged_network_ag_service_ids   = var.privileged_network_ag_service_ids
+
+  # privileged compute
+  privileged_compute_ag_name          = var.privileged_compute_ag_name
+  privileged_compute_ag_policies      = var.privileged_compute_ag_policies
+  privileged_compute_ag_dynamic_rules = var.privileged_compute_ag_dynamic_rules
+  privileged_compute_ag_add_members   = var.privileged_compute_ag_add_members
+  privileged_compute_ag_description   = var.privileged_compute_ag_description
+  privileged_compute_ag_tags          = var.privileged_compute_ag_tags
+  privileged_compute_ag_ibm_ids       = var.privileged_compute_ag_ibm_ids
+  privileged_compute_ag_service_ids   = var.privileged_compute_ag_service_ids
+
+  # observer observability
+  observer_observability_ag_name          = var.observer_observability_ag_name
+  observer_observability_ag_policies      = var.observer_observability_ag_policies
+  observer_observability_ag_dynamic_rules = var.observer_observability_ag_dynamic_rules
+  observer_observability_ag_add_members   = var.observer_observability_ag_add_members
+  observer_observability_ag_description   = var.observer_observability_ag_description
+  observer_observability_ag_tags          = var.observer_observability_ag_tags
+  observer_observability_ag_ibm_ids       = var.observer_observability_ag_ibm_ids
+  observer_observability_ag_service_ids   = var.observer_observability_ag_service_ids
+
+  # observer security
+  observer_security_ag_name          = var.observer_security_ag_name
+  observer_security_ag_policies      = var.observer_security_ag_policies
+  observer_security_ag_dynamic_rules = var.observer_security_ag_dynamic_rules
+  observer_security_ag_add_members   = var.observer_security_ag_add_members
+  observer_security_ag_description   = var.observer_security_ag_description
+  observer_security_ag_tags          = var.observer_security_ag_tags
+  observer_security_ag_ibm_ids       = var.observer_security_ag_ibm_ids
+  observer_security_ag_service_ids   = var.observer_security_ag_service_ids
+
+  # observer network
+  observer_network_ag_name          = var.observer_network_ag_name
+  observer_network_ag_policies      = var.observer_network_ag_policies
+  observer_network_ag_dynamic_rules = var.observer_network_ag_dynamic_rules
+  observer_network_ag_add_members   = var.observer_network_ag_add_members
+  observer_network_ag_description   = var.observer_network_ag_description
+  observer_network_ag_tags          = var.observer_network_ag_tags
+  observer_network_ag_ibm_ids       = var.observer_network_ag_ibm_ids
+  observer_network_ag_service_ids   = var.observer_network_ag_service_ids
+
+  # observer compute
+  observer_compute_ag_name          = var.observer_compute_ag_name
+  observer_compute_ag_policies      = var.observer_compute_ag_policies
+  observer_compute_ag_dynamic_rules = var.observer_compute_ag_dynamic_rules
+  observer_compute_ag_add_members   = var.observer_compute_ag_add_members
+  observer_compute_ag_description   = var.observer_compute_ag_description
+  observer_compute_ag_tags          = var.observer_compute_ag_tags
+  observer_compute_ag_ibm_ids       = var.observer_compute_ag_ibm_ids
+  observer_compute_ag_service_ids   = var.observer_compute_ag_service_ids
+}

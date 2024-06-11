@@ -3,6 +3,7 @@
 An end-to-end deployable architecture solution that provisions the following infrastructure:
 - A resource group
 - A default set of account settings that are compliant with the IBM Cloud for Financial Services framework
+- A default set of IAM access groups for segmenting access at multiple layers of permissions
 - An IBM Cloud Object Storage instance
 - An IBM Cloud Object Storage bucket encrypted with the key management service key
 - An Activity Tracker target for the Object Storage bucket

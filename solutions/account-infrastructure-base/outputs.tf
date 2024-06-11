@@ -181,3 +181,8 @@ output "trusted_profile_projects_policies" {
   value       = module.account_infrastructure_base.trusted_profile_projects_policies
   description = "Trusted Profile Projects Profile Policies"
 }
+
+output "access_management_access_groups" {
+  value       = module.account_infrastructure_base.access_management_access_groups
+  description = "Map of access management access groups"
+}

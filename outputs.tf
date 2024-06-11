@@ -181,3 +181,8 @@ output "trusted_profile_projects_policies" {
   value       = one(module.trusted_profile_projects[*].trusted_profile_policies)
   description = "Trusted Profile Projects Profile Policies"
 }
+
+output "access_management_access_groups" {
+  value       = one(module.access_management[*].access_groups)
+  description = "Map of access management access groups"
+}
