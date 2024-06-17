@@ -80,20 +80,20 @@ locals {
 module "resource_group" {
   for_each            = local.rg_map
   source              = "terraform-ibm-modules/resource-group/ibm"
-  version             = "1.1.5"
+  version             = "1.1.6"
   resource_group_name = each.key
 }
 
 module "existing_resource_group" {
   count                        = var.existing_cos_resource_group_name != null ? 1 : 0
   source                       = "terraform-ibm-modules/resource-group/ibm"
-  version                      = "1.1.5"
+  version                      = "1.1.6"
   existing_resource_group_name = var.existing_cos_resource_group_name
 }
 
 module "account_settings" {
   source                       = "terraform-ibm-modules/iam-account-settings/ibm"
-  version                      = "2.10.0"
+  version                      = "2.10.1"
   access_token_expiration      = var.access_token_expiration
   active_session_timeout       = var.active_session_timeout
   allowed_ip_addresses         = var.allowed_ip_addresses
@@ -114,7 +114,7 @@ module "account_settings" {
 module "cos" {
   count             = var.provision_atracker_cos ? 1 : 0
   source            = "terraform-ibm-modules/cos/ibm//modules/fscloud"
-  version           = "8.3.2"
+  version           = "8.4.1"
   resource_group_id = local.cos_rg
   bucket_configs = [{
     access_tags                   = var.cos_bucket_access_tags
@@ -155,7 +155,7 @@ module "cos" {
 module "activity_tracker" {
   count   = var.provision_atracker_cos ? 1 : 0
   source  = "terraform-ibm-modules/observability-instances/ibm//modules/activity_tracker"
-  version = "2.12.2"
+  version = "2.13.1"
   providers = {
     logdna.at = logdna.at
   }
@@ -188,7 +188,7 @@ moved {
 module "trusted_profile_projects" {
   count                       = var.provision_trusted_profile_projects ? 1 : 0
   source                      = "terraform-ibm-modules/trusted-profile/ibm"
-  version                     = "1.0.3"
+  version                     = "1.0.4"
   trusted_profile_name        = var.trusted_profile_name
   trusted_profile_description = var.trusted_profile_description
   trusted_profile_policies = [{
