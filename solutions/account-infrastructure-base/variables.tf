@@ -348,72 +348,72 @@ variable "trusted_profile_roles" {
 
 variable "provision_cbr" {
   type        = bool
-  description = "Whether to enable the creation of context-based restriction rules and zones in the solution."
+  description = "Whether to enable the creation of context-based restriction rules and zones in the solution. Default is false."
   default     = false
 }
 
 variable "cbr_allow_cos_to_kms" {
   type        = bool
-  description = "Whether to enable the rule that allows Object Storage to access the key management service. Default is true."
+  description = "Whether to enable the rule that allows Object Storage to access the key management service. Default is true if `provision_cbr` is true."
   default     = true
 }
 
 variable "cbr_allow_block_storage_to_kms" {
   type        = bool
-  description = "Whether to enable the rule that allows Block Storage for VPC to access the key management service. Default is true."
+  description = "Whether to enable the rule that allows Block Storage for VPC to access the key management service. Default is true if `provision_cbr` is true."
   default     = true
 }
 
 variable "cbr_allow_roks_to_kms" {
   type        = bool
-  description = "Whether to enable the rule that allows Red Hat OpenShift to access the key management service. Default is true."
+  description = "Whether to enable the rule that allows Red Hat OpenShift to access the key management service. Default is true if `provision_cbr` is true."
   default     = true
 }
 
 variable "cbr_allow_icd_to_kms" {
   type        = bool
-  description = "Whether to enable the rule that allows IBM cloud databases to access the key management service. Default is true."
+  description = "Whether to enable the rule that allows IBM cloud databases to access the key management service. Default is true if `provision_cbr` is true."
   default     = true
 }
 
 variable "cbr_allow_event_streams_to_kms" {
   type        = bool
-  description = "Whether to enable the rule that allows Event Streams to access the key management service. Default is true."
+  description = "Whether to enable the rule that allows Event Streams to access the key management service. Default is true if `provision_cbr` is true."
   default     = true
 }
 
 variable "cbr_allow_vpcs_to_container_registry" {
   type        = bool
-  description = "Whether to enable the rule that allows Virtual Private Clouds to access Container Registry. Default is true."
+  description = "Whether to enable the rule that allows Virtual Private Clouds to access Container Registry. Default is true if `provision_cbr` is true."
   default     = true
 }
 
 variable "cbr_allow_vpcs_to_cos" {
   type        = bool
-  description = "Whether to enable the rule that allows Virtual Private Clouds to access Object Storage. Default is true."
+  description = "Whether to enable the rule that allows Virtual Private Clouds to access Object Storage. Default is true if `provision_cbr` is true."
   default     = true
 }
 
 variable "cbr_allow_at_to_cos" {
   type        = bool
-  description = "Whether to enable the rule that allows Activity Tracker to access Object Storage. Default is true."
+  description = "Whether to enable the rule that allows Activity Tracker to access Object Storage. Default is true if `provision_cbr` is true."
   default     = true
 }
 
 variable "cbr_allow_iks_to_is" {
   type        = bool
-  description = "Whether to enable the rule that allows the Kubernetes Service to access VPC Infrastructure Services. Default is true."
+  description = "Whether to enable the rule that allows the Kubernetes Service to access VPC Infrastructure Services. Default is true if `provision_cbr` is true."
   default     = true
 }
 
 variable "cbr_allow_is_to_cos" {
   type        = bool
-  description = "Whether to enable the rule that allows VPC Infrastructure Services to access Object Storage. Default is true."
+  description = "Whether to enable the rule that allows VPC Infrastructure Services to access Object Storage. Default is true if `provision_cbr` is true."
   default     = true
 }
 
 variable "cbr_kms_service_targeted_by_prewired_rules" {
   type        = list(string)
-  description = "IBM Cloud offers two distinct Key Management Services (KMS): Key Protect and Hyper Protect Crypto Services (HPCS). This variable determines the specific KMS service to which the pre-configured rules are applied. Use the value 'key-protect' to specify the Key Protect service, and 'hs-crypto' for the Hyper Protect Crypto Services (HPCS)."
+  description = "IBM Cloud offers two distinct Key Management Services (KMS): Key Protect and Hyper Protect Crypto Services (HPCS). This variable determines the specific KMS service to which the pre-configured rules are applied. Use the value 'key-protect' to specify the Key Protect service, and 'hs-crypto' for the Hyper Protect Crypto Services (HPCS). Default is `[\"hs-crypto\"]` if `provision_cbr` is true."
   default     = ["hs-crypto"]
 }
