@@ -91,7 +91,13 @@ module "existing_resource_group" {
   existing_resource_group_name = var.existing_cos_resource_group_name
 }
 
+moved {
+  from = module.account_settings
+  to   = module.account_settings[0]
+}
+
 module "account_settings" {
+  count                        = !var.skip_iam_account_settings ? 1 : 0
   source                       = "terraform-ibm-modules/iam-account-settings/ibm"
   version                      = "2.10.1"
   access_token_expiration      = var.access_token_expiration

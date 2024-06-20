@@ -109,6 +109,12 @@ variable "existing_cos_resource_group_name" {
   default     = null
 }
 
+variable "skip_iam_account_settings" {
+  type        = bool
+  description = "Set to true to skip the IAM account settings being applied to the account"
+  default     = false
+}
+
 variable "access_token_expiration" {
   type        = string
   description = "The access token expiration in seconds."
