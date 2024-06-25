@@ -49,6 +49,7 @@ module "account_infrastructure_base" {
   activity_tracker_locations           = var.activity_tracker_locations
 
   # iam account settings
+  skip_iam_account_settings    = var.skip_iam_account_settings
   allowed_ip_addresses         = var.allowed_ip_addresses
   access_token_expiration      = var.access_token_expiration
   active_session_timeout       = var.active_session_timeout

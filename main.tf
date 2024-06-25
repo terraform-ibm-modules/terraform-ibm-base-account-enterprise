@@ -91,7 +91,13 @@ module "existing_resource_group" {
   existing_resource_group_name = var.existing_cos_resource_group_name
 }
 
+moved {
+  from = module.account_settings
+  to   = module.account_settings[0]
+}
+
 module "account_settings" {
+  count                        = !var.skip_iam_account_settings ? 1 : 0
   source                       = "terraform-ibm-modules/iam-account-settings/ibm"
   version                      = "2.10.1"
   access_token_expiration      = var.access_token_expiration
@@ -114,7 +120,7 @@ module "account_settings" {
 module "cos" {
   count             = var.provision_atracker_cos ? 1 : 0
   source            = "terraform-ibm-modules/cos/ibm//modules/fscloud"
-  version           = "8.4.1"
+  version           = "8.5.1"
   resource_group_id = local.cos_rg
   bucket_configs = [{
     access_tags                   = var.cos_bucket_access_tags
@@ -155,7 +161,7 @@ module "cos" {
 module "activity_tracker" {
   count   = var.provision_atracker_cos ? 1 : 0
   source  = "terraform-ibm-modules/observability-instances/ibm//modules/activity_tracker"
-  version = "2.13.1"
+  version = "2.13.2"
   providers = {
     logdna.at = logdna.at
   }
