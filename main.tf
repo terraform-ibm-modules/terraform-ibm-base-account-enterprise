@@ -59,7 +59,7 @@ locals {
 
   # resource group validations
   # tflint-ignore: terraform_unused_declarations
-  validate_observability_resource_group = var.existing_observability_resource_group_name == null && var.observability_resource_group_name == null && var.provision_atracker_cos ? tobool("'var.existing_observability_resource_group_name' must be provided if 'var.provision_atracker_cos' is true and 'var.observability_resource_group_name' is not provided") : true
+  validate_observability_resource_group = var.existing_observability_resource_group_name == null && var.observability_resource_group_name == null && var.provision_atracker_cos ? tobool("'existing_observability_resource_group_name' or 'observability_resource_group_name' must be provided if 'provision_atracker_cos' is true") : true
 
   # resource group outputs
   security_resource_group = local.existing_rg_vars["existing_security_resource_group"] != null ? {
@@ -184,7 +184,7 @@ module "account_settings" {
 module "cos" {
   count             = var.provision_atracker_cos ? 1 : 0
   source            = "terraform-ibm-modules/cos/ibm//modules/fscloud"
-  version           = "8.5.1"
+  version           = "8.5.3"
   resource_group_id = local.cos_rg
   bucket_configs = [{
     access_tags                   = var.cos_bucket_access_tags

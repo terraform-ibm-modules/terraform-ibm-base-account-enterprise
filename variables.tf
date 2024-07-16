@@ -9,7 +9,7 @@ variable "security_resource_group_name" {
 
   validation {
     condition     = length(coalesce(var.security_resource_group_name, "null")) <= 40
-    error_message = "`var.security_resource_group_name` must be 40 characters or less."
+    error_message = "`security_resource_group_name` must be 40 characters or less."
   }
 }
 
@@ -20,7 +20,7 @@ variable "existing_security_resource_group_name" {
 
   validation {
     condition     = length(coalesce(var.existing_security_resource_group_name, "null")) <= 40
-    error_message = "`var.existing_security_resource_group_name` must be 40 characters or less."
+    error_message = "`existing_security_resource_group_name` must be 40 characters or less."
   }
 }
 
@@ -31,7 +31,7 @@ variable "audit_resource_group_name" {
 
   validation {
     condition     = length(coalesce(var.audit_resource_group_name, "null")) <= 40
-    error_message = "`var.existing_audit_resource_group_name` must be 40 characters or less."
+    error_message = "`existing_audit_resource_group_name` must be 40 characters or less."
   }
 }
 
@@ -42,7 +42,7 @@ variable "existing_audit_resource_group_name" {
 
   validation {
     condition     = length(coalesce(var.existing_audit_resource_group_name, "null")) <= 40
-    error_message = "`var.audit_resource_group_name` must be 40 characters or less."
+    error_message = "`audit_resource_group_name` must be 40 characters or less."
   }
 }
 
@@ -53,7 +53,7 @@ variable "observability_resource_group_name" {
 
   validation {
     condition     = length(coalesce(var.observability_resource_group_name, "null")) <= 40
-    error_message = "`var.observability_resource_group_name` must be 40 characters or less."
+    error_message = "`observability_resource_group_name` must be 40 characters or less."
   }
 }
 
@@ -64,7 +64,7 @@ variable "existing_observability_resource_group_name" {
 
   validation {
     condition     = length(coalesce(var.existing_observability_resource_group_name, "null")) <= 40
-    error_message = "`var.existing_observability_resource_group_name` must be 40 characters or less."
+    error_message = "`existing_observability_resource_group_name` must be 40 characters or less."
   }
 }
 
@@ -75,7 +75,7 @@ variable "management_resource_group_name" {
 
   validation {
     condition     = length(coalesce(var.management_resource_group_name, "null")) <= 40
-    error_message = "`var.management_resource_group_name` must be 40 characters or less."
+    error_message = "`management_resource_group_name` must be 40 characters or less."
   }
 }
 
@@ -86,7 +86,7 @@ variable "existing_management_resource_group_name" {
 
   validation {
     condition     = length(coalesce(var.existing_management_resource_group_name, "null")) <= 40
-    error_message = "`var.existing_management_resource_group_name` must be 40 characters or less."
+    error_message = "`existing_management_resource_group_name` must be 40 characters or less."
   }
 }
 
@@ -97,7 +97,7 @@ variable "workload_resource_group_name" {
 
   validation {
     condition     = length(coalesce(var.workload_resource_group_name, "null")) <= 40
-    error_message = "`var.workload_resource_group_name` must be 40 characters or less."
+    error_message = "`workload_resource_group_name` must be 40 characters or less."
   }
 }
 
@@ -108,7 +108,7 @@ variable "existing_workload_resource_group_name" {
 
   validation {
     condition     = length(coalesce(var.existing_workload_resource_group_name, "null")) <= 40
-    error_message = "`var.existing_workload_resource_group_name` must be 40 characters or less."
+    error_message = "`existing_workload_resource_group_name` must be 40 characters or less."
   }
 }
 
@@ -119,7 +119,7 @@ variable "edge_resource_group_name" {
 
   validation {
     condition     = length(coalesce(var.edge_resource_group_name, "null")) <= 40
-    error_message = "`var.edge_resource_group_name` must be 40 characters or less."
+    error_message = "`edge_resource_group_name` must be 40 characters or less."
   }
 }
 
@@ -130,7 +130,7 @@ variable "existing_edge_resource_group_name" {
 
   validation {
     condition     = length(coalesce(var.existing_edge_resource_group_name, "null")) <= 40
-    error_message = "`var.existing_edge_resource_group_name` must be 40 characters or less."
+    error_message = "`existing_edge_resource_group_name` must be 40 characters or less."
   }
 }
 
@@ -141,7 +141,7 @@ variable "devops_resource_group_name" {
 
   validation {
     condition     = length(coalesce(var.devops_resource_group_name, "null")) <= 40
-    error_message = "`var.devops_resource_group_name` must be 40 characters or less."
+    error_message = "`devops_resource_group_name` must be 40 characters or less."
   }
 }
 
@@ -152,7 +152,7 @@ variable "existing_devops_resource_group_name" {
 
   validation {
     condition     = length(coalesce(var.existing_devops_resource_group_name, "null")) <= 40
-    error_message = "`var.existing_devops_resource_group_name` must be 40 characters or less."
+    error_message = "`existing_devops_resource_group_name` must be 40 characters or less."
   }
 }
 
@@ -287,6 +287,16 @@ variable "cos_instance_name" {
   type        = string
   description = "The name to give the cloud object storage instance that will be provisioned by this module, required if 'var.provision_atracker_cos' is true."
   default     = null
+
+  validation {
+    condition     = var.cos_instance_name == null ? true : length(var.cos_instance_name) <= 180
+    error_message = "`cos_instance_name` must be 180 characters or less"
+  }
+
+  validation {
+    condition     = var.cos_instance_name == null ? true : length(regexall("^([^[:ascii:]]|[a-zA-Z0-9-._: ])+$", var.cos_instance_name)) > 0
+    error_message = "`cos_instance_name` must match the following regex pattern: \"^([^[:ascii:]]|[a-zA-Z0-9-._: ])+$\""
+  }
 }
 
 variable "resource_tags" {
@@ -305,6 +315,21 @@ variable "cos_bucket_name" {
   type        = string
   description = "The name to give the newly provisioned COS bucket which will be used for Activity Tracker logs, required if 'var.provision_atracker_cos' is true."
   default     = null
+
+  validation {
+    condition     = var.cos_bucket_name == null ? true : (length(var.cos_bucket_name) >= 3)
+    error_message = "`cos_bucket_name` must be 3 or more characters long"
+  }
+
+  validation {
+    condition     = var.cos_bucket_name == null ? true : (length(var.cos_bucket_name) <= 63)
+    error_message = "`cos_bucket_name` must be 63 or less characters long"
+  }
+
+  validation {
+    condition     = var.cos_bucket_name == null ? true : length(regexall("^[a-z0-9][a-z0-9-]+[a-z0-9]$", var.cos_bucket_name)) > 0
+    error_message = "`cos_bucket_name` must match the following regex pattern: \"^[a-z0-9][a-z0-9]+[a-z0-9]$\""
+  }
 }
 
 variable "cos_bucket_access_tags" {
