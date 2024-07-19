@@ -13,6 +13,17 @@ variable "security_resource_group_name" {
   }
 }
 
+variable "existing_security_resource_group_name" {
+  type        = string
+  description = "The name of the existing resource group to use for security resources, takes precedence over `security_resource_group_name`."
+  default     = null
+
+  validation {
+    condition     = length(coalesce(var.existing_security_resource_group_name, "null")) <= 40
+    error_message = "`existing_security_resource_group_name` must be 40 characters or less."
+  }
+}
+
 variable "audit_resource_group_name" {
   type        = string
   description = "The name of the audit resource group to create."
@@ -20,18 +31,40 @@ variable "audit_resource_group_name" {
 
   validation {
     condition     = length(coalesce(var.audit_resource_group_name, "null")) <= 40
+    error_message = "`existing_audit_resource_group_name` must be 40 characters or less."
+  }
+}
+
+variable "existing_audit_resource_group_name" {
+  type        = string
+  description = "The name of the existing resource group to use for audit resources, takes precedence over `audit_resource_group_name`."
+  default     = null
+
+  validation {
+    condition     = length(coalesce(var.existing_audit_resource_group_name, "null")) <= 40
     error_message = "`audit_resource_group_name` must be 40 characters or less."
   }
 }
 
 variable "observability_resource_group_name" {
   type        = string
-  description = "The name of the observability resource group to create. Required if `var.provision_atracker_cos` is true and `var.existing_cos_resource_group_name` is not provided."
+  description = "The name of the observability resource group to create. Required if `var.provision_atracker_cos` is true and `var.existing_observability_resource_group_name` is not provided."
   default     = null
 
   validation {
     condition     = length(coalesce(var.observability_resource_group_name, "null")) <= 40
     error_message = "`observability_resource_group_name` must be 40 characters or less."
+  }
+}
+
+variable "existing_observability_resource_group_name" {
+  type        = string
+  description = "The name of the existing resource group to use for observability resources, takes precedence over `observability_resource_group_name`. Required if `var.provision_atracker_cos` is true and `var.observability_resource_group_name` is not provided."
+  default     = null
+
+  validation {
+    condition     = length(coalesce(var.existing_observability_resource_group_name, "null")) <= 40
+    error_message = "`existing_observability_resource_group_name` must be 40 characters or less."
   }
 }
 
@@ -46,6 +79,17 @@ variable "management_resource_group_name" {
   }
 }
 
+variable "existing_management_resource_group_name" {
+  type        = string
+  description = "The name of the existing resource group to use for management resources, takes precedence over `management_resource_group_name`."
+  default     = null
+
+  validation {
+    condition     = length(coalesce(var.existing_management_resource_group_name, "null")) <= 40
+    error_message = "`existing_management_resource_group_name` must be 40 characters or less."
+  }
+}
+
 variable "workload_resource_group_name" {
   type        = string
   description = "The name of the workload resource group to create."
@@ -54,6 +98,17 @@ variable "workload_resource_group_name" {
   validation {
     condition     = length(coalesce(var.workload_resource_group_name, "null")) <= 40
     error_message = "`workload_resource_group_name` must be 40 characters or less."
+  }
+}
+
+variable "existing_workload_resource_group_name" {
+  type        = string
+  description = "The name of the existing resource group to use for workload resources, takes precedence over `workload_resource_group_name`."
+  default     = null
+
+  validation {
+    condition     = length(coalesce(var.existing_workload_resource_group_name, "null")) <= 40
+    error_message = "`existing_workload_resource_group_name` must be 40 characters or less."
   }
 }
 
@@ -68,6 +123,17 @@ variable "edge_resource_group_name" {
   }
 }
 
+variable "existing_edge_resource_group_name" {
+  type        = string
+  description = "The name of the existing resource group to use for edge resources, takes precedence over `edge_resource_group_name`."
+  default     = null
+
+  validation {
+    condition     = length(coalesce(var.existing_edge_resource_group_name, "null")) <= 40
+    error_message = "`existing_edge_resource_group_name` must be 40 characters or less."
+  }
+}
+
 variable "devops_resource_group_name" {
   type        = string
   description = "The name of the devops resource group to create."
@@ -79,10 +145,15 @@ variable "devops_resource_group_name" {
   }
 }
 
-variable "existing_cos_resource_group_name" {
+variable "existing_devops_resource_group_name" {
   type        = string
-  description = "The name of an existing resource group to use for the COS instance/bucket, required if `var.provision_artacker_cos` is true and `var.observability_resource_group_name` is not provided."
+  description = "The name of the existing resource group to use for devops resources, takes precedence over `devops_resource_group_name`."
   default     = null
+
+  validation {
+    condition     = length(coalesce(var.existing_devops_resource_group_name, "null")) <= 40
+    error_message = "`existing_devops_resource_group_name` must be 40 characters or less."
+  }
 }
 
 variable "skip_iam_account_settings" {

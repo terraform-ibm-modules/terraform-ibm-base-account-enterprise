@@ -40,41 +40,100 @@ locals {
     name => [for k, v in local.rg_vars : k if name == v]
   }
 
+  #existing resource group logic
+  existing_rg_vars = {
+    existing_security_resource_group      = var.existing_security_resource_group_name,
+    existing_audit_resource_group         = var.existing_audit_resource_group_name,
+    existing_observability_resource_group = var.existing_observability_resource_group_name,
+    existing_management_resource_group    = var.existing_management_resource_group_name,
+    existing_workload_resource_group      = var.existing_workload_resource_group_name,
+    existing_edge_resource_group          = var.existing_edge_resource_group_name,
+    existing_devops_resource_group        = var.existing_devops_resource_group_name
+  }
+
+  existing_rg_list = distinct(compact(values(local.existing_rg_vars)))
+
+  existing_rg_map = { for name in local.existing_rg_list :
+    name => [for k, v in local.rg_vars : k if name == v]
+  }
+
   # resource group validations
   # tflint-ignore: terraform_unused_declarations
-  validate_observability_resource_group = var.existing_cos_resource_group_name == null && var.observability_resource_group_name == null && var.provision_atracker_cos ? tobool("'var.existing_cos_resource_group_name' must be provided if 'var.provision_atracker_cos' is true and 'var.observability_resource_group_name' is not provided") : true
+  validate_observability_resource_group = var.existing_observability_resource_group_name == null && var.observability_resource_group_name == null && var.provision_atracker_cos ? tobool("'existing_observability_resource_group_name' or 'observability_resource_group_name' must be provided if 'provision_atracker_cos' is true") : true
 
   # resource group outputs
-  security_resource_group = local.rg_vars["security_resource_group"] == null ? { id = null, name = null } : {
+  security_resource_group = local.existing_rg_vars["existing_security_resource_group"] != null ? {
+    id   = module.existing_resource_group[local.existing_rg_vars["existing_security_resource_group"]].resource_group_id
+    name = module.existing_resource_group[local.existing_rg_vars["existing_security_resource_group"]].resource_group_name
+    } : local.rg_vars["security_resource_group"] != null ? {
     id   = module.resource_group[local.rg_vars["security_resource_group"]].resource_group_id
     name = module.resource_group[local.rg_vars["security_resource_group"]].resource_group_name
+    } : {
+    id   = null
+    name = null
   }
-  audit_resource_group = local.rg_vars["audit_resource_group"] == null ? { id = null, name = null } : {
+  audit_resource_group = local.existing_rg_vars["existing_audit_resource_group"] != null ? {
+    id   = module.existing_resource_group[local.existing_rg_vars["existing_audit_resource_group"]].resource_group_id
+    name = module.existing_resource_group[local.existing_rg_vars["existing_audit_resource_group"]].resource_group_name
+    } : local.rg_vars["audit_resource_group"] != null ? {
     id   = module.resource_group[local.rg_vars["audit_resource_group"]].resource_group_id
     name = module.resource_group[local.rg_vars["audit_resource_group"]].resource_group_name
+    } : {
+    id   = null
+    name = null
   }
-  observability_resource_group = local.rg_vars["observability_resource_group"] == null ? { id = null, name = null } : {
+  observability_resource_group = local.existing_rg_vars["existing_observability_resource_group"] != null ? {
+    id   = module.existing_resource_group[local.existing_rg_vars["existing_observability_resource_group"]].resource_group_id
+    name = module.existing_resource_group[local.existing_rg_vars["existing_observability_resource_group"]].resource_group_name
+    } : local.rg_vars["observability_resource_group"] != null ? {
     id   = module.resource_group[local.rg_vars["observability_resource_group"]].resource_group_id
     name = module.resource_group[local.rg_vars["observability_resource_group"]].resource_group_name
+    } : {
+    id   = null
+    name = null
   }
-  management_resource_group = local.rg_vars["management_resource_group"] == null ? { id = null, name = null } : {
+  management_resource_group = local.existing_rg_vars["existing_management_resource_group"] != null ? {
+    id   = module.existing_resource_group[local.existing_rg_vars["existing_management_resource_group"]].resource_group_id
+    name = module.existing_resource_group[local.existing_rg_vars["existing_management_resource_group"]].resource_group_name
+    } : local.rg_vars["management_resource_group"] != null ? {
     id   = module.resource_group[local.rg_vars["management_resource_group"]].resource_group_id
     name = module.resource_group[local.rg_vars["management_resource_group"]].resource_group_name
+    } : {
+    id   = null
+    name = null
   }
-  workload_resource_group = local.rg_vars["workload_resource_group"] == null ? { id = null, name = null } : {
+  workload_resource_group = local.existing_rg_vars["existing_workload_resource_group"] != null ? {
+    id   = module.existing_resource_group[local.existing_rg_vars["existing_workload_resource_group"]].resource_group_id
+    name = module.existing_resource_group[local.existing_rg_vars["existing_workload_resource_group"]].resource_group_name
+    } : local.rg_vars["workload_resource_group"] != null ? {
     id   = module.resource_group[local.rg_vars["workload_resource_group"]].resource_group_id
     name = module.resource_group[local.rg_vars["workload_resource_group"]].resource_group_name
+    } : {
+    id   = null
+    name = null
   }
-  edge_resource_group = local.rg_vars["edge_resource_group"] == null ? { id = null, name = null } : {
+  edge_resource_group = local.existing_rg_vars["existing_edge_resource_group"] != null ? {
+    id   = module.existing_resource_group[local.existing_rg_vars["existing_edge_resource_group"]].resource_group_id
+    name = module.existing_resource_group[local.existing_rg_vars["existing_edge_resource_group"]].resource_group_name
+    } : local.rg_vars["edge_resource_group"] != null ? {
     id   = module.resource_group[local.rg_vars["edge_resource_group"]].resource_group_id
     name = module.resource_group[local.rg_vars["edge_resource_group"]].resource_group_name
+    } : {
+    id   = null
+    name = null
   }
-  devops_resource_group = local.rg_vars["devops_resource_group"] == null ? { id = null, name = null } : {
+  devops_resource_group = local.existing_rg_vars["existing_devops_resource_group"] != null ? {
+    id   = module.existing_resource_group[local.existing_rg_vars["existing_devops_resource_group"]].resource_group_id
+    name = module.existing_resource_group[local.existing_rg_vars["existing_devops_resource_group"]].resource_group_name
+    } : local.rg_vars["devops_resource_group"] != null ? {
     id   = module.resource_group[local.rg_vars["devops_resource_group"]].resource_group_id
     name = module.resource_group[local.rg_vars["devops_resource_group"]].resource_group_name
+    } : {
+    id   = null
+    name = null
   }
 
-  cos_rg = !var.provision_atracker_cos ? "" : var.existing_cos_resource_group_name != null ? module.existing_resource_group[0].resource_group_id : local.observability_resource_group.id
+  cos_rg = !var.provision_atracker_cos ? "" : local.observability_resource_group.id
 }
 
 module "resource_group" {
@@ -84,11 +143,16 @@ module "resource_group" {
   resource_group_name = each.key
 }
 
+moved {
+  from = module.existing_resource_group[0]
+  to   = module.existing_resource_group["existing_observability_resource_group"]
+}
+
 module "existing_resource_group" {
-  count                        = var.existing_cos_resource_group_name != null ? 1 : 0
+  for_each                     = local.existing_rg_map
   source                       = "terraform-ibm-modules/resource-group/ibm"
   version                      = "1.1.6"
-  existing_resource_group_name = var.existing_cos_resource_group_name
+  existing_resource_group_name = each.key
 }
 
 moved {
