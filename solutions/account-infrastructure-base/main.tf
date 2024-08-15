@@ -11,14 +11,20 @@ module "account_infrastructure_base" {
   region = var.region
 
   # resource groups
-  audit_resource_group_name         = try("${var.prefix}-${var.audit_resource_group_name}", var.audit_resource_group_name, null)
-  devops_resource_group_name        = try("${var.prefix}-${var.devops_resource_group_name}", var.devops_resource_group_name, null)
-  edge_resource_group_name          = try("${var.prefix}-${var.edge_resource_group_name}", var.edge_resource_group_name, null)
-  management_resource_group_name    = try("${var.prefix}-${var.management_resource_group_name}", var.management_resource_group_name, null)
-  observability_resource_group_name = try("${var.prefix}-${var.observability_resource_group_name}", var.observability_resource_group_name, null)
-  security_resource_group_name      = try("${var.prefix}-${var.security_resource_group_name}", var.security_resource_group_name, null)
-  workload_resource_group_name      = try("${var.prefix}-${var.workload_resource_group_name}", var.workload_resource_group_name, null)
-  existing_cos_resource_group_name  = var.existing_cos_resource_group_name
+  audit_resource_group_name                  = try("${var.prefix}-${var.audit_resource_group_name}", var.audit_resource_group_name, null)
+  existing_audit_resource_group_name         = var.existing_audit_resource_group_name
+  devops_resource_group_name                 = try("${var.prefix}-${var.devops_resource_group_name}", var.devops_resource_group_name, null)
+  existing_devops_resource_group_name        = var.existing_devops_resource_group_name
+  edge_resource_group_name                   = try("${var.prefix}-${var.edge_resource_group_name}", var.edge_resource_group_name, null)
+  existing_edge_resource_group_name          = var.existing_edge_resource_group_name
+  management_resource_group_name             = try("${var.prefix}-${var.management_resource_group_name}", var.management_resource_group_name, null)
+  existing_management_resource_group_name    = var.existing_management_resource_group_name
+  observability_resource_group_name          = try("${var.prefix}-${var.observability_resource_group_name}", var.observability_resource_group_name, null)
+  existing_observability_resource_group_name = var.existing_observability_resource_group_name
+  security_resource_group_name               = try("${var.prefix}-${var.security_resource_group_name}", var.security_resource_group_name, null)
+  existing_security_resource_group_name      = var.existing_security_resource_group_name
+  workload_resource_group_name               = try("${var.prefix}-${var.workload_resource_group_name}", var.workload_resource_group_name, null)
+  existing_workload_resource_group_name      = var.existing_workload_resource_group_name
 
   # atracker + cos
   provision_atracker_cos               = var.provision_atracker_cos

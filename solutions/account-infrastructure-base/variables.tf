@@ -67,9 +67,21 @@ variable "security_resource_group_name" {
   default     = null
 }
 
+variable "existing_security_resource_group_name" {
+  type        = string
+  description = "The name of the existing resource group to use for security resources, takes precedence over `security_resource_group_name`."
+  default     = null
+}
+
 variable "audit_resource_group_name" {
   type        = string
   description = "The name of the audit resource group to create. If `prefix` is provided, it is prefixed on the name in the following format: `<prefix>-<audit_resource_group_name>`."
+  default     = null
+}
+
+variable "existing_audit_resource_group_name" {
+  type        = string
+  description = "The name of the existing resource group to use for audit resources, takes precedence over `audit_resource_group_name`."
   default     = null
 }
 
@@ -79,9 +91,21 @@ variable "observability_resource_group_name" {
   default     = null
 }
 
+variable "existing_observability_resource_group_name" {
+  type        = string
+  description = "The name of the existing resource group to use for observability resources, takes precedence over `observability_resource_group_name`."
+  default     = null
+}
+
 variable "management_resource_group_name" {
   type        = string
   description = "The name of the management resource group to create. If `prefix` is provided, it is prefixed on the name in the following format: `<prefix>-<management_resource_group_name>`."
+  default     = null
+}
+
+variable "existing_management_resource_group_name" {
+  type        = string
+  description = "The name of the existing resource group to use for management resources, takes precedence over `management_resource_group_name`."
   default     = null
 }
 
@@ -91,9 +115,21 @@ variable "workload_resource_group_name" {
   default     = null
 }
 
+variable "existing_workload_resource_group_name" {
+  type        = string
+  description = "The name of the existing resource group to use for workload resources, takes precedence over `workload_resource_group_name`."
+  default     = null
+}
+
 variable "edge_resource_group_name" {
   type        = string
   description = "The name of the edge resource group to create. If `prefix` is provided, it is prefixed on the name in the following format: `<prefix>-<edge_resource_group_name>`."
+  default     = null
+}
+
+variable "existing_edge_resource_group_name" {
+  type        = string
+  description = "The name of the existing resource group to use for edge resources, takes precedence over `edge_resource_group_name`."
   default     = null
 }
 
@@ -103,9 +139,9 @@ variable "devops_resource_group_name" {
   default     = null
 }
 
-variable "existing_cos_resource_group_name" {
+variable "existing_devops_resource_group_name" {
   type        = string
-  description = "The name of an existing resource group to use for the Object Storage instance and bucket. Required if `provision_artacker_cos` is true and `observability_resource_group_name` is not provided."
+  description = "The name of the existing resource group to use for devops resources."
   default     = null
 }
 
