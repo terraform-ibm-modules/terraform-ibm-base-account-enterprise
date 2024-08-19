@@ -163,7 +163,7 @@ moved {
 module "account_settings" {
   count                        = !var.skip_iam_account_settings ? 1 : 0
   source                       = "terraform-ibm-modules/iam-account-settings/ibm"
-  version                      = "2.10.5"
+  version                      = "2.10.6"
   access_token_expiration      = var.access_token_expiration
   active_session_timeout       = var.active_session_timeout
   allowed_ip_addresses         = var.allowed_ip_addresses
@@ -184,7 +184,7 @@ module "account_settings" {
 module "cos" {
   count             = var.provision_atracker_cos ? 1 : 0
   source            = "terraform-ibm-modules/cos/ibm//modules/fscloud"
-  version           = "8.10.1"
+  version           = "8.10.3"
   resource_group_id = local.cos_rg
   bucket_configs = [{
     access_tags                   = var.cos_bucket_access_tags
