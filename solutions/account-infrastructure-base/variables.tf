@@ -219,7 +219,7 @@ variable "shell_settings_enabled" {
 
 variable "skip_cloud_shell_calls" {
   type        = bool
-  description = "Skip Cloud Shell calls in the account"
+  description = "Skip Cloud Shell calls in the account."
   default     = true
 }
 
