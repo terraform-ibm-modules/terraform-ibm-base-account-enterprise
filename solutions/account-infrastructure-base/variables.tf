@@ -220,7 +220,7 @@ variable "shell_settings_enabled" {
 variable "skip_cloud_shell_calls" {
   type        = bool
   description = "Skip Cloud Shell calls in the account."
-  default     = false
+  default     = true
 }
 
 variable "user_mfa" {
