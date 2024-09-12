@@ -131,7 +131,7 @@ You need the following permissions to run this module.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.65.0, < 2.0.0 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.69.0, < 2.0.0 |
 | <a name="requirement_logdna"></a> [logdna](#requirement\_logdna) | >= 1.14.2, < 2.0.0 |
 
 ### Modules
@@ -140,7 +140,7 @@ You need the following permissions to run this module.
 |------|--------|---------|
 | <a name="module_account_settings"></a> [account\_settings](#module\_account\_settings) | terraform-ibm-modules/iam-account-settings/ibm | 2.10.7 |
 | <a name="module_activity_tracker"></a> [activity\_tracker](#module\_activity\_tracker) | terraform-ibm-modules/observability-instances/ibm//modules/activity_tracker | 2.15.0 |
-| <a name="module_cbr_fscloud"></a> [cbr\_fscloud](#module\_cbr\_fscloud) | terraform-ibm-modules/cbr/ibm//modules/fscloud | 1.24.0 |
+| <a name="module_cbr_fscloud"></a> [cbr\_fscloud](#module\_cbr\_fscloud) | terraform-ibm-modules/cbr/ibm//modules/fscloud | 1.27.0 |
 | <a name="module_cos"></a> [cos](#module\_cos) | terraform-ibm-modules/cos/ibm//modules/fscloud | 8.11.7 |
 | <a name="module_existing_resource_group"></a> [existing\_resource\_group](#module\_existing\_resource\_group) | terraform-ibm-modules/resource-group/ibm | 1.1.6 |
 | <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | terraform-ibm-modules/resource-group/ibm | 1.1.6 |
@@ -169,6 +169,7 @@ No resources.
 | <a name="input_cbr_allow_iks_to_is"></a> [cbr\_allow\_iks\_to\_is](#input\_cbr\_allow\_iks\_to\_is) | Whether to enable the rule that allows the Kubernetes Service to access VPC Infrastructure Services. Default is true if `provision_cbr` is set to true. | `bool` | `true` | no |
 | <a name="input_cbr_allow_is_to_cos"></a> [cbr\_allow\_is\_to\_cos](#input\_cbr\_allow\_is\_to\_cos) | Whether to enable the rule that allows VPC Infrastructure Services to access Object Storage. Default is true if `provision_cbr` is set to true. | `bool` | `true` | no |
 | <a name="input_cbr_allow_roks_to_kms"></a> [cbr\_allow\_roks\_to\_kms](#input\_cbr\_allow\_roks\_to\_kms) | Whether to enable the rule that allows Red Hat OpenShift to access the key management service. Default is true if `provision_cbr` is set to true. | `bool` | `true` | no |
+| <a name="input_cbr_allow_scc_to_cos"></a> [cbr\_allow\_scc\_to\_cos](#input\_cbr\_allow\_scc\_to\_cos) | Set rule for SCC (Security and Compliance Center) to COS. Default is true if `provision_cbr` is true. | `bool` | `true` | no |
 | <a name="input_cbr_allow_vpcs_to_container_registry"></a> [cbr\_allow\_vpcs\_to\_container\_registry](#input\_cbr\_allow\_vpcs\_to\_container\_registry) | Whether to enable the rule that allows Virtual Private Clouds to access Container Registry. Default is true if `provision_cbr` is set to true. | `bool` | `true` | no |
 | <a name="input_cbr_allow_vpcs_to_cos"></a> [cbr\_allow\_vpcs\_to\_cos](#input\_cbr\_allow\_vpcs\_to\_cos) | Whether to enable the rule that allows Virtual Private Clouds to access Object Storage. Default is true if `provision_cbr` is set to true. | `bool` | `true` | no |
 | <a name="input_cbr_kms_service_targeted_by_prewired_rules"></a> [cbr\_kms\_service\_targeted\_by\_prewired\_rules](#input\_cbr\_kms\_service\_targeted\_by\_prewired\_rules) | IBM Cloud offers two distinct Key Management Services (KMS): Key Protect and Hyper Protect Crypto Services (HPCS). This variable determines the specific KMS service to which the pre-configured rules are applied. Use the value 'key-protect' to specify the Key Protect service, and 'hs-crypto' for the Hyper Protect Crypto Services (HPCS). Default is `["hs-crypto"]` if `provision_cbr` is set to true. | `list(string)` | <pre>[<br>  "hs-crypto"<br>]</pre> | no |

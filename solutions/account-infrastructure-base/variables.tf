@@ -454,6 +454,12 @@ variable "cbr_allow_is_to_cos" {
   default     = true
 }
 
+variable "cbr_allow_scc_to_cos" {
+  type        = bool
+  description = "Set rule for SCC (Security and Compliance Center) to COS. Default is true if `provision_cbr` is true."
+  default     = true
+}
+
 variable "cbr_kms_service_targeted_by_prewired_rules" {
   type        = list(string)
   description = "IBM Cloud offers two distinct Key Management Services (KMS): Key Protect and Hyper Protect Crypto Services (HPCS). This variable determines the specific KMS service to which the pre-configured rules are applied. Use the value 'key-protect' to specify the Key Protect service, and 'hs-crypto' for the Hyper Protect Crypto Services (HPCS). Default is `[\"hs-crypto\"]` if `provision_cbr` is true."
