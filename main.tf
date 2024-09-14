@@ -184,7 +184,7 @@ module "account_settings" {
 module "cos" {
   count             = var.provision_atracker_cos ? 1 : 0
   source            = "terraform-ibm-modules/cos/ibm//modules/fscloud"
-  version           = "8.11.7"
+  version           = "8.11.9"
   resource_group_id = local.cos_rg
   bucket_configs = [{
     access_tags                   = var.cos_bucket_access_tags
@@ -226,7 +226,7 @@ module "cos" {
 module "activity_tracker" {
   count   = var.provision_atracker_cos ? 1 : 0
   source  = "terraform-ibm-modules/observability-instances/ibm//modules/activity_tracker"
-  version = "2.15.0"
+  version = "2.17.0"
   providers = {
     logdna.at = logdna.at
   }
