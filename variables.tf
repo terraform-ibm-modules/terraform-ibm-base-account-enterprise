@@ -613,8 +613,24 @@ variable "cbr_allow_scc_to_cos" {
   description = "Set rule for SCC (Security and Compliance Center) to COS. Default is true if `provision_cbr` is true."
   default     = true
 }
+
 variable "cbr_kms_service_targeted_by_prewired_rules" {
   type        = list(string)
   description = "IBM Cloud offers two distinct Key Management Services (KMS): Key Protect and Hyper Protect Crypto Services (HPCS). This variable determines the specific KMS service to which the pre-configured rules are applied. Use the value 'key-protect' to specify the Key Protect service, and 'hs-crypto' for the Hyper Protect Crypto Services (HPCS). Default is `[\"hs-crypto\"]` if `provision_cbr` is set to true."
   default     = ["hs-crypto"]
+}
+
+variable "cbr_target_service_details" {
+  type = map(object({
+    description      = optional(string)
+    target_rg        = optional(string)
+    instance_id      = optional(string)
+    enforcement_mode = string
+    tags             = optional(list(string))
+    region           = optional(string)
+    geography        = optional(string)
+    global_deny      = optional(bool, true)
+  }))
+  description = "Details of the target service for which a rule is created. The key is the service name."
+  default     = {}
 }

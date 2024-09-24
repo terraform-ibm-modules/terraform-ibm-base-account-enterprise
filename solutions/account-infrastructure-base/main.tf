@@ -2,6 +2,154 @@
 # Base Account
 ########################################################################################################################
 
+locals {
+  target_service_details = {
+    # "IAM" = {
+    #   enforcement_mode = var.cbr_enforcement_mode
+    # }
+    # "apprapp" = {
+    #   enforcement_mode = var.cbr_enforcement_mode
+    # }
+    "cloud-object-storage" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      region           = var.region
+    }
+    "codeengine" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      region           = var.region
+    }
+    # "compliance" = {
+    #   enforcement_mode = var.cbr_enforcement_mode
+    # }
+    "container-registry" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      region           = var.region
+    }
+    "containers-kubernetes" = {
+      enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
+      region           = var.region
+    }
+    "containers-kubernetes-cluster" = {
+      enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
+      region           = var.region
+    }
+    "containers-kubernetes-management" = {
+      enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
+      region           = var.region
+    }
+    # "context-based-restrictions" = {
+    #   enforcement_mode = var.cbr_enforcement_mode
+    # }
+    "databases-for-cassandra" = {
+      enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
+      region           = var.region
+    }
+    "databases-for-elasticsearch" = {
+      enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
+      region           = var.region
+    }
+    "databases-for-enterprisedb" = {
+      enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
+      region           = var.region
+    }
+    "databases-for-etcd" = {
+      enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
+      region           = var.region
+    }
+    "databases-for-mongodb" = {
+      enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
+      region           = var.region
+    }
+    "databases-for-mysql" = {
+      enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
+      region           = var.region
+    }
+    "databases-for-postgresql" = {
+      enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
+      region           = var.region
+    }
+    "databases-for-redis" = {
+      enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
+      region           = var.region
+    }
+    # "directlink" = {
+    #   enforcement_mode = var.cbr_enforcement_mode
+    # }
+    # "dns-svcs" = {
+    #   enforcement_mode = var.cbr_enforcement_mode
+    # }
+    "event-notifications" = {
+      enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
+      region           = var.region
+    }
+    # "globalcatalog-collection" = {
+    #   enforcement_mode = var.cbr_enforcement_mode
+    # }
+    "hs-crypto" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      region           = var.region
+    }
+    # "iam-access-management" = {
+    #   enforcement_mode = var.cbr_enforcement_mode
+    # }
+    # "iam-groups" = {
+    #   enforcement_mode = var.cbr_enforcement_mode
+    # }
+    "iam-identity" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      region           = var.region
+    }
+    "is" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      region           = var.region
+    }
+    # "kms" = {
+    #   enforcement_mode = var.cbr_enforcement_mode
+    # }
+    "logdna" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      region           = var.region
+    }
+    "logdnaat" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      region           = var.region
+    }
+    "messagehub" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      region           = var.region
+    }
+    "messages-for-rabbitmq" = {
+      enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
+      region           = var.region
+    }
+    # "mqcloud" = {
+    #   enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
+    #   region = var.region
+    # }
+    # "schematics" = {
+    #   enforcement_mode = var.cbr_enforcement_mode
+    # }
+    "secrets-manager" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      region           = var.region
+    }
+    "sysdig-monitor" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      region           = var.region
+    }
+    "sysdig-secure" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      region           = var.region
+    }
+    # "transit" = {
+    #   enforcement_mode = var.cbr_enforcement_mode
+    # }
+    # "user-management" = {
+    #   enforcement_mode = var.cbr_enforcement_mode
+    # }
+  }
+}
+
 module "account_infrastructure_base" {
   source = "../.."
   providers = {
@@ -81,16 +229,17 @@ module "account_infrastructure_base" {
   # cbr
   provision_cbr                              = var.provision_cbr
   cbr_prefix                                 = var.prefix
-  cbr_allow_cos_to_kms                       = var.cbr_allow_cos_to_kms
-  cbr_allow_block_storage_to_kms             = var.cbr_allow_block_storage_to_kms
-  cbr_allow_roks_to_kms                      = var.cbr_allow_roks_to_kms
-  cbr_allow_icd_to_kms                       = var.cbr_allow_icd_to_kms
-  cbr_allow_event_streams_to_kms             = var.cbr_allow_event_streams_to_kms
-  cbr_allow_vpcs_to_container_registry       = var.cbr_allow_vpcs_to_container_registry
-  cbr_allow_vpcs_to_cos                      = var.cbr_allow_vpcs_to_cos
-  cbr_allow_at_to_cos                        = var.cbr_allow_at_to_cos
-  cbr_allow_iks_to_is                        = var.cbr_allow_iks_to_is
-  cbr_allow_is_to_cos                        = var.cbr_allow_is_to_cos
-  cbr_allow_scc_to_cos                       = var.cbr_allow_scc_to_cos
+  cbr_allow_cos_to_kms                       = false
+  cbr_allow_block_storage_to_kms             = false
+  cbr_allow_roks_to_kms                      = false
+  cbr_allow_icd_to_kms                       = false
+  cbr_allow_event_streams_to_kms             = false
+  cbr_allow_vpcs_to_container_registry       = false
+  cbr_allow_vpcs_to_cos                      = false
+  cbr_allow_at_to_cos                        = false
+  cbr_allow_iks_to_is                        = false
+  cbr_allow_is_to_cos                        = false
+  cbr_allow_scc_to_cos                       = false
+  cbr_target_service_details                 = local.target_service_details
   cbr_kms_service_targeted_by_prewired_rules = var.cbr_kms_service_targeted_by_prewired_rules
 }

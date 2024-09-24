@@ -288,4 +288,5 @@ module "cbr_fscloud" {
   allow_is_to_cos                        = var.cbr_allow_is_to_cos
   allow_scc_to_cos                       = var.cbr_allow_scc_to_cos
   kms_service_targeted_by_prewired_rules = var.cbr_kms_service_targeted_by_prewired_rules
+  target_service_details                 = var.cbr_target_service_details
 }
