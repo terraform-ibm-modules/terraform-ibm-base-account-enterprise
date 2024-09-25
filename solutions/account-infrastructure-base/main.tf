@@ -29,9 +29,9 @@ module "account_infrastructure_base" {
   # atracker + cos
   provision_atracker_cos               = var.provision_atracker_cos
   skip_cos_kms_auth_policy             = var.skip_cos_kms_auth_policy
-  cos_instance_name                    = var.cos_instance_name == null ? try("${var.prefix}-cos-instance", "cos-instance") : var.cos_instance_name
-  cos_bucket_name                      = var.cos_bucket_name == null ? try("${var.prefix}-cos-bucket", "cos-bucket") : var.cos_bucket_name
-  cos_target_name                      = var.cos_target_name == null ? try("${var.prefix}-cos-target", "cos-target") : var.cos_target_name
+  cos_instance_name                    = !var.provision_atracker_cos ? null : (var.cos_instance_name == null ? try("${var.prefix}-cos-instance", "cos-instance") : var.cos_instance_name)
+  cos_bucket_name                      = !var.provision_atracker_cos ? null : (var.cos_bucket_name == null ? try("${lower(var.prefix)}-cos-bucket", "cos-bucket") : var.cos_bucket_name)
+  cos_target_name                      = !var.provision_atracker_cos ? null : (var.cos_target_name == null ? try("${var.prefix}-cos-target", "cos-target") : var.cos_target_name)
   activity_tracker_route_name          = var.activity_tracker_route_name == null ? try("${var.prefix}-cos-route", "cos-route") : var.activity_tracker_route_name
   cos_bucket_management_endpoint_type  = var.cos_bucket_management_endpoint_type
   kms_key_crn                          = var.kms_key_crn
