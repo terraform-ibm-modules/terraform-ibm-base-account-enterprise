@@ -98,7 +98,6 @@
             {
               "key": "ibmcloud_api_key",
               "type": "string",
-              "default_value": null,
               "description": "The IBM Cloud API key that is used by the provider to authenticate with IBM Cloud to create the resources.",
               "required": true
             },
@@ -119,7 +118,6 @@
             {
               "key": "prefix",
               "type": "string",
-              "default_value": null,
               "description": "An optional prefix to append to all resources created by this solution.",
               "required": false
             },
@@ -133,7 +131,6 @@
             {
               "key": "kms_key_crn",
               "type": "string",
-              "default_value": null,
               "description": "The CRN of the key management service key to encrypt the Object Storage bucket. Required if `provision_atracker_cos` is true.",
               "required": false
             },
@@ -167,86 +164,72 @@
             {
               "key": "security_resource_group_name",
               "type": "string",
-              "required": false,
-              "default_value": null
+              "required": false
             },
             {
               "key": "existing_security_resource_group_name",
               "type": "string",
-              "required": false,
-              "default_value": null
+              "required": false
             },
             {
               "key": "audit_resource_group_name",
               "type": "string",
-              "required": false,
-              "default_value": null
+              "required": false
             },
             {
               "key": "existing_audit_resource_group_name",
               "type": "string",
-              "required": false,
-              "default_value": null
+              "required": false
             },
             {
               "key": "observability_resource_group_name",
               "type": "string",
-              "required": false,
-              "default_value": null
+              "required": false
             },
             {
               "key": "existing_observability_resource_group_name",
               "type": "string",
-              "required": false,
-              "default_value": null
+              "required": false
             },
             {
               "key": "management_resource_group_name",
               "type": "string",
-              "required": false,
-              "default_value": null
+              "required": false
             },
             {
               "key": "existing_management_resource_group_name",
               "type": "string",
-              "required": false,
-              "default_value": null
+              "required": false
             },
             {
               "key": "workload_resource_group_name",
               "type": "string",
-              "required": false,
-              "default_value": null
+              "required": false
             },
             {
               "key": "existing_workload_resource_group_name",
               "type": "string",
-              "required": false,
-              "default_value": null
+              "required": false
             },
             {
               "key": "edge_resource_group_name",
               "type": "string",
-              "required": false,
-              "default_value": null
+              "required": false
             },
             {
               "key": "existing_edge_resource_group_name",
               "type": "string",
-              "required": false,
-              "default_value": null
+              "required": false
             },
             {
               "key": "devops_resource_group_name",
               "type": "string",
-              "required": false,
-              "default_value": null
+              "required": false
             },
             {
               "key": "existing_devops_resource_group_name",
               "type": "string",
-              "required": false,
-              "default_value": null
+              "required": false
             },
             {
               "key": "access_token_expiration",
@@ -358,8 +341,7 @@
             {
               "key": "cos_instance_name",
               "type": "string",
-              "required": false,
-              "default_value": null
+              "required": false
             },
             {
               "key": "cos_instance_access_tags",
@@ -370,8 +352,7 @@
             {
               "key": "cos_bucket_name",
               "type": "string",
-              "required": false,
-              "default_value": null
+              "required": false
             },
             {
               "key": "cos_bucket_access_tags",
@@ -400,8 +381,7 @@
             {
               "key": "cos_bucket_storage_class",
               "type": "string",
-              "required": false,
-              "default_value": null
+              "required": false
             },
             {
               "key": "cos_bucket_archive_enabled",
@@ -467,14 +447,12 @@
             {
               "key": "cos_target_name",
               "type": "string",
-              "required": false,
-              "default_value": null
+              "required": false
             },
             {
               "key": "activity_tracker_route_name",
               "type": "string",
-              "required": false,
-              "default_value": null
+              "required": false
             },
             {
               "key": "activity_tracker_locations",
@@ -491,8 +469,7 @@
             {
               "key": "trusted_profile_name",
               "type": "string",
-              "required": false,
-              "default_value": null
+              "required": false
             },
             {
               "key": "trusted_profile_description",
