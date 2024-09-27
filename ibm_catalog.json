@@ -108,133 +108,43 @@
               "description": "Set to true to skip the IAM account settings being applied to the account. For more information on these settings, see https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/blob/main/README.md"
             },
             {
-              "key": "region",
-              "type": "region",
-              "description": "The region to provision the Object Storage resources created by this solution. Only required if `provision_atracker_cos` is true.",
-              "required": false
-            },
-            {
               "key": "prefix",
               "type": "string",
               "description": "An optional prefix to append to all resources created by this solution.",
               "required": false
             },
             {
-              "key": "resource_tags",
-              "type": "array",
-              "description": "An optional list of tags to be added to the Object Storage resources created by this solution. Required only if `provision_atracker_cos` is true.",
-              "required": false
-            },
-            {
-              "key": "kms_key_crn",
+              "key": "region",
               "type": "string",
-              "description": "The CRN of the key management service key to encrypt the Object Storage bucket. Required if `provision_atracker_cos` is true.",
-              "required": false
+              "default_value": "us-south",
+              "required": false,
+              "custom_config": {
+                "type": "region",
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "showKinds": [
+                  "region",
+                  "zone",
+                  "dc",
+                  "location"
+                ]
+              }
             },
             {
               "key": "cos_bucket_management_endpoint_type",
               "type": "string",
-              "default_value": "public",
-              "options": [
-                "public",
-                "private",
-                "direct"
-              ]
-            },
-            {
-              "key": "allowed_ip_addresses",
-              "type": "array",
-              "required": false
-            },
-            {
-              "key": "provision_atracker_cos",
-              "type": "boolean",
-              "required": false
-            },
-            {
-              "key": "skip_cos_kms_auth_policy",
-              "type": "boolean",
-              "required": false
-            },
-            {
-              "key": "security_resource_group_name",
-              "type": "string",
-              "required": false
-            },
-            {
-              "key": "existing_security_resource_group_name",
-              "type": "string",
-              "required": false
-            },
-            {
-              "key": "audit_resource_group_name",
-              "type": "string",
-              "required": false
-            },
-            {
-              "key": "existing_audit_resource_group_name",
-              "type": "string",
-              "required": false
-            },
-            {
-              "key": "observability_resource_group_name",
-              "type": "string",
-              "required": false
-            },
-            {
-              "key": "existing_observability_resource_group_name",
-              "type": "string",
-              "required": false
-            },
-            {
-              "key": "management_resource_group_name",
-              "type": "string",
-              "required": false
-            },
-            {
-              "key": "existing_management_resource_group_name",
-              "type": "string",
-              "required": false
-            },
-            {
-              "key": "workload_resource_group_name",
-              "type": "string",
-              "required": false
-            },
-            {
-              "key": "existing_workload_resource_group_name",
-              "type": "string",
-              "required": false
-            },
-            {
-              "key": "edge_resource_group_name",
-              "type": "string",
-              "required": false
-            },
-            {
-              "key": "existing_edge_resource_group_name",
-              "type": "string",
-              "required": false
-            },
-            {
-              "key": "devops_resource_group_name",
-              "type": "string",
-              "required": false
-            },
-            {
-              "key": "existing_devops_resource_group_name",
-              "type": "string",
-              "required": false
-            },
-            {
-              "key": "access_token_expiration",
-              "type": "string",
-              "required": false
-            },
-            {
-              "key": "active_session_timeout",
-              "type": "int",
-              "required": false
+              "required": false,
+              "custom_config": {
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "type": "string",
+                "default_value": "public",
+                "options": [
+                  "public",
+                  "private",
+                  "direct"
+                ]
+              }
             },
             {
               "key": "api_creation",
@@ -246,22 +156,6 @@
                 "NOT_RESTRICTED",
                 "NOT_SET"
               ]
-            },
-            {
-              "key": "enforce_allowed_ip_addresses",
-              "type": "boolean",
-              "required": false,
-              "description": "If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to Activity Tracker. After running in monitored mode to test this variable, it should then explicitly be set to true to enforce IP allow listing, has no effect when `skip_iam_account_settings` is true."
-            },
-            {
-              "key": "inactive_session_timeout",
-              "type": "string",
-              "required": false
-            },
-            {
-              "key": "max_sessions_per_identity",
-              "type": "string",
-              "required": false
             },
             {
               "key": "mfa",
@@ -278,16 +172,6 @@
               ]
             },
             {
-              "key": "public_access_enabled",
-              "type": "boolean",
-              "required": false
-            },
-            {
-              "key": "refresh_token_expiration",
-              "type": "string",
-              "required": false
-            },
-            {
               "key": "serviceid_creation",
               "type": "string",
               "required": false,
@@ -297,21 +181,6 @@
                 "NOT_RESTRICTED",
                 "NOT_SET"
               ]
-            },
-            {
-              "key": "shell_settings_enabled",
-              "type": "boolean",
-              "required": false
-            },
-            {
-              "key": "user_mfa",
-              "type": "array",
-              "required": false
-            },
-            {
-              "key": "user_mfa_reset",
-              "type": "boolean",
-              "required": false
             },
             {
               "key": "cos_plan",
@@ -324,56 +193,6 @@
               ]
             },
             {
-              "key": "cos_instance_name",
-              "type": "string",
-              "required": false
-            },
-            {
-              "key": "cos_instance_access_tags",
-              "type": "array",
-              "required": false
-            },
-            {
-              "key": "cos_bucket_name",
-              "type": "string",
-              "required": false
-            },
-            {
-              "key": "cos_bucket_access_tags",
-              "type": "array",
-              "required": false
-            },
-            {
-              "key": "cos_bucket_expire_enabled",
-              "type": "boolean",
-              "required": false
-            },
-            {
-              "key": "cos_bucket_expire_days",
-              "type": "int",
-              "required": false
-            },
-            {
-              "key": "cos_bucket_object_versioning_enabled",
-              "type": "boolean",
-              "required": false
-            },
-            {
-              "key": "cos_bucket_storage_class",
-              "type": "string",
-              "required": false
-            },
-            {
-              "key": "cos_bucket_archive_enabled",
-              "type": "boolean",
-              "required": false
-            },
-            {
-              "key": "cos_bucket_archive_days",
-              "type": "int",
-              "required": false
-            },
-            {
               "key": "cos_bucket_archive_type",
               "type": "string",
               "required": false,
@@ -382,74 +201,6 @@
                 "Glacier",
                 "Accelerated"
               ]
-            },
-            {
-              "key": "cos_bucket_retention_enabled",
-              "type": "boolean",
-              "required": false
-            },
-            {
-              "key": "cos_bucket_retention_default",
-              "type": "int",
-              "required": false,
-              "description": "Specifies default number of days an object that can be kept unmodified for COS bucket."
-            },
-            {
-              "key": "cos_bucket_retention_maximum",
-              "type": "int",
-              "required": false,
-              "description": "Specifies maximum number of days an object that can be kept unmodified for COS bucket."
-            },
-            {
-              "key": "cos_bucket_retention_minimum",
-              "type": "int",
-              "required": false,
-              "description": "Specifies minimum number of days an object must be kept unmodified for COS bucket."
-            },
-            {
-              "key": "cos_bucket_retention_permanent",
-              "type": "boolean",
-              "required": false
-            },
-            {
-              "key": "skip_atracker_cos_iam_auth_policy",
-              "type": "boolean",
-              "required": false
-            },
-            {
-              "key": "cos_target_name",
-              "type": "string",
-              "required": false
-            },
-            {
-              "key": "activity_tracker_route_name",
-              "type": "string",
-              "required": false
-            },
-            {
-              "key": "activity_tracker_locations",
-              "type": "array",
-              "required": false
-            },
-            {
-              "key": "provision_trusted_profile_projects",
-              "type": "boolean",
-              "required": false
-            },
-            {
-              "key": "trusted_profile_name",
-              "type": "string",
-              "required": false
-            },
-            {
-              "key": "trusted_profile_description",
-              "type": "string",
-              "required": false
-            },
-            {
-              "key": "trusted_profile_roles",
-              "type": "array",
-              "required": false
             }
           ]
         }
