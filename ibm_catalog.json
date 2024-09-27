@@ -108,12 +108,6 @@
               "description": "Set to true to skip the IAM account settings being applied to the account. For more information on these settings, see https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/blob/main/README.md"
             },
             {
-              "key": "prefix",
-              "type": "string",
-              "description": "An optional prefix to append to all resources created by this solution.",
-              "required": false
-            },
-            {
               "key": "region",
               "type": "string",
               "default_value": "us-south",
@@ -128,6 +122,30 @@
                   "dc",
                   "location"
                 ]
+              }
+            },
+            {
+              "key": "prefix",
+              "type": "string",
+              "description": "An optional prefix to append to all resources created by this solution.",
+              "required": false
+            },
+            {
+              "key": "resource_tags",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+                "type": "array",
+                "grouping": "deployment",
+                "original_grouping": "deployment"
+              }
+            },
+            {
+              "key": "kms_key_crn",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+
               }
             },
             {
@@ -147,6 +165,174 @@
               }
             },
             {
+              "key": "allowed_ip_addresses",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+                "type": "array",
+                "grouping": "deployment",
+                "original_grouping": "deployment"
+              }
+            },
+            {
+              "key": "provision_atracker_cos",
+              "type": "boolean",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "skip_cos_kms_auth_policy",
+              "type": "boolean",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "security_resource_group_name",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "existing_security_resource_group_name",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+                "type": "resource_group",
+                "grouping": "deployment",
+                "original_grouping": "deployment"
+              }
+            },
+            {
+              "key": "audit_resource_group_name",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "existing_audit_resource_group_name",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+                "type": "resource_group",
+                "grouping": "deployment",
+                "original_grouping": "deployment"
+              }
+            },
+            {
+              "key": "observability_resource_group_name",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "existing_observability_resource_group_name",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+                "type": "resource_group",
+                "grouping": "deployment",
+                "original_grouping": "deployment"
+              }
+            },
+            {
+              "key": "management_resource_group_name",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "existing_management_resource_group_name",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+                "type": "resource_group",
+                "grouping": "deployment",
+                "original_grouping": "deployment"
+              }
+            },
+            {
+              "key": "workload_resource_group_name",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "existing_workload_resource_group_name",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+                "type": "resource_group",
+                "grouping": "deployment",
+                "original_grouping": "deployment"
+              }
+            },
+            {
+              "key": "edge_resource_group_name",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "existing_edge_resource_group_name",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+                "type": "resource_group",
+                "grouping": "deployment",
+                "original_grouping": "deployment"
+              }
+            },
+            {
+              "key": "devops_resource_group_name",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "existing_devops_resource_group_name",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+                "type": "resource_group",
+                "grouping": "deployment",
+                "original_grouping": "deployment"
+              }
+            },
+            {
+              "key": "access_token_expiration",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "active_session_timeout",
+              "type": "int",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
               "key": "api_creation",
               "type": "string",
               "required": false,
@@ -156,6 +342,30 @@
                 "NOT_RESTRICTED",
                 "NOT_SET"
               ]
+            },
+            {
+              "key": "enforce_allowed_ip_addresses",
+              "type": "boolean",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "inactive_session_timeout",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "max_sessions_per_identity",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+
+              }
             },
             {
               "key": "mfa",
@@ -172,6 +382,22 @@
               ]
             },
             {
+              "key": "public_access_enabled",
+              "type": "boolean",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "refresh_token_expiration",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
               "key": "serviceid_creation",
               "type": "string",
               "required": false,
@@ -181,6 +407,38 @@
                 "NOT_RESTRICTED",
                 "NOT_SET"
               ]
+            },
+            {
+              "key": "shell_settings_enabled",
+              "type": "boolean",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "skip_cloud_shell_calls",
+              "type": "boolean",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "user_mfa",
+              "type": "object",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "user_mfa_reset",
+              "type": "boolean",
+              "required": false,
+              "custom_config": {
+
+              }
             },
             {
               "key": "cos_plan",
@@ -193,6 +451,90 @@
               ]
             },
             {
+              "key": "cos_instance_name",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "cos_instance_access_tags",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+                "type": "array",
+                "grouping": "deployment",
+                "original_grouping": "deployment"
+              }
+            },
+            {
+              "key": "cos_bucket_name",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "cos_bucket_access_tags",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+                "type": "array",
+                "grouping": "deployment",
+                "original_grouping": "deployment"
+              }
+            },
+            {
+              "key": "cos_bucket_expire_enabled",
+              "type": "boolean",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "cos_bucket_expire_days",
+              "type": "int",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "cos_bucket_object_versioning_enabled",
+              "type": "boolean",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "cos_bucket_storage_class",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "cos_bucket_archive_enabled",
+              "type": "boolean",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "cos_bucket_archive_days",
+              "type": "int",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
               "key": "cos_bucket_archive_type",
               "type": "string",
               "required": false,
@@ -201,6 +543,114 @@
                 "Glacier",
                 "Accelerated"
               ]
+            },
+            {
+              "key": "cos_bucket_retention_enabled",
+              "type": "boolean",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "cos_bucket_retention_default",
+              "type": "int",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "cos_bucket_retention_maximum",
+              "type": "int",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "cos_bucket_retention_minimum",
+              "type": "int",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "cos_bucket_retention_permanent",
+              "type": "boolean",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "skip_atracker_cos_iam_auth_policy",
+              "type": "boolean",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "cos_target_name",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "activity_tracker_route_name",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "activity_tracker_locations",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+                "type": "array",
+                "grouping": "deployment",
+                "original_grouping": "deployment"
+              }
+            },
+            {
+              "key": "provision_trusted_profile_projects",
+              "type": "boolean",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "trusted_profile_name",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "trusted_profile_description",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+
+              }
+            },
+            {
+              "key": "trusted_profile_roles",
+              "type": "string",
+              "required": false,
+              "custom_config": {
+                "type": "array",
+                "grouping": "deployment",
+                "original_grouping": "deployment"
+              }
             }
           ]
         }

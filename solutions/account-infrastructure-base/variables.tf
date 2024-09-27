@@ -321,13 +321,13 @@ variable "cos_bucket_retention_enabled" {
 }
 
 variable "cos_bucket_retention_default" {
-  description = "The default duration of time that an object can be kept unmodified in an Object Storage bucket."
+  description = "The default duration of time in days that an object can be kept unmodified in an Object Storage bucket."
   type        = number
   default     = 90
 }
 
 variable "cos_bucket_retention_maximum" {
-  description = "The maximum duration of time that an object can be kept unmodified in an Object Storage bucket."
+  description = "The maximum duration of time in days that an object can be kept unmodified in an Object Storage bucket."
   type        = number
   default     = 350
 }
