@@ -19,6 +19,10 @@ variable "prefix" {
   type        = string
   description = "An optional prefix to append to all resources created by this solution."
   default     = null
+  validation {
+    condition     = length(var.prefix) <= 13
+    error_message = "`prefix` length must be 13 characters or less."
+  }
 }
 
 variable "resource_tags" {
@@ -171,7 +175,7 @@ variable "api_creation" {
 
 variable "enforce_allowed_ip_addresses" {
   type        = bool
-  description = "Whether the IP address restriction is enforced. If `false`, traffic originating outside of the specified allowed IP addresss is monitored with audit events sent to QRadar SIEM and Activity Tracker. After running in monitoring mode to test the impact of the restriction, you must set to `true` to enforce the IP allowlist."
+  description = "Whether the IP address restriction is enforced. If `false`, traffic originating outside of the specified allowed IP addresss is monitored with audit events sent to Activity Tracker. After running in monitoring mode to test the impact of the restriction, you must set to `true` to enforce the IP allowlist."
   default     = true
 }
 

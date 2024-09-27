@@ -103,6 +103,13 @@
               "required": true
             },
             {
+              "key": "skip_iam_account_settings",
+              "type": "boolean",
+              "required": false,
+              "default_value": false,
+              "description": "Set to true to skip the IAM account settings being applied to the account. For more information on these settings, see https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/blob/main/README.md"
+            },
+            {
               "key": "region",
               "type": "region",
               "default_value": "us-south",
@@ -242,12 +249,6 @@
               "default_value": null
             },
             {
-              "key": "skip_iam_account_settings",
-              "type": "boolean",
-              "required": false,
-              "default_value": false
-            },
-            {
               "key": "access_token_expiration",
               "type": "string",
               "required": false,
@@ -274,7 +275,8 @@
               "key": "enforce_allowed_ip_addresses",
               "type": "boolean",
               "required": false,
-              "default_value": true
+              "default_value": true,
+              "description": "If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to Activity Tracker. After running in monitored mode to test this variable, it should then explicitly be set to true to enforce IP allow listing, has no effect when `skip_iam_account_settings` is true."
             },
             {
               "key": "inactive_session_timeout",
@@ -433,19 +435,22 @@
               "key": "cos_bucket_retention_default",
               "type": "int",
               "required": false,
-              "default_value": 90
+              "default_value": 90,
+              "description": "Specifies default number of days an object that can be kept unmodified for COS bucket."
             },
             {
               "key": "cos_bucket_retention_maximum",
               "type": "int",
               "required": false,
-              "default_value": 350
+              "default_value": 350,
+              "description": "Specifies maximum number of days an object that can be kept unmodified for COS bucket."
             },
             {
               "key": "cos_bucket_retention_minimum",
               "type": "int",
               "required": false,
-              "default_value": 90
+              "default_value": 90,
+              "description": "Specifies minimum number of days an object must be kept unmodified for COS bucket."
             },
             {
               "key": "cos_bucket_retention_permanent",
@@ -469,7 +474,7 @@
               "key": "activity_tracker_route_name",
               "type": "string",
               "required": false,
-              "default_value": false
+              "default_value": null
             },
             {
               "key": "activity_tracker_locations",

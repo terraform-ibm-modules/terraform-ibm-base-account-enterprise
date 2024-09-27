@@ -188,7 +188,7 @@ variable "api_creation" {
 
 variable "enforce_allowed_ip_addresses" {
   type        = bool
-  description = "If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to SIEM and Activity Tracker. After running in monitored mode to test this variable, it should then explicitly be set to true to enforce IP allow listing, has no effect when `skip_iam_account_settings` is true."
+  description = "Whether the IP address restriction is enforced. If `false`, traffic originating outside of the specified allowed IP addresss is monitored with audit events sent to Activity Tracker. After running in monitoring mode to test the impact of the restriction, you must set to `true` to enforce the IP allowlist."
   default     = true
 }
 
