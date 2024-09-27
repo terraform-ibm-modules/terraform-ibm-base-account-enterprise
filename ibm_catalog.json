@@ -105,13 +105,11 @@
               "key": "skip_iam_account_settings",
               "type": "boolean",
               "required": false,
-              "default_value": false,
               "description": "Set to true to skip the IAM account settings being applied to the account. For more information on these settings, see https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/blob/main/README.md"
             },
             {
               "key": "region",
               "type": "region",
-              "default_value": "us-south",
               "description": "The region to provision the Object Storage resources created by this solution. Only required if `provision_atracker_cos` is true.",
               "required": false
             },
@@ -124,7 +122,6 @@
             {
               "key": "resource_tags",
               "type": "array",
-              "default_value": [],
               "description": "An optional list of tags to be added to the Object Storage resources created by this solution. Required only if `provision_atracker_cos` is true.",
               "required": false
             },
@@ -152,14 +149,12 @@
             {
               "key": "provision_atracker_cos",
               "type": "boolean",
-              "required": false,
-              "default_value": false
+              "required": false
             },
             {
               "key": "skip_cos_kms_auth_policy",
               "type": "boolean",
-              "required": false,
-              "default_value": false
+              "required": false
             },
             {
               "key": "security_resource_group_name",
@@ -234,14 +229,12 @@
             {
               "key": "access_token_expiration",
               "type": "string",
-              "required": false,
-              "default_value": "3600"
+              "required": false
             },
             {
               "key": "active_session_timeout",
               "type": "int",
-              "required": false,
-              "default_value": 86400
+              "required": false
             },
             {
               "key": "api_creation",
@@ -258,20 +251,17 @@
               "key": "enforce_allowed_ip_addresses",
               "type": "boolean",
               "required": false,
-              "default_value": true,
               "description": "If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to Activity Tracker. After running in monitored mode to test this variable, it should then explicitly be set to true to enforce IP allow listing, has no effect when `skip_iam_account_settings` is true."
             },
             {
               "key": "inactive_session_timeout",
               "type": "string",
-              "required": false,
-              "default_value": "7200"
+              "required": false
             },
             {
               "key": "max_sessions_per_identity",
               "type": "string",
-              "required": false,
-              "default_value": "NOT_SET"
+              "required": false
             },
             {
               "key": "mfa",
@@ -290,14 +280,12 @@
             {
               "key": "public_access_enabled",
               "type": "boolean",
-              "required": false,
-              "default_value": false
+              "required": false
             },
             {
               "key": "refresh_token_expiration",
               "type": "string",
-              "required": false,
-              "default_value": "259200"
+              "required": false
             },
             {
               "key": "serviceid_creation",
@@ -313,20 +301,17 @@
             {
               "key": "shell_settings_enabled",
               "type": "boolean",
-              "required": false,
-              "default_value": true
+              "required": false
             },
             {
               "key": "user_mfa",
               "type": "array",
-              "required": false,
-              "default_value": []
+              "required": false
             },
             {
               "key": "user_mfa_reset",
               "type": "boolean",
-              "required": false,
-              "default_value": false
+              "required": false
             },
             {
               "key": "cos_plan",
@@ -346,8 +331,7 @@
             {
               "key": "cos_instance_access_tags",
               "type": "array",
-              "required": false,
-              "default_value": []
+              "required": false
             },
             {
               "key": "cos_bucket_name",
@@ -357,26 +341,22 @@
             {
               "key": "cos_bucket_access_tags",
               "type": "array",
-              "required": false,
-              "default_value": []
+              "required": false
             },
             {
               "key": "cos_bucket_expire_enabled",
               "type": "boolean",
-              "required": false,
-              "default_value": false
+              "required": false
             },
             {
               "key": "cos_bucket_expire_days",
               "type": "int",
-              "required": false,
-              "default_value": 365
+              "required": false
             },
             {
               "key": "cos_bucket_object_versioning_enabled",
               "type": "boolean",
-              "required": false,
-              "default_value": false
+              "required": false
             },
             {
               "key": "cos_bucket_storage_class",
@@ -386,14 +366,12 @@
             {
               "key": "cos_bucket_archive_enabled",
               "type": "boolean",
-              "required": false,
-              "default_value": false
+              "required": false
             },
             {
               "key": "cos_bucket_archive_days",
               "type": "int",
-              "required": false,
-              "default_value": 20
+              "required": false
             },
             {
               "key": "cos_bucket_archive_type",
@@ -408,41 +386,35 @@
             {
               "key": "cos_bucket_retention_enabled",
               "type": "boolean",
-              "required": false,
-              "default_value": false
+              "required": false
             },
             {
               "key": "cos_bucket_retention_default",
               "type": "int",
               "required": false,
-              "default_value": 90,
               "description": "Specifies default number of days an object that can be kept unmodified for COS bucket."
             },
             {
               "key": "cos_bucket_retention_maximum",
               "type": "int",
               "required": false,
-              "default_value": 350,
               "description": "Specifies maximum number of days an object that can be kept unmodified for COS bucket."
             },
             {
               "key": "cos_bucket_retention_minimum",
               "type": "int",
               "required": false,
-              "default_value": 90,
               "description": "Specifies minimum number of days an object must be kept unmodified for COS bucket."
             },
             {
               "key": "cos_bucket_retention_permanent",
               "type": "boolean",
-              "required": false,
-              "default_value": false
+              "required": false
             },
             {
               "key": "skip_atracker_cos_iam_auth_policy",
               "type": "boolean",
-              "required": false,
-              "default_value": false
+              "required": false
             },
             {
               "key": "cos_target_name",
@@ -457,14 +429,12 @@
             {
               "key": "activity_tracker_locations",
               "type": "array",
-              "required": false,
-              "default_value": ["*", "global"]
+              "required": false
             },
             {
               "key": "provision_trusted_profile_projects",
               "type": "boolean",
-              "required": false,
-              "default_value": true
+              "required": false
             },
             {
               "key": "trusted_profile_name",
@@ -474,14 +444,12 @@
             {
               "key": "trusted_profile_description",
               "type": "string",
-              "required": false,
-              "default_value": "Trusted Profile for Projects access"
+              "required": false
             },
             {
               "key": "trusted_profile_roles",
               "type": "array",
-              "required": false,
-              "default_value": ["Administrator"]
+              "required": false
             }
           ]
         }
