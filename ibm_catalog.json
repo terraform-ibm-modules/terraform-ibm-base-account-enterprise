@@ -105,7 +105,15 @@
             },
             {
               "key": "region",
-              "type": "string"
+              "type": "string",
+              "custom_config": {
+                "type": "vpc_region",
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "generationType": "2"
+                }
+              }
             },
             {
               "key": "prefix",
@@ -127,17 +135,11 @@
             {
               "key": "cos_bucket_management_endpoint_type",
               "type": "string",
-              "custom_config": {
-                "grouping": "deployment",
-                "original_grouping": "deployment",
-                "type": "string",
-                "default_value": "public",
-                "options": [
-                  "public",
-                  "private",
-                  "direct"
-                ]
-              }
+              "options": [
+                "public",
+                "private",
+                "direct"
+              ]
             },
             {
               "key": "allowed_ip_addresses",
