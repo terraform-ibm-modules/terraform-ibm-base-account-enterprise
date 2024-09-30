@@ -97,43 +97,28 @@
           "configuration": [
             {
               "key": "ibmcloud_api_key",
-              "type": "string",
-              "description": "The IBM Cloud API key that is used by the provider to authenticate with IBM Cloud to create the resources.",
-              "required": true
+              "type": "password"
             },
             {
               "key": "skip_iam_account_settings",
-              "type": "boolean",
-              "required": false,
-              "description": "Set to true to skip the IAM account settings being applied to the account. For more information on these settings, see https://github.com/terraform-ibm-modules/terraform-ibm-iam-account-settings/blob/main/README.md"
+              "type": "boolean"
             },
             {
               "key": "region",
               "type": "string",
-              "default_value": "us-south",
-              "required": false,
               "custom_config": {
                 "type": "region",
                 "grouping": "deployment",
-                "original_grouping": "deployment",
-                "showKinds": [
-                  "region",
-                  "zone",
-                  "dc",
-                  "location"
-                ]
+                "original_grouping": "deployment"
               }
             },
             {
               "key": "prefix",
-              "type": "string",
-              "description": "An optional prefix to append to all resources created by this solution.",
-              "required": false
+              "type": "string"
             },
             {
               "key": "resource_tags",
               "type": "string",
-              "required": false,
               "custom_config": {
                 "type": "array",
                 "grouping": "deployment",
@@ -142,16 +127,11 @@
             },
             {
               "key": "kms_key_crn",
-              "type": "string",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "string"
             },
             {
               "key": "cos_bucket_management_endpoint_type",
               "type": "string",
-              "required": false,
               "custom_config": {
                 "grouping": "deployment",
                 "original_grouping": "deployment",
@@ -167,7 +147,6 @@
             {
               "key": "allowed_ip_addresses",
               "type": "string",
-              "required": false,
               "custom_config": {
                 "type": "array",
                 "grouping": "deployment",
@@ -176,32 +155,19 @@
             },
             {
               "key": "provision_atracker_cos",
-              "type": "boolean",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "boolean"
             },
             {
               "key": "skip_cos_kms_auth_policy",
-              "type": "boolean",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "boolean"
             },
             {
               "key": "security_resource_group_name",
-              "type": "string",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "string"
             },
             {
               "key": "existing_security_resource_group_name",
               "type": "string",
-              "required": false,
               "custom_config": {
                 "type": "resource_group",
                 "grouping": "deployment",
@@ -210,16 +176,11 @@
             },
             {
               "key": "audit_resource_group_name",
-              "type": "string",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "string"
             },
             {
               "key": "existing_audit_resource_group_name",
               "type": "string",
-              "required": false,
               "custom_config": {
                 "type": "resource_group",
                 "grouping": "deployment",
@@ -228,16 +189,11 @@
             },
             {
               "key": "observability_resource_group_name",
-              "type": "string",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "string"
             },
             {
               "key": "existing_observability_resource_group_name",
               "type": "string",
-              "required": false,
               "custom_config": {
                 "type": "resource_group",
                 "grouping": "deployment",
@@ -246,16 +202,11 @@
             },
             {
               "key": "management_resource_group_name",
-              "type": "string",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "string"
             },
             {
               "key": "existing_management_resource_group_name",
               "type": "string",
-              "required": false,
               "custom_config": {
                 "type": "resource_group",
                 "grouping": "deployment",
@@ -264,16 +215,11 @@
             },
             {
               "key": "workload_resource_group_name",
-              "type": "string",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "string"
             },
             {
               "key": "existing_workload_resource_group_name",
               "type": "string",
-              "required": false,
               "custom_config": {
                 "type": "resource_group",
                 "grouping": "deployment",
@@ -282,16 +228,11 @@
             },
             {
               "key": "edge_resource_group_name",
-              "type": "string",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "string"
             },
             {
               "key": "existing_edge_resource_group_name",
               "type": "string",
-              "required": false,
               "custom_config": {
                 "type": "resource_group",
                 "grouping": "deployment",
@@ -300,16 +241,11 @@
             },
             {
               "key": "devops_resource_group_name",
-              "type": "string",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "string"
             },
             {
               "key": "existing_devops_resource_group_name",
               "type": "string",
-              "required": false,
               "custom_config": {
                 "type": "resource_group",
                 "grouping": "deployment",
@@ -318,25 +254,15 @@
             },
             {
               "key": "access_token_expiration",
-              "type": "string",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "string"
             },
             {
               "key": "active_session_timeout",
-              "type": "int",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "int"
             },
             {
               "key": "api_creation",
               "type": "string",
-              "required": false,
-              "default_value": "RESTRICTED",
               "options": [
                 "RESTRICTED",
                 "NOT_RESTRICTED",
@@ -345,33 +271,19 @@
             },
             {
               "key": "enforce_allowed_ip_addresses",
-              "type": "boolean",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "boolean"
             },
             {
               "key": "inactive_session_timeout",
-              "type": "string",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "string"
             },
             {
               "key": "max_sessions_per_identity",
-              "type": "string",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "string"
             },
             {
               "key": "mfa",
               "type": "string",
-              "required": false,
-              "default_value": "TOTP4ALL",
               "options": [
                 "NONE",
                 "TOTP",
@@ -383,25 +295,15 @@
             },
             {
               "key": "public_access_enabled",
-              "type": "boolean",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "boolean"
             },
             {
               "key": "refresh_token_expiration",
-              "type": "string",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "string"
             },
             {
               "key": "serviceid_creation",
               "type": "string",
-              "required": false,
-              "default_value": "RESTRICTED",
               "options": [
                 "RESTRICTED",
                 "NOT_RESTRICTED",
@@ -410,41 +312,23 @@
             },
             {
               "key": "shell_settings_enabled",
-              "type": "boolean",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "boolean"
             },
             {
               "key": "skip_cloud_shell_calls",
-              "type": "boolean",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "boolean"
             },
             {
               "key": "user_mfa",
-              "type": "object",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "object"
             },
             {
               "key": "user_mfa_reset",
-              "type": "boolean",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "boolean"
             },
             {
               "key": "cos_plan",
               "type": "string",
-              "required": false,
-              "default_value": "standard",
               "options": [
                 "standard",
                 "cos-one-rate-plan"
@@ -452,16 +336,11 @@
             },
             {
               "key": "cos_instance_name",
-              "type": "string",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "string"
             },
             {
               "key": "cos_instance_access_tags",
               "type": "string",
-              "required": false,
               "custom_config": {
                 "type": "array",
                 "grouping": "deployment",
@@ -470,16 +349,11 @@
             },
             {
               "key": "cos_bucket_name",
-              "type": "string",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "string"
             },
             {
               "key": "cos_bucket_access_tags",
               "type": "string",
-              "required": false,
               "custom_config": {
                 "type": "array",
                 "grouping": "deployment",
@@ -488,57 +362,31 @@
             },
             {
               "key": "cos_bucket_expire_enabled",
-              "type": "boolean",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "boolean"
             },
             {
               "key": "cos_bucket_expire_days",
-              "type": "int",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "int"
             },
             {
               "key": "cos_bucket_object_versioning_enabled",
-              "type": "boolean",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "boolean"
             },
             {
               "key": "cos_bucket_storage_class",
-              "type": "string",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "string"
             },
             {
               "key": "cos_bucket_archive_enabled",
-              "type": "boolean",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "boolean"
             },
             {
               "key": "cos_bucket_archive_days",
-              "type": "int",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "int"
             },
             {
               "key": "cos_bucket_archive_type",
               "type": "string",
-              "required": false,
-              "default_value": "Glacier",
               "options": [
                 "Glacier",
                 "Accelerated"
@@ -546,72 +394,39 @@
             },
             {
               "key": "cos_bucket_retention_enabled",
-              "type": "boolean",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "boolean"
             },
             {
               "key": "cos_bucket_retention_default",
-              "type": "int",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "int"
             },
             {
               "key": "cos_bucket_retention_maximum",
-              "type": "int",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "int"
             },
             {
               "key": "cos_bucket_retention_minimum",
-              "type": "int",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "int"
             },
             {
               "key": "cos_bucket_retention_permanent",
-              "type": "boolean",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "boolean"
             },
             {
               "key": "skip_atracker_cos_iam_auth_policy",
-              "type": "boolean",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "boolean"
             },
             {
               "key": "cos_target_name",
-              "type": "string",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "string"
             },
             {
               "key": "activity_tracker_route_name",
-              "type": "string",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "string"
             },
             {
               "key": "activity_tracker_locations",
               "type": "string",
-              "required": false,
               "custom_config": {
                 "type": "array",
                 "grouping": "deployment",
@@ -620,32 +435,19 @@
             },
             {
               "key": "provision_trusted_profile_projects",
-              "type": "boolean",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "boolean"
             },
             {
               "key": "trusted_profile_name",
-              "type": "string",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "string"
             },
             {
               "key": "trusted_profile_description",
-              "type": "string",
-              "required": false,
-              "custom_config": {
-
-              }
+              "type": "string"
             },
             {
               "key": "trusted_profile_roles",
               "type": "string",
-              "required": false,
               "custom_config": {
                 "type": "array",
                 "grouping": "deployment",
