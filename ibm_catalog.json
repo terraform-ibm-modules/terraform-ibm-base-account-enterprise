@@ -105,12 +105,7 @@
             },
             {
               "key": "region",
-              "type": "string",
-              "custom_config": {
-                "type": "region",
-                "grouping": "deployment",
-                "original_grouping": "deployment"
-              }
+              "type": "string"
             },
             {
               "key": "prefix",
