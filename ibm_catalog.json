@@ -327,7 +327,11 @@
             },
             {
               "key": "user_mfa",
-              "type": "object"
+              "custom_config": {
+                "type": "array",
+                "grouping": "deployment",
+                "original_grouping": "deployment"
+              }
             },
             {
               "key": "user_mfa_reset"
