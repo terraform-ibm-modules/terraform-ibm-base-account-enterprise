@@ -100,12 +100,10 @@
               "type": "password"
             },
             {
-              "key": "skip_iam_account_settings",
-              "type": "boolean"
+              "key": "skip_iam_account_settings"
             },
             {
               "key": "region",
-              "type": "string",
               "custom_config": {
                 "type": "vpc_region",
                 "grouping": "deployment",
@@ -116,12 +114,10 @@
               }
             },
             {
-              "key": "prefix",
-              "type": "string"
+              "key": "prefix"
             },
             {
               "key": "resource_tags",
-              "type": "string",
               "custom_config": {
                 "type": "array",
                 "grouping": "deployment",
@@ -129,12 +125,10 @@
               }
             },
             {
-              "key": "kms_key_crn",
-              "type": "string"
+              "key": "kms_key_crn"
             },
             {
               "key": "cos_bucket_management_endpoint_type",
-              "type": "string",
               "options": [
                 {
                   "displayName": "Public",
@@ -152,7 +146,6 @@
             },
             {
               "key": "allowed_ip_addresses",
-              "type": "string",
               "custom_config": {
                 "type": "array",
                 "grouping": "deployment",
@@ -160,20 +153,16 @@
               }
             },
             {
-              "key": "provision_atracker_cos",
-              "type": "boolean"
+              "key": "provision_atracker_cos"
             },
             {
-              "key": "skip_cos_kms_auth_policy",
-              "type": "boolean"
+              "key": "skip_cos_kms_auth_policy"
             },
             {
-              "key": "security_resource_group_name",
-              "type": "string"
+              "key": "security_resource_group_name"
             },
             {
               "key": "existing_security_resource_group_name",
-              "type": "string",
               "custom_config": {
                 "type": "resource_group",
                 "grouping": "deployment",
@@ -181,12 +170,10 @@
               }
             },
             {
-              "key": "audit_resource_group_name",
-              "type": "string"
+              "key": "audit_resource_group_name"
             },
             {
               "key": "existing_audit_resource_group_name",
-              "type": "string",
               "custom_config": {
                 "type": "resource_group",
                 "grouping": "deployment",
@@ -194,12 +181,10 @@
               }
             },
             {
-              "key": "observability_resource_group_name",
-              "type": "string"
+              "key": "observability_resource_group_name"
             },
             {
               "key": "existing_observability_resource_group_name",
-              "type": "string",
               "custom_config": {
                 "type": "resource_group",
                 "grouping": "deployment",
@@ -207,12 +192,10 @@
               }
             },
             {
-              "key": "management_resource_group_name",
-              "type": "string"
+              "key": "management_resource_group_name"
             },
             {
               "key": "existing_management_resource_group_name",
-              "type": "string",
               "custom_config": {
                 "type": "resource_group",
                 "grouping": "deployment",
@@ -220,12 +203,10 @@
               }
             },
             {
-              "key": "workload_resource_group_name",
-              "type": "string"
+              "key": "workload_resource_group_name"
             },
             {
               "key": "existing_workload_resource_group_name",
-              "type": "string",
               "custom_config": {
                 "type": "resource_group",
                 "grouping": "deployment",
@@ -233,12 +214,10 @@
               }
             },
             {
-              "key": "edge_resource_group_name",
-              "type": "string"
+              "key": "edge_resource_group_name"
             },
             {
               "key": "existing_edge_resource_group_name",
-              "type": "string",
               "custom_config": {
                 "type": "resource_group",
                 "grouping": "deployment",
@@ -246,12 +225,10 @@
               }
             },
             {
-              "key": "devops_resource_group_name",
-              "type": "string"
+              "key": "devops_resource_group_name"
             },
             {
               "key": "existing_devops_resource_group_name",
-              "type": "string",
               "custom_config": {
                 "type": "resource_group",
                 "grouping": "deployment",
@@ -259,16 +236,13 @@
               }
             },
             {
-              "key": "access_token_expiration",
-              "type": "string"
+              "key": "access_token_expiration"
             },
             {
-              "key": "active_session_timeout",
-              "type": "int"
+              "key": "active_session_timeout"
             },
             {
               "key": "api_creation",
-              "type": "string",
               "options": [
                 {
                   "displayName": "RESTRICTED",
@@ -285,20 +259,16 @@
               ]
             },
             {
-              "key": "enforce_allowed_ip_addresses",
-              "type": "boolean"
+              "key": "enforce_allowed_ip_addresses"
             },
             {
-              "key": "inactive_session_timeout",
-              "type": "string"
+              "key": "inactive_session_timeout"
             },
             {
-              "key": "max_sessions_per_identity",
-              "type": "string"
+              "key": "max_sessions_per_identity"
             },
             {
               "key": "mfa",
-              "type": "string",
               "options": [
                 {
                   "displayName": "NONE",
@@ -327,16 +297,13 @@
               ]
             },
             {
-              "key": "public_access_enabled",
-              "type": "boolean"
+              "key": "public_access_enabled"
             },
             {
-              "key": "refresh_token_expiration",
-              "type": "string"
+              "key": "refresh_token_expiration"
             },
             {
               "key": "serviceid_creation",
-              "type": "string",
               "options": [
                 {
                   "displayName": "RESTRICTED",
@@ -353,24 +320,20 @@
               ]
             },
             {
-              "key": "shell_settings_enabled",
-              "type": "boolean"
+              "key": "shell_settings_enabled"
             },
             {
-              "key": "skip_cloud_shell_calls",
-              "type": "boolean"
+              "key": "skip_cloud_shell_calls"
             },
             {
               "key": "user_mfa",
               "type": "object"
             },
             {
-              "key": "user_mfa_reset",
-              "type": "boolean"
+              "key": "user_mfa_reset"
             },
             {
               "key": "cos_plan",
-              "type": "string",
               "options": [
                 {
                   "displayName": "standard",
@@ -383,12 +346,10 @@
               ]
             },
             {
-              "key": "cos_instance_name",
-              "type": "string"
+              "key": "cos_instance_name"
             },
             {
               "key": "cos_instance_access_tags",
-              "type": "string",
               "custom_config": {
                 "type": "array",
                 "grouping": "deployment",
@@ -396,12 +357,10 @@
               }
             },
             {
-              "key": "cos_bucket_name",
-              "type": "string"
+              "key": "cos_bucket_name"
             },
             {
               "key": "cos_bucket_access_tags",
-              "type": "string",
               "custom_config": {
                 "type": "array",
                 "grouping": "deployment",
@@ -409,32 +368,25 @@
               }
             },
             {
-              "key": "cos_bucket_expire_enabled",
-              "type": "boolean"
+              "key": "cos_bucket_expire_enabled"
             },
             {
-              "key": "cos_bucket_expire_days",
-              "type": "int"
+              "key": "cos_bucket_expire_days"
             },
             {
-              "key": "cos_bucket_object_versioning_enabled",
-              "type": "boolean"
+              "key": "cos_bucket_object_versioning_enabled"
             },
             {
-              "key": "cos_bucket_storage_class",
-              "type": "string"
+              "key": "cos_bucket_storage_class"
             },
             {
-              "key": "cos_bucket_archive_enabled",
-              "type": "boolean"
+              "key": "cos_bucket_archive_enabled"
             },
             {
-              "key": "cos_bucket_archive_days",
-              "type": "int"
+              "key": "cos_bucket_archive_days"
             },
             {
               "key": "cos_bucket_archive_type",
-              "type": "string",
               "options": [
                 {
                   "displayName": "Glacier",
@@ -447,40 +399,31 @@
               ]
             },
             {
-              "key": "cos_bucket_retention_enabled",
-              "type": "boolean"
+              "key": "cos_bucket_retention_enabled"
             },
             {
-              "key": "cos_bucket_retention_default",
-              "type": "int"
+              "key": "cos_bucket_retention_default"
             },
             {
-              "key": "cos_bucket_retention_maximum",
-              "type": "int"
+              "key": "cos_bucket_retention_maximum"
             },
             {
-              "key": "cos_bucket_retention_minimum",
-              "type": "int"
+              "key": "cos_bucket_retention_minimum"
             },
             {
-              "key": "cos_bucket_retention_permanent",
-              "type": "boolean"
+              "key": "cos_bucket_retention_permanent"
             },
             {
-              "key": "skip_atracker_cos_iam_auth_policy",
-              "type": "boolean"
+              "key": "skip_atracker_cos_iam_auth_policy"
             },
             {
-              "key": "cos_target_name",
-              "type": "string"
+              "key": "cos_target_name"
             },
             {
-              "key": "activity_tracker_route_name",
-              "type": "string"
+              "key": "activity_tracker_route_name"
             },
             {
               "key": "activity_tracker_locations",
-              "type": "string",
               "custom_config": {
                 "type": "array",
                 "grouping": "deployment",
@@ -488,20 +431,16 @@
               }
             },
             {
-              "key": "provision_trusted_profile_projects",
-              "type": "boolean"
+              "key": "provision_trusted_profile_projects"
             },
             {
-              "key": "trusted_profile_name",
-              "type": "string"
+              "key": "trusted_profile_name"
             },
             {
-              "key": "trusted_profile_description",
-              "type": "string"
+              "key": "trusted_profile_description"
             },
             {
               "key": "trusted_profile_roles",
-              "type": "string",
               "custom_config": {
                 "type": "array",
                 "grouping": "deployment",
