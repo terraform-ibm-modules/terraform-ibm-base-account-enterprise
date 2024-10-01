@@ -136,9 +136,18 @@
               "key": "cos_bucket_management_endpoint_type",
               "type": "string",
               "options": [
-                "public",
-                "private",
-                "direct"
+                {
+                  "displayName": "Public",
+                  "value": "public"
+                },
+                {
+                  "displayName": "Private",
+                  "value": "private"
+                },
+                {
+                  "displayName": "Direct",
+                  "value": "direct"
+                }
               ]
             },
             {
@@ -261,9 +270,18 @@
               "key": "api_creation",
               "type": "string",
               "options": [
-                "RESTRICTED",
-                "NOT_RESTRICTED",
-                "NOT_SET"
+                {
+                  "displayName": "RESTRICTED",
+                  "value": "RESTRICTED"
+                },
+                {
+                  "displayName": "NOT_RESTRICTED",
+                  "value": "NOT_RESTRICTED"
+                },
+                {
+                  "displayName": "NOT_SET",
+                  "value": "NOT_SET"
+                }
               ]
             },
             {
@@ -282,12 +300,30 @@
               "key": "mfa",
               "type": "string",
               "options": [
-                "NONE",
-                "TOTP",
-                "TOTP4ALL",
-                "LEVEL1",
-                "LEVEL2",
-                "LEVEL3"
+                {
+                  "displayName": "NONE",
+                  "value": "NONE"
+                },
+                {
+                  "displayName": "TOTP",
+                  "value": "TOTP"
+                },
+                {
+                  "displayName": "TOTP4ALL",
+                  "value": "TOTP4ALL"
+                },
+                {
+                  "displayName": "LEVEL1",
+                  "value": "LEVEL1"
+                },
+                {
+                  "displayName": "LEVEL2",
+                  "value": "LEVEL2"
+                },
+                {
+                  "displayName": "LEVEL3",
+                  "value": "LEVEL3"
+                }
               ]
             },
             {
@@ -302,9 +338,18 @@
               "key": "serviceid_creation",
               "type": "string",
               "options": [
-                "RESTRICTED",
-                "NOT_RESTRICTED",
-                "NOT_SET"
+                {
+                  "displayName": "RESTRICTED",
+                  "value": "RESTRICTED"
+                },
+                {
+                  "displayName": "NOT_RESTRICTED",
+                  "value": "NOT_RESTRICTED"
+                },
+                {
+                  "displayName": "NOT_SET",
+                  "value": "NOT_SET"
+                }
               ]
             },
             {
@@ -327,8 +372,14 @@
               "key": "cos_plan",
               "type": "string",
               "options": [
-                "standard",
-                "cos-one-rate-plan"
+                {
+                  "displayName": "standard",
+                  "value": "standard"
+                },
+                {
+                  "displayName": "cos-one-rate-plan",
+                  "value": "cos-one-rate-plan"
+                }
               ]
             },
             {
@@ -385,8 +436,14 @@
               "key": "cos_bucket_archive_type",
               "type": "string",
               "options": [
-                "Glacier",
-                "Accelerated"
+                {
+                  "displayName": "Glacier",
+                  "value": "Glacier"
+                },
+                {
+                  "displayName": "Accelerated",
+                  "value": "Accelerated"
+                }
               ]
             },
             {
