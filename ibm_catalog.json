@@ -135,11 +135,11 @@
             {
               "key": "cos_bucket_management_endpoint_type",
               "type": "string",
-              "options": [
-                "public",
-                "private",
-                "direct"
-              ]
+              "custom_config": {
+                "type": "string",
+                "grouping": "deployment",
+                "original_grouping": "deployment"
+              }
             },
             {
               "key": "allowed_ip_addresses",
