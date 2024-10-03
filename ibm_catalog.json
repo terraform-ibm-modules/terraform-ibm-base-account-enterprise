@@ -96,16 +96,21 @@
           },
           "configuration": [
             {
+              "key": "ibmcloud_api_key",
+              "type": "password",
+              "required": true
+            },
+            {
+              "key": "prefix"
+            },
+            {
+              "key": "skip_iam_account_settings"
+            },
+            {
               "key": "access_token_expiration"
             },
             {
               "key": "active_session_timeout"
-            },
-            {
-              "key": "activity_tracker_locations"
-            },
-            {
-              "key": "activity_tracker_route_name"
             },
             {
               "key": "allowed_ip_addresses"
@@ -128,50 +133,110 @@
               ]
             },
             {
-              "key": "audit_resource_group_name"
+              "key": "enforce_allowed_ip_addresses"
             },
             {
-              "key": "cos_bucket_access_tags"
+              "key": "inactive_session_timeout"
             },
             {
-              "key": "cos_bucket_archive_days"
+              "key": "max_sessions_per_identity"
             },
             {
-              "key": "cos_bucket_archive_enabled"
-            },
-            {
-              "key": "cos_bucket_archive_type",
+              "key": "mfa",
               "options": [
                 {
-                  "displayname": "Glacier",
-                  "value": "Glacier"
+                  "displayname": "Option 1",
+                  "value": "TOTP4ALL"
                 },
                 {
-                  "displayname": "Accelerated",
-                  "value": "Accelerated"
+                  "displayname": "Option 2",
+                  "value": "TOTP"
+                },
+                {
+                  "displayname": "Option 3",
+                  "value": "LEVEL1"
+                },
+                {
+                  "displayname": "Option 4",
+                  "value": "LEVEL2"
+                },
+                {
+                  "displayname": "Option 5",
+                  "value": "LEVEL3"
+                },
+                {
+                  "displayname": "Option 6",
+                  "value": "NONE"
                 }
               ]
             },
             {
-              "key": "cos_bucket_expire_days"
+              "key": "public_access_enabled"
             },
             {
-              "key": "cos_bucket_expire_enabled"
+              "key": "refresh_token_expiration"
             },
             {
-              "key": "cos_bucket_management_endpoint_type",
+              "key": "serviceid_creation",
               "options": [
                 {
-                  "displayname": "public",
-                  "value": "public"
+                  "displayname": "Option 1",
+                  "value": "RESTRICTED"
                 },
                 {
-                  "displayname": "private",
-                  "value": "private"
+                  "displayname": "Option 2",
+                  "value": "NOT_RESTRICTED"
                 },
                 {
-                  "displayname": "direct",
-                  "value": "direct"
+                  "displayname": "Option 3",
+                  "value": "NOT_SET"
+                }
+              ]
+            },
+            {
+              "key": "shell_settings_enabled"
+            },
+            {
+              "key": "skip_cloud_shell_calls"
+            },
+            {
+              "key": "user_mfa",
+              "type": "array"
+            },
+            {
+              "key": "user_mfa_reset"
+            },
+            {
+              "key": "provision_atracker_cos"
+            },
+            {
+              "key": "region"
+            },
+            {
+              "key": "kms_key_crn"
+            },
+            {
+              "key": "skip_cos_kms_auth_policy"
+            },
+            {
+              "key": "cos_instance_name"
+            },
+            {
+              "key": "resource_tags"
+            },
+            {
+              "key": "cos_instance_access_tags"
+            },
+            {
+              "key": "cos_plan",
+              "options": [
+                {
+                  "displayname": "Option 1",
+                  "value": "standard"
+                },
+                {
+                  "displayname": "Option 2",
+                  "value": "cos-one-rate-plan"
                 }
               ]
             },
@@ -179,22 +244,16 @@
               "key": "cos_bucket_name"
             },
             {
+              "key": "cos_bucket_access_tags"
+            },
+            {
+              "key": "cos_bucket_expire_enabled"
+            },
+            {
+              "key": "cos_bucket_expire_days"
+            },
+            {
               "key": "cos_bucket_object_versioning_enabled"
-            },
-            {
-              "key": "cos_bucket_retention_default"
-            },
-            {
-              "key": "cos_bucket_retention_enabled"
-            },
-            {
-              "key": "cos_bucket_retention_maximum"
-            },
-            {
-              "key": "cos_bucket_retention_minimum"
-            },
-            {
-              "key": "cos_bucket_retention_permanent"
             },
             {
               "key": "cos_bucket_storage_class",
@@ -222,26 +281,82 @@
               ]
             },
             {
-              "key": "cos_instance_access_tags"
+              "key": "cos_bucket_archive_enabled"
             },
             {
-              "key": "cos_instance_name"
+              "key": "cos_bucket_archive_days"
             },
             {
-              "key": "cos_plan",
+              "key": "cos_bucket_archive_type",
               "options": [
                 {
-                  "displayname": "Option 1",
-                  "value": "standard"
+                  "displayname": "Glacier",
+                  "value": "Glacier"
                 },
                 {
-                  "displayname": "Option 2",
-                  "value": "cos-one-rate-plan"
+                  "displayname": "Accelerated",
+                  "value": "Accelerated"
+                }
+              ]
+            },
+            {
+              "key": "cos_bucket_retention_default"
+            },
+            {
+              "key": "cos_bucket_retention_enabled"
+            },
+            {
+              "key": "cos_bucket_retention_maximum"
+            },
+            {
+              "key": "cos_bucket_retention_minimum"
+            },
+            {
+              "key": "cos_bucket_retention_permanent"
+            },
+            {
+              "key": "skip_atracker_cos_iam_auth_policy"
+            },
+            {
+              "key": "cos_bucket_management_endpoint_type",
+              "options": [
+                {
+                  "displayname": "public",
+                  "value": "public"
+                },
+                {
+                  "displayname": "private",
+                  "value": "private"
+                },
+                {
+                  "displayname": "direct",
+                  "value": "direct"
                 }
               ]
             },
             {
               "key": "cos_target_name"
+            },
+            {
+              "key": "activity_tracker_route_name"
+            },
+            {
+              "key": "activity_tracker_locations"
+            },
+            {
+              "key": "provision_trusted_profile_projects"
+            },
+            {
+              "key": "trusted_profile_name"
+            },
+            {
+              "key": "trusted_profile_description"
+            },
+            {
+              "key": "trusted_profile_roles"
+            },
+            {
+              "key": "audit_resource_group_name"
             },
             {
               "key": "devops_resource_group_name"
@@ -250,7 +365,16 @@
               "key": "edge_resource_group_name"
             },
             {
-              "key": "enforce_allowed_ip_addresses"
+              "key": "management_resource_group_name"
+            },
+            {
+              "key": "observability_resource_group_name"
+            },
+            {
+              "key": "security_resource_group_name"
+            },
+            {
+              "key": "workload_resource_group_name"
             },
             {
               "key": "existing_audit_resource_group_name",
@@ -335,130 +459,6 @@
                   "identifier": "rg_name"
                 }
               }
-            },
-            {
-              "key": "ibmcloud_api_key",
-              "type": "password",
-              "required": true
-            },
-            {
-              "key": "inactive_session_timeout"
-            },
-            {
-              "key": "kms_key_crn"
-            },
-            {
-              "key": "management_resource_group_name"
-            },
-            {
-              "key": "max_sessions_per_identity"
-            },
-            {
-              "key": "mfa",
-              "options": [
-                {
-                  "displayname": "Option 1",
-                  "value": "TOTP4ALL"
-                },
-                {
-                  "displayname": "Option 2",
-                  "value": "TOTP"
-                },
-                {
-                  "displayname": "Option 3",
-                  "value": "LEVEL1"
-                },
-                {
-                  "displayname": "Option 4",
-                  "value": "LEVEL2"
-                },
-                {
-                  "displayname": "Option 5",
-                  "value": "LEVEL3"
-                },
-                {
-                  "displayname": "Option 6",
-                  "value": "NONE"
-                }
-              ]
-            },
-            {
-              "key": "observability_resource_group_name"
-            },
-            {
-              "key": "prefix"
-            },
-            {
-              "key": "provision_atracker_cos"
-            },
-            {
-              "key": "provision_trusted_profile_projects"
-            },
-            {
-              "key": "public_access_enabled"
-            },
-            {
-              "key": "refresh_token_expiration"
-            },
-            {
-              "key": "region"
-            },
-            {
-              "key": "resource_tags"
-            },
-            {
-              "key": "security_resource_group_name"
-            },
-            {
-              "key": "serviceid_creation",
-              "options": [
-                {
-                  "displayname": "Option 1",
-                  "value": "RESTRICTED"
-                },
-                {
-                  "displayname": "Option 2",
-                  "value": "NOT_RESTRICTED"
-                },
-                {
-                  "displayname": "Option 3",
-                  "value": "NOT_SET"
-                }
-              ]
-            },
-            {
-              "key": "shell_settings_enabled"
-            },
-            {
-              "key": "skip_atracker_cos_iam_auth_policy"
-            },
-            {
-              "key": "skip_cloud_shell_calls"
-            },
-            {
-              "key": "skip_cos_kms_auth_policy"
-            },
-            {
-              "key": "skip_iam_account_settings"
-            },
-            {
-              "key": "trusted_profile_description"
-            },
-            {
-              "key": "trusted_profile_name"
-            },
-            {
-              "key": "trusted_profile_roles"
-            },
-            {
-              "key": "user_mfa",
-              "type": "array"
-            },
-            {
-              "key": "user_mfa_reset"
-            },
-            {
-              "key": "workload_resource_group_name"
             }
           ]
         }
