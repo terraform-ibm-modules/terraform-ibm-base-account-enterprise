@@ -97,8 +97,7 @@
           "configuration": [
             {
               "key": "ibmcloud_api_key",
-              "type": "password",
-              "required": true
+              "type": "password"
             },
             {
               "key": "prefix"
@@ -119,15 +118,15 @@
               "key": "api_creation",
               "options": [
                 {
-                  "displayname": "RESTRICTED",
+                  "displayname": "Option 1",
                   "value": "RESTRICTED"
                 },
                 {
-                  "displayname": "NOT_RESTRICTED",
+                  "displayname": "Option 2",
                   "value": "NOT_RESTRICTED"
                 },
                 {
-                  "displayname": "NOT_SET",
+                  "displayname": "Option 3",
                   "value": "NOT_SET"
                 }
               ]
@@ -290,11 +289,11 @@
               "key": "cos_bucket_archive_type",
               "options": [
                 {
-                  "displayname": "Glacier",
+                  "displayname": "Option 1",
                   "value": "Glacier"
                 },
                 {
-                  "displayname": "Accelerated",
+                  "displayname": "Option 2",
                   "value": "Accelerated"
                 }
               ]
@@ -321,15 +320,15 @@
               "key": "cos_bucket_management_endpoint_type",
               "options": [
                 {
-                  "displayname": "public",
+                  "displayname": "Option 1",
                   "value": "public"
                 },
                 {
-                  "displayname": "private",
+                  "displayname": "Option 2",
                   "value": "private"
                 },
                 {
-                  "displayname": "direct",
+                  "displayname": "Option 3",
                   "value": "direct"
                 }
               ]
@@ -378,7 +377,6 @@
             },
             {
               "key": "existing_audit_resource_group_name",
-              "display_name": "Resource group",
               "custom_config": {
                 "type": "resource_group",
                 "grouping": "deployment",
@@ -390,7 +388,6 @@
             },
             {
               "key": "existing_devops_resource_group_name",
-              "display_name": "Resource group",
               "custom_config": {
                 "type": "resource_group",
                 "grouping": "deployment",
@@ -402,7 +399,6 @@
             },
             {
               "key": "existing_edge_resource_group_name",
-              "display_name": "Resource group",
               "custom_config": {
                 "type": "resource_group",
                 "grouping": "deployment",
@@ -414,7 +410,6 @@
             },
             {
               "key": "existing_management_resource_group_name",
-              "display_name": "Resource group",
               "custom_config": {
                 "type": "resource_group",
                 "grouping": "deployment",
@@ -426,7 +421,6 @@
             },
             {
               "key": "existing_observability_resource_group_name",
-              "display_name": "Resource group",
               "custom_config": {
                 "type": "resource_group",
                 "grouping": "deployment",
@@ -438,7 +432,6 @@
             },
             {
               "key": "existing_security_resource_group_name",
-              "display_name": "Resource group",
               "custom_config": {
                 "type": "resource_group",
                 "grouping": "deployment",
@@ -450,7 +443,6 @@
             },
             {
               "key": "existing_workload_resource_group_name",
-              "display_name": "Resource group",
               "custom_config": {
                 "type": "resource_group",
                 "grouping": "deployment",
