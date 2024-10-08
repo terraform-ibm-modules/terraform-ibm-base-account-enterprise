@@ -4,149 +4,162 @@
 
 locals {
   target_service_details = {
-    # "IAM" = {
-    #   enforcement_mode = var.cbr_enforcement_mode
-    # }
-    # "apprapp" = {
-    #   enforcement_mode = var.cbr_enforcement_mode
-    # }
+    "IAM" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      global_deny      = false
+    }
+    "apprapp" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      global_deny      = false
+    }
     "cloud-object-storage" = {
       enforcement_mode = var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
     "codeengine" = {
       enforcement_mode = var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
-    # "compliance" = {
-    #   enforcement_mode = var.cbr_enforcement_mode
-    # }
+    "compliance" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      global_deny      = false
+    }
     "container-registry" = {
       enforcement_mode = var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
     "containers-kubernetes" = {
       enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
     "containers-kubernetes-cluster" = {
       enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
     "containers-kubernetes-management" = {
       enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
-    # "context-based-restrictions" = {
-    #   enforcement_mode = var.cbr_enforcement_mode
-    # }
+    "context-based-restrictions" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      global_deny      = false
+    }
     "databases-for-cassandra" = {
       enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
     "databases-for-elasticsearch" = {
       enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
     "databases-for-enterprisedb" = {
       enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
     "databases-for-etcd" = {
       enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
     "databases-for-mongodb" = {
       enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
     "databases-for-mysql" = {
       enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
     "databases-for-postgresql" = {
       enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
     "databases-for-redis" = {
       enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
-    # "directlink" = {
-    #   enforcement_mode = var.cbr_enforcement_mode
-    # }
-    # "dns-svcs" = {
-    #   enforcement_mode = var.cbr_enforcement_mode
-    # }
+    "directlink" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      global_deny      = false
+    }
+    "dns-svcs" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      global_deny      = false
+    }
     "event-notifications" = {
       enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
-    # "globalcatalog-collection" = {
-    #   enforcement_mode = var.cbr_enforcement_mode
-    # }
+    "globalcatalog-collection" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      global_deny      = false
+    }
     "hs-crypto" = {
       enforcement_mode = var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
-    # "iam-access-management" = {
-    #   enforcement_mode = var.cbr_enforcement_mode
-    # }
-    # "iam-groups" = {
-    #   enforcement_mode = var.cbr_enforcement_mode
-    # }
+    "iam-access-management" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      global_deny      = false
+    }
+    "iam-groups" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      global_deny      = false
+    }
     "iam-identity" = {
       enforcement_mode = var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
     "is" = {
       enforcement_mode = var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
-    # "kms" = {
-    #   enforcement_mode = var.cbr_enforcement_mode
-    # }
+    "kms" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      global_deny      = false
+    }
     "logdna" = {
       enforcement_mode = var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
     "logdnaat" = {
       enforcement_mode = var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
     "messagehub" = {
       enforcement_mode = var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
     "messages-for-rabbitmq" = {
       enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
-    # "mqcloud" = {
-    #   enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
-    #   region = var.region
-    # }
-    # "schematics" = {
-    #   enforcement_mode = var.cbr_enforcement_mode
-    # }
+    "mqcloud" = {
+      enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
+      global_deny      = false
+    }
+    "schematics" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      global_deny      = false
+    }
     "secrets-manager" = {
       enforcement_mode = var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
     "sysdig-monitor" = {
       enforcement_mode = var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
     "sysdig-secure" = {
       enforcement_mode = var.cbr_enforcement_mode
-      region           = var.region
+      global_deny      = false
     }
-    # "transit" = {
-    #   enforcement_mode = var.cbr_enforcement_mode
-    # }
-    # "user-management" = {
-    #   enforcement_mode = var.cbr_enforcement_mode
-    # }
+    "transit" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      global_deny      = false
+    }
+    "user-management" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      global_deny      = false
+    }
   }
 }
 
