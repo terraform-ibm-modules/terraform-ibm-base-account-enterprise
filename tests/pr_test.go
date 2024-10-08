@@ -71,7 +71,7 @@ func TestRunUpgradeDA(t *testing.T) {
 
 	// t.Parallel()
 
-	options := setupOptions(t, "base-acct-upg", solutionDir)
+	options := setupOptions(t, "ba-upg", solutionDir)
 
 	output, err := options.RunTestUpgrade()
 	if !options.UpgradeTestSkipped {
