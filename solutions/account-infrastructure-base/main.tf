@@ -2,6 +2,10 @@
 # Base Account
 ########################################################################################################################
 
+locals {
+  prefix = var.provision_atracker_cos ? lower(var.prefix) : var.prefix
+}
+
 module "account_infrastructure_base" {
   source = "../.."
   providers = {
@@ -11,28 +15,28 @@ module "account_infrastructure_base" {
   region = var.region
 
   # resource groups
-  audit_resource_group_name                  = try("${var.prefix}-${var.audit_resource_group_name}", var.audit_resource_group_name, null)
+  audit_resource_group_name                  = try("${local.prefix}-${var.audit_resource_group_name}", var.audit_resource_group_name, null)
   existing_audit_resource_group_name         = var.existing_audit_resource_group_name
-  devops_resource_group_name                 = try("${var.prefix}-${var.devops_resource_group_name}", var.devops_resource_group_name, null)
+  devops_resource_group_name                 = try("${local.prefix}-${var.devops_resource_group_name}", var.devops_resource_group_name, null)
   existing_devops_resource_group_name        = var.existing_devops_resource_group_name
-  edge_resource_group_name                   = try("${var.prefix}-${var.edge_resource_group_name}", var.edge_resource_group_name, null)
+  edge_resource_group_name                   = try("${local.prefix}-${var.edge_resource_group_name}", var.edge_resource_group_name, null)
   existing_edge_resource_group_name          = var.existing_edge_resource_group_name
-  management_resource_group_name             = try("${var.prefix}-${var.management_resource_group_name}", var.management_resource_group_name, null)
+  management_resource_group_name             = try("${local.prefix}-${var.management_resource_group_name}", var.management_resource_group_name, null)
   existing_management_resource_group_name    = var.existing_management_resource_group_name
-  observability_resource_group_name          = try("${var.prefix}-${var.observability_resource_group_name}", var.observability_resource_group_name, null)
+  observability_resource_group_name          = try("${local.prefix}-${var.observability_resource_group_name}", var.observability_resource_group_name, null)
   existing_observability_resource_group_name = var.existing_observability_resource_group_name
-  security_resource_group_name               = try("${var.prefix}-${var.security_resource_group_name}", var.security_resource_group_name, null)
+  security_resource_group_name               = try("${local.prefix}-${var.security_resource_group_name}", var.security_resource_group_name, null)
   existing_security_resource_group_name      = var.existing_security_resource_group_name
-  workload_resource_group_name               = try("${var.prefix}-${var.workload_resource_group_name}", var.workload_resource_group_name, null)
+  workload_resource_group_name               = try("${local.prefix}-${var.workload_resource_group_name}", var.workload_resource_group_name, null)
   existing_workload_resource_group_name      = var.existing_workload_resource_group_name
 
   # atracker + cos
   provision_atracker_cos               = var.provision_atracker_cos
   skip_cos_kms_auth_policy             = var.skip_cos_kms_auth_policy
-  cos_instance_name                    = !var.provision_atracker_cos ? null : (var.cos_instance_name == null ? try("${var.prefix}-cos-instance", "cos-instance") : var.cos_instance_name)
-  cos_bucket_name                      = !var.provision_atracker_cos ? null : (var.cos_bucket_name == null ? try("${lower(var.prefix)}-cos-bucket", "cos-bucket") : lower(var.cos_bucket_name))
-  cos_target_name                      = !var.provision_atracker_cos ? null : (var.cos_target_name == null ? try("${var.prefix}-cos-target", "cos-target") : var.cos_target_name)
-  activity_tracker_route_name          = var.activity_tracker_route_name == null ? try("${var.prefix}-cos-route", "cos-route") : var.activity_tracker_route_name
+  cos_instance_name                    = !var.provision_atracker_cos ? null : (var.cos_instance_name == null ? try("${local.prefix}-cos-instance", "cos-instance") : var.cos_instance_name)
+  cos_bucket_name                      = !var.provision_atracker_cos ? null : (var.cos_bucket_name == null ? try("${local.prefix}-cos-bucket", "cos-bucket") : lower(var.cos_bucket_name))
+  cos_target_name                      = !var.provision_atracker_cos ? null : (var.cos_target_name == null ? try("${local.prefix}-cos-target", "cos-target") : var.cos_target_name)
+  activity_tracker_route_name          = var.activity_tracker_route_name == null ? try("${local.prefix}-cos-route", "cos-route") : var.activity_tracker_route_name
   cos_bucket_management_endpoint_type  = var.cos_bucket_management_endpoint_type
   kms_key_crn                          = var.kms_key_crn
   resource_tags                        = var.resource_tags
@@ -73,7 +77,7 @@ module "account_infrastructure_base" {
   user_mfa_reset               = var.user_mfa_reset
 
   # trusted profile
-  trusted_profile_name               = var.trusted_profile_name == null ? try("${var.prefix}-trusted-profile", "projects-trusted-profile") : var.trusted_profile_name
+  trusted_profile_name               = var.trusted_profile_name == null ? try("${local.prefix}-trusted-profile", "projects-trusted-profile") : var.trusted_profile_name
   provision_trusted_profile_projects = var.provision_trusted_profile_projects
   trusted_profile_description        = var.trusted_profile_description
   trusted_profile_roles              = var.trusted_profile_roles

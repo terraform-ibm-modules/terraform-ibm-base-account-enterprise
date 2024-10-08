@@ -17,8 +17,12 @@ variable "region" {
 
 variable "prefix" {
   type        = string
-  description = "An optional prefix to append to all resources created by this solution."
+  description = "An optional prefix to append to all resources created by this solution. If `provision_atracker_cos` is true, this value will be converted to lowercase in all instances."
   default     = null
+
+  # prefix restriction due to limitations when using multiple DAs in stacks
+  # this value was determined based on the lowest prefix restriction located here:
+  # https://github.com/terraform-ibm-modules/terraform-ibm-landing-zone/blob/main/patterns/roks/variables.tf#L11
   validation {
     condition     = length(var.prefix) <= 13
     error_message = "`prefix` length must be 13 characters or less."
@@ -175,7 +179,7 @@ variable "api_creation" {
 
 variable "enforce_allowed_ip_addresses" {
   type        = bool
-  description = "Whether the IP address restriction is enforced. If `false`, traffic originating outside of the specified allowed IP addresss is monitored with audit events sent to Activity Tracker. After running in monitoring mode to test the impact of the restriction, you must set to `true` to enforce the IP allowlist."
+  description = "Whether the IP address restriction is enforced. If you want to test the impact of this setting, set to `false`. Traffic originating outside of the specified allowed IP addresss is monitored with audit events sent to Activity Tracker, after running in monitoring mode to test the impact of the restriction, you must set to `true` to enforce the IP allowlist."
   default     = true
 }
 

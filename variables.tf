@@ -188,7 +188,7 @@ variable "api_creation" {
 
 variable "enforce_allowed_ip_addresses" {
   type        = bool
-  description = "Whether the IP address restriction is enforced. If `false`, traffic originating outside of the specified allowed IP addresss is monitored with audit events sent to Activity Tracker. After running in monitoring mode to test the impact of the restriction, you must set to `true` to enforce the IP allowlist."
+  description = "Whether the IP address restriction is enforced. Set the value to `false` to test the impact of the restriction on your account, once the impact of the restriction has been observed set the value to `true`."
   default     = true
 }
 

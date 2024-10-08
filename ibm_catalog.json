@@ -96,8 +96,7 @@
           },
           "configuration": [
             {
-              "key": "ibmcloud_api_key",
-              "type": "password"
+              "key": "ibmcloud_api_key"
             },
             {
               "key": "prefix"
@@ -118,15 +117,15 @@
               "key": "api_creation",
               "options": [
                 {
-                  "displayname": "Option 1",
+                  "displayname": "Restricted",
                   "value": "RESTRICTED"
                 },
                 {
-                  "displayname": "Option 2",
+                  "displayname": "Not Restricted",
                   "value": "NOT_RESTRICTED"
                 },
                 {
-                  "displayname": "Option 3",
+                  "displayname": "Do not set",
                   "value": "NOT_SET"
                 }
               ]
@@ -144,27 +143,27 @@
               "key": "mfa",
               "options": [
                 {
-                  "displayname": "Option 1",
+                  "displayname": "TOTP4ALL",
                   "value": "TOTP4ALL"
                 },
                 {
-                  "displayname": "Option 2",
+                  "displayname": "TOTP",
                   "value": "TOTP"
                 },
                 {
-                  "displayname": "Option 3",
+                  "displayname": "LEVEL1",
                   "value": "LEVEL1"
                 },
                 {
-                  "displayname": "Option 4",
+                  "displayname": "LEVEL2",
                   "value": "LEVEL2"
                 },
                 {
-                  "displayname": "Option 5",
+                  "displayname": "LEVEL3",
                   "value": "LEVEL3"
                 },
                 {
-                  "displayname": "Option 6",
+                  "displayname": "NONE",
                   "value": "NONE"
                 }
               ]
@@ -179,15 +178,15 @@
               "key": "serviceid_creation",
               "options": [
                 {
-                  "displayname": "Option 1",
+                  "displayname": "Restricted",
                   "value": "RESTRICTED"
                 },
                 {
-                  "displayname": "Option 2",
+                  "displayname": "Not Restricted",
                   "value": "NOT_RESTRICTED"
                 },
                 {
-                  "displayname": "Option 3",
+                  "displayname": "Do not set",
                   "value": "NOT_SET"
                 }
               ]
@@ -230,11 +229,11 @@
               "key": "cos_plan",
               "options": [
                 {
-                  "displayname": "Option 1",
+                  "displayname": "Standard",
                   "value": "standard"
                 },
                 {
-                  "displayname": "Option 2",
+                  "displayname": "COS Onerate Plan",
                   "value": "cos-one-rate-plan"
                 }
               ]
@@ -258,23 +257,23 @@
               "key": "cos_bucket_storage_class",
               "options": [
                 {
-                  "displayname": "Option 1",
+                  "displayname": "Standard",
                   "value": "standard"
                 },
                 {
-                  "displayname": "Option 2",
+                  "displayname": "Vault",
                   "value": "vault"
                 },
                 {
-                  "displayname": "Option 3",
+                  "displayname": "Cold",
                   "value": "cold"
                 },
                 {
-                  "displayname": "Option 4",
+                  "displayname": "Smart",
                   "value": "smart"
                 },
                 {
-                  "displayname": "Option 5",
+                  "displayname": "Onerate Active",
                   "value": "onerate_active"
                 }
               ]
@@ -289,11 +288,11 @@
               "key": "cos_bucket_archive_type",
               "options": [
                 {
-                  "displayname": "Option 1",
+                  "displayname": "Glacier",
                   "value": "Glacier"
                 },
                 {
-                  "displayname": "Option 2",
+                  "displayname": "Accelerated",
                   "value": "Accelerated"
                 }
               ]
@@ -320,15 +319,15 @@
               "key": "cos_bucket_management_endpoint_type",
               "options": [
                 {
-                  "displayname": "Option 1",
+                  "displayname": "Public",
                   "value": "public"
                 },
                 {
-                  "displayname": "Option 2",
+                  "displayname": "Private",
                   "value": "private"
                 },
                 {
-                  "displayname": "Option 3",
+                  "displayname": "Direct",
                   "value": "direct"
                 }
               ]
@@ -376,81 +375,25 @@
               "key": "workload_resource_group_name"
             },
             {
-              "key": "existing_audit_resource_group_name",
-              "custom_config": {
-                "type": "resource_group",
-                "grouping": "deployment",
-                "original_grouping": "deployment",
-                "config_constraints": {
-                  "identifier": "rg_name"
-                }
-              }
+              "key": "existing_audit_resource_group_name"
             },
             {
-              "key": "existing_devops_resource_group_name",
-              "custom_config": {
-                "type": "resource_group",
-                "grouping": "deployment",
-                "original_grouping": "deployment",
-                "config_constraints": {
-                  "identifier": "rg_name"
-                }
-              }
+              "key": "existing_devops_resource_group_name"
             },
             {
-              "key": "existing_edge_resource_group_name",
-              "custom_config": {
-                "type": "resource_group",
-                "grouping": "deployment",
-                "original_grouping": "deployment",
-                "config_constraints": {
-                  "identifier": "rg_name"
-                }
-              }
+              "key": "existing_edge_resource_group_name"
             },
             {
-              "key": "existing_management_resource_group_name",
-              "custom_config": {
-                "type": "resource_group",
-                "grouping": "deployment",
-                "original_grouping": "deployment",
-                "config_constraints": {
-                  "identifier": "rg_name"
-                }
-              }
+              "key": "existing_management_resource_group_name"
             },
             {
-              "key": "existing_observability_resource_group_name",
-              "custom_config": {
-                "type": "resource_group",
-                "grouping": "deployment",
-                "original_grouping": "deployment",
-                "config_constraints": {
-                  "identifier": "rg_name"
-                }
-              }
+              "key": "existing_observability_resource_group_name"
             },
             {
-              "key": "existing_security_resource_group_name",
-              "custom_config": {
-                "type": "resource_group",
-                "grouping": "deployment",
-                "original_grouping": "deployment",
-                "config_constraints": {
-                  "identifier": "rg_name"
-                }
-              }
+              "key": "existing_security_resource_group_name"
             },
             {
-              "key": "existing_workload_resource_group_name",
-              "custom_config": {
-                "type": "resource_group",
-                "grouping": "deployment",
-                "original_grouping": "deployment",
-                "config_constraints": {
-                  "identifier": "rg_name"
-                }
-              }
+              "key": "existing_workload_resource_group_name"
             }
           ]
         }
