@@ -71,7 +71,7 @@ func TestRunUpgradeDA(t *testing.T) {
 
 	// t.Parallel()
 
-	options := setupOptions(t, "aib-upg", solutionDir)
+	options := setupOptions(t, "aibupg", solutionDir)
 
 	output, err := options.RunTestUpgrade()
 	if !options.UpgradeTestSkipped {
