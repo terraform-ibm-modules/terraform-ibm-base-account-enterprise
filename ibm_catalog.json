@@ -53,6 +53,7 @@
           "working_directory": "solutions/account-infrastructure-base",
           "compliance": {
             "authority": "scc-v3",
+            "controls": [],
             "profiles": [
               {
                 "profile_name": "IBM Cloud Framework for Financial Services",
@@ -198,8 +199,7 @@
               "key": "skip_cloud_shell_calls"
             },
             {
-              "key": "user_mfa",
-              "type": "array"
+              "key": "user_mfa"
             },
             {
               "key": "user_mfa_reset"
