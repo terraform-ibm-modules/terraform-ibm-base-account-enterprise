@@ -56,7 +56,7 @@ func TestRunDA(t *testing.T) {
 
 	// t.Parallel()
 
-	options := setupOptions(t, "base-acct", solutionDir)
+	options := setupOptions(t, "aib", solutionDir)
 
 	output, err := options.RunTestConsistency()
 	assert.Nil(t, err, "This should not have errored")
@@ -71,7 +71,7 @@ func TestRunUpgradeDA(t *testing.T) {
 
 	// t.Parallel()
 
-	options := setupOptions(t, "ba-upg", solutionDir)
+	options := setupOptions(t, "aib-upg", solutionDir)
 
 	output, err := options.RunTestUpgrade()
 	if !options.UpgradeTestSkipped {
