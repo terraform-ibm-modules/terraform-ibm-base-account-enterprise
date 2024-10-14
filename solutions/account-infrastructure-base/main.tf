@@ -40,10 +40,6 @@ locals {
       enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
       global_deny      = false
     }
-    "context-based-restrictions" = {
-      enforcement_mode = var.cbr_enforcement_mode
-      global_deny      = false
-    }
     "databases-for-cassandra" = {
       enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
       global_deny      = false
@@ -129,10 +125,6 @@ locals {
       global_deny      = false
     }
     "messages-for-rabbitmq" = {
-      enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
-      global_deny      = false
-    }
-    "mqcloud" = {
       enforcement_mode = var.cbr_enforcement_mode == "report" ? "disabled" : var.cbr_enforcement_mode
       global_deny      = false
     }
@@ -241,7 +233,7 @@ module "account_infrastructure_base" {
 
   # cbr
   provision_cbr                              = var.provision_cbr
-  cbr_prefix                                 = var.prefix
+  cbr_prefix                                 = coalesce(var.prefix, "aib-cbr")
   cbr_allow_cos_to_kms                       = false
   cbr_allow_block_storage_to_kms             = false
   cbr_allow_roks_to_kms                      = false
