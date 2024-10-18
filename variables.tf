@@ -592,13 +592,13 @@ variable "cbr_allow_vpcs_to_cos" {
 
 variable "allow_vpcs_to_iam_groups" {
   type        = bool
-  description = "Set rule for VPCs to IAM groups, default is true"
+  description = "Whether to enable the rule that allows Virtual Private Clouds to access IAM groups. Default is true if `provision_cbr` is set to true."
   default     = true
 }
 
 variable "allow_vpcs_to_iam_access_management" {
   type        = bool
-  description = "Set rule for VPCs to IAM access management, default is true"
+  description = "Whether to enable the rule that allows Virtual Private Clouds to IAM access management. Default is true if `provision_cbr` is set to true."
   default     = true
 }
 
