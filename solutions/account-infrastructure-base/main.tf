@@ -235,17 +235,6 @@ module "account_infrastructure_base" {
   # cbr
   provision_cbr                              = var.provision_cbr
   cbr_prefix                                 = coalesce(var.prefix, "aib-cbr")
-  cbr_allow_cos_to_kms                       = false
-  cbr_allow_block_storage_to_kms             = false
-  cbr_allow_roks_to_kms                      = false
-  cbr_allow_icd_to_kms                       = false
-  cbr_allow_event_streams_to_kms             = false
-  cbr_allow_vpcs_to_container_registry       = false
-  cbr_allow_vpcs_to_cos                      = false
-  cbr_allow_at_to_cos                        = false
-  cbr_allow_iks_to_is                        = false
-  cbr_allow_is_to_cos                        = false
-  cbr_allow_scc_to_cos                       = false
   cbr_target_service_details                 = local.target_service_details
   cbr_kms_service_targeted_by_prewired_rules = var.cbr_kms_service_targeted_by_prewired_rules
 }
