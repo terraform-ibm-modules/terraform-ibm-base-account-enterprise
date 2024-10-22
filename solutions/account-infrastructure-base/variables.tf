@@ -297,7 +297,7 @@ variable "cos_bucket_object_versioning_enabled" {
 variable "cos_bucket_storage_class" {
   type        = string
   description = "The Object Storage bucket storage class type."
-  default     = null
+  default     = "smart"
 }
 
 variable "cos_bucket_archive_enabled" {

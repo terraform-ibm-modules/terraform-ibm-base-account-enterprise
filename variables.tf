@@ -375,7 +375,7 @@ variable "cos_bucket_management_endpoint_type" {
 variable "cos_bucket_storage_class" {
   type        = string
   description = "COS Bucket storage class type"
-  default     = null
+  default     = "smart"
 }
 
 variable "cos_bucket_archive_enabled" {

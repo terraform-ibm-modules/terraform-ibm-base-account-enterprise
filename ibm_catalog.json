@@ -199,7 +199,8 @@
               "key": "skip_cloud_shell_calls"
             },
             {
-              "key": "user_mfa"
+              "key": "user_mfa",
+              "type": "array"
             },
             {
               "key": "user_mfa_reset"
