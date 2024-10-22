@@ -188,7 +188,7 @@ variable "api_creation" {
 
 variable "enforce_allowed_ip_addresses" {
   type        = bool
-  description = "If true IP address restriction will be enforced, If false, traffic originated outside specified allowed IP address set is monitored with audit events sent to SIEM and Activity Tracker. After running in monitored mode to test this variable, it should then explicitly be set to true to enforce IP allow listing, has no effect when `skip_iam_account_settings` is true."
+  description = "Whether the IP address restriction is enforced. Set the value to `false` to test the impact of the restriction on your account, once the impact of the restriction has been observed set the value to `true`."
   default     = true
 }
 
@@ -375,7 +375,7 @@ variable "cos_bucket_management_endpoint_type" {
 variable "cos_bucket_storage_class" {
   type        = string
   description = "COS Bucket storage class type"
-  default     = null
+  default     = "smart"
 }
 
 variable "cos_bucket_archive_enabled" {
