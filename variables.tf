@@ -590,6 +590,18 @@ variable "cbr_allow_vpcs_to_cos" {
   default     = true
 }
 
+variable "cbr_allow_vpcs_to_iam_groups" {
+  type        = bool
+  description = "Whether to enable the rule that allows Virtual Private Clouds to access IAM groups. Default is true if `provision_cbr` is set to true."
+  default     = true
+}
+
+variable "cbr_allow_vpcs_to_iam_access_management" {
+  type        = bool
+  description = "Whether to enable the rule that allows Virtual Private Clouds to IAM access management. Default is true if `provision_cbr` is set to true."
+  default     = true
+}
+
 variable "cbr_allow_at_to_cos" {
   type        = bool
   description = "Whether to enable the rule that allows Activity Tracker to access Object Storage. Default is true if `provision_cbr` is set to true."
