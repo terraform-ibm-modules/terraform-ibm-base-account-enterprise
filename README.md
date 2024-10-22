@@ -12,6 +12,11 @@ This module is a general base layer module for setting up a newly provisioned ac
 - Base Resource Group
 - IAM Account Settings
 - Trusted Profile + Access Group for Projects
+- CBR Rules + Zones
+
+This module also optionally supports provisioning the following resources:
+
+- Activity Tracker routing + COS instance and bucket
 
 This module also optionally supports provisioning the following resources:
 
@@ -42,6 +47,10 @@ The module currently does not support setting the following FSCloud requirements
   - Follow these [steps](https://cloud.ibm.com/docs/account?topic=account-enabling-fs-validated) as a workaround to set this manually in the UI
 
 Tracking issue with IBM provider -> https://github.com/IBM-Cloud/terraform-provider-ibm/issues/4204
+
+### Pre-wired CBR configuration for FS Cloud
+
+This module creates pre-wired rules for CBR from our [FS Cloud submodule for CBR](https://github.com/terraform-ibm-modules/terraform-ibm-cbr), see [this README](https://github.com/terraform-ibm-modules/terraform-ibm-cbr/tree/main/modules/fscloud#pre-wired-cbr-configuration-for-fs-cloud) for more details on this configuration.
 
 ### Usage
 
@@ -122,7 +131,7 @@ You need the following permissions to run this module.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.62.0, < 2.0.0 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.69.0, < 2.0.0 |
 | <a name="requirement_logdna"></a> [logdna](#requirement\_logdna) | >= 1.14.2, < 2.0.0 |
 
 ### Modules
@@ -131,7 +140,8 @@ You need the following permissions to run this module.
 |------|--------|---------|
 | <a name="module_account_settings"></a> [account\_settings](#module\_account\_settings) | terraform-ibm-modules/iam-account-settings/ibm | 2.10.7 |
 | <a name="module_activity_tracker"></a> [activity\_tracker](#module\_activity\_tracker) | terraform-ibm-modules/observability-instances/ibm//modules/activity_tracker | 2.19.1 |
-| <a name="module_cos"></a> [cos](#module\_cos) | terraform-ibm-modules/cos/ibm//modules/fscloud | 8.11.16 |
+| <a name="module_cbr_fscloud"></a> [cbr\_fscloud](#module\_cbr\_fscloud) | terraform-ibm-modules/cbr/ibm//modules/fscloud | 1.28.0 |
+| <a name="module_cos"></a> [cos](#module\_cos) | terraform-ibm-modules/cos/ibm//modules/fscloud | 8.13.2 |
 | <a name="module_existing_resource_group"></a> [existing\_resource\_group](#module\_existing\_resource\_group) | terraform-ibm-modules/resource-group/ibm | 1.1.6 |
 | <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | terraform-ibm-modules/resource-group/ibm | 1.1.6 |
 | <a name="module_trusted_profile_projects"></a> [trusted\_profile\_projects](#module\_trusted\_profile\_projects) | terraform-ibm-modules/trusted-profile/ibm | 1.0.4 |
@@ -151,6 +161,20 @@ No resources.
 | <a name="input_allowed_ip_addresses"></a> [allowed\_ip\_addresses](#input\_allowed\_ip\_addresses) | List of the IP addresses and subnets from which IAM tokens can be created for the account, has no effect when `skip_iam_account_settings` is true. | `list(any)` | `[]` | no |
 | <a name="input_api_creation"></a> [api\_creation](#input\_api\_creation) | When restriction is enabled, only users, including the account owner, assigned the User API key creator role on the IAM Identity Service can create API keys. Allowed values are 'RESTRICTED', 'NOT\_RESTRICTED', or 'NOT\_SET' (to 'unset' a previous set value), has no effect when `skip_iam_account_settings` is true. | `string` | `"RESTRICTED"` | no |
 | <a name="input_audit_resource_group_name"></a> [audit\_resource\_group\_name](#input\_audit\_resource\_group\_name) | The name of the audit resource group to create. | `string` | `null` | no |
+| <a name="input_cbr_allow_at_to_cos"></a> [cbr\_allow\_at\_to\_cos](#input\_cbr\_allow\_at\_to\_cos) | Whether to enable the rule that allows Activity Tracker to access Object Storage. Default is true if `provision_cbr` is set to true. | `bool` | `true` | no |
+| <a name="input_cbr_allow_block_storage_to_kms"></a> [cbr\_allow\_block\_storage\_to\_kms](#input\_cbr\_allow\_block\_storage\_to\_kms) | Whether to enable the rule that allows Block Storage for VPC to access the key management service. Default is true if `provision_cbr` is set to true. | `bool` | `true` | no |
+| <a name="input_cbr_allow_cos_to_kms"></a> [cbr\_allow\_cos\_to\_kms](#input\_cbr\_allow\_cos\_to\_kms) | Whether to enable the rule that allows Object Storage to access the key management service. Default is true if `provision_cbr` is set to true. | `bool` | `true` | no |
+| <a name="input_cbr_allow_event_streams_to_kms"></a> [cbr\_allow\_event\_streams\_to\_kms](#input\_cbr\_allow\_event\_streams\_to\_kms) | Whether to enable the rule that allows Event Streams to access the key management service. Default is true if `provision_cbr` is set to true. | `bool` | `true` | no |
+| <a name="input_cbr_allow_icd_to_kms"></a> [cbr\_allow\_icd\_to\_kms](#input\_cbr\_allow\_icd\_to\_kms) | Whether to enable the rule that allows IBM cloud databases to access the key management service. Default is true if `provision_cbr` is set to true. | `bool` | `true` | no |
+| <a name="input_cbr_allow_iks_to_is"></a> [cbr\_allow\_iks\_to\_is](#input\_cbr\_allow\_iks\_to\_is) | Whether to enable the rule that allows the Kubernetes Service to access VPC Infrastructure Services. Default is true if `provision_cbr` is set to true. | `bool` | `true` | no |
+| <a name="input_cbr_allow_is_to_cos"></a> [cbr\_allow\_is\_to\_cos](#input\_cbr\_allow\_is\_to\_cos) | Whether to enable the rule that allows VPC Infrastructure Services to access Object Storage. Default is true if `provision_cbr` is set to true. | `bool` | `true` | no |
+| <a name="input_cbr_allow_roks_to_kms"></a> [cbr\_allow\_roks\_to\_kms](#input\_cbr\_allow\_roks\_to\_kms) | Whether to enable the rule that allows Red Hat OpenShift to access the key management service. Default is true if `provision_cbr` is set to true. | `bool` | `true` | no |
+| <a name="input_cbr_allow_scc_to_cos"></a> [cbr\_allow\_scc\_to\_cos](#input\_cbr\_allow\_scc\_to\_cos) | Set rule for SCC (Security and Compliance Center) to COS. Default is true if `provision_cbr` is true. | `bool` | `true` | no |
+| <a name="input_cbr_allow_vpcs_to_container_registry"></a> [cbr\_allow\_vpcs\_to\_container\_registry](#input\_cbr\_allow\_vpcs\_to\_container\_registry) | Whether to enable the rule that allows Virtual Private Clouds to access Container Registry. Default is true if `provision_cbr` is set to true. | `bool` | `true` | no |
+| <a name="input_cbr_allow_vpcs_to_cos"></a> [cbr\_allow\_vpcs\_to\_cos](#input\_cbr\_allow\_vpcs\_to\_cos) | Whether to enable the rule that allows Virtual Private Clouds to access Object Storage. Default is true if `provision_cbr` is set to true. | `bool` | `true` | no |
+| <a name="input_cbr_kms_service_targeted_by_prewired_rules"></a> [cbr\_kms\_service\_targeted\_by\_prewired\_rules](#input\_cbr\_kms\_service\_targeted\_by\_prewired\_rules) | IBM Cloud offers two distinct Key Management Services (KMS): Key Protect and Hyper Protect Crypto Services (HPCS). This variable determines the specific KMS service to which the pre-configured rules are applied. Use the value 'key-protect' to specify the Key Protect service, and 'hs-crypto' for the Hyper Protect Crypto Services (HPCS). Default is `["hs-crypto"]` if `provision_cbr` is set to true. | `list(string)` | <pre>[<br/>  "hs-crypto"<br/>]</pre> | no |
+| <a name="input_cbr_prefix"></a> [cbr\_prefix](#input\_cbr\_prefix) | String to use as the prefix for all context-based restriction resources, default is `account-infra-base` if `provision_cbr` is set to true. | `string` | `"acct-infra-base"` | no |
+| <a name="input_cbr_target_service_details"></a> [cbr\_target\_service\_details](#input\_cbr\_target\_service\_details) | Details of the target service for which a rule is created. The key is the service name. | <pre>map(object({<br/>    description      = optional(string)<br/>    target_rg        = optional(string)<br/>    instance_id      = optional(string)<br/>    enforcement_mode = string<br/>    tags             = optional(list(string))<br/>    region           = optional(string)<br/>    geography        = optional(string)<br/>    global_deny      = optional(bool, true)<br/>  }))</pre> | `{}` | no |
 | <a name="input_cos_bucket_access_tags"></a> [cos\_bucket\_access\_tags](#input\_cos\_bucket\_access\_tags) | A list of Access Tags applied to the created bucket. | `list(string)` | `[]` | no |
 | <a name="input_cos_bucket_archive_days"></a> [cos\_bucket\_archive\_days](#input\_cos\_bucket\_archive\_days) | Number of days to archive objects in the bucket. | `number` | `20` | no |
 | <a name="input_cos_bucket_archive_enabled"></a> [cos\_bucket\_archive\_enabled](#input\_cos\_bucket\_archive\_enabled) | Set as true to enable archiving on the COS bucket. | `bool` | `false` | no |
@@ -189,6 +213,7 @@ No resources.
 | <a name="input_mfa"></a> [mfa](#input\_mfa) | Specify Multi-Factor Authentication method in the account. Supported valid values are 'NONE' (No MFA trait set), 'TOTP' (For all non-federated IBMId users), 'TOTP4ALL' (For all users), 'LEVEL1' (Email based MFA for all users), 'LEVEL2' (TOTP based MFA for all users), 'LEVEL3' (U2F MFA for all users), has no effect when `skip_iam_account_settings` is true. | `string` | `"TOTP4ALL"` | no |
 | <a name="input_observability_resource_group_name"></a> [observability\_resource\_group\_name](#input\_observability\_resource\_group\_name) | The name of the observability resource group to create. Required if `var.provision_atracker_cos` is true and `var.existing_observability_resource_group_name` is not provided. | `string` | `null` | no |
 | <a name="input_provision_atracker_cos"></a> [provision\_atracker\_cos](#input\_provision\_atracker\_cos) | Enable to create an Atracker route and COS instance + bucket. | `bool` | `false` | no |
+| <a name="input_provision_cbr"></a> [provision\_cbr](#input\_provision\_cbr) | Whether to enable the creation of context-based restriction rules and zones in the module. Default is false. | `bool` | `false` | no |
 | <a name="input_provision_trusted_profile_projects"></a> [provision\_trusted\_profile\_projects](#input\_provision\_trusted\_profile\_projects) | Controls whether the Trusted Profile for Projects is provisioned. | `bool` | `true` | no |
 | <a name="input_public_access_enabled"></a> [public\_access\_enabled](#input\_public\_access\_enabled) | Enable/Disable public access group in which resources are open anyone regardless if they are member of your account or not, has no effect when `skip_iam_account_settings` is true. | `bool` | `false` | no |
 | <a name="input_refresh_token_expiration"></a> [refresh\_token\_expiration](#input\_refresh\_token\_expiration) | Defines the refresh token expiration in seconds, has no effect when `skip_iam_account_settings` is true. | `string` | `"259200"` | no |
@@ -229,6 +254,8 @@ No resources.
 | <a name="output_activity_tracker_targets"></a> [activity\_tracker\_targets](#output\_activity\_tracker\_targets) | Activity Tracker Targets |
 | <a name="output_audit_resource_group_id"></a> [audit\_resource\_group\_id](#output\_audit\_resource\_group\_id) | ID of the Resource Group created by the module. |
 | <a name="output_audit_resource_group_name"></a> [audit\_resource\_group\_name](#output\_audit\_resource\_group\_name) | Name of the Resource Group created by the module. |
+| <a name="output_cbr_map_service_ref_name_zoneid"></a> [cbr\_map\_service\_ref\_name\_zoneid](#output\_cbr\_map\_service\_ref\_name\_zoneid) | Map of service reference and zone ids |
+| <a name="output_cbr_map_target_service_rule_ids"></a> [cbr\_map\_target\_service\_rule\_ids](#output\_cbr\_map\_target\_service\_rule\_ids) | Map of target service and rule ids |
 | <a name="output_cos_bucket"></a> [cos\_bucket](#output\_cos\_bucket) | COS Bucket |
 | <a name="output_cos_instance_guid"></a> [cos\_instance\_guid](#output\_cos\_instance\_guid) | COS Instance GUID |
 | <a name="output_cos_instance_id"></a> [cos\_instance\_id](#output\_cos\_instance\_id) | COS Instance ID |

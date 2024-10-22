@@ -395,3 +395,21 @@ variable "trusted_profile_roles" {
   description = "A list of roles given to the trusted profile."
   default     = ["Administrator"]
 }
+
+variable "provision_cbr" {
+  type        = bool
+  description = "Whether to enable the creation of context-based restriction rules and zones in the solution. Default is false."
+  default     = false
+}
+
+variable "cbr_enforcement_mode" {
+  type        = string
+  description = "Enforcement mode of the CBR rules, valid values are `enabled`, `disabled`, or `report`. Default is report."
+  default     = "report"
+}
+
+variable "cbr_kms_service_targeted_by_prewired_rules" {
+  type        = list(string)
+  description = "IBM Cloud offers two distinct Key Management Services (KMS): Key Protect and Hyper Protect Crypto Services (HPCS). This variable determines the specific KMS service to which the pre-configured rules are applied. Use the value 'key-protect' to specify the Key Protect service, and 'hs-crypto' for the Hyper Protect Crypto Services (HPCS). Default is `[\"hs-crypto\"]` if `provision_cbr` is true."
+  default     = ["hs-crypto"]
+}

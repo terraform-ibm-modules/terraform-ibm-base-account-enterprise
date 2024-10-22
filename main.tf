@@ -184,7 +184,7 @@ module "account_settings" {
 module "cos" {
   count             = var.provision_atracker_cos ? 1 : 0
   source            = "terraform-ibm-modules/cos/ibm//modules/fscloud"
-  version           = "8.11.16"
+  version           = "8.13.2"
   resource_group_id = local.cos_rg
   bucket_configs = [{
     access_tags                   = var.cos_bucket_access_tags
@@ -268,4 +268,25 @@ module "trusted_profile_projects" {
       service = "project"
     }]
   }]
+}
+
+module "cbr_fscloud" {
+  count                                  = var.provision_cbr ? 1 : 0
+  source                                 = "terraform-ibm-modules/cbr/ibm//modules/fscloud"
+  version                                = "1.28.0"
+  prefix                                 = var.cbr_prefix
+  zone_vpc_crn_list                      = []
+  allow_cos_to_kms                       = var.cbr_allow_cos_to_kms
+  allow_block_storage_to_kms             = var.cbr_allow_block_storage_to_kms
+  allow_roks_to_kms                      = var.cbr_allow_roks_to_kms
+  allow_icd_to_kms                       = var.cbr_allow_icd_to_kms
+  allow_event_streams_to_kms             = var.cbr_allow_event_streams_to_kms
+  allow_vpcs_to_container_registry       = var.cbr_allow_vpcs_to_container_registry
+  allow_vpcs_to_cos                      = var.cbr_allow_vpcs_to_cos
+  allow_at_to_cos                        = var.cbr_allow_at_to_cos
+  allow_iks_to_is                        = var.cbr_allow_iks_to_is
+  allow_is_to_cos                        = var.cbr_allow_is_to_cos
+  allow_scc_to_cos                       = var.cbr_allow_scc_to_cos
+  kms_service_targeted_by_prewired_rules = var.cbr_kms_service_targeted_by_prewired_rules
+  target_service_details                 = var.cbr_target_service_details
 }
