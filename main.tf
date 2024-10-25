@@ -184,7 +184,7 @@ module "account_settings" {
 module "cos" {
   count             = var.provision_atracker_cos ? 1 : 0
   source            = "terraform-ibm-modules/cos/ibm//modules/fscloud"
-  version           = "8.13.2"
+  version           = "8.13.5"
   resource_group_id = local.cos_rg
   bucket_configs = [{
     access_tags                   = var.cos_bucket_access_tags
@@ -273,7 +273,7 @@ module "trusted_profile_projects" {
 module "cbr_fscloud" {
   count                                  = var.provision_cbr ? 1 : 0
   source                                 = "terraform-ibm-modules/cbr/ibm//modules/fscloud"
-  version                                = "1.28.0"
+  version                                = "1.28.1"
   prefix                                 = var.cbr_prefix
   zone_vpc_crn_list                      = []
   allow_cos_to_kms                       = var.cbr_allow_cos_to_kms
