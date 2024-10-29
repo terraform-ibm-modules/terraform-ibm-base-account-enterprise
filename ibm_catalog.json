@@ -2,7 +2,7 @@
   "products": [
     {
       "name": "deploy-arch-ibm-account-infra-base",
-      "label": "Account Infrastructure Base",
+      "label": "Cloud automation for Account Infrastructure Base",
       "product_kind": "solution",
       "tags": [
         "ibm_created",
