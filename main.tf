@@ -226,7 +226,7 @@ module "cos" {
 module "activity_tracker" {
   count   = var.provision_atracker_cos ? 1 : 0
   source  = "terraform-ibm-modules/observability-instances/ibm//modules/activity_tracker"
-  version = "2.19.1"
+  version = "3.3.0"
   providers = {
     logdna.at = logdna.at
   }
