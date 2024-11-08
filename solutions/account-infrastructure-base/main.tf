@@ -158,10 +158,6 @@ locals {
 
 module "account_infrastructure_base" {
   source = "../.."
-  providers = {
-    logdna.at = logdna.at
-    logdna.ld = logdna.ld
-  }
   region = var.region
 
   # resource groups
