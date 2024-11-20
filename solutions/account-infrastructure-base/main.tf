@@ -153,6 +153,10 @@ locals {
       enforcement_mode = var.cbr_enforcement_mode
       global_deny      = false
     }
+    "logs" = {
+      enforcement_mode = var.cbr_enforcement_mode
+      global_deny      = false
+    }
   }
 }
 
