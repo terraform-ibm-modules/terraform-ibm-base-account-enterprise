@@ -4,5 +4,5 @@
   "resource_tags": $TAGS,
   "prefix": $PREFIX,
   "kms_key_crn": $HPCS_US_SOUTH_ROOT_KEY_CRN,
-  "allowed_ip_addresses": "[\"0.0.0.0/0\"]"
+  "allowed_ip_addresses": "[\"0.0.0.0/0\", \"::\"]"
 }
