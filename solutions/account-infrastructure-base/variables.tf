@@ -33,7 +33,7 @@ variable "prefix" {
   # this value was determined based on the lowest prefix restriction located here:
   # https://github.com/terraform-ibm-modules/terraform-ibm-landing-zone/blob/main/patterns/roks/variables.tf#L11
   validation {
-    condition     = length(var.prefix) <= 13
+    condition     = var.prefix == null || length(var.prefix) <= 13
     error_message = "`prefix` length must be 13 characters or less."
   }
 }
