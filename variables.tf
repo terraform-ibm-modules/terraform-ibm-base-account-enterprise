@@ -5,7 +5,7 @@
 variable "security_resource_group_name" {
   type        = string
   description = "The name of the security resource group to create."
-  default     = null
+  default     = "security-rg"
 
   validation {
     condition     = length(coalesce(var.security_resource_group_name, "null")) <= 40
@@ -27,7 +27,7 @@ variable "existing_security_resource_group_name" {
 variable "audit_resource_group_name" {
   type        = string
   description = "The name of the audit resource group to create."
-  default     = null
+  default     = "audit-rg"
 
   validation {
     condition     = length(coalesce(var.audit_resource_group_name, "null")) <= 40
@@ -49,7 +49,7 @@ variable "existing_audit_resource_group_name" {
 variable "observability_resource_group_name" {
   type        = string
   description = "The name of the observability resource group to create. Required if `var.provision_atracker_cos` is true and `var.existing_observability_resource_group_name` is not provided."
-  default     = null
+  default     = "observability-rg"
 
   validation {
     condition     = length(coalesce(var.observability_resource_group_name, "null")) <= 40
@@ -71,7 +71,7 @@ variable "existing_observability_resource_group_name" {
 variable "management_resource_group_name" {
   type        = string
   description = "The name of the management resource group to create."
-  default     = null
+  default     = "management-plane-rg"
 
   validation {
     condition     = length(coalesce(var.management_resource_group_name, "null")) <= 40
@@ -93,7 +93,7 @@ variable "existing_management_resource_group_name" {
 variable "workload_resource_group_name" {
   type        = string
   description = "The name of the workload resource group to create."
-  default     = null
+  default     = "workload-rg"
 
   validation {
     condition     = length(coalesce(var.workload_resource_group_name, "null")) <= 40
@@ -115,7 +115,7 @@ variable "existing_workload_resource_group_name" {
 variable "edge_resource_group_name" {
   type        = string
   description = "The name of the edge resource group to create."
-  default     = null
+  default     = "edge-rg"
 
   validation {
     condition     = length(coalesce(var.edge_resource_group_name, "null")) <= 40
@@ -137,7 +137,7 @@ variable "existing_edge_resource_group_name" {
 variable "devops_resource_group_name" {
   type        = string
   description = "The name of the devops resource group to create."
-  default     = null
+  default     = "devops-tools-rg"
 
   validation {
     condition     = length(coalesce(var.devops_resource_group_name, "null")) <= 40

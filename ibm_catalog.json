@@ -8,7 +8,6 @@
         "ibm_created",
         "target_terraform",
         "terraform",
-        "devops",
         "security",
         "solution"
       ],
@@ -22,7 +21,7 @@
         "iam"
       ],
       "short_description": "Creates and configures the base layer components of an IBM Cloud account",
-      "long_description": "This architecture supports creating and configuring the foundational components of an IBM Cloud account. This includes IAM account settings, Activity Tracker routing, Cloud Objects Storage, a trusted profile and associated access groups, and the resource group in which all resources are provisioned.",
+      "long_description": "This architecture supports creating and configuring the foundational components of an IBM Cloud account. This includes IAM account settings, Activity Tracker routing, Cloud Objects Storage, a trusted profile and associated access groups, and the resource groups in which all resources are provisioned.",
       "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-base-account-enterprise/blob/main/README.md",
       "offering_icon_url": "https://raw.githubusercontent.com/terraform-ibm-modules/documentation/main/icons/security_icon.svg",
       "provider_name": "IBM",
@@ -98,6 +97,23 @@
           "configuration": [
             {
               "key": "ibmcloud_api_key"
+            },
+            {
+              "key": "provider_visibility",
+              "options": [
+                {
+                  "displayname": "private",
+                  "value": "private"
+                },
+                {
+                  "displayname": "public",
+                  "value": "public"
+                },
+                {
+                  "displayname": "public-and-private",
+                  "value": "public-and-private"
+                }
+              ]
             },
             {
               "key": "prefix"
