@@ -81,7 +81,7 @@ variable "skip_cos_kms_auth_policy" {
 variable "security_resource_group_name" {
   type        = string
   description = "The name of the security resource group to create. If `var.prefix` is provided, it is prefixed on the name in the following format: `<prefix>-<security_resource_group_name>`."
-  default     = null
+  default     = "security-rg"
 }
 
 variable "existing_security_resource_group_name" {
@@ -93,7 +93,7 @@ variable "existing_security_resource_group_name" {
 variable "audit_resource_group_name" {
   type        = string
   description = "The name of the audit resource group to create. If `prefix` is provided, it is prefixed on the name in the following format: `<prefix>-<audit_resource_group_name>`."
-  default     = null
+  default     = "audit-rg"
 }
 
 variable "existing_audit_resource_group_name" {
@@ -105,7 +105,7 @@ variable "existing_audit_resource_group_name" {
 variable "observability_resource_group_name" {
   type        = string
   description = "The name of the observability resource group to create. Required if `provision_atracker_cos` is true and `existing_cos_resource_group_name` is not provided. If `prefix` is provided, it is prefixed on the name in the following format: `<prefix>-<observability_resource_group_name>`."
-  default     = null
+  default     = "observability-rg"
 }
 
 variable "existing_observability_resource_group_name" {
@@ -117,7 +117,7 @@ variable "existing_observability_resource_group_name" {
 variable "management_resource_group_name" {
   type        = string
   description = "The name of the management resource group to create. If `prefix` is provided, it is prefixed on the name in the following format: `<prefix>-<management_resource_group_name>`."
-  default     = null
+  default     = "management-plane-rg"
 }
 
 variable "existing_management_resource_group_name" {
@@ -129,7 +129,7 @@ variable "existing_management_resource_group_name" {
 variable "workload_resource_group_name" {
   type        = string
   description = "The name of the workload resource group to create. If `prefix` is provided, it is prefixed on the name in the following format: `<prefix>-<workload_resource_group_name>`."
-  default     = null
+  default     = "workload-rg"
 }
 
 variable "existing_workload_resource_group_name" {
@@ -141,7 +141,7 @@ variable "existing_workload_resource_group_name" {
 variable "edge_resource_group_name" {
   type        = string
   description = "The name of the edge resource group to create. If `prefix` is provided, it is prefixed on the name in the following format: `<prefix>-<edge_resource_group_name>`."
-  default     = null
+  default     = "edge-rg"
 }
 
 variable "existing_edge_resource_group_name" {
@@ -153,7 +153,7 @@ variable "existing_edge_resource_group_name" {
 variable "devops_resource_group_name" {
   type        = string
   description = "The name of the devops resource group to create. If `prefix` is provided, it is prefixed on the name in the following format: `<prefix>-<devops_resource_group_name>`."
-  default     = null
+  default     = "devops-tools-rg"
 }
 
 variable "existing_devops_resource_group_name" {
