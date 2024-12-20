@@ -27,13 +27,13 @@ variable "region" {
 variable "prefix" {
   type        = string
   description = "An optional prefix to append to all resources created by this solution. If `provision_atracker_cos` is true, this value will be converted to lowercase in all instances."
-  default     = null
+  default     = "acc-infra-base"
 
   # prefix restriction due to limitations when using multiple DAs in stacks
   # this value was determined based on the lowest prefix restriction located here:
   # https://github.com/terraform-ibm-modules/terraform-ibm-landing-zone/blob/main/patterns/roks/variables.tf#L11
   validation {
-    condition     = var.prefix == null || can(length(var.prefix)) && length(var.prefix) <= 13
+    condition     = var.prefix == null || var.prefix == "" || can(length(var.prefix)) && length(var.prefix) <= 13
     error_message = "`prefix` length must be 13 characters or less or null."
   }
 }
