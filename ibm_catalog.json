@@ -225,7 +225,17 @@
               "key": "provision_atracker_cos"
             },
             {
-              "key": "region"
+              "key": "region",
+              "custom_config": {
+                "config_constraints": {
+                  "generationType": "2"
+                },
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "type": "vpc_region"
+              },
+              "required": true,
+              "type": "string"
             },
             {
               "key": "kms_key_crn"
