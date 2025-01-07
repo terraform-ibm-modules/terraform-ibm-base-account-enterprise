@@ -421,7 +421,7 @@
             {
               "key": "activity_tracker_locations",
               "type": "array",
-                            "default_value": "",
+                            "default_value": "*, global",
                             "description": "Location of the route for the Activity Tracker, logs from these locations will be sent to the specified target. Supports passing individual regions, as well as `global` and `*`.",
                             "display_name": "array",
                             "required": true,
@@ -446,7 +446,7 @@
             {
               "key": "trusted_profile_roles",
               "type": "array",
-                            "default_value": "",
+                            "default_value": "Administrator",
                             "description": "List of roles given to the trusted profile.",
                             "display_name": "array",
                             "required": true,
