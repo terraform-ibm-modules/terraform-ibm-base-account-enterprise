@@ -27,7 +27,7 @@ variable "region" {
 variable "prefix" {
   type        = string
   description = "An optional prefix to append to all resources created by this solution. If `provision_atracker_cos` is true, this value will be converted to lowercase in all instances. Prefix value can be an empty string (\"\") or `null` for advanced users."
-  default     = "accinfbase"
+  default     = "infrabase"
 
   # prefix restriction due to limitations when using multiple DAs in stacks
   # this value was determined based on the lowest prefix restriction located here:
