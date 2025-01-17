@@ -116,8 +116,7 @@
               ]
             },
             {
-              "key": "prefix",
-              "required": true
+              "key": "prefix"
             },
             {
               "key": "skip_iam_account_settings"
@@ -129,20 +128,7 @@
               "key": "active_session_timeout"
             },
             {
-              "key": "allowed_ip_addresses",
-              "type": "array",
-              "default_value": "",
-              "description": "List of the IP addresses and subnets from which IAM tokens can be created for the account, has no effect when `skip_iam_account_settings` is true",
-              "display_name": "array",
-              "required": true,
-              "custom_config": {
-                "type": "array",
-                "grouping": "deployment",
-                "original_grouping": "deployment",
-                "config_constraints": {
-                  "type": "mixed"
-                }
-              }
+              "key": "allowed_ip_addresses"
             },
             {
               "key": "api_creation",
@@ -239,17 +225,7 @@
               "key": "provision_atracker_cos"
             },
             {
-              "key": "region",
-              "custom_config": {
-                "config_constraints": {
-                  "generationType": "2"
-                },
-                "grouping": "deployment",
-                "original_grouping": "deployment",
-                "type": "vpc_region"
-              },
-              "required": true,
-              "type": "string"
+              "key": "region"
             },
             {
               "key": "kms_key_crn"
@@ -262,11 +238,7 @@
             },
             {
               "key": "resource_tags",
-              "type": "array",
-              "default_value": "",
-              "description": "A list of tags applied to the COS resources created by the module.",
               "display_name": "array",
-              "required": true,
               "custom_config": {
                 "type": "array",
                 "grouping": "deployment",
@@ -278,11 +250,7 @@
             },
             {
               "key": "cos_instance_access_tags",
-              "type": "array",
-              "default_value": "",
-              "description": "A list of Access Tags applied to the created COS instance.",
               "display_name": "array",
-              "required": true,
               "custom_config": {
                 "type": "array",
                 "grouping": "deployment",
@@ -310,11 +278,7 @@
             },
             {
               "key": "cos_bucket_access_tags",
-              "type": "array",
-              "default_value": "",
-              "description": "A list of Access Tags applied to the created bucket.",
               "display_name": "array",
-              "required": true,
               "custom_config": {
                 "type": "array",
                 "grouping": "deployment",
@@ -420,11 +384,7 @@
             },
             {
               "key": "activity_tracker_locations",
-              "type": "array",
-              "default_value": "*, global",
-              "description": "Location of the route for the Activity Tracker, logs from these locations will be sent to the specified target. Supports passing individual regions, as well as `global` and `*`.",
               "display_name": "array",
-              "required": true,
               "custom_config": {
                 "type": "array",
                 "grouping": "deployment",
@@ -445,11 +405,7 @@
             },
             {
               "key": "trusted_profile_roles",
-              "type": "array",
-              "default_value": "Administrator",
-              "description": "List of roles given to the trusted profile.",
               "display_name": "array",
-              "required": true,
               "custom_config": {
                 "type": "array",
                 "grouping": "deployment",
