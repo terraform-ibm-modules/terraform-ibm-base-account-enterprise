@@ -116,7 +116,8 @@
               ]
             },
             {
-              "key": "prefix"
+              "key": "prefix",
+              "required": true
             },
             {
               "key": "skip_iam_account_settings"
