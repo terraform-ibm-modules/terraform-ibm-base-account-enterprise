@@ -412,6 +412,15 @@
             },
             {
               "key": "existing_workload_resource_group_name"
+            },
+            {
+              "key":"cbr_enforcement_mode"
+            },
+            {
+              "key":"cbr_kms_service_targeted_by_prewired_rules"
+            },
+            {
+              "key":"provision_cbr"
             }
           ]
         }
