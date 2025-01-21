@@ -3,7 +3,7 @@
 ########################################################################################################################
 
 locals {
-  prefix = var.provision_atracker_cos ? lower(var.prefix) : var.prefix
+  prefix = var.provision_atracker_cos ? (var.prefix != null && var.prefix != "" ? lower(var.prefix) : null) : var.prefix
   target_service_details = {
     "IAM" = {
       enforcement_mode = var.cbr_enforcement_mode
