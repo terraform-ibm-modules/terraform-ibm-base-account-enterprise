@@ -116,7 +116,8 @@
               ]
             },
             {
-              "key": "prefix"
+              "key": "prefix",
+              "required": true
             },
             {
               "key": "skip_iam_account_settings"
@@ -128,7 +129,17 @@
               "key": "active_session_timeout"
             },
             {
-              "key": "allowed_ip_addresses"
+              "key": "allowed_ip_addresses",
+              "display_name": "array",
+              "required": true,
+              "custom_config": {
+                "type": "array",
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "type": "mixed"
+                }
+              }
             },
             {
               "key": "api_creation",
@@ -239,6 +250,7 @@
             {
               "key": "resource_tags",
               "display_name": "array",
+              "required": true,
               "custom_config": {
                 "type": "array",
                 "grouping": "deployment",
@@ -251,6 +263,7 @@
             {
               "key": "cos_instance_access_tags",
               "display_name": "array",
+              "required": true,
               "custom_config": {
                 "type": "array",
                 "grouping": "deployment",
@@ -279,6 +292,7 @@
             {
               "key": "cos_bucket_access_tags",
               "display_name": "array",
+              "required": true,
               "custom_config": {
                 "type": "array",
                 "grouping": "deployment",
@@ -385,6 +399,7 @@
             {
               "key": "activity_tracker_locations",
               "display_name": "array",
+              "required": true,
               "custom_config": {
                 "type": "array",
                 "grouping": "deployment",
@@ -406,6 +421,7 @@
             {
               "key": "trusted_profile_roles",
               "display_name": "array",
+              "required": true,
               "custom_config": {
                 "type": "array",
                 "grouping": "deployment",
