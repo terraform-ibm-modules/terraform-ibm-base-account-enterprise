@@ -130,7 +130,6 @@
             },
             {
               "key": "allowed_ip_addresses",
-              "display_name": "array",
               "required": true,
               "custom_config": {
                 "type": "array",
@@ -249,7 +248,6 @@
             },
             {
               "key": "resource_tags",
-              "display_name": "array",
               "required": true,
               "custom_config": {
                 "grouping": "deployment",
@@ -261,7 +259,6 @@
             },
             {
               "key": "cos_instance_access_tags",
-              "display_name": "array",
               "required": true,
               "custom_config": {
                 "grouping": "deployment",
@@ -289,7 +286,6 @@
             },
             {
               "key": "cos_bucket_access_tags",
-              "display_name": "array",
               "required": true,
               "custom_config": {
                 "grouping": "deployment",
@@ -395,7 +391,6 @@
             },
             {
               "key": "activity_tracker_locations",
-              "display_name": "array",
               "required": true,
               "custom_config": {
                 "grouping": "deployment",
@@ -416,7 +411,6 @@
             },
             {
               "key": "trusted_profile_roles",
-              "display_name": "array",
               "required": true,
               "custom_config": {
                 "grouping": "deployment",
