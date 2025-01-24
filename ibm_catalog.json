@@ -136,7 +136,7 @@
                 "grouping": "deployment",
                 "original_grouping": "deployment",
                 "config_constraints": {
-                  "type": "mixed"
+                  "type": "string"
                 }
               }
             },
@@ -461,6 +461,17 @@
             },
             {
               "key": "existing_workload_resource_group_name"
+            },
+            {
+              "key": "cbr_kms_service_targeted_by_prewired_rules",
+              "required": true,
+              "custom_config": {
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "type": "string"
+                }
+              }
             }
           ]
         }
