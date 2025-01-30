@@ -131,7 +131,6 @@
             },
             {
               "key": "allowed_ip_addresses",
-              "required": true,
               "custom_config": {
                 "grouping": "deployment",
                 "original_grouping": "deployment",
@@ -248,7 +247,6 @@
             },
             {
               "key": "resource_tags",
-              "required": true,
               "custom_config": {
                 "grouping": "deployment",
                 "original_grouping": "deployment",
@@ -259,7 +257,7 @@
             },
             {
               "key": "cos_instance_access_tags",
-              "required": true,
+
               "custom_config": {
                 "grouping": "deployment",
                 "original_grouping": "deployment",
@@ -286,7 +284,7 @@
             },
             {
               "key": "cos_bucket_access_tags",
-              "required": true,
+
               "custom_config": {
                 "grouping": "deployment",
                 "original_grouping": "deployment",
@@ -391,7 +389,7 @@
             },
             {
               "key": "activity_tracker_locations",
-              "required": true,
+
               "custom_config": {
                 "grouping": "deployment",
                 "original_grouping": "deployment",
@@ -411,7 +409,7 @@
             },
             {
               "key": "trusted_profile_roles",
-              "required": true,
+
               "custom_config": {
                 "grouping": "deployment",
                 "original_grouping": "deployment",
@@ -464,7 +462,7 @@
             },
             {
               "key": "cbr_kms_service_targeted_by_prewired_rules",
-              "required": true,
+
               "custom_config": {
                 "grouping": "deployment",
                 "original_grouping": "deployment",
