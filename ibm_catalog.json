@@ -132,7 +132,6 @@
               "key": "allowed_ip_addresses",
               "required": true,
               "custom_config": {
-                "type": "array",
                 "grouping": "deployment",
                 "original_grouping": "deployment",
                 "config_constraints": {
