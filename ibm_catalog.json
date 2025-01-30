@@ -117,7 +117,8 @@
             },
             {
               "key": "prefix",
-              "required": true
+              "required": true,
+              "description":"Prefix to add to all resources created by this solution. To not use any prefix value, you can enter the string `__NULL__`."
             },
             {
               "key": "skip_iam_account_settings"
