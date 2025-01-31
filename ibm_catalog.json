@@ -257,7 +257,6 @@
             },
             {
               "key": "cos_instance_access_tags",
-
               "custom_config": {
                 "grouping": "deployment",
                 "original_grouping": "deployment",
@@ -284,7 +283,6 @@
             },
             {
               "key": "cos_bucket_access_tags",
-
               "custom_config": {
                 "grouping": "deployment",
                 "original_grouping": "deployment",
@@ -389,7 +387,6 @@
             },
             {
               "key": "activity_tracker_locations",
-
               "custom_config": {
                 "grouping": "deployment",
                 "original_grouping": "deployment",
@@ -409,7 +406,6 @@
             },
             {
               "key": "trusted_profile_roles",
-
               "custom_config": {
                 "grouping": "deployment",
                 "original_grouping": "deployment",
@@ -462,7 +458,6 @@
             },
             {
               "key": "cbr_kms_service_targeted_by_prewired_rules",
-
               "custom_config": {
                 "grouping": "deployment",
                 "original_grouping": "deployment",
