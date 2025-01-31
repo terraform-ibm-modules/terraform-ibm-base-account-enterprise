@@ -130,7 +130,14 @@
               "key": "active_session_timeout"
             },
             {
-              "key": "allowed_ip_addresses"
+              "key": "allowed_ip_addresses",
+              "custom_config": {
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "type": "string"
+                }
+              }
             },
             {
               "key": "api_creation",
@@ -239,10 +246,24 @@
               "key": "cos_instance_name"
             },
             {
-              "key": "resource_tags"
+              "key": "resource_tags",
+              "custom_config": {
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "type": "string"
+                }
+              }
             },
             {
-              "key": "cos_instance_access_tags"
+              "key": "cos_instance_access_tags",
+              "custom_config": {
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "type": "string"
+                }
+              }
             },
             {
               "key": "cos_plan",
@@ -261,7 +282,14 @@
               "key": "cos_bucket_name"
             },
             {
-              "key": "cos_bucket_access_tags"
+              "key": "cos_bucket_access_tags",
+              "custom_config": {
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "type": "string"
+                }
+              }
             },
             {
               "key": "cos_bucket_expire_enabled"
@@ -358,7 +386,14 @@
               "key": "activity_tracker_route_name"
             },
             {
-              "key": "activity_tracker_locations"
+              "key": "activity_tracker_locations",
+              "custom_config": {
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "type": "string"
+                }
+              }
             },
             {
               "key": "provision_trusted_profile_projects"
@@ -370,7 +405,14 @@
               "key": "trusted_profile_description"
             },
             {
-              "key": "trusted_profile_roles"
+              "key": "trusted_profile_roles",
+              "custom_config": {
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "type": "string"
+                }
+              }
             },
             {
               "key": "audit_resource_group_name"
@@ -413,6 +455,16 @@
             },
             {
               "key": "existing_workload_resource_group_name"
+            },
+            {
+              "key": "cbr_kms_service_targeted_by_prewired_rules",
+              "custom_config": {
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "type": "string"
+                }
+              }
             }
           ]
         }
