@@ -35,11 +35,11 @@ variable "prefix" {
   validation {
     condition = (var.prefix == null ? true :
       alltrue([
-        can(regex("^([a-z]|[a-z][-a-z0-9]{0,14}[a-z0-9])$|^$", var.prefix)),
+        can(regex("^([a-z]|[a-z][-a-z0-9]{0,11}[a-z0-9])$|^$", var.prefix)),
         length(regexall("^.*--.*", var.prefix)) == 0
       ])
     )
-    error_message = "Prefix must begin with a lowercase letter, contain only lowercase letters, numbers, and - characters. Prefixes must end with a lowercase letter or number and be 16 or fewer characters."
+    error_message = "Prefix must begin with a lowercase letter, contain only lowercase letters, numbers, and - characters, and cannot have double hyphens (--). Prefixes must end with a lowercase letter or number and be 13 or fewer characters."
   }
 }
 
