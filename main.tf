@@ -184,7 +184,7 @@ module "account_settings" {
 module "cos" {
   count             = var.provision_atracker_cos ? 1 : 0
   source            = "terraform-ibm-modules/cos/ibm//modules/fscloud"
-  version           = "8.13.5"
+  version           = "8.19.3"
   resource_group_id = local.cos_rg
   bucket_configs = [{
     access_tags                   = var.cos_bucket_access_tags
@@ -226,7 +226,7 @@ module "cos" {
 module "activity_tracker" {
   count   = var.provision_atracker_cos ? 1 : 0
   source  = "terraform-ibm-modules/observability-instances/ibm//modules/activity_tracker"
-  version = "3.3.0"
+  version = "3.4.2"
   activity_tracker_routes = [
     {
       route_name = var.activity_tracker_route_name
